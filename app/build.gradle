@@ -1,0 +1,193 @@
+// kotlin-android,使用Kotlin插件
+// kotlin-android-extensions, 使用Kotlin Android扩展插件 ,像这个就可以直接实现Databinding
+// kotlin-kapt, kotlin注解处理器插件,以AAC系列库的注解使用都依赖这东西
+// kotlin-parcelize,自动化处理序列化生成
+/*
+* Android Studio中的Module主要有两种属性
+* 1. application属性 -> apply plugin: ‘com.android.application’ , 可以独立运行的Android程序，也就是我们的APP
+* 2. library属性 -> apply plugin: ‘com.android.library’ , 不可以独立运行，一般是Android程序依赖的库文件
+* */
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+    id 'dagger.hilt.android.plugin'
+}
+
+// 上面的调用等同域 apply plugin: 'com.android.application'
+apply from: "$rootDir/dependencies.gradle"
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.onion.android"
+        minSdkVersion 26
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        // Java编译配置参数
+        javaCompileOptions {
+            // 注解处理
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation" : "$projectDir/schemas".toString()]
+            }
+        }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments["dagger.hilt.disableModulesHaveInstallInCheck"] = "true"
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        // 如果您打算在Kotlin项目中使用数据绑定，则应应用kotlin-kapt插件
+        dataBinding true
+    }
+
+    lintOptions {
+        // true--关闭lint报告的分析进度
+        quiet true
+        // true--错误发生后停止gradle构建
+        abortOnError false
+        // true--只报告error
+        ignoreWarnings true
+        // true--忽略有错误的文件的全/绝对路径(默认是true)
+        //absolutePaths true
+        // true--检查所有问题点，包含其他默认关闭项
+        checkAllWarnings true
+        // true--所有warning当做error
+        warningsAsErrors true
+        // 关闭指定问题检查
+        disable 'TypographyFractions','TypographyQuotes'
+        // 打开指定问题检查
+        enable 'RtlHardcoded','RtlCompat', 'RtlEnabled'
+        // 仅检查指定问题
+        check 'NewApi', 'InlinedApi'
+        // true--error输出文件不包含源码行号
+        noLines true
+        // true--显示错误的所有发生位置，不截取
+        showAll true
+        // 回退lint设置(默认规则)
+        lintConfig file("default-lint.xml")
+        // true--生成txt格式报告(默认false)
+        textReport true
+        // 重定向输出；可以是文件或'stdout'
+        textOutput 'stdout'
+        // true--生成XML格式报告
+        xmlReport false
+        // 指定xml报告文档(默认lint-results.xml)
+        xmlOutput file("lint-report.xml")
+        // true--生成HTML报告(带问题解释，源码位置，等)
+        htmlReport true
+        // html报告可选路径(构建器默认是lint-results.html )
+        htmlOutput file("lint-report.html")
+        //  true--所有正式版构建执行规则生成崩溃的lint检查，如果有崩溃问题将停止构建
+        checkReleaseBuilds true
+        // 在发布版本编译时检查(即使不包含lint目标)，指定问题的规则生成崩溃
+        fatal 'NewApi', 'InlineApi'
+        // 指定问题的规则生成错误
+        error 'Wakelock', 'TextViewEdits'
+        // 指定问题的规则生成警告
+        warning 'ResourceAsColor'
+        // 忽略指定问题的规则(同关闭检查)
+        ignore 'TypographyQuotes'
+    }
+
+}
+
+dependencies {
+
+    //noinspection GradleDependency
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin_version"
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.1'
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // RxJava2 Dependencies
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
+    // Dagger Core
+    implementation "com.google.dagger:dagger:${versions.dagger}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${versions.dagger}"
+
+    // Dagger Android
+    implementation "com.google.dagger:dagger-android:${versions.dagger}"
+    implementation "com.google.dagger:dagger-android-support:${versions.dagger}"
+    annotationProcessor "com.google.dagger:dagger-android-processor:${versions.dagger}"
+
+    // AAC
+    implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$versions.lifecycleVersion"
+    implementation "androidx.room:room-runtime:$versions.roomVersion"
+    implementation "androidx.room:room-ktx:$versions.roomVersion"
+    kapt "androidx.room:room-compiler:$versions.roomVersion"
+    testImplementation "androidx.arch.core:core-testing:$versions.archCompomentVersion"
+
+
+    // hilt
+//    implementation "com.google.dagger:hilt-android:$versions.hiltCoreVersion"
+//    implementation "androidx.hilt:hilt-common:$versions.hiltVersion"
+//    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$versions.hiltVersion"
+//    compileOnly "com.squareup.inject:assisted-inject-annotations-dagger2:$versions.assistedInjectVersion"
+//    kapt "com.squareup.inject:assisted-inject-processor-dagger2:$versions.assistedInjectVersion"
+//    kapt "com.google.dagger:hilt-compiler:$versions.hiltCoreVersion"
+//    kapt "androidx.hilt:hilt-compiler:$versions.hiltVersion"
+//    androidTestImplementation "com.google.dagger:hilt-android-testing:$versions.hiltCoreVersion"
+//    kaptAndroidTest "com.google.dagger:hilt-compiler:$versions.hiltCoreVersion"
+    implementation "com.google.dagger:hilt-android:$versions.hiltCoreVersion"
+    implementation "androidx.hilt:hilt-common:$versions.hiltVersion"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$versions.hiltVersion"
+    kapt "com.google.dagger:hilt-compiler:$versions.hiltCoreVersion"
+    kapt "androidx.hilt:hilt-compiler:$versions.hiltVersion"
+    androidTestImplementation "com.google.dagger:hilt-android-testing:$versions.hiltCoreVersion"
+    kaptAndroidTest "com.google.dagger:hilt-compiler:$versions.hiltCoreVersion"
+
+    // network
+    implementation "com.squareup.retrofit2:retrofit:$versions.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-moshi:$versions.retrofitVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$versions.okhttpVersion"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$versions.okhttpVersion"
+    // moshi
+    implementation "com.squareup.moshi:moshi-kotlin:$versions.moshiVersion"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$versions.moshiVersion"
+
+
+    // ui
+    implementation "com.github.skydoves:transformationlayout:$versions.transformationLayout"
+    implementation "com.github.bumptech.glide:glide:$versions.glideVersion"
+    implementation "com.github.florent37:glidepalette:$versions.glidePaletteVersion"
+    kapt "com.github.bumptech.glide:compiler:$versions.glideVersion"
+    implementation "com.github.skydoves:rainbow:$versions.rainbowVersion"
+    implementation "com.github.skydoves:baserecyclerviewadapter:$versions.baseAdapter"
+
+    // debugging
+    implementation "com.jakewharton.timber:timber:$versions.timberVersion"
+
+}

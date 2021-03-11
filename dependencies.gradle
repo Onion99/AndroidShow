@@ -1,0 +1,40 @@
+ext.versions = [
+
+        // gradle plugins
+        gradleBuildTool      : '4.1.1',
+        spotlessGradle       : '5.8.2',
+        versionPlugin        : '0.28.0',
+
+        // kotlin
+        kotlin_version : '1.4.20',
+
+        lifecycleVersion  : '2.2.0',
+        roomVersion          : '2.3.0-alpha03',
+        dagger            : '2.30.1',
+        espresso          : '3.0.2',
+
+        // hilt
+        hiltCoreVersion      : '2.31-alpha',
+        hiltVersion          : '1.0.0-alpha02',
+        assistedInjectVersion: '0.5.2',
+
+        // network
+        retrofitVersion      : '2.9.0',
+        okhttpVersion        : '4.9.0',
+
+        // ui
+        transformationLayout : '1.0.4',
+        glideVersion         : '4.11.0',
+        glidePaletteVersion  : '2.1.2',
+        rainbowVersion       : '1.0.3',
+        baseAdapter          : '0.1.3',
+
+        // debugging
+        timberVersion        : '4.7.1',
+
+        // moshi
+        moshiVersion         : '1.11.0',
+        moshiConverterVersion: '2.7.2'
+
+
+]

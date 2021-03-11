@@ -1,0 +1,47 @@
+ext {
+    var = '4.2.0-alpha11'
+}
+
+// 应用 ben-manes gradle-versions-plugin的更新配置
+apply from: "$rootDir/versionsPlugin.gradle"
+buildscript {
+    apply from: "$rootDir/dependencies.gradle"
+    repositories {
+        // 配置阿里云Maven，速度更快哟
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        google()
+        jcenter()
+        maven {
+            url "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:$versions.gradleBuildTool"
+        // kotlin 插件
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin_version"
+        // 这个插件提供了一个任务来确定哪些依赖项有更新。此外，插件还检查Gradle本身的更新。 https://github.com/ben-manes/gradle-versions-plugin
+        classpath "com.github.ben-manes:gradle-versions-plugin:$versions.versionPlugin"
+        // hilt 插件 ，依赖 hilt 注入库 ，必须应用此插件，否则报错
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$versions.hiltCoreVersion"
+    }
+}
+
+allprojects {
+    repositories {
+        // 配置阿里云Maven，速度更快哟
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        google()
+        jcenter()
+        maven {
+            url "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

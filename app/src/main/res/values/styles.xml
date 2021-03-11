@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 定义子样式 -->
+<resources xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlHighlight">@color/colorPrimary</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+    </style>
+
+    <style name="AppTheme.Dark" parent="ThemeParent.Dark">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primaryDark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="md_button_casing">literal</item>
+    </style>
+
+    <style name="AppTheme.Custom" parent="ThemeParent.Dark">
+        <item name="colorPrimary">@color/primary_custom</item>
+        <item name="colorPrimaryDark">@color/primaryDark_custom</item>
+        <item name="colorAccent">@color/accent_custom</item>
+
+        <!-- Dialog 主题设置 -->
+        <item name="md_corner_radius">16dp</item>
+        <item name="md_font_title">@font/raleway_bold</item>
+        <item name="md_font_body">@font/raleway_medium</item>
+        <item name="md_font_button">@font/raleway_semibold</item>
+        <item name="md_ripple_color">@color/primary_custom_translucent</item>
+
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="button_color">#424242</item>
+        <item name="md_background_color">#212121</item>
+    </style>
+
+
+    <style name="TextHeader">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">start</item>
+        <item name="android:textSize">@dimen/headerTitle</item>
+        <item name="android:textColor">?android:colorPrimary</item>
+        <item name="android:layout_marginStart">@dimen/headerMarginStart</item>
+        <item name="android:layout_marginTop">@dimen/headerMarginVertical</item>
+        <item name="android:layout_marginBottom">@dimen/headerMarginVertical</item>
+    </style>
+
+    <style name="ContentButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/content_button_height</item>
+        <item name="android:layout_marginTop">@dimen/content_button_spacing</item>
+        <item name="android:textColor">?button_text_color</item>
+        <item name="backgroundTint">?button_color</item>
+    </style>
+
+    <style name="TextStyle" parent="@android:style/Widget.TextView">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+</resources>

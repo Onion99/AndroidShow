@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 声明属性表 -->
+<resources>
+    <attr format="color" name="button_color" />
+    <attr format="color" name="button_text_color" />
+</resources>
