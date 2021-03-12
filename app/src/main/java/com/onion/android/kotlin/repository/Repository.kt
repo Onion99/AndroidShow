@@ -1,3 +1,3 @@
-package com.onion99.android.kotlin.repository
+package com.onion.android.kotlin.repository
 
 interface Repository

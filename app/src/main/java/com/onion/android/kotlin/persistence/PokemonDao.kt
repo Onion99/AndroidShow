@@ -1,10 +1,10 @@
-package com.onion99.android.kotlin.persistence
+package com.onion.android.kotlin.persistence
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.onion99.android.kotlin.model.Pokemon
+import com.onion.android.kotlin.model.Pokemon
 
 /*
 * @Dao : 将类标记为数据访问对象。数据访问对象是定义数据库交互的主要类。 它们可以包括各种查询方法

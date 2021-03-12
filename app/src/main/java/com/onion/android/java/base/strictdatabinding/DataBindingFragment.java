@@ -16,7 +16,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 
-import com.onion99.android.R;
+import com.onion.android.R;
 
 public abstract class DataBindingFragment extends Fragment {
 

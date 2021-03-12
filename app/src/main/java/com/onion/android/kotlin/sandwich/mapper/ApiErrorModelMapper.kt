@@ -1,6 +1,6 @@
-package com.onion99.android.kotlin.sandwich.mapper
+package com.onion.android.kotlin.sandwich.mapper
 
-import com.onion99.android.kotlin.network.handler.ApiResponse
+import com.onion.android.kotlin.network.handler.ApiResponse
 
 /*
 * 简单来说就避免了kotlin 定义 callback，再用 object 去声明的麻烦

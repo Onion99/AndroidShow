@@ -1,12 +1,12 @@
-package com.onion99.android.kotlin.ui.binding
+package com.onion.android.kotlin.ui.binding
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.onion99.android.kotlin.model.Pokemon
-import com.onion99.android.kotlin.simple.whatif.whatIfNotNullAs
-import com.onion99.android.kotlin.simple.whatif.whatIfNotNullOrEmpty
-import com.onion99.android.kotlin.ui.adapter.PokemonAdapter
-import com.onion99.android.kotlin.vm.MainViewModel
+import com.onion.android.kotlin.model.Pokemon
+import com.onion.android.kotlin.simple.whatif.whatIfNotNullAs
+import com.onion.android.kotlin.simple.whatif.whatIfNotNullOrEmpty
+import com.onion.android.kotlin.ui.adapter.PokemonAdapter
+import com.onion.android.kotlin.vm.MainViewModel
 import com.skydoves.baserecyclerviewadapter.RecyclerViewPaginator
 
 object RecyclerViewBinding {

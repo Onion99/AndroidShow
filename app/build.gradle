@@ -196,4 +196,11 @@ dependencies {
     implementation "info.guardianproject.netcipher:netcipher:$versions.netcipherVersion"
     implementation "info.guardianproject.netcipher:netcipher-okhttp3:$versions.netcipherOkhttpVersion"
     implementation "info.guardianproject.netcipher:netcipher-webkit:$versions.netcipherWebViewVersion"
+
+    // ExoPlayer
+    implementation "com.google.android.exoplayer:exoplayer:$versions.exoplayerversion"
+    implementation "com.google.android.exoplayer:extension-mediasession:$versions.exoplayerversion"
+    // 投屏 ，使用公共用户界面在远程接收器设备上启用媒体显示和播放
+    implementation "androidx.mediarouter:mediarouter:$versions.mediarouter"
+
 }

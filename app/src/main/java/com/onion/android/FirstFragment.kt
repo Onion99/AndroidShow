@@ -1,4 +1,4 @@
-package com.onion99.android
+package com.onion.android
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

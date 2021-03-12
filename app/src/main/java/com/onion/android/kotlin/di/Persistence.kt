@@ -1,9 +1,9 @@
-package com.onion99.android.kotlin.di
+package com.onion.android.kotlin.di
 
 import android.app.Application
 import androidx.room.Room
-import com.onion99.android.kotlin.persistence.AppDataBase
-import com.onion99.android.kotlin.persistence.PokemonDao
+import com.onion.android.kotlin.persistence.AppDataBase
+import com.onion.android.kotlin.persistence.PokemonDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

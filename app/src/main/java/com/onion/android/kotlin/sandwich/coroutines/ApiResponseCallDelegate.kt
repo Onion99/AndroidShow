@@ -1,6 +1,6 @@
-package com.onion99.android.kotlin.sandwich.coroutines
+package com.onion.android.kotlin.sandwich.coroutines
 
-import com.onion99.android.kotlin.network.handler.ApiResponse
+import com.onion.android.kotlin.network.handler.ApiResponse
 import okio.Timeout
 import retrofit2.Call
 import retrofit2.Callback

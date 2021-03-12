@@ -1,4 +1,4 @@
-package com.onion99.android.ui.dialog
+package com.onion.android.ui.dialog
 
 import android.app.Dialog
 import android.content.Context

@@ -1,8 +1,8 @@
-package com.onion99.android.kotlin.persistence
+package com.onion.android.kotlin.persistence
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.onion99.android.kotlin.model.Pokemon
+import com.onion.android.kotlin.model.Pokemon
 
 /*
 * 整个App的持久化存储, 采用Room进行存储

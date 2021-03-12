@@ -1,11 +1,10 @@
-package com.onion99.android.kotlin.ui.adapter
+package com.onion.android.kotlin.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.onion99.android.databinding.ItemPokemonBinding
-import com.onion99.android.kotlin.model.Pokemon
+import com.onion.android.databinding.ItemPokemonBinding
+import com.onion.android.kotlin.model.Pokemon
 
 class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>(){
 

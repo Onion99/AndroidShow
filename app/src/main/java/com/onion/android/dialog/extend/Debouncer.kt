@@ -1,4 +1,4 @@
-package com.onion99.android.ui.dialog.extend
+package com.onion.android.ui.dialog.extend
 
 import android.view.View
 

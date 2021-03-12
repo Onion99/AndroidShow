@@ -1,4 +1,4 @@
-package com.onion99.android.kotlin.network.handler
+package com.onion.android.kotlin.network.handler
 
 /*
 * 枚举类 （enum class） - 实现一个类型安全的枚举

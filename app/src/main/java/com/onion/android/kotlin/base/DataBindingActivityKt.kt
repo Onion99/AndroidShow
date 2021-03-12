@@ -1,4 +1,4 @@
-package com.onion99.android.kotlin.base
+package com.onion.android.kotlin.base
 
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
@@ -99,7 +99,7 @@ open class Carvas(){
     * 构造函数中使用修饰词
     * 1 - 指定主构造函数不可访问，私有化
     * */
-    // 包级别的,即 com.onion99.android.xxx 下，不在任何类中
+    // 包级别的,即 com.onion.android.xxx 下，不在任何类中
     private fun  test1(){}
     public   var v="任何地方都可以见,默认就是public，因而可以省略"
     private  var v2="只有在本源文件中可见"

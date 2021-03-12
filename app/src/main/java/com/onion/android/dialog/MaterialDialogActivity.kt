@@ -1,10 +1,10 @@
-package com.onion99.android.ui.dialog
+package com.onion.android.ui.dialog
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import com.onion99.android.R
-import com.onion99.android.ui.dialog.extend.onClickDebounced
+import com.onion.android.R
+import com.onion.android.ui.dialog.extend.onClickDebounced
 
 class MaterialDialogActivity : AppCompatActivity() {
 

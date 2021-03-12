@@ -13,7 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
-import com.onion99.android.R;
+import com.onion.android.R;
+
 
 public abstract class DataBindingActivity extends AppCompatActivity {
 

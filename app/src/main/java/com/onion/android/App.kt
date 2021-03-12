@@ -1,4 +1,4 @@
-package com.onion99.android
+package com.onion.android
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

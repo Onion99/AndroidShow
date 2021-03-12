@@ -1,4 +1,4 @@
-package com.onion99.android.kotlin.simple.whatif
+package com.onion.android.kotlin.simple.whatif
 
 /**
  * @JvmSynthetic 用于标记Kotlin 特有API，使得其无法从java代码中访问

@@ -1,7 +1,7 @@
 @file:JvmName("WhatIfString")
 @file:JvmMultifileClass
 
-package com.onion99.android.kotlin.simple.whatif
+package com.onion.android.kotlin.simple.whatif
 
 @JvmSynthetic
 @WhatIfInlineOnly

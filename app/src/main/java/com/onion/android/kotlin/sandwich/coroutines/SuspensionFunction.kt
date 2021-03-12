@@ -1,4 +1,4 @@
-package com.onion99.android.kotlin.sandwich.coroutines
+package com.onion.android.kotlin.sandwich.coroutines
 
 /*
 * 自定义注解,用于标记或者代表某些含义

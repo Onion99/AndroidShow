@@ -1,4 +1,4 @@
-package com.onion99.android.kotlin.sandwich.coroutines
+package com.onion.android.kotlin.sandwich.coroutines
 
 import okhttp3.Request
 import retrofit2.Call

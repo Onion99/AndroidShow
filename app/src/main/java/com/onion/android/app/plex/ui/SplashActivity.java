@@ -4,18 +4,22 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+
+import com.onion.android.R;
+import com.onion.android.app.plex.vm.SplashViewModel;
+import com.onion.android.app.utils.Tools;
+import com.onion.android.databinding.PlexActivitySplashBinding;
+import com.onion.android.java.base.PlexBaseActivity;
 
 import info.guardianproject.netcipher.client.StrongBuilder;
 import info.guardianproject.netcipher.client.StrongOkHttpClientBuilder;
 import okhttp3.OkHttpClient;
 
-public class SplashActivity extends AppCompatActivity implements StrongBuilder.Callback<OkHttpClient> {
+import static com.onion.android.app.constants.PlexConstants.SERVER_BASE_URL;
 
+public class SplashActivity extends PlexBaseActivity<PlexActivitySplashBinding, SplashViewModel> implements StrongBuilder.Callback<OkHttpClient> {
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    private void initNetcipher(){
         // Netcipher-step-2-Creating a Builder
         try {
             StrongOkHttpClientBuilder
@@ -27,7 +31,21 @@ public class SplashActivity extends AppCompatActivity implements StrongBuilder.C
             finish();
             e.printStackTrace();
         }
+    }
 
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initNetcipher();
+        Tools.loadHttpImg(getApplication(),binding.logoImageTop,SERVER_BASE_URL +"image/logo");
+        Tools.postDelayed(()->{
+            finish();
+        },1600);
+    }
+
+    @Override
+    public int getBindingContent(@Nullable Bundle savedInstanceState) {
+        return R.layout.plex_activity_splash;
     }
 
     @Override

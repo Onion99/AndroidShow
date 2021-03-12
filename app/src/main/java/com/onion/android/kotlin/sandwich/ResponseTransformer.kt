@@ -1,8 +1,8 @@
-package com.onion99.android.kotlin.sandwich
+package com.onion.android.kotlin.sandwich
 
-import com.onion99.android.kotlin.network.handler.ApiResponse
-import com.onion99.android.kotlin.sandwich.coroutines.SuspensionFunction
-import com.onion99.android.kotlin.sandwich.mapper.ApiErrorModelMapper
+import com.onion.android.kotlin.network.handler.ApiResponse
+import com.onion.android.kotlin.sandwich.coroutines.SuspensionFunction
+import com.onion.android.kotlin.sandwich.mapper.ApiErrorModelMapper
 
 
 /**

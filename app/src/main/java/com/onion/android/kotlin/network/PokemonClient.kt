@@ -1,7 +1,7 @@
-package com.onion99.android.kotlin.network
+package com.onion.android.kotlin.network
 
-import com.onion99.android.kotlin.model.PokemonResponse
-import com.onion99.android.kotlin.network.handler.ApiResponse
+import com.onion.android.kotlin.model.PokemonResponse
+import com.onion.android.kotlin.network.handler.ApiResponse
 import javax.inject.Inject
 
 class PokemonClient @Inject constructor(

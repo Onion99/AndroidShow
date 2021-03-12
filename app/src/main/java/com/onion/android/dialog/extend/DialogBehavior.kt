@@ -1,4 +1,4 @@
-package com.onion99.android.ui.dialog.extend
+package com.onion.android.ui.dialog.extend
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.annotation.StyleRes
-import com.onion99.android.ui.dialog.MaterialDialog
+import com.onion.android.ui.dialog.MaterialDialog
 
 interface DialogBehavior {
 

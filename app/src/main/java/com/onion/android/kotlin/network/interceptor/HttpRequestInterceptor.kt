@@ -1,4 +1,4 @@
-package com.onion99.android.kotlin.network.interceptor
+package com.onion.android.kotlin.network.interceptor
 
 import okhttp3.Interceptor
 import okhttp3.Response

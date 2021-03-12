@@ -1,11 +1,11 @@
-package com.onion99.android.kotlin.vm
+package com.onion.android.kotlin.vm
 
 import androidx.annotation.MainThread
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.*
-import com.onion99.android.kotlin.base.LiveCoroutinesViewModel
-import com.onion99.android.kotlin.model.Pokemon
-import com.onion99.android.kotlin.repository.MainRepository
+import com.onion.android.kotlin.base.LiveCoroutinesViewModel
+import com.onion.android.kotlin.model.Pokemon
+import com.onion.android.kotlin.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow

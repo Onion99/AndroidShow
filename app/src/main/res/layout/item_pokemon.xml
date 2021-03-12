@@ -5,7 +5,7 @@
     <data>
         <variable
             name="pokemon"
-            type="com.onion99.studyinxmiles.kotlin.model.Pokemon" />
+            type="com.onion.android.kotlin.model.Pokemon" />
     </data>
 
     <com.skydoves.transformationlayout.TransformationLayout

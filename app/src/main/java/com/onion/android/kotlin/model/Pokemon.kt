@@ -1,4 +1,4 @@
-package com.onion99.android.kotlin.model
+package com.onion.android.kotlin.model
 
 import android.os.Parcelable
 import androidx.room.Entity

@@ -1,4 +1,4 @@
-package com.onion99.android.kotlin.simple.whatif
+package com.onion.android.kotlin.simple.whatif
 
 /**
  * @Target 表示该注解可以用于什么地方

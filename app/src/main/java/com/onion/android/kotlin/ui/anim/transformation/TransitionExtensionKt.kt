@@ -1,4 +1,4 @@
-package com.onion99.android.kotlin.ui.anim.transformation
+package com.onion.android.kotlin.ui.anim.transformation
 
 import android.app.Activity
 import android.view.Window

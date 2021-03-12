@@ -1,4 +1,4 @@
-package com.onion99.android.kotlin.base
+package com.onion.android.kotlin.base
 
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers

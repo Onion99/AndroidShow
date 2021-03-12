@@ -1,4 +1,4 @@
-package com.onion99.android.kotlin.ui.binding
+package com.onion.android.kotlin.ui.binding
 
 import android.view.View
 import android.widget.Toast
@@ -8,8 +8,8 @@ import com.bumptech.glide.Glide
 import com.github.florent37.glidepalette.BitmapPalette
 import com.github.florent37.glidepalette.GlidePalette
 import com.google.android.material.card.MaterialCardView
-import com.onion99.android.kotlin.simple.whatif.whatIfNotNull
-import com.onion99.android.kotlin.simple.whatif.whatIfNotNullOrEmpty
+import com.onion.android.kotlin.simple.whatif.whatIfNotNull
+import com.onion.android.kotlin.simple.whatif.whatIfNotNullOrEmpty
 
 object ViewBinding {
 

@@ -1,14 +1,14 @@
-package com.onion99.android.kotlin.ui
+package com.onion.android.kotlin.ui
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.annotation.VisibleForTesting
-import com.onion99.android.R
-import com.onion99.android.databinding.ActivityMainKtBinding
-import com.onion99.android.kotlin.base.DataBindingActivityKt
-import com.onion99.android.kotlin.ui.adapter.PokemonAdapter
-import com.onion99.android.kotlin.ui.anim.transformation.onTransformationStartContainer
-import com.onion99.android.kotlin.vm.MainViewModel
+import com.onion.android.R
+import com.onion.android.databinding.ActivityMainKtBinding
+import com.onion.android.kotlin.base.DataBindingActivityKt
+import com.onion.android.kotlin.ui.adapter.PokemonAdapter
+import com.onion.android.kotlin.ui.anim.transformation.onTransformationStartContainer
+import com.onion.android.kotlin.vm.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 // 标记在Activity和Fragment上. 创建了一个和当前Activity/fragment生命周期相关的container
@@ -18,7 +18,7 @@ class MainActivityKt : DataBindingActivityKt() {
     // @VisibleForTesting 可以把这个注解标注到类、方法或者字段上，以便在测试的时候可以使用。
     // 这个Annotation只是一个指示作用，告诉其他开发者该函数为什么有这么大的可见程度
     @VisibleForTesting val viewModel: MainViewModel by viewModels()
-    private val binding:ActivityMainKtBinding by binding(R.layout.activity_main_kt)
+    private val binding: ActivityMainKtBinding by binding(R.layout.activity_main_kt)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

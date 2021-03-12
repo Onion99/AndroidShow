@@ -18,6 +18,20 @@
         <item name="md_button_casing">literal</item>
     </style>
 
+    <style name="AppPlexTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/plex_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/plex_colorPrimaryDark</item>
+        <item name="colorAccent">@color/main_color</item>
+        <item name="mediaRouteButtonTint">@color/grey_11</item>
+        <item name="alertDialogTheme">@style/AppThemeDialog</item>
+    </style>
+
+    <style name="AppThemeDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorPrimary">@color/main_color</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+    </style>
+
+
     <style name="AppTheme.Custom" parent="ThemeParent.Dark">
         <item name="colorPrimary">@color/primary_custom</item>
         <item name="colorPrimaryDark">@color/primaryDark_custom</item>

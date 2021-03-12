@@ -1,9 +1,9 @@
-package com.onion99.android.kotlin.di
+package com.onion.android.kotlin.di
 
-import com.onion99.android.kotlin.network.PokemonClient
-import com.onion99.android.kotlin.network.PokemonService
-import com.onion99.android.kotlin.network.interceptor.HttpRequestInterceptor
-import com.onion99.android.kotlin.sandwich.coroutines.CoroutinesResponseCallAdapterFactory
+import com.onion.android.kotlin.network.PokemonClient
+import com.onion.android.kotlin.network.PokemonService
+import com.onion.android.kotlin.network.interceptor.HttpRequestInterceptor
+import com.onion.android.kotlin.sandwich.coroutines.CoroutinesResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
