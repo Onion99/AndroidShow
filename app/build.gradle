@@ -148,19 +148,9 @@ dependencies {
     implementation "androidx.room:room-runtime:$versions.roomVersion"
     implementation "androidx.room:room-ktx:$versions.roomVersion"
     kapt "androidx.room:room-compiler:$versions.roomVersion"
-    testImplementation "androidx.arch.core:core-testing:$versions.archCompomentVersion"
 
 
     // hilt
-//    implementation "com.google.dagger:hilt-android:$versions.hiltCoreVersion"
-//    implementation "androidx.hilt:hilt-common:$versions.hiltVersion"
-//    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$versions.hiltVersion"
-//    compileOnly "com.squareup.inject:assisted-inject-annotations-dagger2:$versions.assistedInjectVersion"
-//    kapt "com.squareup.inject:assisted-inject-processor-dagger2:$versions.assistedInjectVersion"
-//    kapt "com.google.dagger:hilt-compiler:$versions.hiltCoreVersion"
-//    kapt "androidx.hilt:hilt-compiler:$versions.hiltVersion"
-//    androidTestImplementation "com.google.dagger:hilt-android-testing:$versions.hiltCoreVersion"
-//    kaptAndroidTest "com.google.dagger:hilt-compiler:$versions.hiltCoreVersion"
     implementation "com.google.dagger:hilt-android:$versions.hiltCoreVersion"
     implementation "androidx.hilt:hilt-common:$versions.hiltVersion"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$versions.hiltVersion"
@@ -190,4 +180,20 @@ dependencies {
     // debugging
     implementation "com.jakewharton.timber:timber:$versions.timberVersion"
 
+
+    /**
+     * NetCipher: Secured Networking for Android
+     * https://dl.bintray.com/guardianproject/CipherKit/info/guardianproject/netcipher/netcipher/
+     * NetCipher是一个为android提供的库，它提供了多种手段来改善移动应用程序中的网络安全性(类似于洋葱，匿名代理)。
+     * 提供了最佳实践TLS设置使用标准Android HTTP方法，HttpURLConnection和Apache HTTP客户端，提供简单的Tor集成，使它很容易配置代理的HTTP连接和WebView实例。
+     * https://github.com/guardianproject/NetCipher
+     * - 加强TLS协议支持和密码套件，尤其是在旧版Android（例如4.4及更低版本）
+     * - 代理连接支持：通过特定配置对HTTP和HTTPS流量的HTTP和SOCKS代理连接支持
+     * - OrbotHelper：支持应用程序与Orbot（Android的Tor）集成的实用类。检查是否安装，自动启动等。
+     * - 可选的自定义证书存储，基于open Debian root CA trust store，它是用Mozilla的CA集合构建的
+     * - NetCipher还附带了一个helper库，它使webview的代理设置变得很简单
+     * */
+    implementation "info.guardianproject.netcipher:netcipher:$versions.netcipherVersion"
+    implementation "info.guardianproject.netcipher:netcipher-okhttp3:$versions.netcipherOkhttpVersion"
+    implementation "info.guardianproject.netcipher:netcipher-webkit:$versions.netcipherWebViewVersion"
 }

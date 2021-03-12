@@ -34,7 +34,11 @@ ext.versions = [
 
         // moshi
         moshiVersion         : '1.11.0',
-        moshiConverterVersion: '2.7.2'
+        moshiConverterVersion: '2.7.2',
 
+        // netcipher
+        netcipherVersion     : '2.1.0',
+        netcipherOkhttpVersion : '2.0.0-alpha1',
+        netcipherWebViewVersion: '2.0.0-alpha1'
 
 ]

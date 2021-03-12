@@ -10,11 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.onion99.android.java.base.strictdatabinding.DataBindingActivity;
-import com.onion99.android.java.utils.android.AdaptScreenUtils;
-import com.onion99.android.java.utils.android.BarUtils;
-import com.onion99.android.java.utils.android.ScreenUtils;
-
+import com.onion.android.java.base.strictdatabinding.DataBindingActivity;
+import com.onion.android.java.utils.android.AdaptScreenUtils;
+import com.onion.android.java.utils.android.BarUtils;
+import com.onion.android.java.utils.android.ScreenUtils;
 
 public abstract class BaseActivity extends DataBindingActivity {
     /**
