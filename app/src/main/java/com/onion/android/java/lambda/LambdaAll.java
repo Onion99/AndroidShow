@@ -1,4 +1,4 @@
-package com.onion.android.java;
+package com.onion.android.java.lambda;
 
 
 /** Lambda 允许把函数作为一个方法的参数（函数作为参数传递进方法中） */

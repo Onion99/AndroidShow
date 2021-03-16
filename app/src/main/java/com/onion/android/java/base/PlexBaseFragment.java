@@ -14,12 +14,13 @@ import androidx.fragment.app.Fragment;
 import java.util.Optional;
 
 public abstract class PlexBaseFragment<T extends ViewDataBinding> extends Fragment {
-    private T mBinding;
+    public T mBinding;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, getBindingContent(savedInstanceState), container,false);
+        initView();
         return mBinding.getRoot();
     }
 

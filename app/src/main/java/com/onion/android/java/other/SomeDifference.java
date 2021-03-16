@@ -1,4 +1,4 @@
-package com.onion.android.java;
+package com.onion.android.java.other;
 
 public class SomeDifference {
     /*

@@ -1,6 +1,5 @@
-package com.onion.android.rxjava;
+package com.onion.android.java.rxjava;
 
-import android.annotation.SuppressLint;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -15,7 +14,6 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
-import io.reactivex.Scheduler;
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;

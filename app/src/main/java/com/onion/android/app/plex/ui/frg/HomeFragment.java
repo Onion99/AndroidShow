@@ -1,6 +1,23 @@
 package com.onion.android.app.plex.ui.frg;
 
-import androidx.fragment.app.Fragment;
+import android.os.Bundle;
 
-public class HomeFragment extends Fragment {
+import androidx.annotation.Nullable;
+
+import com.onion.android.R;
+import com.onion.android.databinding.PlexFragmentHomeBinding;
+import com.onion.android.java.base.PlexBaseFragment;
+
+public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding> {
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public int getBindingContent(@Nullable Bundle savedInstanceState) {
+        return R.layout.plex_fragment_home;
+    }
+
 }

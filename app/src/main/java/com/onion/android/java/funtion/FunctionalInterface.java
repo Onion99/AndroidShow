@@ -1,4 +1,4 @@
-package com.onion.android.java;
+package com.onion.android.java.funtion;
 
 import java.util.Arrays;
 import java.util.function.BiConsumer;

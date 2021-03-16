@@ -1,4 +1,4 @@
-package com.onion.android.java;
+package com.onion.android.java.stream;
 
 import java.util.Arrays;
 import java.util.IntSummaryStatistics;
