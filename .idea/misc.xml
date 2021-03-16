@@ -4,11 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/ic_apps.xml" value="0.16296296296296298" />
-        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/layout/activity_main.xml" value="0.20993227990970656" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/ic_home.xml" value="0.1398148148148148" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/layout/activity_main.xml" value="0.8648648648648649" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/layout/activity_main_kt.xml" value="0.8648648648648649" />
-        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/layout/content_main.xml" value="0.1" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/layout/content_main.xml" value="0.8648648648648649" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/layout/item_pokemon.xml" value="0.8648648648648649" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/layout/plex_activity_main.xml" value="0.8648648648648649" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/layout/plex_activity_spalsh.xml" value="0.14994934143870314" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/menu/plex_bottom.xml" value="0.1" />
       </map>
     </option>
   </component>

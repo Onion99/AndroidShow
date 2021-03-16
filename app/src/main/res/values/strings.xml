@@ -14,4 +14,12 @@
     <string name="debug_activity_databinding_warning">Debug 提示：此 Activity 未遵循 DataBinding 严格模式，存在 视图调用的 Null 安全风险</string>
     <string name="image">image</string>
 
+    <!-- Plex -->
+    <string name="home">Home</string>
+    <string name="discover">Discover</string>
+    <string name="library">Library</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="streaming">Streaming</string>
+    <string name="live_text">LIVE</string>
+
 </resources>

@@ -17,7 +17,7 @@ import okhttp3.OkHttpClient;
 
 import static com.onion.android.app.constants.PlexConstants.SERVER_BASE_URL;
 
-public class SplashActivity extends PlexBaseActivity<PlexActivitySplashBinding, SplashViewModel> implements StrongBuilder.Callback<OkHttpClient> {
+public class SplashActivity extends PlexBaseActivity<PlexActivitySplashBinding> implements StrongBuilder.Callback<OkHttpClient> {
 
     private void initNetcipher(){
         // Netcipher-step-2-Creating a Builder
@@ -33,19 +33,22 @@ public class SplashActivity extends PlexBaseActivity<PlexActivitySplashBinding, 
         }
     }
 
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void initView() {
         initNetcipher();
-        Tools.loadHttpImg(getApplication(),binding.logoImageTop,SERVER_BASE_URL +"image/logo");
-        Tools.postDelayed(()->{
-            finish();
-        },1600);
+        Tools.loadHttpImg(getApplication(), mBinding.logoImageTop,SERVER_BASE_URL +"image/logo");
     }
 
     @Override
     public int getBindingContent(@Nullable Bundle savedInstanceState) {
         return R.layout.plex_activity_splash;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Tools.clearHandler();
     }
 
     @Override

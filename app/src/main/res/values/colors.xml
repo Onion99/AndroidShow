@@ -76,4 +76,5 @@
     <color name="main_color">#00b4ca</color>
     <color name="main_orange">#fff9930d</color>
     <color name="primary_dark">#0288D1</color>
+    <color name="plex_bottom_navgation_bg">#121212</color>
 </resources>

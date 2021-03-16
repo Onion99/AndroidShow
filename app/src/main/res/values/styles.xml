@@ -78,4 +78,12 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <!-- Plex -->
+    <style name="PlexBottomNavigationView.Active" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="PlexBottomNavigationView.Inactive" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">10sp</item>
+    </style>
+
 </resources>
