@@ -1,14 +1,21 @@
 package com.onion.android
 
 import android.app.Application
+import androidx.lifecycle.ViewModelStore
+import androidx.lifecycle.ViewModelStoreOwner
 import dagger.hilt.android.HiltAndroidApp
 import info.guardianproject.netcipher.proxy.OrbotHelper
 import info.guardianproject.netcipher.webkit.WebkitProxy
 import java.lang.Exception
 
-
+/**
+ * 实现 ViewModelStoreOwner 接口以实现ViewModel
+ * */
 @HiltAndroidApp
-class App : Application(){
+class App : Application(),ViewModelStoreOwner{
+
+    private lateinit var mAppViewModelStore: ViewModelStore
+
     override fun onCreate() {
         super.onCreate()
         /**
@@ -27,5 +34,18 @@ class App : Application(){
                 8118
             )
         } catch (e: Exception) { e.printStackTrace() }
+        // 实例化mAppViewModelStore
+        mAppViewModelStore = ViewModelStore()
+    }
+
+    companion object {
+        @JvmStatic
+        fun getBaseContext():Application{
+            return this.getBaseContext()
+        }
+    }
+
+    override fun getViewModelStore(): ViewModelStore {
+        return mAppViewModelStore
     }
 }

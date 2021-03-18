@@ -2,32 +2,34 @@ package com.onion.android.java.rxjava;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.Completable;
-import io.reactivex.CompletableObserver;
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.ObservableSource;
-import io.reactivex.Observer;
-import io.reactivex.Single;
-import io.reactivex.SingleObserver;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.BiFunction;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
-import io.reactivex.functions.Predicate;
-import io.reactivex.observers.DisposableObserver;
-import io.reactivex.schedulers.Schedulers;
-import io.reactivex.subjects.AsyncSubject;
-import io.reactivex.subjects.BehaviorSubject;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.CompletableObserver;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableEmitter;
+import io.reactivex.rxjava3.core.ObservableOnSubscribe;
+import io.reactivex.rxjava3.core.ObservableSource;
+import io.reactivex.rxjava3.core.Observer;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.core.SingleObserver;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.BiFunction;
+import io.reactivex.rxjava3.functions.Consumer;
+import io.reactivex.rxjava3.functions.Function;
+import io.reactivex.rxjava3.functions.Predicate;
+import io.reactivex.rxjava3.functions.Supplier;
+import io.reactivex.rxjava3.observers.DisposableObserver;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.reactivex.rxjava3.subjects.AsyncSubject;
+import io.reactivex.rxjava3.subjects.BehaviorSubject;
+
 
 /**
  * RxJava 操作符学习
@@ -35,7 +37,7 @@ import io.reactivex.subjects.BehaviorSubject;
 public class Operators {
     private final String TAG = Operators.class.getSimpleName();
     public static void main(String[] args) {
-        Observable.intervalRange(1,1320,1,1, TimeUnit.SECONDS,Schedulers.trampoline()).subscribe(
+        Observable.intervalRange(1,1320,1,1, TimeUnit.SECONDS, Schedulers.trampoline()).subscribe(
                 new Consumer<Long>() {
                     @Override
                     public void accept(Long aLong) throws Exception {
@@ -135,9 +137,9 @@ public class Operators {
      */
     private final CompositeDisposable disposables = new CompositeDisposable();
     private  Observable<String> observableForDisposable(){
-        return Observable.defer(new Callable<ObservableSource<? extends String>>() {
+        return Observable.defer(new Supplier<ObservableSource<? extends String>>() {
             @Override
-            public ObservableSource<? extends String> call() throws Exception {
+            public ObservableSource<? extends String> get() throws Throwable {
                 return Observable.just("ONE");
             }
         });
@@ -185,9 +187,9 @@ public class Operators {
      * Timer : 倒计时操作
      */
     private  Observable<String> observableForTimer(){
-        return Observable.defer(new Callable<ObservableSource<? extends String>>() {
+        return Observable.defer(new Supplier<ObservableSource<? extends String>>() {
             @Override
-            public ObservableSource<? extends String> call() throws Exception {
+            public ObservableSource<? extends String> get() throws Throwable {
                 return Observable.timer(2, TimeUnit.SECONDS).just("ONE");
             }
         });
@@ -199,9 +201,9 @@ public class Operators {
      * period - 周期 , start 开始步数 , count 总步数 , initialDelay 开始延时
      */
     public   Observable<String> observableForInterval(){
-        return Observable.defer(new Callable<ObservableSource<? extends String>>() {
+        return Observable.defer(new Supplier<ObservableSource<? extends String>>() {
             @Override
-            public ObservableSource<? extends String> call() throws Exception {
+            public ObservableSource<? extends String> get() throws Throwable {
                 return Observable.intervalRange(0,1,0,10, TimeUnit.SECONDS).just("ONE");
             }
         });

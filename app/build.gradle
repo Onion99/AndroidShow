@@ -122,14 +122,15 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.1'
+    implementation "androidx.paging:paging-runtime:2.1.2"
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.1'
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    // RxJava2 Dependencies
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    // Reactive Programming
+    implementation "io.reactivex.rxjava3:rxandroid:${versions.rxandroidVersion}"
+    implementation "io.reactivex.rxjava3:rxjava:${versions.rxjavaVersion}"
 
     // Dagger Core
     implementation "com.google.dagger:dagger:${versions.dagger}"
@@ -148,6 +149,10 @@ dependencies {
     implementation "androidx.room:room-runtime:$versions.roomVersion"
     implementation "androidx.room:room-ktx:$versions.roomVersion"
     kapt "androidx.room:room-compiler:$versions.roomVersion"
+    // Room RxJava Support for Room
+    implementation 'androidx.room:room-rxjava2:2.2.6'
+    implementation "com.github.akarnokd:rxjava3-bridge:3.0.0"
+
 
 
     // hilt
@@ -162,8 +167,11 @@ dependencies {
     // network
     implementation "com.squareup.retrofit2:retrofit:$versions.retrofitVersion"
     implementation "com.squareup.retrofit2:converter-moshi:$versions.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$versions.retrofitVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$versions.okhttpVersion"
     testImplementation "com.squareup.okhttp3:mockwebserver:$versions.okhttpVersion"
+    implementation "com.google.code.gson:gson:${versions.gsonVersion}"
+    implementation "com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0-RC8"
     // moshi
     implementation "com.squareup.moshi:moshi-kotlin:$versions.moshiVersion"
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$versions.moshiVersion"

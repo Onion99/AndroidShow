@@ -5,10 +5,11 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 
 import com.onion.android.R;
+import com.onion.android.app.plex.vm.HomeViewModel;
 import com.onion.android.databinding.PlexFragmentHomeBinding;
 import com.onion.android.java.base.PlexBaseFragment;
 
-public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding> {
+public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding, HomeViewModel> {
 
     @Override
     public void initView() {
@@ -18,6 +19,11 @@ public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding> {
     @Override
     public int getBindingContent(@Nullable Bundle savedInstanceState) {
         return R.layout.plex_fragment_home;
+    }
+
+    @Override
+    public Class<HomeViewModel> getViewModelClass() {
+        return HomeViewModel.class;
     }
 
 }

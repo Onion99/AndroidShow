@@ -6,7 +6,6 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import com.onion.android.R;
-import com.onion.android.app.plex.vm.SplashViewModel;
 import com.onion.android.app.utils.Tools;
 import com.onion.android.databinding.PlexActivitySplashBinding;
 import com.onion.android.java.base.PlexBaseActivity;

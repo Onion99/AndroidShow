@@ -21,6 +21,7 @@ ext.versions = [
         // network
         retrofitVersion        : '2.9.0',
         okhttpVersion          : '4.9.0',
+        gsonVersion            : '2.8.6',
 
         // ui
         transformationLayout   : '1.0.4',
@@ -43,7 +44,11 @@ ext.versions = [
 
         // ExoPlayer
         exoplayerversion       : '2.11.7',
-        mediarouter            : '1.2.2'
+        mediarouter            : '1.2.2',
+
+        // react programing
+        'rxandroidVersion'       : '3.0.0',
+        'rxjavaVersion'          : '3.0.0',
 
 
 

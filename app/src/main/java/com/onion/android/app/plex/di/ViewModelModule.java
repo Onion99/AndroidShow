@@ -1,8 +1,8 @@
-package com.onion.android.app.plex.di;
+package com.onion.android.app.plex.data.di;
 
 import androidx.lifecycle.ViewModelProvider;
 
-import com.onion.android.app.plex.vm.PlexViewModelFactory;
+import com.onion.android.app.plex.data.vm.PlexViewModelFactory;
 
 import dagger.Binds;
 import dagger.Module;

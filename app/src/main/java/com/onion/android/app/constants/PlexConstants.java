@@ -43,4 +43,174 @@ public abstract class PlexConstants{
         return new String(valueDecoded);
     }
 
+    public static final String MOVIE ="MOVIE";
+    public static final String SERIE ="SERIE";
+    public static final String EMPTY_URL ="about:blank";
+    public static final String MOVIE_ID = "id";
+    public static final String YOUTUBE_WATCH_BASE_URL = "https://www.youtube.com/watch?v=";
+    public static final String YOUTUBE_SEARCH_BASE_URL = " https://www.youtube.com/results?search_query=";
+    public static final String PAYPAL_CLIENT_ID = "clientid";
+    public static final String PAYMENT = "payment";
+    public static final String SUBS_SIZE = "subs_size";
+    public static final String SUBS_BACKGROUND = "subs_background";
+    public static final String PLAYER_ASPECT_RATIO = "player_aspect_ratio";
+    public static final String PREFERED_AUDIO = "player_prefered_audio";
+    public static final String CACHE_CONTROL = "Cache-Control";
+    public static final String ARG_MOVIE = "movie";
+    public static final String ARG_MOVIE_HISTORY = "history";
+    public static final String ARG_PAYMENT = "payment";
+    public static final String SUBSCRIPTIONS = "You Subscription has ended !";
+    public static final String EXTERNAL_ID = "external_id";
+    public static final String MOVIE_LINK = "link";
+    public static final String MOVIE_IMDB_NOTIFICATION = "tmdb_id";
+
+
+    // Buttons Switch Constants
+    public static final String WIFI_CHECK = "wifi_check";
+    public static final String SWITCH_PUSH_NOTIFICATION = "switch_push_notification";
+    public static final String AUTO_PLAY = "autoplay_check";
+    public static final String EXTENTIONS = "enable_extentions";
+
+
+    // Auth Constants
+    public static final String PREMUIM = "premuim";
+    public static final String AUTH_NAME = "name";
+    public static final String AUTH_ID = "id";
+    public static final String AUTH_EXPIRED_DATE = "expired_in";
+    public static final String ERROR = "Error";
+
+    public static final String LEGIT = "0";
+    public static final String PURCHASE_KEY = " ";
+
+
+
+    // Ads Constants
+    public static final String ADS_LINK = "link";
+    public static final String ADS_CLICKTHROUGHURL = "clickThroughUrl";
+
+
+    // Admob
+
+
+
+    // Remote
+    public static final String APPLICATION_JSON = "application/json";
+    public static final String ACCEPT = "Accept";
+
+
+    // Substitles
+
+    public static final String STORAGE_LOCATION = "file:///storage/emulated/0/Android/data/";
+    public static final String ZIP_FILE_NAME = "1.srt";
+    public static final String SUBSTITLE_LOCATION = "file:///storage/emulated/0/Android/data/";
+    public static final String SUBSTITLE_SUB_FILENAME_ZIP = "/subs.zip";
+
+
+
+    // Settings Constants
+    public static final String APP_NAME = "app_name";
+    public static final String AD_FACEBOOK_INTERSTITIAL_SHOW = "facebook_show_interstitial";
+    public static final String AD_INTERSTITIAL_SHOW = "ad_show_interstitial";
+    public static final String AD_INTERSTITIAL = "ad_interstitial";
+    public static final String AD_INTERSTITIAL_UNIT = "ad_unit_id_interstitial";
+    public static final String AD_BANNER = "ad_banner";
+    public static final String AD_BANNER_UNIT = "ad_unit_id_banner";
+    public static final String TMDB = "tmdb_api_key";
+    public static final String APP_URL_ANDROID = "app_url_android";
+    public static final String PRIVACY_POLICY = "privacy_policy";
+    public static final String LATEST_VERSION = "latestVersion";
+    public static final String UPDATE_TITLE = "update_title";
+    public static final String RELEASE_NOTES = "releaseNotes";
+    public static final String PAYPAL_AMOUNT = "paypal_amount";
+    public static final String FEATURED_HOME_NUMBERS = "featured_home_numbers";
+    public static final String IMDB_COVER_PATH = "imdb_cover_path";
+    public static final String AUTOSUBSTITLES = "autosubstitles";
+    public static final String ANIME = "anime";
+    public static final String ADS_SETTINGS = "ads";
+    public static final String AD_INTERSTITIAL_FACEEBOK_ENABLE = "ad_face_audience_interstitial";
+    public static final String AD_INTERSTITIAL_FACEEBOK_UNIT_ID = "ad_unit_id_facebook_interstitial_audience";
+    public static final String AD_INTERSTITIAL_APPODEAL_UNIT_ID = "ad_unit_id__appodeal_rewarded";
+    public static final String AD_BANNER_APPODEAL_UNIT_ID = "ad_unit_id_appodeal_banner_audience";
+    public static final String AD_NATIVEADS_ADMOB_UNIT_ID = "admob_native_ads";
+    public static final String AD_NATIVEADS_ADMOB_ENABLE = "ad_unit_id_native_enable";
+    public static final String PAYPAL_CURRENCY = "paypal_currency";
+    public static final String AD_INTERSTITIAL_APPOBEAL_ENABLE = "ad_unit_id_native";
+    public static final String AD_INTERSTITIAL_APPOBEAL_SHOW = "appodeal_show_interstitial";
+    public static final String DEFAULT_PAYMENT = "default_payment";
+    public static final String DEVICE_ID = "device_id";
+    public static final String PREFS = "APP_CONFIG";
+    public static final String PREFS2 = "APP_STARUP";
+    public static final String AD_BANNER_FACEEBOK_ENABLE = "ad_face_audience_banner";
+    public static final String AD_BANNER_FACEEBOK_UNIT_ID = "ad_unit_id_facebook_banner_audience";
+    public static final String DEFAULT_NETWORK = "default_network";
+    public static final String DEFAULT_NETWORK_PLAYER = "default_network_player";
+    public static final String STARTAPP_ID = "startapp_id";
+    public static final String ADMOB_REWARD = "ad_unit_id_rewarded";
+    public static final String FACEBOOK_REWARD = "ad_unit_id__facebook_rewarded";
+    public static final String UNITY_GAME_ID = "unity_game_id";
+    public static final String WATCH_ADS_TO_UNLOCK = "wach_ads_to_unlock";
+    public static final String WATCH_ADS_TO_UNLOCK_PLAYER = "wach_ads_to_unlock_player";
+    public static final String CUSTOM_MESSAGE = "custom_message";
+    public static final String ENABLE_CUSTOM_MESSAGE = "enable_custom_message";
+    public static final String STRIPE_PUBLISHABLE_KEY = "stripe_publishable_key";
+    public static final String STRIPE_SECRET_KEY = "stripe_secret_key";
+    public static final String APPODEAL_REWARD = "ad_unit_id__appodeal_rewarded";
+    public static final String APPODEAL_BANNER = "appodeal_banner";
+
+    public static final String DOWNLOADS_PREMUIM_ONLY = "download_premuim_only";
+    public static final String NEXT_EPISODE_TIMER = "next_episode_timer";
+    public static final String FACEBOOK = "facebook";
+    public static final String TWITTER = "twitter";
+    public static final String INSTAGRAM = "instagram";
+    public static final String YOUTUBE = "youtube";
+    public static final String ENABLE_SERVER_DIALOG_SELECTION = "server_dialog_selection";
+
+    public static final String ENABLE_CUSTOM_BANNER = "enable_custom_banner";
+    public static final String CUSTOM_BANNER_IMAGE = "custom_banner_image";
+    public static final String CUSTOM_BANNER_IMAGE_LINK = "custom_banner_image_link";
+
+
+    public static final String API_KEY_SETTINGS = "api_key";
+
+
+    // Status
+    public static final String CODE = "code";
+
+
+    // TV-SERIES
+    public static final String SPECIALS = "Specials";
+    public static final String SEASONS = "Seasons: ";
+    public static final String RESUME = "RESUME";
+
+
+    // Player Constants
+    public static final int CUSTOM_SEEK_CONTROL_STATE = 2; // Every time long press left/right will enter this state
+    public static final int EDIT_CUSTOM_SEEK_CONTROL_STATE = 3; // After long press left/right will enter this state
+    public static final long DEFAULT_FREQUENCY = 1000;
+    public static final String FSMPLAYER_TESTING = "FSM_LOGGING";
+    public static final String SUBSTITLE_SIZE = "subs_size";
+    public static final String UPNEXT = "Up Next in : ";
+    public static final String EP = "EP";
+    public static final String S0 = "S0";
+    public static final String E = "E";
+    public static final String STREAMING = "streaming";
+    public static final String ANIME_TYPE = "anime";
+    public static final String PIP_ACTION_PAUSE = "pause";
+    public static final String PIP_ACTION_PLAY = "play";
+    public static final String PIP_ENABLE_KEY = "pipEnable";
+    public static final int PIP_NUMERATOR_DEFAULT = 4;
+    public static final int PIP_DENOMINATOR_DEFAULT = 3;
+    public static final boolean PIP_ENABLE_VALUE_DEFAULT = true;
+
+
+
+    // Ads Watch Var
+
+
+
+
+    // Shared Preferences Constants
+    public static final String PREF_FILE = "Preferences";
+    public static final String ANDROI_ID = "android_id";
+
 }
