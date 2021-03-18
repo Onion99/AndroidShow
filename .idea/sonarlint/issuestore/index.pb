@@ -3,8 +3,6 @@ u
 Eapp/src/main/java/com/onion/android/app/plex/ui/frg/HomeFragment.java,b\d\bd66bea1d016acb14165140913981ab8f0cfb199
 s
 Capp/src/main/java/com/onion/android/java/base/PlexBaseFragment.java,4\c\4cc870897d47d4b3541d0cec5ecd663203637525
-R
-"app/src/main/res/values/colors.xml,9\6\969faa2a5d9f5e8390e958d2c07f2cfd54676e6b
 X
 (app/src/main/res/layout/content_main.xml,7\c\7c023c74a9bce7eb3587d0708a1c0350f6266748
 V
@@ -21,8 +19,6 @@ l
 .app/src/main/res/navigation/plex_nav_graph.xml,e\a\ea9592e76ae02e0cdadca23aa5e55d5f80651c88
 S
 #app/src/main/res/values/strings.xml,d\2\d2281fbb3027de2722081a53408dd77628bf080e
-R
-"app/src/main/res/values/styles.xml,f\7\f79cc2688e29fcbc286fda14ae07b27c9e83690f
 s
 Capp/src/main/java/com/onion/android/java/base/PlexBaseActivity.java,a\3\a30fd489b35f3ee37d9c51f80672a5982bc16d34
 |
@@ -49,8 +45,6 @@ n
 >app/src/main/java/com/onion/android/java/rxjava/Operators.java,8\f\8f7e3acf5bf1385ec1df5b13888735da8afe0f05
 r
 Bapp/src/main/java/com/onion/android/java/optional/OptionalAll.java,c\4\c4583473c76d992792682d8dfb0ba273f9d5ec9e
-^
-.app/src/main/res/layout/plex_fragment_home.xml,2\a\2af2639033a7cc274e9c683db9cf6d330d1db1d5
 n
 >app/src/main/java/com/onion/android/java/stream/StreamAll.java,4\e\4e1175b0c594ad56c747beb9329c9e7e7a0644d0
 r

@@ -1,7 +1,6 @@
 package com.onion.android.java.base;
 
 import android.app.Activity;
-import android.app.Application;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;

@@ -85,5 +85,9 @@
     <style name="PlexBottomNavigationView.Inactive" parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:textSize">10sp</item>
     </style>
+    <style name="Toolbar.Light" parent="@style/AppTheme">
+        <item name="colorControlNormal">@color/grey_11</item>
+        <item name="android:textColorPrimary">@color/grey_60</item>
+    </style>
 
 </resources>
