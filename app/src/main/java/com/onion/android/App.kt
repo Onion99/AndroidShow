@@ -3,6 +3,8 @@ package com.onion.android
 import android.app.Application
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
+import dagger.android.AndroidInjector
+import dagger.android.HasAndroidInjector
 import dagger.hilt.android.HiltAndroidApp
 import info.guardianproject.netcipher.proxy.OrbotHelper
 import info.guardianproject.netcipher.webkit.WebkitProxy
@@ -10,9 +12,10 @@ import java.lang.Exception
 
 /**
  * 实现 ViewModelStoreOwner 接口以实现ViewModel
+ * 实现 HasAndroidInjector 以实现Application注入
  * */
 @HiltAndroidApp
-class App : Application(),ViewModelStoreOwner{
+class App : Application(),ViewModelStoreOwner,HasAndroidInjector{
 
     private lateinit var mAppViewModelStore: ViewModelStore
 
@@ -47,5 +50,9 @@ class App : Application(),ViewModelStoreOwner{
 
     override fun getViewModelStore(): ViewModelStore {
         return mAppViewModelStore
+    }
+
+    override fun androidInjector(): AndroidInjector<Any> {
+
     }
 }

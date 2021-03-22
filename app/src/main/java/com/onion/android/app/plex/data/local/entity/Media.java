@@ -23,9 +23,6 @@ import com.onion.android.app.plex.data.model.substitles.MediaSubstitle;
 import java.util.List;
 
 
-/**
- * @author Yobex.
- */
 
 
 @Entity(primaryKeys = "tmdbId",

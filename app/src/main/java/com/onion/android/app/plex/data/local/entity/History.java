@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName;
 
 
 @SuppressWarnings(RoomWarnings.DEFAULT_CONSTRUCTOR)
-@Entity(primaryKeys = "id",
+@Entity(
         tableName = "history",
         indices = {@Index(value = {"id"}, unique = true)}, inheritSuperIndices = true)
 

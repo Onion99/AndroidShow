@@ -1,5 +1,6 @@
 package com.onion.android.app.plex.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -37,6 +38,9 @@ public class SplashActivity extends PlexBaseActivity<PlexActivitySplashBinding> 
     public void initView() {
         initNetcipher();
         Tools.loadHttpImg(getApplication(), mBinding.logoImageTop,SERVER_BASE_URL +"image/logo");
+        Tools.postDelayed(()->{
+            startActivity(new Intent(this,MainActivity.class));
+        },1900);
     }
 
     @Override

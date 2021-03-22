@@ -1,4 +1,4 @@
-package com.onion.android.app.plex.data.di;
+package com.onion.android.app.plex.di.module;
 
 import androidx.lifecycle.ViewModelProvider;
 

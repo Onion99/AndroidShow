@@ -79,4 +79,7 @@
     <color name="main_orange">#fff9930d</color>
     <color name="primary_dark">#0288D1</color>
     <color name="plex_bottom_navgation_bg">#121212</color>
+    <color name="fragment_featured_end">#1a1a1a</color>
+    <color name="fragment_featured_overlay_center">#6626262d</color>
+    <color name="fragment_featured_overlay_start">#0026262d</color>
 </resources>

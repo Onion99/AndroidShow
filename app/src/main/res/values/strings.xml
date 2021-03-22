@@ -21,5 +21,9 @@
     <string name="upcoming">Upcoming</string>
     <string name="streaming">Streaming</string>
     <string name="live_text">LIVE</string>
+    <string name="genre">Genre</string>
+    <string name="premuim">Premuim</string>
+    <string name="title">TITLE</string>
+    <string name="lecture">Lecture</string>
 
 </resources>

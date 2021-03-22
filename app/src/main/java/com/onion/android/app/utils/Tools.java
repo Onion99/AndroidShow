@@ -2,6 +2,7 @@ package com.onion.android.app.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.Network;
@@ -10,10 +11,12 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.TypedValue;
 import android.view.Window;
 import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.onion.android.R;
 // 导入包域静态变量
 import static android.os.Build.VERSION;
 import static android.os.Build.VERSION_CODES;
@@ -75,6 +78,23 @@ public class Tools {
             }
         }
         return false;
+    }
+
+    // Converting Pixels to DPI
+    public static int dpToPx(Context c, int dp) {
+        Resources r = c.getResources();
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
+    // Load Media Cover Path for Media Details (Movie - Serie - Stream - Anime)
+    public static void onLoadMediaCover(Context context,ImageView
+            imageView,String mediaCoverPath){
+        Glide.with(context).asBitmap().load(mediaCoverPath)
+                .fitCenter()
+                .placeholder(R.color.black_70)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .transition(withCrossFade())
+                .skipMemoryCache(true)
+                .into(imageView);
     }
 
 }
