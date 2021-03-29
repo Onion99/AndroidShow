@@ -14,6 +14,10 @@ plugins {
     id 'kotlin-parcelize'
     id 'dagger.hilt.android.plugin'
 }
+// java和kotlin混合开发 使用Dagger 需要在目标build.gradle(module)的最后添加下面代码
+//kapt {
+//    generateStubs = true
+//}
 
 // 上面的调用等同域 apply plugin: 'com.android.application'
 apply from: "$rootDir/dependencies.gradle"
@@ -45,6 +49,7 @@ android {
 
     buildTypes {
         release {
+            // 是否启用代码收缩、混淆和优化
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -132,12 +137,16 @@ dependencies {
 
     // Dagger Core
     implementation "com.google.dagger:dagger:${versions.dagger}"
+    // kotlin 和 java 混合开发的情况需同时声明一下, java - annotationProcessor, kotlin - kapt
     annotationProcessor "com.google.dagger:dagger-compiler:${versions.dagger}"
+    kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
 
     // Dagger Android
     implementation "com.google.dagger:dagger-android:${versions.dagger}"
     implementation "com.google.dagger:dagger-android-support:${versions.dagger}"
+    // kotlin 和 java 混合开发的情况需同时声明一下, java - annotationProcessor, kotlin - kapt
     annotationProcessor "com.google.dagger:dagger-android-processor:${versions.dagger}"
+    kapt "com.google.dagger:dagger-android-processor:${versions.dagger}"
 
     // AAC
     implementation "androidx.lifecycle:lifecycle-extensions:$versions.lifecycleVersion"

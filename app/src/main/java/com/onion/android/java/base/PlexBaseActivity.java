@@ -14,6 +14,8 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Optional;
 
+import dagger.android.AndroidInjection;
+
 public abstract class PlexBaseActivity<T extends ViewDataBinding> extends AppCompatActivity {
 
     public T mBinding;
@@ -24,6 +26,9 @@ public abstract class PlexBaseActivity<T extends ViewDataBinding> extends AppCom
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Dagger-依赖注入（zi）
+        AndroidInjection.inject(this);
+        // DataBinding 绑定
         mBinding = DataBindingUtil.setContentView(this, getBindingContent(savedInstanceState));
         initView();
     }
