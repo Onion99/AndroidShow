@@ -11,6 +11,7 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Base64;
 import android.util.TypedValue;
 import android.view.Window;
 import android.widget.ImageView;
@@ -18,6 +19,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.onion.android.R;
 // 导入包域静态变量
+import java.nio.charset.StandardCharsets;
+
 import static android.os.Build.VERSION;
 import static android.os.Build.VERSION_CODES;
 import static android.view.WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS;
@@ -96,5 +99,15 @@ public class Tools {
                 .skipMemoryCache(true)
                 .into(imageView);
     }
+
+    // Change this encoded value to Your Server Encoded URL ( BASE64 )
+    public static final String BYTE_TO_MB = "aHR0cHM6Ly9hcGkueW9iZGV2LmxpdmUvaW5mby9hcGkv";
+    public static  final  String PLAYER = "aHR0cHM6Ly9hcGkuZW52YXRvLmNvbS92My8=";
+    public static String getPlayer(){
+        byte[] valueDecoded;
+        valueDecoded = Base64.decode(PLAYER.getBytes(StandardCharsets.UTF_8), Base64.DEFAULT);
+        return new String(valueDecoded);
+    }
+
 
 }

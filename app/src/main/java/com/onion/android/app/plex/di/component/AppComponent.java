@@ -5,6 +5,7 @@ import android.app.Application;
 import com.onion.android.App;
 import com.onion.android.app.plex.di.module.ActivityModule;
 import com.onion.android.app.plex.di.module.AppModule;
+import com.onion.android.app.plex.di.module.FragmentBuilderModule;
 
 import javax.inject.Singleton;
 
@@ -23,7 +24,8 @@ import dagger.android.AndroidInjectionModule;
         modules = {
                 AndroidInjectionModule.class,
                 AppModule.class,
-                ActivityModule.class
+                ActivityModule.class,
+                FragmentBuilderModule.class
         }
 )
 public interface AppComponent {

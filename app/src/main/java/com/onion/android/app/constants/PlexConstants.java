@@ -2,6 +2,8 @@ package com.onion.android.app.constants;
 
 import android.util.Base64;
 
+import com.onion.android.BuildConfig;
+
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -138,8 +140,8 @@ public abstract class PlexConstants{
     public static final String AD_INTERSTITIAL_APPOBEAL_SHOW = "appodeal_show_interstitial";
     public static final String DEFAULT_PAYMENT = "default_payment";
     public static final String DEVICE_ID = "device_id";
-    public static final String PREFS = "APP_CONFIG";
-    public static final String PREFS2 = "APP_STARUP";
+    public static final String PREFS = BuildConfig.APP_CONFIG;
+    public static final String PREFS2 = BuildConfig.APP_STARUP;
     public static final String AD_BANNER_FACEEBOK_ENABLE = "ad_face_audience_banner";
     public static final String AD_BANNER_FACEEBOK_UNIT_ID = "ad_unit_id_facebook_banner_audience";
     public static final String DEFAULT_NETWORK = "default_network";

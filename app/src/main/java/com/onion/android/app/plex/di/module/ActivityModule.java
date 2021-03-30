@@ -1,5 +1,6 @@
 package com.onion.android.app.plex.di.module;
 
+import com.onion.android.app.plex.ui.MainActivity;
 import com.onion.android.app.plex.ui.SplashActivity;
 import com.onion.android.java.base.PlexBaseActivity;
 
@@ -22,4 +23,8 @@ public abstract class ActivityModule {
 
     @ContributesAndroidInjector
     abstract SplashActivity contributeSplashActivity();
+
+    // 如果存在Fragment，则将Activity对应的FragmentModule依赖进来
+    @ContributesAndroidInjector(modules = FragmentBuilderModule.class)
+    abstract MainActivity contributeMainActivity();
 }

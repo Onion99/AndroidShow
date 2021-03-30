@@ -1,0 +1,4 @@
+ext.configs = [
+        'api' : 'https://api.envato.com/v3/',
+        'api2': 'https://api.yobdev.live/easyplex/api/'
+]

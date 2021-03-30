@@ -50,7 +50,4 @@ ext.versions = [
         'rxandroidVersion'       : '3.0.0',
         'rxjavaVersion'          : '3.0.0',
 
-
-
-
 ]

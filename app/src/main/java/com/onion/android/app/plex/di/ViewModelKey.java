@@ -10,7 +10,8 @@ import java.lang.annotation.Target;
 
 import dagger.MapKey;
 
-
+// 这个主要用于解决一个奇怪的问题
+// https://stackoverflow.com/questions/55669810/dagger-missingbinding-java-util-mapjava-lang-class-extends-viewmodel-provide
 @Documented
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)

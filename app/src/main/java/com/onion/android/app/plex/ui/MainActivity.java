@@ -13,14 +13,11 @@ import com.onion.android.app.utils.Tools;
 import com.onion.android.databinding.PlexActivityMainBinding;
 import com.onion.android.java.base.PlexBaseActivity;
 
-import dagger.android.AndroidInjection;
-
 public class MainActivity extends PlexBaseActivity<PlexActivityMainBinding> {
 
 
     @Override
     public void initView() {
-        AndroidInjection.inject(this);
         Tools.setSystemBarTransparent(this);
         changeFragment(new HomeFragment(),HomeFragment.class.getSimpleName());
         onNavigationItemClick();

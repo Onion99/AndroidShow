@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 
 import com.onion.android.R;
 import com.onion.android.app.plex.data.repository.MediaRepository;
+import com.onion.android.app.plex.di.injector.Injectable;
 import com.onion.android.app.plex.ui.adapter.FeaturedAdapter;
 import com.onion.android.app.plex.ui.adapter.decoration.SpacingItemDecoration;
 import com.onion.android.app.plex.vm.HomeViewModel;
@@ -17,7 +18,7 @@ import com.onion.android.java.base.PlexBaseFragment;
 
 import javax.inject.Inject;
 
-public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding, HomeViewModel> {
+public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding, HomeViewModel> implements Injectable {
 
     private PagerSnapHelper pagerSnapHelper;
     private FeaturedAdapter mFeaturedAdapter;
@@ -52,7 +53,7 @@ public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding, Home
         pagerSnapHelper = new PagerSnapHelper();
         pagerSnapHelper.attachToRecyclerView(mBinding.rvFeatured);
         mBinding.indicator.attachToRecyclerView(mBinding.rvFeatured, pagerSnapHelper);
-        mBinding.indicator.createIndicators(mFeaturedAdapter.getItemCount(),0);
+//        mBinding.indicator.createIndicators(mFeaturedAdapter.getItemCount(),0);
         mFeaturedAdapter.registerAdapterDataObserver(mBinding.indicator.getAdapterDataObserver());
 
         mViewModel.featuredMoviesMutableLiveData.observe(getViewLifecycleOwner(), featured -> mFeaturedAdapter.addFeatured(featured.getFeatured(),requireActivity(), mediaRepository));

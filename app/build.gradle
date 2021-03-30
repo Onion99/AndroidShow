@@ -21,6 +21,7 @@ plugins {
 
 // 上面的调用等同域 apply plugin: 'com.android.application'
 apply from: "$rootDir/dependencies.gradle"
+apply from: "$rootDir/config.gradle"
 
 android {
     compileSdkVersion 30
@@ -48,7 +49,13 @@ android {
     }
 
     buildTypes {
+        debug{
+            buildConfigField "String", "APP_CONFIG", "\"${configs.api}\""
+            buildConfigField "String", "APP_STARUP", "\"${configs.api2}\""
+        }
         release {
+            buildConfigField "String", "APP_CONFIG", "\"${configs.api}\""
+            buildConfigField "String", "APP_STARUP", "\"${configs.api2}\""
             // 是否启用代码收缩、混淆和优化
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

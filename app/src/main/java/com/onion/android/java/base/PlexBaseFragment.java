@@ -36,9 +36,14 @@ public abstract class PlexBaseFragment<T extends ViewDataBinding,V extends ViewM
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, getBindingContent(savedInstanceState), container,false);
         mBinding.setLifecycleOwner(this);
-        mViewModel = getActivityScopeViewModel(getViewModelClass());
-        initView();
+//        mViewModel = getActivityScopeViewModel(getViewModelClass());
         return mBinding.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initView();
     }
 
     @Override
