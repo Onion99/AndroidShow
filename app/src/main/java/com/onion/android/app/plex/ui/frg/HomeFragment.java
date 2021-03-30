@@ -18,10 +18,12 @@ import com.onion.android.java.base.PlexBaseFragment;
 
 import javax.inject.Inject;
 
-public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding, HomeViewModel> implements Injectable {
+public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding> implements Injectable {
 
     private PagerSnapHelper pagerSnapHelper;
     private FeaturedAdapter mFeaturedAdapter;
+    @Inject
+    private HomeViewModel viewModel;
 
     @Inject
     MediaRepository mediaRepository;
@@ -36,14 +38,8 @@ public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding, Home
         return R.layout.plex_fragment_home;
     }
 
-    @Override
-    public Class<HomeViewModel> getViewModelClass() {
-        return HomeViewModel.class;
-    }
-
     // Display Featured Movies Details
     private void onLoadFeaturedMovies() {
-
         mBinding.rvFeatured.setHasFixedSize(true);
         mBinding.rvFeatured.setNestedScrollingEnabled(false);
         mBinding.rvFeatured.setLayoutManager(new LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false));
@@ -53,10 +49,9 @@ public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding, Home
         pagerSnapHelper = new PagerSnapHelper();
         pagerSnapHelper.attachToRecyclerView(mBinding.rvFeatured);
         mBinding.indicator.attachToRecyclerView(mBinding.rvFeatured, pagerSnapHelper);
-//        mBinding.indicator.createIndicators(mFeaturedAdapter.getItemCount(),0);
+        mBinding.indicator.createIndicators(mFeaturedAdapter.getItemCount(),0);
         mFeaturedAdapter.registerAdapterDataObserver(mBinding.indicator.getAdapterDataObserver());
-
-        mViewModel.featuredMoviesMutableLiveData.observe(getViewLifecycleOwner(), featured -> mFeaturedAdapter.addFeatured(featured.getFeatured(),requireActivity(), mediaRepository));
+        viewModel.featuredMoviesMutableLiveData.observe(getViewLifecycleOwner(), featured -> mFeaturedAdapter.addFeatured(featured.getFeatured(),requireActivity(), mediaRepository));
     }
 
 }
