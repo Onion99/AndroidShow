@@ -23,6 +23,8 @@ import com.onion.android.databinding.ItemFeaturedBinding;
 import java.util.List;
 import java.util.Random;
 
+import javax.inject.Inject;
+
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.FeaturedViewHolder> {
@@ -37,6 +39,10 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
     private static final String TAG = "FeaturedAdapter";
     protected SimpleExoPlayer mMoviePlayer;
     MediaModel mMediaModel;
+
+    @Inject
+    public FeaturedAdapter() {
+    }
 
     public void addFeatured(List<Media> castList, Context context,
                             MediaRepository mediaRepository){

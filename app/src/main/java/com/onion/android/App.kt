@@ -1,6 +1,7 @@
 package com.onion.android
 
 import android.app.Application
+import android.content.Context
 import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
 import com.onion.android.app.plex.di.injector.AppInjector
@@ -8,8 +9,11 @@ import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import dagger.hilt.android.HiltAndroidApp
+import info.guardianproject.netcipher.client.StrongBuilder
+import info.guardianproject.netcipher.client.StrongOkHttpClientBuilder
 import info.guardianproject.netcipher.proxy.OrbotHelper
 import info.guardianproject.netcipher.webkit.WebkitProxy
+import okhttp3.OkHttpClient
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -19,7 +23,7 @@ import javax.inject.Inject
  * */
 // Todo 这里加上 @HiltAndroidApp 的话 Hilt 和 Dagger 会发生冲突，导致某些注入需求找不到 ,因而现在先注释掉
 // @HiltAndroidApp
-class App : Application(),ViewModelStoreOwner,HasAndroidInjector{
+class App : Application(),ViewModelStoreOwner,HasAndroidInjector,StrongBuilder.Callback<OkHttpClient>{
 
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
@@ -28,6 +32,7 @@ class App : Application(),ViewModelStoreOwner,HasAndroidInjector{
 
     override fun onCreate() {
         super.onCreate()
+        context = applicationContext
         AppInjector.init(this)
         /**
          * Netcipher-step-1-Creating the OrbotHelper
@@ -44,6 +49,10 @@ class App : Application(),ViewModelStoreOwner,HasAndroidInjector{
                 "localhost",
                 8118
             )
+            // Netcipher-step-2-Creating a Activity Builder
+            StrongOkHttpClientBuilder.forMaxSecurity(this)
+                .withTorValidation()
+                .build(this)
         } catch (e: Exception) { e.printStackTrace() }
         // 实例化mAppViewModelStore
         mAppViewModelStore = ViewModelStore()
@@ -51,9 +60,7 @@ class App : Application(),ViewModelStoreOwner,HasAndroidInjector{
 
     companion object {
         @JvmStatic
-        fun getBaseContext():Application{
-            return this.getBaseContext()
-        }
+        lateinit var context:Context
     }
 
     override fun getViewModelStore(): ViewModelStore {
@@ -64,4 +71,12 @@ class App : Application(),ViewModelStoreOwner,HasAndroidInjector{
         AppInjector.init(this)
         return androidInjector
     }
+
+    override fun onConnected(connection: OkHttpClient?) {}
+
+    override fun onConnectionException(e: Exception?) {}
+
+    override fun onTimeout() {}
+
+    override fun onInvalid() {}
 }

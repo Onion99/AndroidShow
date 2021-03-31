@@ -1,6 +1,7 @@
 package com.onion.android.app.plex.ui.frg;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,17 +21,20 @@ import javax.inject.Inject;
 
 public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding> implements Injectable {
 
-    private PagerSnapHelper pagerSnapHelper;
-    private FeaturedAdapter mFeaturedAdapter;
     @Inject
-    private HomeViewModel viewModel;
+    FeaturedAdapter mFeaturedAdapter;
+    @Inject
+    HomeViewModel viewModel;
 
     @Inject
     MediaRepository mediaRepository;
 
     @Override
     public void initView() {
-        onLoadFeaturedMovies();
+        if(Tools.checkIfHasNetwork(requireContext())){
+            viewModel.initData();
+            onLoadFeaturedMovies();
+        }
     }
 
     @Override
@@ -46,12 +50,23 @@ public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding> impl
         mBinding.rvFeatured.addItemDecoration(new SpacingItemDecoration(1, Tools.dpToPx(requireActivity(), 0), true));
         mBinding.rvFeatured.setAdapter(mFeaturedAdapter);
         mBinding.rvFeatured.setItemViewCacheSize(8);
-        pagerSnapHelper = new PagerSnapHelper();
+        PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
         pagerSnapHelper.attachToRecyclerView(mBinding.rvFeatured);
         mBinding.indicator.attachToRecyclerView(mBinding.rvFeatured, pagerSnapHelper);
         mBinding.indicator.createIndicators(mFeaturedAdapter.getItemCount(),0);
         mFeaturedAdapter.registerAdapterDataObserver(mBinding.indicator.getAdapterDataObserver());
-        viewModel.featuredMoviesMutableLiveData.observe(getViewLifecycleOwner(), featured -> mFeaturedAdapter.addFeatured(featured.getFeatured(),requireActivity(), mediaRepository));
+        viewModel.featuredMoviesMutableLiveData.observe(getViewLifecycleOwner(), featured -> {
+            mFeaturedAdapter.addFeatured(featured.getFeatured(), requireActivity(), mediaRepository);
+            viewModel.mFeaturedLoaded = true;
+            viewModel.mScrollLoaded = true;
+            checkDataLoaded();
+        });
     }
 
+    private void checkDataLoaded(){
+        if(viewModel.checkDataLoaded()){
+            mBinding.scrollView.setVisibility(View.VISIBLE);
+            mBinding.progressBar.setVisibility(View.GONE);
+        }
+    }
 }

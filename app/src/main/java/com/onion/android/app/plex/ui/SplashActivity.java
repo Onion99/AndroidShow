@@ -7,9 +7,13 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import com.onion.android.R;
+import com.onion.android.app.plex.manager.SettingsManager;
+import com.onion.android.app.plex.vm.SettingsViewModel;
 import com.onion.android.app.utils.Tools;
 import com.onion.android.databinding.PlexActivitySplashBinding;
 import com.onion.android.java.base.PlexBaseActivity;
+
+import javax.inject.Inject;
 
 import info.guardianproject.netcipher.client.StrongBuilder;
 import info.guardianproject.netcipher.client.StrongOkHttpClientBuilder;
@@ -19,8 +23,13 @@ import static com.onion.android.app.constants.PlexConstants.SERVER_BASE_URL;
 
 public class SplashActivity extends PlexBaseActivity<PlexActivitySplashBinding> implements StrongBuilder.Callback<OkHttpClient> {
 
+    @Inject
+    SettingsViewModel settingsViewModel;
+    @Inject
+    SettingsManager settingsManager;
+
     private void initNetcipher(){
-        // Netcipher-step-2-Creating a Builder
+        // Netcipher-step-2-Creating a Activity Builder
         try {
             StrongOkHttpClientBuilder
                     .forMaxSecurity(this)
@@ -38,9 +47,14 @@ public class SplashActivity extends PlexBaseActivity<PlexActivitySplashBinding> 
     public void initView() {
         initNetcipher();
         Tools.loadHttpImg(getApplication(), mBinding.logoImageTop,SERVER_BASE_URL +"image/logo");
-        Tools.postDelayed(()->{
-            startActivity(new Intent(this,MainActivity.class));
-        },1900);
+        settingsViewModel.getSettingsDetails();
+        settingsViewModel.settingsMutableLiveData.observe(this, settings -> {
+            settingsManager.saveSettings(settings);
+            Tools.postDelayed(()->{
+                startActivity(new Intent(this,MainActivity.class));
+            },1900);
+        });
+
     }
 
     @Override

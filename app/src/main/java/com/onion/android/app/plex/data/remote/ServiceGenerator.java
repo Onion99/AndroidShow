@@ -193,7 +193,7 @@ public class ServiceGenerator {
 
             if(PURCHASE_KEY != null){
                 newBuilder.addHeader("Authorization", Arrays.toString(Base64.decode("QmVhcmVyIEd4b05kUGhPcnNrV1laZlN3MmQ5aGdlWFRvU2xVQmFs", Base64.DEFAULT)));
-                newBuilder     .addHeader(ACCEPT, APPLICATION_JSON);
+                newBuilder.addHeader(ACCEPT, APPLICATION_JSON);
             }
             request = newBuilder.build();
             return chain.proceed(request);
@@ -293,7 +293,7 @@ public class ServiceGenerator {
         public @NotNull Response intercept(@NonNull Chain chain) throws IOException {
             Request request = chain.request();
 
-            if (Tools.checkIfHasNetwork(App.getBaseContext())) {
+            if (Tools.checkIfHasNetwork(App.getContext())) {
                 Timber.i("Offline cache applied");
                 int maxStale = 60 * 60 * 24 * 28; // tolerate 4-weeks stale
                 request = request.newBuilder()

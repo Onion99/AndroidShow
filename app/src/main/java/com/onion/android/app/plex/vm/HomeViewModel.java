@@ -18,8 +18,9 @@ public class HomeViewModel extends ViewModel {
     private final MediaRepository mediaRepository;
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     public final MutableLiveData<MovieResponse> featuredMoviesMutableLiveData = new MutableLiveData<>();
-
-
+    // State
+    public boolean mFeaturedLoaded;
+    public boolean mScrollLoaded;
     @Inject
     HomeViewModel(MediaRepository mediaRepository){
         this.mediaRepository = mediaRepository;
@@ -28,9 +29,13 @@ public class HomeViewModel extends ViewModel {
     public void initData(){
         // get feature data
         compositeDisposable.add(mediaRepository.getFeatured()
+                // mediaRepository.getFeature 所在的线程
                 .subscribeOn(Schedulers.io())
+                // featuredMoviesMutableLiveData::postValue 所在的线程
                 .observeOn(AndroidSchedulers.mainThread())
+                // 是否缓存
                 .cache()
+                // 执行完毕后，通知谁
                 .subscribe(featuredMoviesMutableLiveData::postValue,this::handleError)
         );
     }
@@ -39,4 +44,13 @@ public class HomeViewModel extends ViewModel {
         Timber.i("In onError()%s", e.getMessage());
     }
 
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        compositeDisposable.clear();
+    }
+
+    public boolean checkDataLoaded(){
+        return mFeaturedLoaded && mScrollLoaded;
+    }
 }
