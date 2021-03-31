@@ -83,8 +83,9 @@ public class ServiceGenerator {
     }
 
 
+    // Todo ： 叉，原来OkHttp缓存报错是这里的原因，缓存目录有问题
     private static final File httpCacheDirectory
-            = new File(Environment.getExternalStorageState(), "responses");
+            = new File(App.getContext().getCacheDir(), "responses");
     private static final int CACHE_SIZE = 30 * 1024 * 1024; // 10 MB
     // 因为kotlin的Cache 类，所以识别不了,但可以正常調用
     private static final Cache cache = new Cache(httpCacheDirectory, CACHE_SIZE);
@@ -293,7 +294,7 @@ public class ServiceGenerator {
         public @NotNull Response intercept(@NonNull Chain chain) throws IOException {
             Request request = chain.request();
 
-            if (Tools.checkIfHasNetwork(App.getContext())) {
+            if (!Tools.checkIfHasNetwork(App.getContext())) {
                 Timber.i("Offline cache applied");
                 int maxStale = 60 * 60 * 24 * 28; // tolerate 4-weeks stale
                 request = request.newBuilder()

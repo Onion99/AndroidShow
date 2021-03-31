@@ -45,6 +45,7 @@ public class SplashActivity extends PlexBaseActivity<PlexActivitySplashBinding> 
 
     @Override
     public void initView() {
+        Tools.hideSystemBar(this,true);
         initNetcipher();
         Tools.loadHttpImg(getApplication(), mBinding.logoImageTop,SERVER_BASE_URL +"image/logo");
         settingsViewModel.getSettingsDetails();

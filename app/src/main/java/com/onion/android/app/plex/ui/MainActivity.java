@@ -18,7 +18,7 @@ public class MainActivity extends PlexBaseActivity<PlexActivityMainBinding> {
 
     @Override
     public void initView() {
-        Tools.setSystemBarTransparent(this);
+        Tools.hideSystemBar(this,true);
         changeFragment(new HomeFragment(),HomeFragment.class.getSimpleName());
         onNavigationItemClick();
     }

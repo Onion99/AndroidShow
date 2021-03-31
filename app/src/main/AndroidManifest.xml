@@ -35,7 +35,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".app.plex.ui.MainActivity">
-
         </activity>
     </application>
 

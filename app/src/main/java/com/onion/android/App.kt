@@ -42,13 +42,14 @@ class App : Application(),ViewModelStoreOwner,HasAndroidInjector,StrongBuilder.C
          * */
         OrbotHelper.get(this).init()
         try {
-            WebkitProxy.setProxy(
+            // Todo 暂时不设置 webkit代理了，会导致网络请求问题
+/*            WebkitProxy.setProxy(
                 App::class.java.name,
                 this.applicationContext,
                 null,
                 "localhost",
                 8118
-            )
+            )*/
             // Netcipher-step-2-Creating a Activity Builder
             StrongOkHttpClientBuilder.forMaxSecurity(this)
                 .withTorValidation()

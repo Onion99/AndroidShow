@@ -18,7 +18,7 @@
         <item name="md_button_casing">literal</item>
     </style>
 
-    <style name="AppPlexTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppPlexTheme" parent="Theme.MaterialComponents.Light.NoActionBar" >
         <item name="colorPrimary">@color/plex_colorPrimary</item>
         <item name="colorPrimaryDark">@color/plex_colorPrimaryDark</item>
         <item name="colorAccent">@color/main_color</item>
