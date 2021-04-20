@@ -25,7 +25,6 @@ public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding> impl
     FeaturedAdapter mFeaturedAdapter;
     @Inject
     HomeViewModel viewModel;
-
     @Inject
     MediaRepository mediaRepository;
 
@@ -42,7 +41,7 @@ public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding> impl
         return R.layout.plex_fragment_home;
     }
 
-    // Display Featured Movies Details
+    // 加载流行影片
     private void onLoadFeaturedMovies() {
         mBinding.rvFeatured.setHasFixedSize(true);
         mBinding.rvFeatured.setNestedScrollingEnabled(false);

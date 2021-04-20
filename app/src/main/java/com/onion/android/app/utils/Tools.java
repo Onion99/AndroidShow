@@ -58,7 +58,11 @@ public class Tools {
         }
     }
 
-    // 隐藏系统状态栏
+    /**
+     * 隐藏系统状态栏
+     * @param activity 当前上下文
+     * @param immediate 是否沉浸式
+     */
     public static void hideSystemBar(@NonNull final Activity activity, final boolean immediate){
         hideSystemBar(activity,immediate,2000);
     }
@@ -100,7 +104,9 @@ public class Tools {
         decorView.setSystemUiVisibility(uiState);
     }
 
-    // 加载网络图片
+    /**
+     * 加载网络图片
+     */
     public static void loadHttpImg(Context context, ImageView imageView,String url){
         Glide.with(context).asBitmap().load(url)
                 .fitCenter()

@@ -27,8 +27,8 @@ public class SettingsViewModel extends ViewModel {
         this.settingsRepository = settingsRepository;
     }
 
+    /**获取配置信息*/
     public void getSettingsDetails() {
-        // Fetch Settings Details
         compositeDisposable.add(settingsRepository.getSettings()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

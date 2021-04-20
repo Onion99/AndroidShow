@@ -36,7 +36,6 @@ public class SettingsRepository {
     @Inject
     SettingsRepository(ApiInterface apiInterface) {
         this.apiInterface = apiInterface;
-
     }
 
 

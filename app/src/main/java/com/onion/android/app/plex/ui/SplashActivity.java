@@ -28,6 +28,9 @@ public class SplashActivity extends PlexBaseActivity<PlexActivitySplashBinding> 
     @Inject
     SettingsManager settingsManager;
 
+    /**
+     * 初始化洋葱代理，使用的洋葱路由概念(提供匿名性和对交通监控的抵抗)
+     */
     private void initNetcipher(){
         // Netcipher-step-2-Creating a Activity Builder
         try {
@@ -45,15 +48,14 @@ public class SplashActivity extends PlexBaseActivity<PlexActivitySplashBinding> 
 
     @Override
     public void initView() {
-        Tools.hideSystemBar(this,true);
         initNetcipher();
+        Tools.hideSystemBar(this,true);
         Tools.loadHttpImg(getApplication(), mBinding.logoImageTop,SERVER_BASE_URL +"image/logo");
         settingsViewModel.getSettingsDetails();
+        // 监听配置信息获取
         settingsViewModel.settingsMutableLiveData.observe(this, settings -> {
             settingsManager.saveSettings(settings);
-            Tools.postDelayed(()->{
-                startActivity(new Intent(this,MainActivity.class));
-            },1900);
+            Tools.postDelayed(()->{ startActivity(new Intent(this,MainActivity.class)); },1900);
         });
 
     }
