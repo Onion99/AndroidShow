@@ -150,6 +150,118 @@ public class Settings {
     @Expose
     private int nextEpisodeTimer;
 
+    public int getAllowAdm() {
+        return allowAdm;
+    }
+
+    public void setAllowAdm(int allowAdm) {
+        this.allowAdm = allowAdm;
+    }
+
+
+
+    public int getVlc() {
+        return vlc;
+    }
+
+    public void setVlc(int vlc) {
+        this.vlc = vlc;
+    }
+
+    @SerializedName("enable_vlc")
+    @Expose
+    private int vlc;
+
+    @SerializedName("startapp_interstitial")
+    @Expose
+    private int startappInterstitial;
+
+    public int getStartappInterstitial() {
+        return startappInterstitial;
+    }
+
+    public void setStartappInterstitial(int startappInterstitial) {
+        this.startappInterstitial = startappInterstitial;
+    }
+
+    public int getStartappBanner() {
+        return startappBanner;
+    }
+
+    public void setStartappBanner(int startappBanner) {
+        this.startappBanner = startappBanner;
+    }
+
+    public int getUnityadsInterstitial() {
+        return unityadsInterstitial;
+    }
+
+    public void setUnityadsInterstitial(int unityadsInterstitial) {
+        this.unityadsInterstitial = unityadsInterstitial;
+    }
+
+    public int getUnityadsBanner() {
+        return unityadsBanner;
+    }
+
+    public void setUnityadsBanner(int unityadsBanner) {
+        this.unityadsBanner = unityadsBanner;
+    }
+
+
+    public int getStreaming() {
+        return streaming;
+    }
+
+    public void setStreaming(int streaming) {
+        this.streaming = streaming;
+    }
+
+
+    public int getEnableBannerBottom() {
+        return enableBannerBottom;
+    }
+
+    public void setEnableBannerBottom(int enableBannerBottom) {
+        this.enableBannerBottom = enableBannerBottom;
+    }
+
+    @SerializedName("enable_banner_bottom")
+    @Expose
+    private int enableBannerBottom;
+
+    @SerializedName("streaming")
+    @Expose
+    private int streaming;
+
+    @SerializedName("unityads_interstitial")
+    @Expose
+    private int unityadsInterstitial;
+
+    @SerializedName("unityads_banner")
+    @Expose
+    private int unityadsBanner;
+
+    @SerializedName("startapp_banner")
+    @Expose
+    private int startappBanner;
+
+    public int getResumeOffline() {
+        return resumeOffline;
+    }
+
+    public void setResumeOffline(int resumeOffline) {
+        this.resumeOffline = resumeOffline;
+    }
+
+    @SerializedName("resume_offline")
+    @Expose
+    private int resumeOffline;
+
+    @SerializedName("allow_adm")
+    @Expose
+    private int allowAdm;
+
     @SerializedName("download_premuim_only")
     @Expose
     private int downloadPremuimOnly;
@@ -234,7 +346,29 @@ public class Settings {
     @Expose
     private String adUnitIdFacebookRewarded;
 
+    public int getAdFaceAudienceNative() {
+        return adFaceAudienceNative;
+    }
 
+    public void setAdFaceAudienceNative(int adfaceaudiencenative) {
+        this.adFaceAudienceNative = adfaceaudiencenative;
+    }
+
+    @SerializedName("ad_face_audience_native")
+    @Expose
+    private int adFaceAudienceNative;
+
+    public String getAdUnitIdFacebookNativeAudience() {
+        return adUnitIdFacebookNativeAudience;
+    }
+
+    public void setAdUnitIdFacebookNativeAudience(String adunitidfacebooknativeaudience) {
+        this.adUnitIdFacebookNativeAudience = adunitidfacebooknativeaudience;
+    }
+
+    @SerializedName("ad_unit_id_facebook_native_audience")
+    @Expose
+    private String adUnitIdFacebookNativeAudience;
 
     @SerializedName("unity_game_id")
     @Expose
@@ -327,6 +461,43 @@ public class Settings {
     @SerializedName("appodeal_banner")
     @Expose
     private int appodealBanner;
+
+
+    public int getEnablePinned() {
+        return enablePinned;
+    }
+
+    public void setEnablePinned(int enablePinned) {
+        this.enablePinned = enablePinned;
+    }
+
+    public int getEnableUpcoming() {
+        return enableUpcoming;
+    }
+
+    public void setEnableUpcoming(int enableUpcoming) {
+        this.enableUpcoming = enableUpcoming;
+    }
+
+    @SerializedName("enable_upcoming")
+    @Expose
+    private int enableUpcoming;
+
+    @SerializedName("enable_pinned")
+    @Expose
+    private int enablePinned;
+
+    public int getEnablePreviews() {
+        return enablePreviews;
+    }
+
+    public void setEnablePreviews(int enablePreviews) {
+        this.enablePreviews = enablePreviews;
+    }
+
+    @SerializedName("enable_previews")
+    @Expose
+    private int enablePreviews;
 
 
     public int getAppodealShowInterstitial() {
@@ -441,7 +612,80 @@ public class Settings {
     @Expose
     private String adUnitIdFacebookInterstitialAudience;
 
+    public int getMantenanceMode() {
+        return mantenanceMode;
+    }
 
+    public void setMantenanceMode(int mantenanceMode) {
+        this.mantenanceMode = mantenanceMode;
+    }
+
+    public String getMantenanceModeMessage() {
+        return mantenanceModeMessage;
+    }
+
+    public void setMantenanceModeMessage(String mantenanceModeMessage) {
+        this.mantenanceModeMessage = mantenanceModeMessage;
+    }
+
+    @SerializedName("mantenance_mode")
+    @Expose
+    private int mantenanceMode;
+
+    public String getSplashImage() {
+        return splashImage;
+    }
+
+    public void setSplashImage(String splashImage) {
+        this.splashImage = splashImage;
+    }
+
+    @SerializedName("mantenance_mode_message")
+    @Expose
+    private String mantenanceModeMessage;
+
+
+    public String getDefaultYoutubeQuality() {
+        return defaultYoutubeQuality;
+    }
+
+    public void setDefaultYoutubeQuality(String defaultYoutubeQuality) {
+        this.defaultYoutubeQuality = defaultYoutubeQuality;
+    }
+
+    @SerializedName("default_youtube_quality")
+    @Expose
+    private String defaultYoutubeQuality;
+
+    public String getDefaultDownloadsOptions() {
+        return defaultDownloadsOptions;
+    }
+
+    public void setDefaultDownloadsOptions(String defaultDownloadsOptions) {
+        this.defaultDownloadsOptions = defaultDownloadsOptions;
+    }
+
+
+
+    public String getUserAgent() {
+        return userAgent;
+    }
+
+    public void setUserAgent(String userAgent) {
+        this.userAgent = userAgent;
+    }
+
+    @SerializedName("user_agent")
+    @Expose
+    private String userAgent;
+
+    @SerializedName("default_downloads_options")
+    @Expose
+    private String defaultDownloadsOptions;
+
+    @SerializedName("splash_image")
+    @Expose
+    private String splashImage;
 
 
     public String getAdUnitIdAppodealBannerAudience() {

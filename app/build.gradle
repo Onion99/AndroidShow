@@ -103,7 +103,7 @@ android {
         // 打开指定问题检查
         enable 'RtlHardcoded','RtlCompat', 'RtlEnabled'
         // 仅检查指定问题
-        check 'NewApi', 'InlinedApi'
+        checkOnly 'NewApi', 'InlinedApi'
         // true--error输出文件不包含源码行号
         noLines true
         // true--显示错误的所有发生位置，不截取

@@ -19,3 +19,8 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+#配置proguard.cfg以允许你的GlideModule可以通过反射实例化：
+-keepnames class * com.onion.android.app.utils.GlideModule
+#或者把所有的Module都一次性配置好：
+-keep public class * implements com.bumptech.glide.module.GlideModule

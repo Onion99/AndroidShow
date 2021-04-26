@@ -24,6 +24,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.onion.android.app.constants.PlexConstants.PREF_FILE;
@@ -32,8 +33,15 @@ import static com.onion.android.app.constants.PlexConstants.PREF_FILE;
  * Application域的注入
  * Module表示包含将提供依赖项的方法的类。
  * */
-@Module
+@Module(includes = ViewModelModule.class)
 public class AppModule {
+    // Rxjava CompositeDisposable注入
+    @Provides
+    @Singleton
+    CompositeDisposable providesCompositeDisposable() {
+        return new CompositeDisposable();
+    }
+
 
     // Application 注入
     @Singleton

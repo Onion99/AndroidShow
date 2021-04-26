@@ -13,23 +13,16 @@ import static com.onion.android.app.constants.PlexConstants.*;
 
 public class SettingsManager {
 
-
-
     private SharedPreferences prefs;
     private SharedPreferences.Editor editor;
-
 
     @SuppressLint("CommitPrefEdits")
     public SettingsManager(SharedPreferences prefs){
         this.prefs = prefs;
         this.editor = prefs.edit();
-
     }
 
-    public SettingsManager() {
-
-
-    }
+    public SettingsManager() { }
 
 
     public void saveSettings(Settings settings){
@@ -90,14 +83,36 @@ public class SettingsManager {
         editor.putString(AD_NATIVEADS_ADMOB_UNIT_ID, settings.getAdUnitIdNative()).commit();
         editor.putString(PAYPAL_CURRENCY, settings.getPaypalCurrency()).commit();
         editor.putString(DEFAULT_PAYMENT, settings.getDefaultPayment()).commit();
-
         editor.putInt(ENABLE_CUSTOM_BANNER, settings.getEnableCustomBanner()).commit();
         editor.putString(CUSTOM_BANNER_IMAGE, settings.getCustomBannerImage()).commit();
         editor.putString(CUSTOM_BANNER_IMAGE_LINK, settings.getCustomBannerImageLink()).commit();
+        editor.putString(MANTENANCE_MESSAGE, settings.getMantenanceModeMessage()).commit();
+        editor.putInt(MANTENANCE_MODE, settings.getMantenanceMode()).commit();
+        editor.putString(SPLASH_IMAGE, settings.getSplashImage()).commit();
+        editor.putString(DEFAULT_YOUTUBE_QUALITY, settings.getDefaultYoutubeQuality()).commit();
+        editor.putInt(ALLOW_ADM_DOWNLOADS, settings.getAllowAdm()).commit();
+        editor.putString(DEFAULT_DOWNLOADS_OPTION, settings.getDefaultDownloadsOptions()).commit();
+        editor.putInt(STARTAPP_BANNER, settings.getStartappBanner()).commit();
+        editor.putInt(STARTAPP_INTER ,settings.getStartappInterstitial()).commit();
+        editor.putInt(VLC ,settings.getVlc()).commit();
+        editor.putInt(OFFLINE_RESUME ,settings.getResumeOffline()).commit();
+        editor.putInt(PINNED ,settings.getEnablePinned()).commit();
+        editor.putInt(UPCOMING ,settings.getEnableUpcoming()).commit();
+        editor.putInt(PREVIEWS ,settings.getEnablePreviews()).commit();
+        editor.putString(USER_AGENT, settings.getUserAgent()).commit();
+        editor.putInt(UNITYADS_BANNER, settings.getUnityadsBanner()).commit();
+        editor.putInt(UNITYADS_INTER ,settings.getUnityadsInterstitial()).commit();
+        editor.putInt(ENABLE_STREAMING ,settings.getStreaming()).commit();
+        editor.putInt(ENABLE_BOTTOM_ADS_HOME ,settings.getEnableBannerBottom()).commit();
+        editor.putString(USER_AGENT, settings.getUserAgent()).commit();
+        editor.putInt(AD_FACEBOOK_NATIVE_ENABLE ,settings.getAdFaceAudienceNative()).commit();
+        editor.putString(AD_FACEBOOK_NATIVE_UNIT_ID, settings.getAdUnitIdFacebookNativeAudience()).commit();
+        editor.putString(DEFAULT_MEDIA_COVER, settings.getDefaultMediaPlaceholderPath()).commit();
+
+
     }
 
     public void deleteSettings(){
-
         editor.remove(APP_NAME).commit();
         editor.remove(AD_INTERSTITIAL).commit();
         editor.remove(AD_INTERSTITIAL_UNIT).commit();
@@ -127,9 +142,6 @@ public class SettingsManager {
         editor.remove(INSTAGRAM).commit();
         editor.remove(YOUTUBE).commit();
         editor.remove(ENABLE_SERVER_DIALOG_SELECTION).commit();
-
-
-
     }
 
     public Settings getSettings(){
@@ -191,14 +203,28 @@ public class SettingsManager {
         settings.setEnableCustomBanner(prefs.getInt(ENABLE_CUSTOM_BANNER, 0));
         settings.setCustomBannerImage(prefs.getString(CUSTOM_BANNER_IMAGE, null));
         settings.setCustomBannerImageLink(prefs.getString(CUSTOM_BANNER_IMAGE_LINK, null));
-
+        settings.setMantenanceModeMessage(prefs.getString(MANTENANCE_MESSAGE, null));
+        settings.setMantenanceMode(prefs.getInt(MANTENANCE_MODE, 0));
+        settings.setSplashImage(prefs.getString(SPLASH_IMAGE, null));
+        settings.setDefaultYoutubeQuality(prefs.getString(DEFAULT_YOUTUBE_QUALITY, "720p"));
+        settings.setAllowAdm(prefs.getInt(ALLOW_ADM_DOWNLOADS, 0));
+        settings.setDefaultDownloadsOptions(prefs.getString(DEFAULT_DOWNLOADS_OPTION, "Free"));
+        settings.setStartappBanner(prefs.getInt(STARTAPP_BANNER, 0));
+        settings.setStartappInterstitial(prefs.getInt(STARTAPP_INTER, 0));
+        settings.setVlc(prefs.getInt(VLC, 0));
+        settings.setResumeOffline(prefs.getInt(OFFLINE_RESUME, 0));
+        settings.setEnablePinned(prefs.getInt(PINNED, 0));
+        settings.setEnableUpcoming(prefs.getInt(UPCOMING, 0));
+        settings.setEnablePreviews(prefs.getInt(PREVIEWS, 0));
+        settings.setUserAgent(prefs.getString(USER_AGENT, "EasyPlexPlayer"));
+        settings.setUnityadsBanner(prefs.getInt(UNITYADS_BANNER, 0));
+        settings.setUnityadsInterstitial(prefs.getInt(UNITYADS_BANNER, 0));
+        settings.setStreaming(prefs.getInt(ENABLE_STREAMING, 1));
+        settings.setEnableBannerBottom(prefs.getInt(ENABLE_BOTTOM_ADS_HOME, 0));
+        settings.setAdFaceAudienceNative(prefs.getInt(AD_FACEBOOK_NATIVE_ENABLE, 0));
+        settings.setAdUnitIdFacebookNativeAudience(prefs.getString(AD_FACEBOOK_NATIVE_UNIT_ID, null));
+        settings.setDefaultMediaPlaceholderPath(prefs.getString(DEFAULT_MEDIA_COVER, null));
         return settings;
-
-
     }
-
-
-
-
-
 }
+

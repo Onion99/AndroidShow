@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.onion.android.R;
 import com.onion.android.app.plex.manager.SettingsManager;
 import com.onion.android.app.plex.vm.SettingsViewModel;
+import com.onion.android.app.utils.GlideApp;
 import com.onion.android.app.utils.Tools;
 import com.onion.android.databinding.PlexActivitySplashBinding;
 import com.onion.android.java.base.PlexBaseActivity;
@@ -66,6 +67,7 @@ public class SplashActivity extends PlexBaseActivity<PlexActivitySplashBinding> 
         initNetcipher();
         Tools.hideSystemBar(this,true);
         Tools.loadHttpImg(getApplication(), mBinding.logoImageTop,SERVER_BASE_URL +"image/logo");
+        GlideApp.with(this).asBitmap().load(settingsManager.getSettings().getSplashImage()).into(mBinding.splashImage);
     }
 
     @Override

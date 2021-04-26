@@ -16,9 +16,12 @@ import timber.log.Timber;
 
 public class SettingsViewModel extends ViewModel {
 
-    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
+//    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     private final SettingsRepository settingsRepository;
     public final MutableLiveData<Settings> settingsMutableLiveData = new MutableLiveData<>();
+
+    @Inject
+    CompositeDisposable compositeDisposable;
 
     @Inject
     SettingsManager settingsManager;

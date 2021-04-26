@@ -11,6 +11,34 @@
         android:orientation="vertical"
         android:visibility="visible">
 
+
+        <ImageView
+            android:id="@+id/splash_image"
+            android:layout_width="match_parent"
+            android:background="@color/grey_1100"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/image" />
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/fragment_shadows"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/image" />
+
+
+        <ProgressBar
+            android:id="@+id/loader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/tubi_tv_controller_guideline_bottom"
+            app:layout_constraintRight_toLeftOf="@id/tubi_tv_controller_guideline_right"
+            app:layout_constraintLeft_toLeftOf="@id/tubi_tv_controller_guideline_left"
+            android:visibility="visible" />
+
+
         <ImageView
             android:id="@+id/logo_image_top"
             android:layout_width="100dp"
@@ -20,6 +48,58 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:contentDescription="@string/image" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tubi_tv_controller_guideline_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="32dp" />
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tubi_tv_controller_guideline_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/pixel_20dp" />
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tubi_tv_controller_guideline_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/pixel_20dp" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tubi_tv_controller_guideline_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="@dimen/pixel_20dp" />
+
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tubi_tv_controller_guideline_seek_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="84dp" />
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/tubi_tv_controller_guideline_seek_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="84dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

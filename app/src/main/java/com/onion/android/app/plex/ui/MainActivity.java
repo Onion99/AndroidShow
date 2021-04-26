@@ -17,6 +17,11 @@ public class MainActivity extends PlexBaseActivity<PlexActivityMainBinding> {
 
 
     @Override
+    public void initViewModel() {
+
+    }
+
+    @Override
     public void initView() {
         Tools.hideSystemBar(this,true);
         changeFragment(new HomeFragment(),HomeFragment.class.getSimpleName());

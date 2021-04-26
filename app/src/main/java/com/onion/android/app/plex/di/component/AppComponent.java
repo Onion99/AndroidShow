@@ -6,6 +6,7 @@ import com.onion.android.App;
 import com.onion.android.app.plex.di.module.ActivityModule;
 import com.onion.android.app.plex.di.module.AppModule;
 import com.onion.android.app.plex.di.module.FragmentBuilderModule;
+import com.onion.android.app.plex.di.module.ViewModelModule;
 
 import javax.inject.Singleton;
 
@@ -25,7 +26,8 @@ import dagger.android.AndroidInjectionModule;
                 AndroidInjectionModule.class,
                 AppModule.class,
                 ActivityModule.class,
-                FragmentBuilderModule.class
+                FragmentBuilderModule.class,
+                ViewModelModule.class
         }
 )
 public interface AppComponent {
