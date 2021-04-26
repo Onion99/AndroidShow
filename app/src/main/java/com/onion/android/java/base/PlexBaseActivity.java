@@ -34,6 +34,7 @@ public abstract class PlexBaseActivity<T extends ViewDataBinding> extends AppCom
         AndroidInjection.inject(this);
         // DataBinding 绑定
         mBinding = DataBindingUtil.setContentView(this, getBindingContent(savedInstanceState));
+        initViewModel();
         initView();
     }
 
@@ -42,6 +43,8 @@ public abstract class PlexBaseActivity<T extends ViewDataBinding> extends AppCom
         super.onDestroy();
         Optional.ofNullable(mBinding).ifPresent(ViewDataBinding::unbind);
     }
+
+    public abstract void initViewModel();
 
     public abstract void initView();
 

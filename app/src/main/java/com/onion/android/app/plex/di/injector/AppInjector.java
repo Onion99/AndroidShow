@@ -18,7 +18,7 @@ import dagger.android.HasAndroidInjector;
 import dagger.android.support.AndroidSupportInjection;
 
 /**
- * Dagger- init 第一步必须执行，不然会报错
+ * Dagger-1.5 init 第一步必须执行，不然会报错
  * 实现自动依赖注入
  * */
 public class AppInjector {

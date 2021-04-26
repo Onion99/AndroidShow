@@ -1,4 +1,4 @@
-package com.onion.android.app.plex.data.vm;
+package com.onion.android.app.plex.vm;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;

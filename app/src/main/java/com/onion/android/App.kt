@@ -30,9 +30,15 @@ class App : Application(),ViewModelStoreOwner,HasAndroidInjector,StrongBuilder.C
 
     private lateinit var mAppViewModelStore: ViewModelStore
 
+    companion object {
+        @JvmStatic
+        lateinit var context:Context
+    }
+
     override fun onCreate() {
         super.onCreate()
         context = applicationContext
+        //  Application 注入
         AppInjector.init(this)
         /**
          * Netcipher-step-1-Creating the OrbotHelper
@@ -59,15 +65,17 @@ class App : Application(),ViewModelStoreOwner,HasAndroidInjector,StrongBuilder.C
         mAppViewModelStore = ViewModelStore()
     }
 
-    companion object {
-        @JvmStatic
-        lateinit var context:Context
-    }
-
     override fun getViewModelStore(): ViewModelStore {
         return mAppViewModelStore
     }
 
+    /**
+     * Activity 注入
+     * Dagger-Tip
+     * 1. Application 包含 多个Activity，要实现对应的依赖注入绑定，我们必须去实现 HasActivityInjector 接口
+     * 2. 如果Activity 包含 fragment,同样也必须在Activity中实现 HasFragmentInjector/HasSupportFragmentInjector 接口
+     *    如果Activity 不包含 fragment,则无需注入任何东西，无需实现响应接口
+     */
     override fun androidInjector(): AndroidInjector<Any> {
         AppInjector.init(this)
         return androidInjector
