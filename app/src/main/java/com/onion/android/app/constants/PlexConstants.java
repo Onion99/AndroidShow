@@ -10,6 +10,8 @@ import java.nio.charset.StandardCharsets;
  * Plex Application CONSTANTS.
  */
 public abstract class PlexConstants{
+    public static final String AUTHORISATION_BEARER_STRING = decodeAuthorisationBearer();
+    public static final String AUTHORISATION_BEARER = "ZWFzeXBsZXhfZXhhbXBsZV9hdXRob3Jpc2F0aW9uX2JlYXJlcg==";
     // this is not your laravel api , this key will be used to authorise all api calls inside your app ( this key must be the same as API_KEY value in your .env file otherwise you will get
     //  "Invalid access key" error in your api calls )
     // for ex http://192.168.1.130/public/api/movies/featured/p2lbgWkFrykA4QyUmpHihzmc5BNzIABq
@@ -31,6 +33,14 @@ public abstract class PlexConstants{
         valueDecoded = Base64.decode(SERVER_ENCODED.getBytes(StandardCharsets.UTF_8), Base64.DEFAULT);
         return new String(valueDecoded);
     }
+
+    // Don't Change
+    private static String decodeAuthorisationBearer(){
+        byte[] valueDecoded;
+        valueDecoded = Base64.decode(AUTHORISATION_BEARER.getBytes(StandardCharsets.UTF_8), Base64.DEFAULT);
+        return new String(valueDecoded);
+    }
+
 
     private static String decodeImdbApi(){
         byte[] valueDecoded;

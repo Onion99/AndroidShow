@@ -15,7 +15,7 @@ import com.onion.android.app.plex.ui.adapter.decoration.SpacingItemDecoration;
 import com.onion.android.app.plex.vm.HomeViewModel;
 import com.onion.android.app.utils.Tools;
 import com.onion.android.databinding.PlexFragmentHomeBinding;
-import com.onion.android.java.base.PlexBaseFragment;
+import com.onion.android.app.base.PlexBaseFragment;
 
 import javax.inject.Inject;
 

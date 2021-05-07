@@ -1,19 +1,24 @@
 package com.onion.android.app.plex.ui;
 
-import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.onion.android.R;
 import com.onion.android.app.plex.manager.SettingsManager;
 import com.onion.android.app.plex.vm.SettingsViewModel;
 import com.onion.android.app.utils.GlideApp;
 import com.onion.android.app.utils.Tools;
 import com.onion.android.databinding.PlexActivitySplashBinding;
-import com.onion.android.java.base.PlexBaseActivity;
+import com.onion.android.app.base.PlexBaseActivity;
 
 import javax.inject.Inject;
 
@@ -56,7 +61,7 @@ public class SplashActivity extends PlexBaseActivity<PlexActivitySplashBinding> 
         // 监听配置信息获取
         settingsViewModel.settingsMutableLiveData.observe(this, settings -> {
             settingsManager.saveSettings(settings);
-            Tools.postDelayed(()->{ startActivity(new Intent(this,MainActivity.class)); },1900);
+//            Tools.postDelayed(()->{ startActivity(new Intent(this,MainActivity.class)); },1900);
         });
     }
 
@@ -67,7 +72,20 @@ public class SplashActivity extends PlexBaseActivity<PlexActivitySplashBinding> 
         initNetcipher();
         Tools.hideSystemBar(this,true);
         Tools.loadHttpImg(getApplication(), mBinding.logoImageTop,SERVER_BASE_URL +"image/logo");
-        GlideApp.with(this).asBitmap().load(settingsManager.getSettings().getSplashImage()).into(mBinding.splashImage);
+        GlideApp.with(this).asBitmap()
+                .listener(new RequestListener<Bitmap>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
+                        return false;
+                    }
+                    @Override
+                    public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
+                        mBinding.loader.setVisibility(View.GONE);
+                        return false;
+                    }
+                })
+                .load(settingsManager.getSettings().getSplashImage())
+                .into(mBinding.splashImage);
     }
 
     @Override

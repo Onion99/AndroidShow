@@ -11,7 +11,7 @@ import com.onion.android.R;
 import com.onion.android.app.plex.ui.frg.HomeFragment;
 import com.onion.android.app.utils.Tools;
 import com.onion.android.databinding.PlexActivityMainBinding;
-import com.onion.android.java.base.PlexBaseActivity;
+import com.onion.android.app.base.PlexBaseActivity;
 
 public class MainActivity extends PlexBaseActivity<PlexActivityMainBinding> {
 

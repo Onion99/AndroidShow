@@ -2,7 +2,6 @@ package com.onion.android.app.plex.di.module;
 
 import com.onion.android.app.plex.ui.MainActivity;
 import com.onion.android.app.plex.ui.SplashActivity;
-import com.onion.android.java.base.PlexBaseActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;

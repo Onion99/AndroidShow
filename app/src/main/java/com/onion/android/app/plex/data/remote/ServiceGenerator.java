@@ -34,6 +34,7 @@ import timber.log.Timber;
 
 import static com.onion.android.app.constants.PlexConstants.ACCEPT;
 import static com.onion.android.app.constants.PlexConstants.APPLICATION_JSON;
+import static com.onion.android.app.constants.PlexConstants.AUTHORISATION_BEARER_STRING;
 import static com.onion.android.app.constants.PlexConstants.CACHE_CONTROL;
 import static com.onion.android.app.constants.PlexConstants.IMDB_BASE_URL;
 import static com.onion.android.app.constants.PlexConstants.PREFS2;
@@ -69,15 +70,11 @@ public class ServiceGenerator {
             Request request = chain.request();
 
             Request.Builder addHeader = request.newBuilder()
-                    .addHeader(ACCEPT, APPLICATION_JSON)
-                    .addHeader("Connection", "close");
-
+                    .addHeader(ACCEPT, APPLICATION_JSON);
+//                    .addHeader("Connection", "close")
             request = addHeader.build();
-
             return chain.proceed(request);
-
         });
-
         return builder.build();
 
     }
@@ -148,11 +145,18 @@ public class ServiceGenerator {
 
     public static <S> S createService(Class<S> serviceClass) {
 
-
         if (!httpClient.interceptors().contains(logging)) {
-            httpClient.addInterceptor(logging);
-            builder.client(httpClient.build());
+            httpClient.addInterceptor(logging)
+                    .addNetworkInterceptor(chain -> {
+                        Request request = chain.request();
+                        Request.Builder newBuilder = request.newBuilder();
 
+                        newBuilder.addHeader(ACCEPT, APPLICATION_JSON);
+                        newBuilder.addHeader("Authorization", "Bearer "+AUTHORISATION_BEARER_STRING);
+                        request = newBuilder.build();
+                        return chain.proceed(request);
+                    });
+            builder.client(httpClient.build());
             retrofit = builder.build();
         }
 
@@ -168,14 +172,11 @@ public class ServiceGenerator {
         OkHttpClient newClient = client.newBuilder().addInterceptor(chain -> {
 
             Request request = chain.request();
-
             Request.Builder newBuilder = request.newBuilder();
-
             newBuilder.addHeader(ACCEPT, APPLICATION_JSON);
-
-
             request = newBuilder.build();
             return chain.proceed(request);
+
         }).build();
 
         Retrofit newRetrofit = retrofitApp.newBuilder().client(newClient).build();
@@ -240,7 +241,6 @@ public class ServiceGenerator {
         OkHttpClient newClient = client.newBuilder().addInterceptor(chain -> {
 
             Request request = chain.request();
-
             Request.Builder newBuilder = request.newBuilder();
 
             if(tokenManager.getToken().getAccessToken() != null){
@@ -330,7 +330,6 @@ public class ServiceGenerator {
                     Timber.i("Network Unknown Error");
                     break;
             }
-
             return response;
         }
     }
@@ -343,9 +342,6 @@ public class ServiceGenerator {
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(logging);
-
-
-
 
         if (retrofit5 == null) {
             retrofit5 = new Retrofit.Builder()
