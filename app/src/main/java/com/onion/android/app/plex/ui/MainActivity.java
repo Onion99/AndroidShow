@@ -8,10 +8,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.onion.android.R;
+import com.onion.android.app.base.PlexBaseActivity;
 import com.onion.android.app.plex.ui.frg.HomeFragment;
 import com.onion.android.app.utils.Tools;
 import com.onion.android.databinding.PlexActivityMainBinding;
-import com.onion.android.app.base.PlexBaseActivity;
 
 public class MainActivity extends PlexBaseActivity<PlexActivityMainBinding> {
 
@@ -35,7 +35,14 @@ public class MainActivity extends PlexBaseActivity<PlexActivityMainBinding> {
                         case R.id.navigation_home:
                             changeFragment(new HomeFragment(), HomeFragment.class
                                     .getSimpleName());
-                            break; }
+                            break;
+                        case R.id.navigation_mylist:
+                            changeFragment(new HomeFragment(), HomeFragment.class
+                                    .getSimpleName());
+                            break;
+                        default:
+                            break;
+                    }
                     return true;
                 });
     }

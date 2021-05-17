@@ -16,6 +16,7 @@
 
     <!-- Plex -->
     <string name="home">Home</string>
+    <string name="mylist">My List</string>
     <string name="discover">Discover</string>
     <string name="library">Library</string>
     <string name="upcoming">Upcoming</string>

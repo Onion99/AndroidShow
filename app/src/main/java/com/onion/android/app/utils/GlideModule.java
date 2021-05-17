@@ -51,7 +51,7 @@ public class GlideModule extends AppGlideModule {
          * setMemoryCache - 缓存方式
          */
         MemorySizeCalculator calculator = new MemorySizeCalculator.Builder(context)
-                .setMemoryCacheScreens(5)
+                .setMemoryCacheScreens(2)
                 .build();
         builder.setMemoryCache(new LruResourceCache(calculator.getMemoryCacheSize()));
         // 配置默认过度动画

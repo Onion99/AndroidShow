@@ -5,40 +5,45 @@
         android:icon="@drawable/ic_home"
         android:iconTint="@color/white"
         android:title="@string/home" />
-
-<!--
     <item
-        android:id="@+id/navigation_search"
-        android:icon="@drawable/ic_search"
-        android:iconTint="@color/white"
-        android:menuCategory="secondary"
-        android:title="@string/discover" />
-
-
-
-
-    <item
-        android:id="@+id/navigation_live"
-        android:icon="@drawable/ic_live"
-        android:iconTint="@color/white"
-        android:menuCategory="secondary"
-        android:title="@string/streaming" />
-
-
-    <item
-        android:id="@+id/navigation_browse"
-        android:icon="@drawable/ic_apps"
-        android:menuCategory="secondary"
-        android:title="@string/library" />
-
-
-    <item
-        android:id="@+id/navigation_soon"
+        android:id="@+id/navigation_mylist"
         android:icon="@drawable/ic_movie"
         android:iconTint="@color/white"
         android:menuCategory="secondary"
-        android:title="@string/upcoming" />
--->
+        android:title="@string/mylist" />
+    <!--
+        <item
+            android:id="@+id/navigation_search"
+            android:icon="@drawable/ic_search"
+            android:iconTint="@color/white"
+            android:menuCategory="secondary"
+            android:title="@string/discover" />
+
+
+
+
+        <item
+            android:id="@+id/navigation_live"
+            android:icon="@drawable/ic_live"
+            android:iconTint="@color/white"
+            android:menuCategory="secondary"
+            android:title="@string/streaming" />
+
+
+        <item
+            android:id="@+id/navigation_browse"
+            android:icon="@drawable/ic_apps"
+            android:menuCategory="secondary"
+            android:title="@string/library" />
+
+
+        <item
+            android:id="@+id/navigation_soon"
+            android:icon="@drawable/ic_movie"
+            android:iconTint="@color/white"
+            android:menuCategory="secondary"
+            android:title="@string/upcoming" />
+    -->
 
 
 </menu>

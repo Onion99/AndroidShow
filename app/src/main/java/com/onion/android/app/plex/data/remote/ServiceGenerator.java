@@ -1,6 +1,5 @@
 package com.onion.android.app.plex.data.remote;
 
-import android.os.Environment;
 import android.util.Base64;
 
 import androidx.annotation.NonNull;
@@ -20,7 +19,6 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-// 没事这不影响，找的到的
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
 import okhttp3.Cache;
 import okhttp3.Interceptor;
@@ -52,26 +50,22 @@ import static com.onion.android.app.constants.PlexConstants.SERVER_OPENSUBS_URL;
 @Singleton
 public class ServiceGenerator {
 
+    private static final OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
+            .addNetworkInterceptor(new ResponseCacheInterceptor())
+            .addInterceptor(new OfflineResponseCacheInterceptor())
+            .addInterceptor(new ErrorHandlerInterceptor())
+            .connectTimeout(5, TimeUnit.MINUTES)
+            .readTimeout(5, TimeUnit.MINUTES)
+            .cache(cache);
+
+    private static final OkHttpClient client = buildClient();
 
 
-    private ServiceGenerator(){
-
-
-    }
-
-
-    private  static final OkHttpClient client = buildClient();
-
-
-    private static OkHttpClient buildClient(){
-
-
+    private static OkHttpClient buildClient() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder().addInterceptor(chain -> {
             Request request = chain.request();
-
             Request.Builder addHeader = request.newBuilder()
                     .addHeader(ACCEPT, APPLICATION_JSON);
-//                    .addHeader("Connection", "close")
             request = addHeader.build();
             return chain.proceed(request);
         });
@@ -136,21 +130,16 @@ public class ServiceGenerator {
 
     private static final HttpLoggingInterceptor logging = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
 
-    private static final OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
-            .addNetworkInterceptor(new ResponseCacheInterceptor())
-            .addInterceptor(new OfflineResponseCacheInterceptor())
-            .addInterceptor(new ErrorHandlerInterceptor())
-            .cache(cache);
-
+    private ServiceGenerator() {
+    }
 
     public static <S> S createService(Class<S> serviceClass) {
-
         if (!httpClient.interceptors().contains(logging)) {
             httpClient.addInterceptor(logging)
                     .addNetworkInterceptor(chain -> {
                         Request request = chain.request();
-                        Request.Builder newBuilder = request.newBuilder();
 
+                        Request.Builder newBuilder = request.newBuilder();
                         newBuilder.addHeader(ACCEPT, APPLICATION_JSON);
                         newBuilder.addHeader("Authorization", "Bearer "+AUTHORISATION_BEARER_STRING);
                         request = newBuilder.build();
@@ -170,13 +159,12 @@ public class ServiceGenerator {
     @Named("app")
     public static <T> T createServiceApp(Class<T> service){
         OkHttpClient newClient = client.newBuilder().addInterceptor(chain -> {
-
             Request request = chain.request();
+
             Request.Builder newBuilder = request.newBuilder();
             newBuilder.addHeader(ACCEPT, APPLICATION_JSON);
             request = newBuilder.build();
             return chain.proceed(request);
-
         }).build();
 
         Retrofit newRetrofit = retrofitApp.newBuilder().client(newClient).build();
@@ -190,7 +178,6 @@ public class ServiceGenerator {
         OkHttpClient newClient = client.newBuilder().addInterceptor(chain -> {
 
             Request request = chain.request();
-
             Request.Builder newBuilder = request.newBuilder();
 
             if(PURCHASE_KEY != null){
@@ -230,7 +217,6 @@ public class ServiceGenerator {
             builderOpenSubs.client(httpClient.build());
             retrofit = builderOpenSubs.build();
         }
-
         return retrofit3.create(serviceClass);
     }
 
@@ -242,7 +228,6 @@ public class ServiceGenerator {
 
             Request request = chain.request();
             Request.Builder newBuilder = request.newBuilder();
-
             if(tokenManager.getToken().getAccessToken() != null){
                 newBuilder.addHeader("Authorization", "Bearer " + tokenManager.getToken().getAccessToken());
             }

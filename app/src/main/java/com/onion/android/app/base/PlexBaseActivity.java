@@ -11,7 +11,6 @@ import java.util.Optional;
 
 import javax.inject.Inject;
 
-import dagger.android.AndroidInjection;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasAndroidInjector;
@@ -31,7 +30,8 @@ public abstract class PlexBaseActivity<T extends ViewDataBinding> extends AppCom
         // 1 - implements HasAndroidInjector
         // 2 - AndroidInjection.inject(this);
         // 最后都在Activity Module 实现实例返回
-        AndroidInjection.inject(this);
+        // AndroidInjection.inject(this);
+
         // DataBinding 绑定
         mBinding = DataBindingUtil.setContentView(this, getBindingContent(savedInstanceState));
         initViewModel();

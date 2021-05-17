@@ -1,5 +1,6 @@
 package com.onion.android.app.plex.ui;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -13,12 +14,12 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.onion.android.R;
+import com.onion.android.app.base.PlexBaseActivity;
 import com.onion.android.app.plex.manager.SettingsManager;
 import com.onion.android.app.plex.vm.SettingsViewModel;
 import com.onion.android.app.utils.GlideApp;
 import com.onion.android.app.utils.Tools;
 import com.onion.android.databinding.PlexActivitySplashBinding;
-import com.onion.android.app.base.PlexBaseActivity;
 
 import javax.inject.Inject;
 
@@ -61,7 +62,10 @@ public class SplashActivity extends PlexBaseActivity<PlexActivitySplashBinding> 
         // 监听配置信息获取
         settingsViewModel.settingsMutableLiveData.observe(this, settings -> {
             settingsManager.saveSettings(settings);
-//            Tools.postDelayed(()->{ startActivity(new Intent(this,MainActivity.class)); },1900);
+            Tools.postDelayed(() -> {
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
+            }, 1900);
         });
     }
 

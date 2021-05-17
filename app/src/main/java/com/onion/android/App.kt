@@ -2,19 +2,14 @@ package com.onion.android
 
 import android.app.Application
 import android.content.Context
-import androidx.lifecycle.ViewModelStore
-import androidx.lifecycle.ViewModelStoreOwner
 import com.onion.android.app.plex.di.injector.AppInjector
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
-import dagger.hilt.android.HiltAndroidApp
 import info.guardianproject.netcipher.client.StrongBuilder
 import info.guardianproject.netcipher.client.StrongOkHttpClientBuilder
 import info.guardianproject.netcipher.proxy.OrbotHelper
-import info.guardianproject.netcipher.webkit.WebkitProxy
 import okhttp3.OkHttpClient
-import java.lang.Exception
 import javax.inject.Inject
 
 /**
@@ -23,16 +18,14 @@ import javax.inject.Inject
  * */
 // Todo 这里加上 @HiltAndroidApp 的话 Hilt 和 Dagger 会发生冲突，导致某些注入需求找不到 ,因而现在先注释掉
 // @HiltAndroidApp
-class App : Application(),ViewModelStoreOwner,HasAndroidInjector,StrongBuilder.Callback<OkHttpClient>{
+class App : Application(), HasAndroidInjector, StrongBuilder.Callback<OkHttpClient> {
 
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
-    private lateinit var mAppViewModelStore: ViewModelStore
-
     companion object {
         @JvmStatic
-        lateinit var context:Context
+        lateinit var context: Context
     }
 
     override fun onCreate() {
@@ -61,12 +54,6 @@ class App : Application(),ViewModelStoreOwner,HasAndroidInjector,StrongBuilder.C
                 .withTorValidation()
                 .build(this)
         } catch (e: Exception) { e.printStackTrace() }
-        // 实例化mAppViewModelStore
-        mAppViewModelStore = ViewModelStore()
-    }
-
-    override fun getViewModelStore(): ViewModelStore {
-        return mAppViewModelStore
     }
 
     /**

@@ -2,7 +2,7 @@ package com.onion.android.app.plex.ui.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,42 +10,42 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.onion.android.R;
-import com.onion.android.app.plex.data.local.entity.History;
 import com.onion.android.app.plex.data.local.entity.Media;
 import com.onion.android.app.plex.data.model.genres.Genre;
-import com.onion.android.app.plex.data.model.media.MediaModel;
 import com.onion.android.app.plex.data.repository.MediaRepository;
-import com.onion.android.app.utils.Tools;
+import com.onion.android.app.plex.ui.MainActivity;
+import com.onion.android.app.utils.GlideApp;
+import com.onion.android.app.utils.UITools;
 import com.onion.android.databinding.ItemFeaturedBinding;
 
 import java.util.List;
-import java.util.Random;
 
 import javax.inject.Inject;
 
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import static com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions.withCrossFade;
 
 public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.FeaturedViewHolder> {
 
     private List<Media> castList;
     private Context context;
     private MediaRepository mediaRepository;
-    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
-    private Random random;
-    private History history;
-    private static final int PRELOAD_TIME_S = 2;
-    private static final String TAG = "FeaturedAdapter";
     protected SimpleExoPlayer mMoviePlayer;
-    MediaModel mMediaModel;
+//    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
+//    private Random random;
+//    private History history;
+//    private static final int PRELOAD_TIME_S = 2;
+//    private static final String TAG = "FeaturedAdapter";
+//    MediaModel mMediaModel;
 
     @Inject
     public FeaturedAdapter() {
     }
 
     public void addFeatured(List<Media> castList, Context context,
-                            MediaRepository mediaRepository){
+                            MediaRepository mediaRepository) {
         this.castList = castList;
         this.context = context;
         this.mediaRepository = mediaRepository;
@@ -57,7 +57,6 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
     public FeaturedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ItemFeaturedBinding binding = ItemFeaturedBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new FeaturedViewHolder(binding);
-
     }
 
     @Override
@@ -68,19 +67,16 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
     @Override
     public int getItemCount() {
         if (castList != null) {
-            if(castList.size() <= 20){
-                return castList.size();
-            }else {
-                return 20;
-            }
+            return Math.min(castList.size(), 20);
         } else {
             return 0;
         }
     }
+
     class FeaturedViewHolder extends RecyclerView.ViewHolder {
         private final ItemFeaturedBinding binding;
-        FeaturedViewHolder (@NonNull ItemFeaturedBinding binding)
-        {
+
+        FeaturedViewHolder(@NonNull ItemFeaturedBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
@@ -88,13 +84,8 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
         @SuppressLint({"SetTextI18n", "UseCompatLoadingForDrawables"})
         void onBind(final int position) {
             final Media media = castList.get(position);
-            if (mMoviePlayer !=null) {
-                mMoviePlayer.release();
-            }
-            binding.PlayButtonIcon.setOnClickListener(view -> {
-
-            });
-            if (media.getName() !=null) {
+            if (mMoviePlayer != null) mMoviePlayer.release();
+            if (media.getName() != null) {
                 binding.movietitle.setText(media.getName());
                 for (Genre genre : media.getGenres()) {
                     binding.mgenres.setText(genre.getName());
@@ -103,14 +94,17 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
                 });
                 binding.rootLayout.setOnClickListener(v -> {
                 });
-                binding.moviePremuim.setVisibility(media.getPremuim() == 1? View.VISIBLE:View.GONE);
-            }else {
+                binding.moviePremuim.setVisibility(media.getPremuim() == 1 ? View.VISIBLE : View.GONE);
+            } else {
                 onLoadMovies(media);
             }
-
-            Tools.onLoadMediaCover(context,binding.itemMovieImage,media.getPosterPath());
-
-
+            GlideApp.with(context).asBitmap().load(media.getPosterPath())
+                    .fitCenter()
+                    .placeholder(new ColorDrawable(UITools.getCoolColor()))
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .transition(withCrossFade())
+                    .override(UITools.getScreenWidth((MainActivity) context), UITools.getHeight((MainActivity) context))
+                    .into(binding.itemMovieImage);
         }
 
 
@@ -121,7 +115,6 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
             }else {
                 binding.PlayButtonIcon.setBackground(context.getResources().getDrawable(R.drawable.btn_gradient,null));
                 binding.PlayButtonIcon.setText("Lecture");
-
             }
             binding.moviePremuim.setVisibility(media.getPremuim() == 1? View.VISIBLE:View.GONE);
             binding.infoTrailer.setOnClickListener(v -> {});

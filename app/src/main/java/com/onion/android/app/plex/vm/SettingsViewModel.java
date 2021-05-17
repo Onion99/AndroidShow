@@ -25,6 +25,7 @@ public class SettingsViewModel extends ViewModel {
 
     @Inject
     SettingsManager settingsManager;
+
     @Inject
     public SettingsViewModel(SettingsRepository settingsRepository) {
         this.settingsRepository = settingsRepository;

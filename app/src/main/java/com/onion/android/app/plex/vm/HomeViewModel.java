@@ -14,13 +14,13 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import timber.log.Timber;
 
 public class HomeViewModel extends ViewModel {
-
     private final MediaRepository mediaRepository;
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     public final MutableLiveData<MovieResponse> featuredMoviesMutableLiveData = new MutableLiveData<>();
     // State
     public boolean mFeaturedLoaded;
     public boolean mScrollLoaded;
+
     @Inject
     HomeViewModel(MediaRepository mediaRepository){
         this.mediaRepository = mediaRepository;

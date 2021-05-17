@@ -3,8 +3,8 @@ package com.onion.android.app.plex.di.module;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-
 import com.onion.android.app.plex.di.ViewModelKey;
+import com.onion.android.app.plex.vm.HomeViewModel;
 import com.onion.android.app.plex.vm.PlexViewModelFactory;
 import com.onion.android.app.plex.vm.SettingsViewModel;
 
@@ -21,6 +21,11 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SettingsViewModel.class)
     abstract ViewModel bindSettingsViewModel(SettingsViewModel settingsViewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(HomeViewModel.class)
+    abstract ViewModel bindHomeViewModel(HomeViewModel homeViewModel);
 
     @Binds
     abstract ViewModelProvider.Factory bindViewModelFactory(PlexViewModelFactory factory);

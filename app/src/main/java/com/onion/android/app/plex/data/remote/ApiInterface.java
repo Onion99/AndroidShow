@@ -24,7 +24,6 @@ import com.onion.android.app.plex.data.model.upcoming.Upcoming;
 
 import java.util.List;
 
-
 import io.reactivex.rxjava3.core.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -239,7 +238,7 @@ public interface ApiInterface {
     Observable<MovieResponse> getMovieLatest(@Path("code") String code);
 
     // Featured Movies API Call
-    @GET("movies/featured/{code}")
+    @GET("media/featuredcontent/{code}")
     Observable<MovieResponse> getMovieFeatured(@Path("code") String code);
 
     // Recommended Movies API Call
