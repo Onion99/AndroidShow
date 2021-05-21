@@ -50,6 +50,14 @@ import static com.onion.android.app.constants.PlexConstants.SERVER_OPENSUBS_URL;
 @Singleton
 public class ServiceGenerator {
 
+    // Todo ： 叉，原来OkHttp缓存报错是这里的原因，缓存目录有问题
+    private static final File httpCacheDirectory
+            = new File(App.getContext().getCacheDir(), "responses");
+    private static final int CACHE_SIZE = 30 * 1024 * 1024; // 10 MB
+    // 因为kotlin的Cache 类，所以识别不了,但可以正常調用
+    private static final Cache cache = new Cache(httpCacheDirectory, CACHE_SIZE);
+
+
     private static final OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
             .addNetworkInterceptor(new ResponseCacheInterceptor())
             .addInterceptor(new OfflineResponseCacheInterceptor())
@@ -72,16 +80,6 @@ public class ServiceGenerator {
         return builder.build();
 
     }
-
-
-    // Todo ： 叉，原来OkHttp缓存报错是这里的原因，缓存目录有问题
-    private static final File httpCacheDirectory
-            = new File(App.getContext().getCacheDir(), "responses");
-    private static final int CACHE_SIZE = 30 * 1024 * 1024; // 10 MB
-    // 因为kotlin的Cache 类，所以识别不了,但可以正常調用
-    private static final Cache cache = new Cache(httpCacheDirectory, CACHE_SIZE);
-
-
 
     private static final Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl(SERVER_BASE_URL)

@@ -38,13 +38,8 @@ public class MovieDataSource extends PageKeyedDataSource<Integer, Media> {
 
             @Override
             public void onResponse(@NotNull Call<GenresData> call, @NotNull Response<GenresData> response) {
-
-
                 if (response.isSuccessful()) {
-
                     callback.onResult(response.body().getGlobaldata(), null, FIRST_PAGE+1);
-
-
                 }
             }
 
@@ -65,14 +60,9 @@ public class MovieDataSource extends PageKeyedDataSource<Integer, Media> {
 
             @Override
             public void onResponse(@NotNull Call<GenresData> call, @NotNull Response<GenresData> response) {
-
-
                 if (response.isSuccessful()) {
-
                     Integer key = (params.key > 1) ? params.key - 1 : null;
                     callback.onResult(response.body().getGlobaldata(), key);
-
-
                 }
             }
 
@@ -87,28 +77,18 @@ public class MovieDataSource extends PageKeyedDataSource<Integer, Media> {
     @Override
     public void loadAfter(@NonNull final LoadParams<Integer> params, @NonNull final LoadCallback<Integer, Media> callback) {
 
-
-
         Call<GenresData> call = requestInterface.getAllMoviesCall(settingsManager.getSettings().getApiKey(),params.key);
         call.enqueue(new Callback<GenresData>() {
-
             @Override
             public void onResponse(@NotNull Call<GenresData> call, @NotNull Response<GenresData> response) {
-
-
                 if (response.isSuccessful()) {
-
                     callback.onResult(response.body().getGlobaldata(), params.key + 1);
-
-
                 }
             }
 
             @Override
             public void onFailure(@NotNull Call<GenresData> call, @NotNull Throwable t) {
-
                 //
-
             }
         });
 

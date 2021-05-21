@@ -19,12 +19,15 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.exoplayer2.util.Util;
+import com.google.android.material.appbar.AppBarLayout;
 import com.onion.android.R;
-// 导入包域静态变量
+
 import java.nio.charset.StandardCharsets;
 
 import static android.os.Build.VERSION;
@@ -107,13 +110,25 @@ public class Tools {
     /**
      * 加载网络图片
      */
-    public static void loadHttpImg(Context context, ImageView imageView,String url){
-        Glide.with(context).asBitmap().load(url)
+    public static void loadHttpImg(Context context, ImageView imageView, String url) {
+        GlideApp.with(context).asBitmap().load(url)
                 .fitCenter()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .transition(withCrossFade())
                 .skipMemoryCache(true)
                 .into(imageView);
+    }
+
+    // 加载标题栏
+    public static void loadToolbar(AppCompatActivity appCompatActivity, Toolbar toolbar, AppBarLayout appBarLayout) {
+        appCompatActivity.setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(android.graphics.Color.WHITE);
+        toolbar.setTitle(null);
+        if (appBarLayout != null) {
+            appBarLayout.bringToFront();
+        }
+        appCompatActivity.getSupportActionBar().setDisplayShowTitleEnabled(false);
+
     }
 
     // 检查网络状态

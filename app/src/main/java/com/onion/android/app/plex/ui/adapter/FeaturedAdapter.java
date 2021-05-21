@@ -33,12 +33,6 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
     private Context context;
     private MediaRepository mediaRepository;
     protected SimpleExoPlayer mMoviePlayer;
-//    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
-//    private Random random;
-//    private History history;
-//    private static final int PRELOAD_TIME_S = 2;
-//    private static final String TAG = "FeaturedAdapter";
-//    MediaModel mMediaModel;
 
     @Inject
     public FeaturedAdapter() {

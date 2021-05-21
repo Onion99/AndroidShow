@@ -45,13 +45,12 @@ public abstract class PlexBaseFragment<T extends ViewDataBinding> extends Fragme
         initView();
     }
 
-    public abstract void initView();
-
     public abstract void initViewModel();
     // 创建ViewModelProvider ，这将通过给定的Factory创造ViewModels，并将其保持在给定的ViewModelStoreOwner
     // 创建的ViewModel与给定的范围相关联，只要该范围处于活动状态（例如，如果它是一项活动，直到完成或终止进程），它将一直保留
     // viewModel = new ViewModelProvider(this,viewModelFactory).get(HomeViewModel .class);
 
+    public abstract void initView();
 
     @Override
     public void onDestroyView() {

@@ -26,5 +26,11 @@
     <string name="premuim">Premuim</string>
     <string name="title">TITLE</string>
     <string name="lecture">Lecture</string>
+    <string name="movies">Movies</string>
+    <string name="series">Series</string>
+    <string name="animes">Animes</string>
+    <string name="genres_list_is_empty">Genres List is empty</string>
+    <string name="please_try_another_genre">Please try another genre.</string>
+
 
 </resources>

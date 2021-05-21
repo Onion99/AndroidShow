@@ -5,12 +5,12 @@
         android:icon="@drawable/ic_home"
         android:iconTint="@color/white"
         android:title="@string/home" />
+
     <item
-        android:id="@+id/navigation_mylist"
-        android:icon="@drawable/ic_movie"
-        android:iconTint="@color/white"
+        android:id="@+id/navigation_browse"
+        android:icon="@drawable/ic_apps"
         android:menuCategory="secondary"
-        android:title="@string/mylist" />
+        android:title="@string/library" />
     <!--
         <item
             android:id="@+id/navigation_search"

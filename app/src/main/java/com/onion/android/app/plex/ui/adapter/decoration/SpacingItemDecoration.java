@@ -1,9 +1,6 @@
 package com.onion.android.app.plex.ui.adapter.decoration;
 
-import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Rect;
-import android.util.TypedValue;
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;

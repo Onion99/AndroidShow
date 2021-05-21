@@ -25,7 +25,7 @@
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="NullableNotNullManager">
-    <option name="myDefaultNullable" value="android.support.annotation.Nullable" />
+    <option name="myDefaultNullable" value="androidx.annotation.Nullable" />
     <option name="myDefaultNotNull" value="androidx.annotation.NonNull" />
     <option name="myNullables">
       <value>

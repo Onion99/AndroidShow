@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- 定义子样式 -->
-<resources xmlns:tools="http://schemas.android.com/tools"
-    >
+<resources>
 
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -82,12 +81,23 @@
     <style name="PlexBottomNavigationView.Active" parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:textSize">12sp</item>
     </style>
+
     <style name="PlexBottomNavigationView.Inactive" parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:textSize">10sp</item>
     </style>
+
     <style name="Toolbar.Light" parent="@style/AppTheme">
         <item name="colorControlNormal">@color/grey_11</item>
         <item name="android:textColorPrimary">@color/grey_60</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">#000</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 
 </resources>
