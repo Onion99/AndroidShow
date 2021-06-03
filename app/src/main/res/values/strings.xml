@@ -31,6 +31,11 @@
     <string name="animes">Animes</string>
     <string name="genres_list_is_empty">Genres List is empty</string>
     <string name="please_try_another_genre">Please try another genre.</string>
+    <string name="search_movies_series">Search Movies, Series,Animes,Streaming…</string>
+    <string name="oh_darn_we_don_t_have_that">Oh darn. We don\'t have that</string>
+    <string name="movies_amp_series"><![CDATA[MOVIES & Series]]></string>
+    <string name="suggested_programmes">Suggested Programmes</string>
+    <string name="try_searching_for_another_movie_show">Try Searching for another movie,show</string>
 
 
 </resources>

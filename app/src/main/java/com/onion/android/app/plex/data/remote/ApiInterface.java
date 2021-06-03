@@ -461,7 +461,7 @@ public interface ApiInterface {
     Observable<MovieResponse> getRelatedsMovies(@Path("id") int movieId,@Path("code") String code);
 
     // Suggested Movies API Call
-    @GET("movies/suggested/{code}")
+    @GET("media/suggestedcontent/{code}")
     Observable <MovieResponse> getMovieSuggested(@Path("code") String code);
 
 

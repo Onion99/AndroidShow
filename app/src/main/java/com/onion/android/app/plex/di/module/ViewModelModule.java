@@ -7,6 +7,7 @@ import com.onion.android.app.plex.di.ViewModelKey;
 import com.onion.android.app.plex.vm.GenresViewModel;
 import com.onion.android.app.plex.vm.HomeViewModel;
 import com.onion.android.app.plex.vm.PlexViewModelFactory;
+import com.onion.android.app.plex.vm.SearchViewModel;
 import com.onion.android.app.plex.vm.SettingsViewModel;
 
 import dagger.Binds;
@@ -32,6 +33,11 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(GenresViewModel.class)
     abstract ViewModel bindGenresViewModel(GenresViewModel homeViewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SearchViewModel.class)
+    abstract ViewModel bindSearchViewModel(SearchViewModel searchViewModel);
 
     @Binds
     abstract ViewModelProvider.Factory bindViewModelFactory(PlexViewModelFactory factory);

@@ -80,6 +80,7 @@
     <color name="primary_dark">#0288D1</color>
     <color name="plex_bottom_navgation_bg">#232325</color>
     <color name="plex_item_bg">#121212</color>
+    <color name="plex_search_background_input">#333333</color>
     <color name="fragment_featured_end">#1a1a1a</color>
     <color name="fragment_featured_overlay_center">#6626262d</color>
     <color name="fragment_featured_overlay_start">#0026262d</color>

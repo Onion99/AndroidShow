@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.onion.android.R;
 import com.onion.android.app.base.PlexBaseActivity;
+import com.onion.android.app.plex.ui.frg.DiscoverFragment;
 import com.onion.android.app.plex.ui.frg.HomeFragment;
 import com.onion.android.app.plex.ui.frg.LibraryFragment;
 import com.onion.android.app.utils.Tools;
@@ -36,6 +37,9 @@ public class MainActivity extends PlexBaseActivity<PlexActivityMainBinding> {
                         case R.id.navigation_home:
                             changeFragment(new HomeFragment(), HomeFragment.class
                                     .getSimpleName());
+                            break;
+                        case R.id.navigation_search:
+                            changeFragment(new DiscoverFragment(), DiscoverFragment.class.getSimpleName());
                             break;
                         case R.id.navigation_browse:
                             changeFragment(new LibraryFragment(), LibraryFragment.class

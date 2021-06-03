@@ -61,7 +61,7 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
     @Override
     public int getItemCount() {
         if (castList != null) {
-            return Math.min(castList.size(), 20);
+            return castList.size();
         } else {
             return 0;
         }
