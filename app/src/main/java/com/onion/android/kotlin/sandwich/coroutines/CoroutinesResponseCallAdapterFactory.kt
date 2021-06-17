@@ -1,6 +1,6 @@
 package com.onion.android.kotlin.sandwich.coroutines
 
-import com.onion.android.kotlin.network.handler.ApiResponse
+import com.onion.android.app.pokemon.network.handler.ApiResponse
 import retrofit2.Call
 import retrofit2.CallAdapter
 import retrofit2.Retrofit

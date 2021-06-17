@@ -19,7 +19,7 @@ import com.onion.android.app.plex.data.repository.MediaRepository;
 import com.onion.android.app.plex.ui.MainActivity;
 import com.onion.android.app.utils.GlideApp;
 import com.onion.android.app.utils.UITools;
-import com.onion.android.databinding.ItemFeaturedBinding;
+import com.onion.android.databinding.PlexItemFeaturedBinding;
 
 import java.util.List;
 
@@ -49,7 +49,7 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
     @NonNull
     @Override
     public FeaturedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemFeaturedBinding binding = ItemFeaturedBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        PlexItemFeaturedBinding binding = PlexItemFeaturedBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new FeaturedViewHolder(binding);
     }
 
@@ -68,9 +68,9 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
     }
 
     class FeaturedViewHolder extends RecyclerView.ViewHolder {
-        private final ItemFeaturedBinding binding;
+        private final PlexItemFeaturedBinding binding;
 
-        FeaturedViewHolder(@NonNull ItemFeaturedBinding binding) {
+        FeaturedViewHolder(@NonNull PlexItemFeaturedBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }

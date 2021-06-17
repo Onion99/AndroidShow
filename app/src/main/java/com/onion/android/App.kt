@@ -16,7 +16,7 @@ import javax.inject.Inject
  * 实现 ViewModelStoreOwner 接口以实现ViewModel
  * 实现 HasAndroidInjector 以实现Application注入
  * */
-// Todo 这里加上 @HiltAndroidApp 的话 Hilt 和 Dagger 会发生冲突，导致某些注入需求找不到 ,因而现在先注释掉
+// Todo 这里加上 @HiltAndroidApp 的话 Hilt 和 Dagger 会发生冲突，导致某些注入需求找不到 , 如果是在改App Plex 模块，则需要先注释掉
 // @HiltAndroidApp
 class App : Application(), HasAndroidInjector, StrongBuilder.Callback<OkHttpClient> {
 
@@ -31,6 +31,7 @@ class App : Application(), HasAndroidInjector, StrongBuilder.Callback<OkHttpClie
     override fun onCreate() {
         super.onCreate()
         context = applicationContext
+        // // Todo 这里加上 @HiltAndroidApp 的话 Hilt 和 Dagger 会发生冲突，导致某些注入需求找不到 , 如果是在改App PokeDex 模块，则需要先注释掉
         //  Application 注入
         AppInjector.init(this)
         /**

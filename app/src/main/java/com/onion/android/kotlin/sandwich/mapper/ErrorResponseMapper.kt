@@ -1,7 +1,7 @@
 package com.onion.android.kotlin.sandwich.mapper
 
-import com.onion.android.kotlin.model.PokemonErrorResponse
-import com.onion.android.kotlin.network.handler.ApiResponse
+import com.onion.android.app.pokemon.model.PokemonErrorResponse
+import com.onion.android.app.pokemon.network.handler.ApiResponse
 import com.onion.android.kotlin.sandwich.message
 
 object ErrorResponseMapper: ApiErrorModelMapper<PokemonErrorResponse> {

@@ -5,10 +5,11 @@
     <data>
         <variable
             name="vm"
-            type="com.onion.android.kotlin.vm.MainViewModel" />
+            type="com.onion.android.app.pokemon.vm.MainViewModel" />
+
         <variable
             name="adapter"
-            type="com.onion.android.kotlin.ui.adapter.PokemonAdapter" />
+            type="com.onion.android.app.pokemon.adapter.PokemonAdapter" />
     </data>
     <!-- clipToPadding 控件的绘制区域是否在padding里面的，true的情况下如果你设置了padding那么绘制的区域就往里 缩-->
     <!-- clipChildren 指子控件是否超过padding区域，这两个属性默认是true的，所以在设置了padding情况下，默认滚动是在 padding内部的-->
@@ -27,7 +28,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
-            <include layout="@layout/toolbar_home" />
+            <include layout="@layout/pokedex_toolbar_home" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -48,7 +49,7 @@
             app:adapterPokemonList="@{vm.pokemonListLiveData}"
             app:paginationPokemonList="@{vm}"
             app:toast="@{vm.toastLiveData}"
-            tools:listitem="@layout/item_pokemon"
+            tools:listitem="@layout/pokedex_item_pokemon"
             />
 
         <ProgressBar

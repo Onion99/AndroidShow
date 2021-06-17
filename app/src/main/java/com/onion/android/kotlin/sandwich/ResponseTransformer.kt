@@ -1,6 +1,6 @@
 package com.onion.android.kotlin.sandwich
 
-import com.onion.android.kotlin.network.handler.ApiResponse
+import com.onion.android.app.pokemon.network.handler.ApiResponse
 import com.onion.android.kotlin.sandwich.coroutines.SuspensionFunction
 import com.onion.android.kotlin.sandwich.mapper.ApiErrorModelMapper
 
@@ -18,10 +18,10 @@ import com.onion.android.kotlin.sandwich.mapper.ApiErrorModelMapper
 @JvmSynthetic
 @SuspensionFunction
 suspend inline fun <T> ApiResponse<T>.suspendOnSuccess(
-   crossinline onResult: suspend ApiResponse.Success<T>.() -> Unit
-): ApiResponse<T>{
+    crossinline onResult: suspend ApiResponse.Success<T>.() -> Unit
+): ApiResponse<T> {
     // this -> ApiResponse<T>
-    if(this is ApiResponse.Success){
+    if (this is ApiResponse.Success) {
         onResult(this)
     }
     return this
@@ -31,8 +31,8 @@ suspend inline fun <T> ApiResponse<T>.suspendOnSuccess(
 @JvmSynthetic
 inline fun <T> ApiResponse<T>.onError(
     crossinline onResult: ApiResponse.Failure.Error<T>.() -> Unit
-): ApiResponse<T>{
-    if(this is ApiResponse.Failure.Error){
+): ApiResponse<T> {
+    if (this is ApiResponse.Failure.Error) {
         onResult(this)
     }
     return this
@@ -41,9 +41,9 @@ inline fun <T> ApiResponse<T>.onError(
 @JvmSynthetic
 @SuspensionFunction
 suspend inline fun <T> ApiResponse<T>.onException(
-   crossinline onResult: ApiResponse.Failure.Exception<T>.() -> Unit
-):ApiResponse<T>{
-    if(this is ApiResponse.Failure.Exception){
+    crossinline onResult: ApiResponse.Failure.Exception<T>.() -> Unit
+): ApiResponse<T> {
+    if (this is ApiResponse.Failure.Exception) {
         onResult(this)
     }
     return this

@@ -26,7 +26,6 @@ public class SearchViewModel extends ViewModel {
     private final MediaRepository mediaRepository;
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     public boolean checkData;
-    ;
 
     @Inject
     SearchViewModel(MediaRepository mediaRepository) {
