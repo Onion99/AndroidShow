@@ -1,10 +1,12 @@
 package com.onion.android.app.base
 
+import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import dagger.android.AndroidInjection
 
 /**
  * 基于DataBinding的基类
@@ -12,6 +14,7 @@ import androidx.databinding.ViewDataBinding
 abstract class BindingActivity<T:ViewDataBinding> constructor(
     @LayoutRes private val layoutId:Int
 ) : AppCompatActivity(){
+
     /**
      * protected 和 private一样 + 在子类中可见
      * 编译期间生成此接口，以生成所有使用的实例BindingAdapters
@@ -48,5 +51,10 @@ abstract class BindingActivity<T:ViewDataBinding> constructor(
             // 通知侦听器此实例的所有属性已更改。
             binding.notifyChange()
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        AndroidInjection.inject(this)
     }
 }

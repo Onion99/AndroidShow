@@ -28,14 +28,15 @@ import dagger.android.AndroidInjectionModule;
                 FragmentBuilderModule.class,
         }
 )
-public interface AppComponent {
+public interface PlexAppComponent {
 
     @Component.Builder
-    interface Builder{
+    interface Builder {
 
         @BindsInstance
         Builder application(Application application);
-        AppComponent build();
+
+        PlexAppComponent build();
     }
 
     void inject(App app);

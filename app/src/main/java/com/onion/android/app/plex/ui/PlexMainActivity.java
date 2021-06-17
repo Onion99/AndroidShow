@@ -15,7 +15,7 @@ import com.onion.android.app.plex.ui.frg.LibraryFragment;
 import com.onion.android.app.utils.Tools;
 import com.onion.android.databinding.PlexActivityMainBinding;
 
-public class MainActivity extends PlexBaseActivity<PlexActivityMainBinding> {
+public class PlexMainActivity extends PlexBaseActivity<PlexActivityMainBinding> {
 
 
     @Override
@@ -25,7 +25,7 @@ public class MainActivity extends PlexBaseActivity<PlexActivityMainBinding> {
 
     @Override
     public void initView() {
-        Tools.hideSystemBar(this,true);
+        Tools.hideSystemBar(this, true);
         changeFragment(new HomeFragment(),HomeFragment.class.getSimpleName());
         onNavigationItemClick();
     }

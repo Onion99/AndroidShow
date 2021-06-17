@@ -29,7 +29,7 @@ import okhttp3.OkHttpClient;
 
 import static com.onion.android.app.constants.PlexConstants.SERVER_BASE_URL;
 
-public class SplashActivity extends PlexBaseActivity<PlexActivitySplashBinding> implements StrongBuilder.Callback<OkHttpClient> {
+public class PlexSplashActivity extends PlexBaseActivity<PlexActivitySplashBinding> implements StrongBuilder.Callback<OkHttpClient> {
 
     SettingsViewModel settingsViewModel;
 
@@ -38,6 +38,7 @@ public class SplashActivity extends PlexBaseActivity<PlexActivitySplashBinding> 
 
     @Inject
     ViewModelProvider.Factory viewModelFactory;
+
     /**
      * 初始化洋葱代理，使用的洋葱路由概念(提供匿名性和对交通监控的抵抗)
      */
@@ -63,7 +64,7 @@ public class SplashActivity extends PlexBaseActivity<PlexActivitySplashBinding> 
         settingsViewModel.settingsMutableLiveData.observe(this, settings -> {
             settingsManager.saveSettings(settings);
             Tools.postDelayed(() -> {
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, PlexMainActivity.class));
                 finish();
             }, 1900);
         });

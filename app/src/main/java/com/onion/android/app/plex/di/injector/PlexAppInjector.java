@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.onion.android.App;
-import com.onion.android.app.plex.di.component.DaggerAppComponent;
+import com.onion.android.app.plex.di.component.DaggerPlexAppComponent;
 
 import dagger.android.AndroidInjection;
 import dagger.android.HasAndroidInjector;
@@ -20,13 +20,13 @@ import dagger.android.support.AndroidSupportInjection;
 /**
  * Dagger-1.5 init 第一步必须执行，不然会报错
  * 实现自动依赖注入
- * */
-public class AppInjector {
-    public AppInjector() {
+ */
+public class PlexAppInjector {
+    public PlexAppInjector() {
     }
 
-    public static void init(App app){
-        DaggerAppComponent.builder()
+    public static void init(App app) {
+        DaggerPlexAppComponent.builder()
                 .application(app)
                 .build()
                 .inject(app);

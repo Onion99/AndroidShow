@@ -16,7 +16,7 @@ import com.onion.android.R;
 import com.onion.android.app.plex.data.local.entity.Media;
 import com.onion.android.app.plex.data.model.genres.Genre;
 import com.onion.android.app.plex.data.repository.MediaRepository;
-import com.onion.android.app.plex.ui.MainActivity;
+import com.onion.android.app.plex.ui.PlexMainActivity;
 import com.onion.android.app.utils.GlideApp;
 import com.onion.android.app.utils.UITools;
 import com.onion.android.databinding.PlexItemFeaturedBinding;
@@ -97,7 +97,7 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
                     .placeholder(new ColorDrawable(UITools.getCoolColor()))
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .transition(withCrossFade())
-                    .override(UITools.getScreenWidth((MainActivity) context), UITools.getHeight((MainActivity) context))
+                    .override(UITools.getScreenWidth((PlexMainActivity) context), UITools.getHeight((PlexMainActivity) context))
                     .into(binding.itemMovieImage);
         }
 

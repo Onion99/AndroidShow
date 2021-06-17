@@ -2,7 +2,8 @@ package com.onion.android
 
 import android.app.Application
 import android.content.Context
-import com.onion.android.app.plex.di.injector.AppInjector
+import com.onion.android.app.plex.di.injector.PlexAppInjector
+import com.onion.android.app.pokemon.di.injector.PokedexAppInjector
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -31,9 +32,10 @@ class App : Application(), HasAndroidInjector, StrongBuilder.Callback<OkHttpClie
     override fun onCreate() {
         super.onCreate()
         context = applicationContext
-        // // Todo 这里加上 @HiltAndroidApp 的话 Hilt 和 Dagger 会发生冲突，导致某些注入需求找不到 , 如果是在改App PokeDex 模块，则需要先注释掉
+        //  这里加上 @HiltAndroidApp 的话 Hilt 和 Dagger 会发生冲突，导致某些注入需求找不到 , 如果是在改App PokeDex 模块，则需要先注释掉
         //  Application 注入
-        AppInjector.init(this)
+        PlexAppInjector.init(this)
+        PokedexAppInjector.init(this)
         /**
          * Netcipher-step-1-Creating the OrbotHelper
          * OrbotHelper是一个单例，它管理应用程序和Orbot之间的大量异步通信。
@@ -65,7 +67,8 @@ class App : Application(), HasAndroidInjector, StrongBuilder.Callback<OkHttpClie
      *    如果Activity 不包含 fragment,则无需注入任何东西，无需实现响应接口
      */
     override fun androidInjector(): AndroidInjector<Any> {
-        AppInjector.init(this)
+        PlexAppInjector.init(this)
+        PokedexAppInjector.init(this)
         return androidInjector
     }
 

@@ -4,7 +4,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.onion.android.app.pokemon.adapter.PokemonAdapter
 import com.onion.android.app.pokemon.model.Pokemon
-import com.onion.android.app.pokemon.vm.MainViewModel
+import com.onion.android.app.pokemon.vm.PokedexMainViewModel
 import com.onion.android.kotlin.simple.whatif.whatIfNotNullAs
 import com.onion.android.kotlin.simple.whatif.whatIfNotNullOrEmpty
 import com.skydoves.baserecyclerviewadapter.RecyclerViewPaginator
@@ -19,11 +19,11 @@ object RecyclerViewBinding {
 
     @JvmStatic
     @BindingAdapter("paginationPokemonList")
-    fun paginationPokemonList(view: RecyclerView,viewModel: MainViewModel){
+    fun paginationPokemonList(view: RecyclerView, viewModelPokedex: PokedexMainViewModel) {
         RecyclerViewPaginator(
             recyclerView = view,
-            isLoading = { viewModel.isLoading.get() },
-            loadMore = { viewModel.fetchPokemonList() },
+            isLoading = { viewModelPokedex.isLoading.get() },
+            loadMore = { viewModelPokedex.fetchPokemonList() },
             onLast = { false }
         ).run {
             threshold = 8

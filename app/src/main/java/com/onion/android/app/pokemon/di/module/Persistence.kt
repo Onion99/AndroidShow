@@ -1,14 +1,4 @@
-package com.onion.android.app.pokemon.di
-
-import android.app.Application
-import androidx.room.Room
-import com.onion.android.app.pokemon.persistence.AppDataBase
-import com.onion.android.app.pokemon.persistence.PokemonDao
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+package com.onion.android.app.pokemon.di.module
 
 /*
 * object
@@ -32,22 +22,23 @@ import javax.inject.Singleton
 * ViewWithFragmentComponent	View#super()	  View destroyed	        @ViewScoped
 * ServiceComponent	Service#onCreate()	      View destroyed	       @ViewScoped
 * */
-@Module
-@InstallIn(SingletonComponent::class)
-object Persistence {
-
-    @Provides
-    @Singleton
-    fun provideAppDataBase(
-        application: Application
-    ): AppDataBase {
-        return Room.databaseBuilder(application, AppDataBase::class.java, "Pokemon.db")
-            .fallbackToDestructiveMigration().build()
-    }
-
-    @Provides
-    @Singleton
-    fun providePokemonDao(appDataBase: AppDataBase): PokemonDao {
-        return appDataBase.pokemonDao()
-    }
-}
+// 现在主用Dagger,不用hilt
+//@Module
+//@InstallIn(SingletonComponent::class)
+//object Persistence {
+//
+//    @Provides
+//    @Singleton
+//    fun provideAppDataBase(
+//        application: Application
+//    ): AppDataBase {
+//        return Room.databaseBuilder(application, AppDataBase::class.java, "Pokemon.db")
+//            .fallbackToDestructiveMigration().build()
+//    }
+//
+//    @Provides
+//    @Singleton
+//    fun providePokemonDao(appDataBase: AppDataBase): PokemonDao {
+//        return appDataBase.pokemonDao()
+//    }
+//}

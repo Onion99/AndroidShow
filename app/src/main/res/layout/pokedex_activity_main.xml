@@ -5,7 +5,7 @@
     <data>
         <variable
             name="vm"
-            type="com.onion.android.app.pokemon.vm.MainViewModel" />
+            type="com.onion.android.app.pokemon.vm.PokedexMainViewModel" />
 
         <variable
             name="adapter"

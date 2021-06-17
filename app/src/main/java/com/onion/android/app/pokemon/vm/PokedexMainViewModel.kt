@@ -6,7 +6,6 @@ import androidx.lifecycle.*
 import com.onion.android.app.pokemon.base.LiveCoroutinesViewModel
 import com.onion.android.app.pokemon.model.Pokemon
 import com.onion.android.app.pokemon.repository.MainRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import timber.log.Timber
@@ -16,12 +15,13 @@ import javax.inject.Inject
 *
 *  @ViewModelInject 标识用于注入的androidx.lifecycle.ViewModel的构造函数
 * */
-@HiltViewModel
-class MainViewModel
-    @Inject constructor(
-        private val mainRepository: MainRepository,
-        private val savedState:SavedStateHandle
-    ) : LiveCoroutinesViewModel() {
+// 现在主用Dagger,不用hilt
+// @HiltViewModel
+class PokedexMainViewModel
+@Inject constructor(
+    private val mainRepository: MainRepository,
+    private val savedState: SavedStateHandle
+) : LiveCoroutinesViewModel() {
 
     /**
      * MutableStateFlow https://juejin.cn/post/6844904168910487560
