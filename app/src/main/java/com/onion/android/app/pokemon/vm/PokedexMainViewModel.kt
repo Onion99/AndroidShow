@@ -2,7 +2,10 @@ package com.onion.android.app.pokemon.vm
 
 import androidx.annotation.MainThread
 import androidx.databinding.ObservableBoolean
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.switchMap
 import com.onion.android.app.pokemon.base.LiveCoroutinesViewModel
 import com.onion.android.app.pokemon.model.Pokemon
 import com.onion.android.app.pokemon.repository.MainRepository
@@ -20,7 +23,6 @@ import javax.inject.Inject
 class PokedexMainViewModel
 @Inject constructor(
     private val mainRepository: MainRepository,
-    private val savedState: SavedStateHandle
 ) : LiveCoroutinesViewModel() {
 
     /**
@@ -43,8 +45,9 @@ class PokedexMainViewModel
      * MutableStateFlow 有更多的操作式表达
      */
     val pokemonListLiveData: LiveData<List<Pokemon>>
-    private val _toastLiveData:MutableLiveData<String> = MutableLiveData()
+    private val _toastLiveData: MutableLiveData<String> = MutableLiveData()
     val toastLiveData: LiveData<String> get() = _toastLiveData
+
     /*
     * DataBinding Observable https://blog.csdn.net/qq_26923265/article/details/82745408
     * 同样类似UI页面观察者
@@ -53,8 +56,7 @@ class PokedexMainViewModel
 
     init {
         Timber.d("init MainViewModel")
-        pokemonListLiveData = pokemonFetchingIndex.asLiveData().switchMap {
-            page ->
+        pokemonListLiveData = pokemonFetchingIndex.asLiveData().switchMap { page ->
             isLoading.set(true)
             mainRepository.fetchPokemonList(
                 page = page,

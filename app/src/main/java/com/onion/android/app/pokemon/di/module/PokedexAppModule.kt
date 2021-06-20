@@ -16,13 +16,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
-@Module
-open class PokedexAppModule {
+@Module(includes = [PokedexViewModelModule::class])
+class PokedexAppModule {
 
     // Application 注入
     @Singleton
     @Provides
-    open fun provideContext(application: Application): Context {
+    fun provideContext(application: Application): Context {
         return application.applicationContext
     }
 

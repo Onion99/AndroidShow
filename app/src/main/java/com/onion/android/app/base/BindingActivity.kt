@@ -6,20 +6,26 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import dagger.android.AndroidInjection
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import dagger.android.AndroidInjector
+import dagger.android.HasAndroidInjector
+import javax.inject.Inject
 
 /**
  * 基于DataBinding的基类
  */
-abstract class BindingActivity<T:ViewDataBinding> constructor(
-    @LayoutRes private val layoutId:Int
-) : AppCompatActivity(){
+abstract class BindingActivity<T : ViewDataBinding> constructor(
+    @LayoutRes private val layoutId: Int
+) : AppCompatActivity(), HasAndroidInjector {
+
+    private lateinit var androidInjector: AndroidInjector<Any>
 
     /**
      * protected 和 private一样 + 在子类中可见
      * 编译期间生成此接口，以生成所有使用的实例BindingAdapters
      */
-    protected var bindingComponent:DataBindingComponent? = DataBindingUtil.getDefaultComponent()
+    protected var bindingComponent: DataBindingComponent? = DataBindingUtil.getDefaultComponent()
 
     /**
      * DataBinding将在调用onCreate之前初始化
@@ -27,7 +33,7 @@ abstract class BindingActivity<T:ViewDataBinding> constructor(
      */
     @BindingOnly
     protected val binding: T by lazy(LazyThreadSafetyMode.NONE) {
-        DataBindingUtil.setContentView(this,layoutId,bindingComponent)
+        DataBindingUtil.setContentView(this, layoutId, bindingComponent)
     }
 
     /**
@@ -39,7 +45,7 @@ abstract class BindingActivity<T:ViewDataBinding> constructor(
      * 简单的说，内联函数会将所有内联函数相关代码直接移到调用执行
      */
     @BindingOnly
-    protected inline fun binding(block: T.() -> Unit): T{
+    protected inline fun binding(block: T.() -> Unit): T {
         return binding.apply(block)
     }
 
@@ -55,6 +61,16 @@ abstract class BindingActivity<T:ViewDataBinding> constructor(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AndroidInjection.inject(this)
+//        AndroidInjection.inject(this)
     }
+
+    override fun androidInjector(): AndroidInjector<Any> {
+        return androidInjector
+    }
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    fun <T : ViewModel> getInjectViewModel(c: Class<T>) =
+        ViewModelProvider(this, viewModelFactory).get(c)
 }

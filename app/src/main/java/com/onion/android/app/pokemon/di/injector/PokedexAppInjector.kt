@@ -18,7 +18,8 @@ class PokedexAppInjector() {
 
         @JvmStatic
         fun init(app: App) {
-            DaggerPokedexAppComponent.builder().application(app)
+            DaggerPokedexAppComponent.builder()
+                .application(app)
                 .build()
                 .inject(app)
             // 监听Activity 创建回调,实现Activity 和 Fragment注入

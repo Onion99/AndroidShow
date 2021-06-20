@@ -13,12 +13,11 @@ import info.guardianproject.netcipher.proxy.OrbotHelper
 import okhttp3.OkHttpClient
 import javax.inject.Inject
 
-/**
- * 实现 ViewModelStoreOwner 接口以实现ViewModel
- * 实现 HasAndroidInjector 以实现Application注入
- * */
-// Todo 这里加上 @HiltAndroidApp 的话 Hilt 和 Dagger 会发生冲突，导致某些注入需求找不到 , 如果是在改App Plex 模块，则需要先注释掉
-// @HiltAndroidApp
+///////////////////////////////////////////////////////////////////////////
+//  实现 ViewModelStoreOwner 接口以实现ViewModel
+//  实现 HasAndroidInjector 以实现Application注入
+///////////////////////////////////////////////////////////////////////////
+// @HiltAndroidApp,这里加上 @HiltAndroidApp 的话 Hilt 和 Dagger 会发生冲突，导致某些注入需求找不到 , 如果是在改App Plex 模块，则需要先注释掉
 class App : Application(), HasAndroidInjector, StrongBuilder.Callback<OkHttpClient> {
 
     @Inject
@@ -44,7 +43,7 @@ class App : Application(), HasAndroidInjector, StrongBuilder.Callback<OkHttpClie
          * */
         OrbotHelper.get(this).init()
         try {
-            // Todo 暂时不设置 webkit代理了，会导致网络请求问题
+            // 暂时不设置 webkit代理了，会导致网络请求问题
             /*WebkitProxy.setProxy(
                 App::class.java.name,
                 this.applicationContext,
@@ -56,7 +55,9 @@ class App : Application(), HasAndroidInjector, StrongBuilder.Callback<OkHttpClie
             StrongOkHttpClientBuilder.forMaxSecurity(this)
                 .withTorValidation()
                 .build(this)
-        } catch (e: Exception) { e.printStackTrace() }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     /**
@@ -67,8 +68,8 @@ class App : Application(), HasAndroidInjector, StrongBuilder.Callback<OkHttpClie
      *    如果Activity 不包含 fragment,则无需注入任何东西，无需实现响应接口
      */
     override fun androidInjector(): AndroidInjector<Any> {
-        PlexAppInjector.init(this)
         PokedexAppInjector.init(this)
+        PlexAppInjector.init(this)
         return androidInjector
     }
 
