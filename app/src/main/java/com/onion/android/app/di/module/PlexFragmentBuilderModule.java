@@ -1,4 +1,4 @@
-package com.onion.android.app.plex.di.module;
+package com.onion.android.app.di.module;
 
 import com.onion.android.app.plex.ui.frg.AnimesFragment;
 import com.onion.android.app.plex.ui.frg.DiscoverFragment;
@@ -14,7 +14,7 @@ import dagger.android.ContributesAndroidInjector;
  * 又被对应依赖注入的Activity引用的Fragment，都要声明在下面
  */
 @Module
-public abstract class FragmentBuilderModule {
+public abstract class PlexFragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract HomeFragment contributeHomeFragment();

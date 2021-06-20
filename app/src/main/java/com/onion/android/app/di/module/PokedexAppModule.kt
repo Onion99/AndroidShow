@@ -1,4 +1,4 @@
-package com.onion.android.app.pokemon.di.module
+package com.onion.android.app.di.module
 
 import android.app.Application
 import android.content.Context

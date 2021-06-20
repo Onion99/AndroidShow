@@ -1,4 +1,4 @@
-package com.onion.android.app.plex.di.module;
+package com.onion.android.app.di.module;
 
 import android.app.Application;
 import android.content.Context;
@@ -32,9 +32,9 @@ import static com.onion.android.app.constants.PlexConstants.PREF_FILE;
 /**
  * Application域的注入
  * Module表示包含将提供依赖项的方法的类。
- * */
-@Module(includes = ViewModelModule.class)
-public class AppModule {
+ */
+@Module(includes = PlexViewModelModule.class)
+public class PlexAppModule {
     // Rxjava CompositeDisposable注入
     @Provides
     @Singleton
@@ -46,7 +46,7 @@ public class AppModule {
     // Application 注入
     @Singleton
     @Provides
-    Context provideContext(Application application){
+    Context provideContext(Application application) {
         return application.getApplicationContext();
     }
 
@@ -54,20 +54,20 @@ public class AppModule {
     @Provides
     @Singleton
     StatusManager provideStatusManager(Application application) {
-        return new StatusManager(application.getSharedPreferences(PREF_FILE,MODE_PRIVATE));
+        return new StatusManager(application.getSharedPreferences(PREF_FILE, MODE_PRIVATE));
     }
 
     @Provides
     @Singleton
-    SettingsManager provideSettingsManager(Application application){
-        return new SettingsManager(application.getSharedPreferences(PREF_FILE,MODE_PRIVATE));
+    SettingsManager provideSettingsManager(Application application) {
+        return new SettingsManager(application.getSharedPreferences(PREF_FILE, MODE_PRIVATE));
     }
 
 
     @Provides
     @Singleton
-    AuthManager provideAuthManager(Application application){
-        return new AuthManager(application.getSharedPreferences(PREF_FILE,MODE_PRIVATE));
+    AuthManager provideAuthManager(Application application) {
+        return new AuthManager(application.getSharedPreferences(PREF_FILE, MODE_PRIVATE));
     }
 
 
@@ -81,7 +81,7 @@ public class AppModule {
     // Http Service - 注入
     @Singleton
     @Provides
-    ApiInterface provideMoviesService(){
+    ApiInterface provideMoviesService() {
         return ServiceGenerator.createService(ApiInterface.class);
     }
 
@@ -97,10 +97,9 @@ public class AppModule {
     @Singleton
     @Named("status")
     ApiInterface provideServiceStatus(SettingsManager tokenManager) {
-        return ServiceGenerator.createServiceWithStatus(ApiInterface.class,tokenManager);
+        return ServiceGenerator.createServiceWithStatus(ApiInterface.class, tokenManager);
 
     }
-
 
 
     @Provides
@@ -110,7 +109,6 @@ public class AppModule {
         return ServiceGenerator.createServiceImdb(ApiInterface.class);
 
     }
-
 
 
     @Provides
@@ -126,7 +124,7 @@ public class AppModule {
     @Singleton
     @Named("Auth")
     ApiInterface provideServiceAuth(TokenManager tokenManager) {
-        return ServiceGenerator.createServiceWithAuth(ApiInterface.class,tokenManager);
+        return ServiceGenerator.createServiceWithAuth(ApiInterface.class, tokenManager);
 
     }
 
@@ -138,15 +136,15 @@ public class AppModule {
     }
 
 
-
     // Room 数据库 - 注入
     @Singleton
     @Provides
-    EasyPlexDataBase provideDataBase(Application application){
-        return Room.databaseBuilder(application,EasyPlexDataBase.class,"plex.db")
+    EasyPlexDataBase provideDataBase(Application application) {
+        return Room.databaseBuilder(application, EasyPlexDataBase.class, "plex.db")
                 .allowMainThreadQueries()
                 .fallbackToDestructiveMigration().build();
     }
+
     // Room 表 - 注入
     @Singleton
     @Provides
@@ -156,20 +154,20 @@ public class AppModule {
 
     @Singleton
     @Provides
-    DownloadDao provideProgressDao(EasyPlexDataBase dataBase){
+    DownloadDao provideProgressDao(EasyPlexDataBase dataBase) {
         return dataBase.progressDao();
     }
 
     @Singleton
     @Provides
-    StreamListDao provideStreamyDao(EasyPlexDataBase dataBase){
+    StreamListDao provideStreamyDao(EasyPlexDataBase dataBase) {
         return dataBase.streamListDao();
     }
 
 
     @Singleton
     @Provides
-    HistoryDao provideHistoryDao(EasyPlexDataBase dataBase){
+    HistoryDao provideHistoryDao(EasyPlexDataBase dataBase) {
         return dataBase.historyDao();
     }
 

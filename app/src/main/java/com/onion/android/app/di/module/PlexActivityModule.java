@@ -1,4 +1,4 @@
-package com.onion.android.app.plex.di.module;
+package com.onion.android.app.di.module;
 
 import com.onion.android.app.plex.ui.PlexMainActivity;
 import com.onion.android.app.plex.ui.PlexSplashActivity;
@@ -8,6 +8,7 @@ import dagger.android.ContributesAndroidInjector;
 
 /**
  * Dagger-2 声明相应提供对象的Module
+ *
  * @Module - 用于提供对象
  * 用于标记提供对象的类，这个类负责提供一些我们需要的对象，
  * 比如SharedPreferences是通过构造函数无法直接提供的，这时候就可以通过一个有@Module的类，这个类负责提供内容
@@ -15,15 +16,15 @@ import dagger.android.ContributesAndroidInjector;
  * 引入 @ContributesAndroidInjector 注释作用
  * 1. 创建用@Subcomponent注释的单独组件（需要定义@Subcomponent类）
  * 2. 编写自定义注释，如@PerActivity。
- * */
+ */
 @Module
-public abstract class ActivityModule {
+public abstract class PlexActivityModule {
 
 
     @ContributesAndroidInjector
     abstract PlexSplashActivity contributeSplashActivity();
 
     // 如果存在Fragment，则将Activity对应的FragmentModule依赖进来
-    @ContributesAndroidInjector(modules = FragmentBuilderModule.class)
+    @ContributesAndroidInjector(modules = PlexFragmentBuilderModule.class)
     abstract PlexMainActivity contributeMainActivity();
 }

@@ -1,4 +1,4 @@
-package com.onion.android.app.plex.di;
+package com.onion.android.app.di.annotation;
 
 import androidx.lifecycle.ViewModel;
 

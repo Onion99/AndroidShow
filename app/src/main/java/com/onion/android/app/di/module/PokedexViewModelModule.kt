@@ -1,10 +1,8 @@
-package com.onion.android.app.pokemon.di.module
+package com.onion.android.app.di.module
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import com.onion.android.app.di.annotation.ViewModelKey
 import com.onion.android.app.pokemon.vm.PokedexMainViewModel
-import com.onion.android.app.pokemon.vm.PokedexViewModelFactory
-import com.onion.android.app.pokemon.vm.ViewModelKey
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -21,7 +19,4 @@ abstract class PokedexViewModelModule {
     @ViewModelKey(PokedexMainViewModel::class)
     abstract fun bindPokedexMainViewModel(pokedexMainViewModel: PokedexMainViewModel): ViewModel
 
-    // 提供ViewModel的工厂类
-    @Binds
-    abstract fun bindViewModelFactory(factory: PokedexViewModelFactory): ViewModelProvider.Factory
 }

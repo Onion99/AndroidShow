@@ -12,7 +12,7 @@ import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.onion.android.app.plex.di.injector.Injectable;
+import com.onion.android.app.di.injector.Injectable;
 
 import java.util.Optional;
 

@@ -1,4 +1,4 @@
-package com.onion.android.app.pokemon.di.module
+package com.onion.android.app.di.module
 
 import com.onion.android.app.pokemon.ui.PokedexMainActivity
 import dagger.Module
