@@ -49,5 +49,7 @@ ext.versions = [
         // react programing
         'rxandroidVersion'       : '3.0.0',
         'rxjavaVersion'          : '3.0.0',
+        // Anko
+        'anko_version'          : '0.10.8',
 
 ]

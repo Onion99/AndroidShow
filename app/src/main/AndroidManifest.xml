@@ -15,21 +15,26 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppPlexTheme">
-        <activity
-            android:name=".app.plex.ui.PlexSplashActivity"
-            android:theme="@style/SplashTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <!--        <activity-->
+        <!--            android:name=".app.plex.ui.PlexSplashActivity"-->
+        <!--            android:theme="@style/SplashTheme">-->
+        <!--            <intent-filter>-->
+        <!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+        <!--            </intent-filter>-->
+        <!--        </activity>-->
         <!--        <activity android:name=".app.pokemon.ui.PokedexMainActivity">-->
         <!--            <intent-filter>-->
         <!--                <action android:name="android.intent.action.MAIN" />-->
         <!--                <category android:name="android.intent.category.LAUNCHER" />-->
         <!--            </intent-filter>-->
-        <!--        </activity>-->
+        <activity android:name=".customview.first_location.TestViewActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".app.plex.ui.PlexMainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"

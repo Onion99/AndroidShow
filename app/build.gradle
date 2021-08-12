@@ -249,4 +249,9 @@ dependencies {
     // 投屏 ，使用公共用户界面在远程接收器设备上启用媒体显示和播放
     implementation "androidx.mediarouter:mediarouter:$versions.mediarouter"
 
+    // Anko
+    api "org.jetbrains.anko:anko:$versions.anko_version"
+    api "org.jetbrains.anko:anko-constraint-layout:$versions.anko_version"
+
+
 }

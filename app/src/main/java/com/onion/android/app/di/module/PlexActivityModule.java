@@ -2,6 +2,7 @@ package com.onion.android.app.di.module;
 
 import com.onion.android.app.plex.ui.PlexMainActivity;
 import com.onion.android.app.plex.ui.PlexSplashActivity;
+import com.onion.android.customview.first_location.TestViewActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -23,6 +24,9 @@ public abstract class PlexActivityModule {
 
     @ContributesAndroidInjector
     abstract PlexSplashActivity contributeSplashActivity();
+
+    @ContributesAndroidInjector
+    abstract TestViewActivity contributeTestViewActivity();
 
     // 如果存在Fragment，则将Activity对应的FragmentModule依赖进来
     @ContributesAndroidInjector(modules = PlexFragmentBuilderModule.class)
