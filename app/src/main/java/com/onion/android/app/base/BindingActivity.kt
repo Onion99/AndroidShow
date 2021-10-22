@@ -61,7 +61,8 @@ abstract class BindingActivity<T : ViewDataBinding> constructor(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        AndroidInjection.inject(this)
+        // 另一种方式实现依赖注入
+        // AndroidInjection.inject(this)
     }
 
     override fun androidInjector(): AndroidInjector<Any> {
