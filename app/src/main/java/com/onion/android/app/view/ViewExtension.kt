@@ -4,10 +4,16 @@
 package com.onion.android.app.view
 
 import android.content.res.Resources
+import android.animation.ValueAnimator
+import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import androidx.core.animation.doOnEnd
+import androidx.core.view.drawToBitmap
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.onion.android.R
 
 ///////////////////////////////////////////////////////////////////////////
@@ -45,7 +51,7 @@ val Float.px
 val Int.dp
     get() = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP,
-        this,
+        this.toFloat(),
         Resources.getSystem().displayMetrics
     )
 
@@ -96,3 +102,33 @@ internal fun ViewGroup.updateLayoutParams(block: ViewGroup.LayoutParams.() -> Un
         layoutParams = params
     }
 }
+
+///////////////////////////////////////////////////////////////////////////
+// BottomNavigationView隐藏动画
+///////////////////////////////////////////////////////////////////////////
+fun BottomNavigationView.hide() {
+    if (visibility == View.GONE) return
+
+    val drawable = BitmapDrawable(context.resources, drawToBitmap())
+    val parent = parent as ViewGroup
+    drawable.setBounds(left, top, right, bottom)
+    parent.overlay.add(drawable)
+    visibility = View.GONE
+    ValueAnimator.ofInt(top, parent.height).apply {
+        startDelay = 100L
+        duration = 200L
+        interpolator = AnimationUtils.loadInterpolator(
+            context,
+            android.R.interpolator.fast_out_linear_in
+        )
+        addUpdateListener {
+            val newTop = it.animatedValue as Int
+            drawable.setBounds(left, newTop, right, newTop + height)
+        }
+        doOnEnd {
+            parent.overlay.remove(drawable)
+        }
+        start()
+    }
+}
+

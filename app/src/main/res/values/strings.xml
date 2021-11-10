@@ -38,4 +38,8 @@
     <string name="try_searching_for_another_movie_show">Try Searching for another movie,show</string>
 
 
+    <!-- Owl -->
+    <string name="my_courses">My Courses</string>
+    <string name="featured">Featured</string>
+    <string name="search">Search</string>
 </resources>
