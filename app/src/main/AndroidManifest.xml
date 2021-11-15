@@ -15,7 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppPlexTheme"
         android:usesCleartextTraffic="true">
-        <!--<activity
+        <!-- parentActivityName:为了左上角给子Activity加一个返回按钮-->
+        <activity
+            android:name=".app.plex.ui.SerieDetailsActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:parentActivityName=".app.plex.ui.PlexMainActivity" />
+        <!--
+        <activity
             android:name=".app.material.owl.ui.OwlMainActivity"
             android:exported="true">
             <intent-filter>
@@ -29,7 +37,8 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>-->
+        </activity>
+        -->
         <activity
             android:name=".app.plex.ui.PlexSplashActivity"
             android:theme="@style/SplashTheme">

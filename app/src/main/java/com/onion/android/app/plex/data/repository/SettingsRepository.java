@@ -5,19 +5,21 @@ import com.onion.android.app.plex.data.model.ads.Ads;
 import com.onion.android.app.plex.data.model.settings.Settings;
 import com.onion.android.app.plex.data.model.status.Status;
 import com.onion.android.app.plex.data.remote.ApiInterface;
-import com.onion.android.app.plex.manager.SettingsManager;;
+import com.onion.android.app.plex.manager.SettingsManager;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import io.reactivex.rxjava3.core.Observable;
 
+;
+
+
 /**
  * Class that requests authentication and user information from the remote data source and
  * maintains an in-memory cache of login status and user credentials information.
  */
 public class SettingsRepository {
-
 
 
     @Inject

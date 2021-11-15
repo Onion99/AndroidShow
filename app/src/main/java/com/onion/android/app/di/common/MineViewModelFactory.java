@@ -14,7 +14,7 @@ import javax.inject.Singleton;
 ///////////////////////////////////////////////////////////////////////////
 // 自定义MineViewModelFactory 避免以下情况，因为 ViewModelProviders 的 of() 仅能实现无参 ViewModel 的构建
 // ViewModelProviders 的 of() 方法，在内部创建了默认的 ViewModelProvider.Factory ，从而实现了 ViewModel 的无参创建。
-// 所以，当我们在构造方法添加参数时， ViewModelProvider.Factory 的内部无法实例化 ViewModel 对象，因为 ViewModelProvider.Factory 调用主构造方法创建 ViewModel’s 实例而失败
+// 所以，当我们在VideModel构造方法添加参数时， ViewModelProvider.Factory 的内部无法实例化 ViewModel 对象，因为 ViewModelProvider.Factory 调用主构造方法创建 ViewModel’s 实例而失败
 // https://www.cnblogs.com/yuanhao-1999/p/11534568.html
 ///////////////////////////////////////////////////////////////////////////
 @Singleton

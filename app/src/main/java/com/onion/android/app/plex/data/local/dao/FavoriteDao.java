@@ -11,7 +11,8 @@ import com.onion.android.app.plex.data.local.entity.Download;
 import com.onion.android.app.plex.data.local.entity.Media;
 
 import java.util.List;
-import io.reactivex.Flowable;
+
+import io.reactivex.rxjava3.core.Flowable;
 
 @Dao
 public interface FavoriteDao {

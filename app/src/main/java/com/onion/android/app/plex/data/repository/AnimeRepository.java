@@ -19,12 +19,6 @@ import io.reactivex.rxjava3.core.Observable;
 import timber.log.Timber;
 
 
-/**
- * Repository that acts as a mediators between different data sources; API network and ROOM database.
- * It abstracts the data sources from the rest of the app
- *
- * @author Yobex.
- */
 @Singleton
 public class AnimeRepository {
 

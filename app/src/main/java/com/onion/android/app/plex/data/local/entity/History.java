@@ -54,14 +54,14 @@ public class History extends Media {
     @SerializedName("id")
     @Expose
     @ColumnInfo(name = "history_id")
-    private String id;
+    public String id;
 
 
     @NonNull
     @SerializedName("tmdb_id")
     @Expose
     @ColumnInfo(name = "tmdbId_history")
-    private String tmdbId;
+    public String tmdbId;
 
     @Override
     public String getTitle() {

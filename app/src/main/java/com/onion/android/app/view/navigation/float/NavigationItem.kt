@@ -10,10 +10,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.onion.android.R
 import com.onion.android.databinding.ViewNavigationItemBinding
-import org.jetbrains.anko.AnkoContext
-import org.jetbrains.anko.UI
-import org.jetbrains.anko.frameLayout
-import org.jetbrains.anko.px2dip
 
 ///////////////////////////////////////////////////////////////////////////
 // @JvmOverloads 指示 Kotlin 编译器为此函数生成替代默认参数值的重载。
@@ -24,18 +20,6 @@ class NavigationItem @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : RelativeLayout(context, attrs, defStyleAttr) {
 
-    ///////////////////////////////////////////////////////////////////////////
-    // 使用Anko构造
-    ///////////////////////////////////////////////////////////////////////////
-    // 这里的Context为AnkoContext<NavigationItem> 是当前View的
-    private val itemView = AnkoContext.createDelegate(this).apply {
-        frameLayout {}
-    }.view
-
-    // 这里的Context为AnkoContext<context> 取决你传进来的
-    private val testView = context.UI {
-        frameLayout {}
-    }.view
 
     ///////////////////////////////////////////////////////////////////////////
     // 获取当前ItemView
@@ -65,7 +49,7 @@ class NavigationItem @JvmOverloads constructor(
         }
 
     // icon尺寸
-    private var iconSize = px2dip(48)
+    private var iconSize = 48
 
     // 消息提示文本
     var count: String? = ""

@@ -32,12 +32,10 @@ import java.util.List;
 @SuppressWarnings(RoomWarnings.PRIMARY_KEY_FROM_EMBEDDED_IS_DROPPED)
 public class Media implements Parcelable {
 
-
-
-    public Media(){
-
-        //
-    }
+    @NonNull
+    @SerializedName("id")
+    @Expose
+    public String id;
 
     public String getDeviceId() {
         return deviceId;
@@ -50,19 +48,14 @@ public class Media implements Parcelable {
     @SerializedName("deviceId")
     @Expose
     private String deviceId;
-
-
-    @NonNull
-    @SerializedName("id")
-    @Expose
-    private String id;
-
-
-
     @NonNull
     @SerializedName("tmdb_id")
     @Expose
-    private String tmdbId;
+    public String tmdbId;
+
+
+    public Media() {
+    }
 
 
     public String getImdbExternalId() {

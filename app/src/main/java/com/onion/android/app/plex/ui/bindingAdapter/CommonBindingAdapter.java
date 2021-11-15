@@ -1,7 +1,8 @@
 package com.onion.android.app.plex.ui.bindingAdapter;
 
+import static com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions.withCrossFade;
+
 import android.graphics.drawable.ColorDrawable;
-import android.view.View;
 
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.databinding.BindingAdapter;
@@ -10,8 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.onion.android.app.utils.GlideApp;
 import com.onion.android.app.utils.UITools;
-
-import static com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions.withCrossFade;
 
 public class CommonBindingAdapter {
 
@@ -33,10 +32,4 @@ public class CommonBindingAdapter {
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemViewCacheSize(8);
     }
-
-    @BindingAdapter(value = {"gone"})
-    public static void bindGOne(View view, boolean gone) {
-        view.setVisibility(gone ? View.GONE : View.VISIBLE);
-    }
-
 }

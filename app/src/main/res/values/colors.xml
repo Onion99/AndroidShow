@@ -84,4 +84,7 @@
     <color name="fragment_featured_end">#1a1a1a</color>
     <color name="fragment_featured_overlay_center">#6626262d</color>
     <color name="fragment_featured_overlay_start">#0026262d</color>
+    <color name="fragment_content_detail_overlay_end">#1a1a1a</color>
+    <color name="fragment_content_detail_overlay_center">#6626262d</color>
+    <color name="fragment_content_detail_overlay_start">#0026262d</color>
 </resources>

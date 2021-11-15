@@ -15,11 +15,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import timber.log.Timber;
 
-/**
- * ViewModel for SearchActivity.
- *
- * @author Yobex.
- */
+
 public class SearchViewModel extends ViewModel {
 
     public final MutableLiveData<MovieResponse> movieDetailMutableLiveData = new MutableLiveData<>();

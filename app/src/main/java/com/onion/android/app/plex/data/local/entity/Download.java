@@ -59,14 +59,14 @@ public class Download extends Media {
     @SerializedName("id")
     @Expose
     @ColumnInfo(name = "download_id")
-    private String id;
+    public String id;
 
 
     @NonNull
     @SerializedName("tmdb_id")
     @Expose
-    @ColumnInfo(name = "tmdbId_download",index = true)
-    private String tmdbId;
+    @ColumnInfo(name = "tmdbId_download", index = true)
+    public String tmdbId;
 
     @Override
     public String getTitle() {

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.onion.android.app.di.annotation.ViewModelKey;
 import com.onion.android.app.di.common.MineViewModelFactory;
+import com.onion.android.app.plex.vm.DetailVideModel;
 import com.onion.android.app.plex.vm.GenresViewModel;
 import com.onion.android.app.plex.vm.HomeViewModel;
 import com.onion.android.app.plex.vm.SearchViewModel;
@@ -33,6 +34,11 @@ public abstract class PlexViewModelModule {
     @IntoMap
     @ViewModelKey(GenresViewModel.class)
     abstract ViewModel bindGenresViewModel(GenresViewModel homeViewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(DetailVideModel.class)
+    abstract ViewModel bindDetailVideModel(DetailVideModel detailVideModel);
 
     @Binds
     @IntoMap

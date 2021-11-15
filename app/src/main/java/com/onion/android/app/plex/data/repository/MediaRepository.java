@@ -1,5 +1,7 @@
 package com.onion.android.app.plex.data.repository;
 
+import static com.onion.android.app.constants.PlexConstants.PURCHASE_KEY;
+
 import android.annotation.SuppressLint;
 
 import androidx.lifecycle.LiveData;
@@ -44,13 +46,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import hu.akarnokd.rxjava3.bridge.RxJavaBridge;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.Call;
 import timber.log.Timber;
-
-import static com.onion.android.app.constants.PlexConstants.PURCHASE_KEY;
 
 @Singleton
 public class MediaRepository {
@@ -554,32 +553,32 @@ public class MediaRepository {
 
     // Return Favorite Lists of Movies or Series
     public Flowable<List<Media>> getFavorites() {
-        return favoriteDao.getFavoriteMovies().as(RxJavaBridge.toV3Flowable());
+        return favoriteDao.getFavoriteMovies();
     }
 
 
     public Flowable<List<Stream>> getStreamFavorites() {
-        return streamListDao.getFavorite().as(RxJavaBridge.toV3Flowable());
+        return streamListDao.getFavorite();
     }
 
 
 
     // Return Download Lists of Movies or Series
     public Flowable<List<History>> getwatchHistory() {
-        return historyDao.getHistory().as(RxJavaBridge.toV3Flowable());
+        return historyDao.getHistory();
     }
 
 
     // Return Download Lists of Movies or Series
     public Flowable<List<History>> getHistoryByTmdb(int imdb) {
-        return historyDao.getHistoryByTmdb(imdb).as(RxJavaBridge.toV3Flowable());
+        return historyDao.getHistoryByTmdb(imdb);
     }
 
 
 
     // Return Download Lists of Movies or Series
     public Flowable<List<Download>> getDownloads() {
-        return downloadDao.getDownloadMovies().as(RxJavaBridge.toV3Flowable());
+        return downloadDao.getDownloadMovies();
     }
 
 

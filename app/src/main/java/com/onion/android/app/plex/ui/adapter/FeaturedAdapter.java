@@ -1,5 +1,7 @@
 package com.onion.android.app.plex.ui.adapter;
 
+import static com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions.withCrossFade;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -25,8 +27,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import static com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions.withCrossFade;
-
 public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.FeaturedViewHolder> {
 
     private List<Media> castList;
@@ -38,8 +38,7 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
     public FeaturedAdapter() {
     }
 
-    public void addFeatured(List<Media> castList, Context context,
-                            MediaRepository mediaRepository) {
+    public void addFeatured(List<Media> castList, Context context, MediaRepository mediaRepository) {
         this.castList = castList;
         this.context = context;
         this.mediaRepository = mediaRepository;

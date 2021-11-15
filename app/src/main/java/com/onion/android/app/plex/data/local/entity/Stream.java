@@ -41,7 +41,7 @@ public class Stream extends Media {
     @SerializedName("id")
     @Expose
     @ColumnInfo(name = "stream_id")
-    private String id;
+    public String id;
 
     @Override
     @NonNull
@@ -58,7 +58,7 @@ public class Stream extends Media {
     @SerializedName("tmdb_id")
     @ColumnInfo(name = "stream_tmdb")
     @Expose
-    private String tmdbId;
+    public String tmdbId;
 
 
     @Override

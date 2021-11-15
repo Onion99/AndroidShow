@@ -7,12 +7,12 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.RoomWarnings;
 
-
 import com.onion.android.app.plex.data.local.entity.Stream;
 
 import java.util.List;
 
-import io.reactivex.Flowable;
+import io.reactivex.rxjava3.core.Flowable;
+
 
 /**
  * Data Access Object that contains methods used for accessing the database.
