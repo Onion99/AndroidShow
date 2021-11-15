@@ -2,8 +2,6 @@ package com.onion.android
 
 import org.junit.Test
 
-import org.junit.Assert.*
-
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
@@ -11,7 +9,18 @@ import org.junit.Assert.*
  */
 class ExampleUnitTest {
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun addition_sort() {
+        val list = arrayListOf(1, 7, 2, 6, 3, 4)
+        // 遍历集合
+        for (index in list.indices) {
+            for (childIndex in index + 1 until list.size) {
+                // 前后交换判断
+                if (list[index] > list[childIndex]) {
+                    val temp = list[index]
+                    list[index] = list[childIndex]
+                    list[childIndex] = temp
+                }
+            }
+        }
     }
 }

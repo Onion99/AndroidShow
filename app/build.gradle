@@ -160,13 +160,11 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.1'
     implementation "androidx.paging:paging-runtime:2.1.2"
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.1'
-    // UI Widget
-    implementation 'me.relex:circleindicator:2.1.6'
-    // Reactive Programming
+    // Reactive Programming,异步编程
     implementation "io.reactivex.rxjava3:rxandroid:${versions.rxandroidVersion}"
     implementation "io.reactivex.rxjava3:rxjava:${versions.rxjavaVersion}"
 
-    // Dagger Core
+    // Dagger Core,依赖注入
     implementation "com.google.dagger:dagger:${versions.dagger}"
     // kotlin 和 java 混合开发的情况需同时声明一下, java - annotationProcessor, kotlin - kapt
     annotationProcessor "com.google.dagger:dagger-compiler:${versions.dagger}"
@@ -191,7 +189,7 @@ dependencies {
     implementation "androidx.room:room-rxjava3:$versions.roomVersion"
 
 
-    // hilt
+    // hilt,基于Dagger的依赖注入,现项目主用Dagger,所以这个暂时吃灰
     implementation "com.google.dagger:hilt-android:$versions.hiltCoreVersion"
     implementation "androidx.hilt:hilt-common:$versions.hiltVersion"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$versions.hiltVersion"
@@ -213,19 +211,16 @@ dependencies {
     implementation "com.squareup.moshi:moshi-kotlin:$versions.moshiVersion"
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$versions.moshiVersion"
 
-
-    // ui
+    // UI
     implementation "com.github.skydoves:transformationlayout:$versions.transformationLayout"
     implementation "com.github.bumptech.glide:glide:$versions.glideVersion"
     implementation "com.github.florent37:glidepalette:$versions.glidePaletteVersion"
     kapt "com.github.bumptech.glide:compiler:$versions.glideVersion"
     implementation "com.github.skydoves:rainbow:$versions.rainbowVersion"
     implementation "com.github.skydoves:baserecyclerviewadapter:$versions.baseAdapter"
-
-    // debugging
+    implementation 'me.relex:circleindicator:2.1.6'
+    // timber,日志打印库
     implementation "com.jakewharton.timber:timber:$versions.timberVersion"
-
-
     /**
      * NetCipher: Secured Networking for Android
      * https://dl.bintray.com/guardianproject/CipherKit/info/guardianproject/netcipher/netcipher/
@@ -241,14 +236,17 @@ dependencies {
     implementation "info.guardianproject.netcipher:netcipher:$versions.netcipherVersion"
     implementation "info.guardianproject.netcipher:netcipher-okhttp3:$versions.netcipherOkhttpVersion"
     implementation "info.guardianproject.netcipher:netcipher-webkit:$versions.netcipherWebViewVersion"
-
     // ExoPlayer
     implementation "com.google.android.exoplayer:exoplayer:$versions.exoplayerversion"
     implementation "com.google.android.exoplayer:extension-mediasession:$versions.exoplayerversion"
     // 投屏 ，使用公共用户界面在远程接收器设备上启用媒体显示和播放
     implementation "androidx.mediarouter:mediarouter:$versions.mediarouter"
+    // Anko,Kotlin的动态布局库
+    // api "org.jetbrains.anko:anko:$versions.anko_version"
+    // api "org.jetbrains.anko:anko-constraint-layout:$versions.anko_version"
 
-    // Anko
-    //api "org.jetbrains.anko:anko:$versions.anko_version"
-    //api "org.jetbrains.anko:anko-constraint-layout:$versions.anko_version"
+    // 测试相关
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
