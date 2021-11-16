@@ -12,23 +12,27 @@ import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import dp
 
 class ViewLoadingDotsBounce : LinearLayout {
 
     private lateinit var currentContext: Context
-    private var imgs = arrayOf<ImageView>()
-    private var layouts = arrayOf<LinearLayout>()
-    private var anims = arrayOf<ObjectAnimator>()
+    private var imgs = mutableListOf<ImageView>()
+    private var layouts = mutableListOf<LinearLayout>()
+    private var anims = mutableListOf<ObjectAnimator>()
 
     // 渐变背景
     private val circle = GradientDrawable()
     private val OBJECT_SIZE = 3
-    private val POST_DIV = 6
+    private val POST_DIV = 10
     private val DURATION = 500
 
 
     constructor(context: Context?) : super(context)
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
+    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
+        preInit()
+    }
+
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
         context,
         attrs,
@@ -38,8 +42,6 @@ class ViewLoadingDotsBounce : LinearLayout {
     private fun preInit() {
         orientation = LinearLayout.HORIZONTAL
         gravity = Gravity.CENTER
-        layoutParams =
-            LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
 
         var color = Color.GRAY
         val background = background
@@ -47,22 +49,23 @@ class ViewLoadingDotsBounce : LinearLayout {
             color = background.color
         }
 
+
         setBackgroundColor(Color.TRANSPARENT)
         removeAllViews()
 
         circle.shape = GradientDrawable.OVAL
         circle.setColor(color)
-        circle.setSize(200, 200)
+        circle.setSize(10.dp, 10.dp)
 
-        val layoutParams2 = LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT)
+        val layoutParams2 =
+            LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         layoutParams2.weight = 1f
 
-
-        for (index in 0..OBJECT_SIZE) {
-            layouts[index] = LinearLayout(context)
+        for (index in 0 until OBJECT_SIZE) {
+            layouts.add(LinearLayout(context))
             layouts[index].gravity = Gravity.CENTER
             layouts[index].layoutParams = layoutParams2
-            imgs[index] = ImageView(context)
+            imgs.add(ImageView(context))
             imgs[index].setBackgroundDrawable(circle)
             layouts[index].addView(imgs[index])
             addView(layouts[index])
@@ -73,19 +76,19 @@ class ViewLoadingDotsBounce : LinearLayout {
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
         super.onLayout(changed, l, t, r, b)
         if (hasLayout) return
-        val lp = LayoutParams(width / 5, width / 5)
-        for (index in 0..OBJECT_SIZE) {
+        val lp = LayoutParams(width / 5, width / 3)
+        for (index in 0 until OBJECT_SIZE) {
             layouts[index].layoutParams = lp
         }
-        for (index in 0..OBJECT_SIZE) {
+        for (index in 0 until OBJECT_SIZE) {
             imgs[index].translationY = (height / POST_DIV).toFloat()
             val y = PropertyValuesHolder.ofFloat(TRANSLATION_Y, (-height / POST_DIV).toFloat())
             val x = PropertyValuesHolder.ofFloat(TRANSLATION_X, 0f)
-            anims[index] = ObjectAnimator.ofPropertyValuesHolder(imgs[index], x, y)
+            anims.add(ObjectAnimator.ofPropertyValuesHolder(imgs[index], x, y))
             anims[index].repeatCount = -1
             anims[index].repeatMode = ValueAnimator.REVERSE
             anims[index].duration = DURATION.toLong()
-            anims[index].startDelay = (DURATION / 3 * index).toLong()
+            anims[index].startDelay = ((DURATION / 3) * index).toLong()
             anims[index].start()
         }
         hasLayout = true

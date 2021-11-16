@@ -10,6 +10,7 @@ import java.nio.charset.StandardCharsets;
  * Plex Application CONSTANTS.
  */
 public abstract class PlexConstants{
+
     public static final String AUTHORISATION_BEARER_STRING = decodeAuthorisationBearer();
     public static final String AUTHORISATION_BEARER = "ZWFzeXBsZXhfZXhhbXBsZV9hdXRob3Jpc2F0aW9uX2JlYXJlcg==";
     // this is not your laravel api , this key will be used to authorise all api calls inside your app ( this key must be the same as API_KEY value in your .env file otherwise you will get
@@ -200,12 +201,9 @@ public abstract class PlexConstants{
     public static final String CODE = "code";
 
 
-    // TV-SERIES
+    // TV
     public static final String SPECIALS = "Specials";
-    public static final String SEASONS = "Seasons: ";
-    public static final int UNITY_ADS_BANNER_WIDTH = 320;
-    public static final int UNITY_ADS_BANNER_HEIGHT = 50;
-
+    public static final String SEASONS = "剧集: ";
 
     // Player Constants
     public static final int CUSTOM_SEEK_CONTROL_STATE = 2; // Every time long press left/right will enter this state

@@ -1,9 +1,11 @@
 package com.onion.android.app.plex.ui.adapter;
 
 import static com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions.withCrossFade;
+import static com.onion.android.app.plex.ui.MediaDetailsActivityKt.ARG_MOVIE;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +20,7 @@ import com.onion.android.R;
 import com.onion.android.app.plex.data.local.entity.Media;
 import com.onion.android.app.plex.data.model.genres.Genre;
 import com.onion.android.app.plex.data.repository.MediaRepository;
+import com.onion.android.app.plex.ui.MediaDetailsActivity;
 import com.onion.android.app.plex.ui.PlexMainActivity;
 import com.onion.android.app.utils.GlideApp;
 import com.onion.android.app.utils.UITools;
@@ -33,6 +36,7 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
     private Context context;
     private MediaRepository mediaRepository;
     protected SimpleExoPlayer mMoviePlayer;
+    private FeaturedViewHolder viewHolder;
 
     @Inject
     public FeaturedAdapter() {
@@ -49,11 +53,18 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
     @Override
     public FeaturedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         PlexItemFeaturedBinding binding = PlexItemFeaturedBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        binding.rootLayout.setOnClickListener(v -> {
+            if (viewHolder.getLayoutPosition() == RecyclerView.NO_POSITION) return;
+            Intent intent = new Intent(context, MediaDetailsActivity.class);
+            intent.putExtra(ARG_MOVIE, castList.get(viewHolder.getLayoutPosition()));
+            context.startActivity(intent);
+        });
         return new FeaturedViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull FeaturedViewHolder holder, int position) {
+        viewHolder = holder;
         holder.onBind(position);
     }
 
@@ -74,6 +85,7 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
             this.binding = binding;
         }
 
+
         @SuppressLint({"SetTextI18n", "UseCompatLoadingForDrawables"})
         void onBind(final int position) {
             final Media media = castList.get(position);
@@ -83,10 +95,6 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
                 for (Genre genre : media.getGenres()) {
                     binding.mgenres.setText(genre.getName());
                 }
-                binding.infoTrailer.setOnClickListener(v -> {
-                });
-                binding.rootLayout.setOnClickListener(v -> {
-                });
                 binding.moviePremuim.setVisibility(media.getPremuim() == 1 ? View.VISIBLE : View.GONE);
             } else {
                 onLoadMovies(media);
@@ -110,13 +118,10 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
                 binding.PlayButtonIcon.setText("Lecture");
             }
             binding.moviePremuim.setVisibility(media.getPremuim() == 1? View.VISIBLE:View.GONE);
-            binding.infoTrailer.setOnClickListener(v -> {});
             binding.movietitle.setText(media.getTitle());
             for (Genre genre : media.getGenres()) {
                 binding.mgenres.setText(genre.getName());
             }
-            binding.rootLayout.setOnClickListener(view -> {});
-            binding.PlayButtonIcon.setOnClickListener(view -> {});
         }
     }
 

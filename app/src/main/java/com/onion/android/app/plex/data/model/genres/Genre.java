@@ -11,10 +11,10 @@ import com.google.gson.annotations.SerializedName;
 public class Genre implements Parcelable {
 
     @SerializedName("id")
-    private int id;
+    public int id;
 
     @SerializedName("name")
-    private String name;
+    public String name;
 
     public Genre() {
     }

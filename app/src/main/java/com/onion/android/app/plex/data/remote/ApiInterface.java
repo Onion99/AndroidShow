@@ -392,10 +392,10 @@ public interface ApiInterface {
     @GET("categories/streaming/show/{id}/{code}")
     Call<GenresData> getStreamByIdCall(@Path("id") String genreId,@Path("code") String code, @Query("page") Integer page);
 
+
     // Serie Details By ID  API Call
     @GET("series/show/{tmdb}/{code}")
     Observable<Media> getSerieById(@Path("tmdb") String serieTmdb, @Path("code") String code);
-
 
 
     @GET("livetv/show/{id}/{code}")

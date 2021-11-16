@@ -1,5 +1,15 @@
 package com.onion.android.app.plex.data.remote;
 
+import static com.onion.android.app.constants.PlexConstants.ACCEPT;
+import static com.onion.android.app.constants.PlexConstants.APPLICATION_JSON;
+import static com.onion.android.app.constants.PlexConstants.AUTHORISATION_BEARER_STRING;
+import static com.onion.android.app.constants.PlexConstants.CACHE_CONTROL;
+import static com.onion.android.app.constants.PlexConstants.IMDB_BASE_URL;
+import static com.onion.android.app.constants.PlexConstants.PREFS2;
+import static com.onion.android.app.constants.PlexConstants.PURCHASE_KEY;
+import static com.onion.android.app.constants.PlexConstants.SERVER_BASE_URL;
+import static com.onion.android.app.constants.PlexConstants.SERVER_OPENSUBS_URL;
+
 import android.util.Base64;
 
 import androidx.annotation.NonNull;
@@ -30,16 +40,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import timber.log.Timber;
 
-import static com.onion.android.app.constants.PlexConstants.ACCEPT;
-import static com.onion.android.app.constants.PlexConstants.APPLICATION_JSON;
-import static com.onion.android.app.constants.PlexConstants.AUTHORISATION_BEARER_STRING;
-import static com.onion.android.app.constants.PlexConstants.CACHE_CONTROL;
-import static com.onion.android.app.constants.PlexConstants.IMDB_BASE_URL;
-import static com.onion.android.app.constants.PlexConstants.PREFS2;
-import static com.onion.android.app.constants.PlexConstants.PURCHASE_KEY;
-import static com.onion.android.app.constants.PlexConstants.SERVER_BASE_URL;
-import static com.onion.android.app.constants.PlexConstants.SERVER_OPENSUBS_URL;
-
 
 /**
  * A class that defines how Retrofit 2 & OkHttp should communicate with an API.
@@ -50,9 +50,8 @@ import static com.onion.android.app.constants.PlexConstants.SERVER_OPENSUBS_URL;
 @Singleton
 public class ServiceGenerator {
 
-    // Todo ： 叉，原来OkHttp缓存报错是这里的原因，缓存目录有问题
-    private static final File httpCacheDirectory
-            = new File(App.getContext().getCacheDir(), "responses");
+    // 叉，原来OkHttp缓存报错是这里的原因，缓存目录有问题
+    private static final File httpCacheDirectory = new File(App.getContext().getCacheDir(), "responses");
     private static final int CACHE_SIZE = 30 * 1024 * 1024; // 10 MB
     // 因为kotlin的Cache 类，所以识别不了,但可以正常調用
     private static final Cache cache = new Cache(httpCacheDirectory, CACHE_SIZE);
@@ -72,8 +71,7 @@ public class ServiceGenerator {
     private static OkHttpClient buildClient() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder().addInterceptor(chain -> {
             Request request = chain.request();
-            Request.Builder addHeader = request.newBuilder()
-                    .addHeader(ACCEPT, APPLICATION_JSON);
+            Request.Builder addHeader = request.newBuilder().addHeader(ACCEPT, APPLICATION_JSON);
             request = addHeader.build();
             return chain.proceed(request);
         });
@@ -136,7 +134,6 @@ public class ServiceGenerator {
             httpClient.addInterceptor(logging)
                     .addNetworkInterceptor(chain -> {
                         Request request = chain.request();
-
                         Request.Builder newBuilder = request.newBuilder();
                         newBuilder.addHeader(ACCEPT, APPLICATION_JSON);
                         newBuilder.addHeader("Authorization", "Bearer "+AUTHORISATION_BEARER_STRING);
@@ -146,7 +143,6 @@ public class ServiceGenerator {
             builder.client(httpClient.build());
             retrofit = builder.build();
         }
-
         return retrofit.create(serviceClass);
     }
 

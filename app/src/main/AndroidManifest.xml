@@ -17,7 +17,7 @@
         android:usesCleartextTraffic="true">
         <!-- parentActivityName:为了左上角给子Activity加一个返回按钮-->
         <activity
-            android:name=".app.plex.ui.SerieDetailsActivity"
+            android:name=".app.plex.ui.MediaDetailsActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:exported="true"
             android:launchMode="singleTop"

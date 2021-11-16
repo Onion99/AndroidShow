@@ -4,9 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.onion.android.app.plex.data.local.entity.Media
 import com.onion.android.app.plex.data.repository.MediaRepository
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -24,17 +22,19 @@ class DetailVideModel : ViewModel {
     }
 
     fun getMediaDetail(tmdb: String) {
-        compositeDisposable.add(
+        mediaRepository.getSerie(tmdb)
+
+/*        compositeDisposable.add(
             mediaRepository.getSerie(tmdb)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .cache()
                 .subscribe(movieDetailMutableLiveData::postValue, this::handleError)
-        )
+        )*/
     }
 
     // Handle Errors
     private fun handleError(e: Throwable) {
-        Timber.i("In onError()%s", e.message)
+        Timber.e("In onError()%s", e.message)
     }
 }

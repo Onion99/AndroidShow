@@ -38,6 +38,7 @@
     <string name="movies">电影</string>
     <string name="series">电视剧</string>
     <string name="animes">动漫</string>
+    <string name="views">观看数: </string>
     <string name="seasons">剧集</string>
     <string name="genres_list_is_empty">Genres List is empty</string>
     <string name="please_try_another_genre">Please try another genre.</string>

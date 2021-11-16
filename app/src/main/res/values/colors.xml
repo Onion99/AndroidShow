@@ -75,6 +75,7 @@
     <color name="md_blue_200">#0091EA</color>
 
     <!-- Plex -->
+    <color name="app_background">#232325</color>
     <color name="main_color">#00b4ca</color>
     <color name="main_orange">#fff9930d</color>
     <color name="primary_dark">#0288D1</color>
