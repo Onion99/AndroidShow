@@ -36,7 +36,6 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
     private Context context;
     private MediaRepository mediaRepository;
     protected SimpleExoPlayer mMoviePlayer;
-    private FeaturedViewHolder viewHolder;
 
     @Inject
     public FeaturedAdapter() {
@@ -53,18 +52,11 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
     @Override
     public FeaturedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         PlexItemFeaturedBinding binding = PlexItemFeaturedBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        binding.rootLayout.setOnClickListener(v -> {
-            if (viewHolder.getLayoutPosition() == RecyclerView.NO_POSITION) return;
-            Intent intent = new Intent(context, MediaDetailsActivity.class);
-            intent.putExtra(ARG_MOVIE, castList.get(viewHolder.getLayoutPosition()));
-            context.startActivity(intent);
-        });
         return new FeaturedViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull FeaturedViewHolder holder, int position) {
-        viewHolder = holder;
         holder.onBind(position);
     }
 
@@ -99,6 +91,11 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
             } else {
                 onLoadMovies(media);
             }
+            binding.rootLayout.setOnClickListener(v -> {
+                Intent intent = new Intent(context, MediaDetailsActivity.class);
+                intent.putExtra(ARG_MOVIE, media);
+                context.startActivity(intent);
+            });
             GlideApp.with(context).asBitmap().load(media.getPosterPath())
                     .fitCenter()
                     .placeholder(new ColorDrawable(UITools.getCoolColor()))

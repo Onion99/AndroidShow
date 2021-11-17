@@ -38,8 +38,16 @@
     <string name="movies">电影</string>
     <string name="series">电视剧</string>
     <string name="animes">动漫</string>
-    <string name="views">观看数: </string>
+    <string name="views">观看人数: </string>
     <string name="seasons">剧集</string>
+    <string name="movie_original_label">电影标题</string>
+    <string name="movie_release_label">2019</string>
+    <string name="movie_overview_label">概述</string>
+    <string name="movie_overview_text">具体描述</string>
+    <string name="movie_cast_label">演员表</string>
+    <string name="relateds">相关电影</string>
+    <string name="movie_time">41 min</string>
+    <string name="no_relateds_movies_found">未找到相关电影</string>
     <string name="genres_list_is_empty">Genres List is empty</string>
     <string name="please_try_another_genre">Please try another genre.</string>
     <string name="search_movies_series">Search Movies, Series,Animes,Streaming…</string>

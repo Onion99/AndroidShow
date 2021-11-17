@@ -367,12 +367,12 @@ public interface ApiInterface {
 
 
     // Movie Details By ID  API Call
-    @GET("movies/show/{tmdb}/{code}")
+    @GET("media/detail/{tmdb}/{code}")
     Observable<Media> getMovieByTmdb(@Path("tmdb") String tmdb,@Path("code") String code);
 
 
     // Movie Details By ID  API Call
-    @GET("movies/show/{tmdb}/{code}")
+    @GET("media/show/{tmdb}/{code}")
     Call<Media> getMoviebyId (@Path("tmdb") String tmdb,@Path("code") String code);
 
 
@@ -442,6 +442,7 @@ public interface ApiInterface {
     Observable<MovieCreditsResponse> getSerieCredits(@Path("id") int movieId, @Query("api_key") String apiKey);
 
 
+
     // Popular Series API Call
     @GET("series/popular/{code}")
     Observable<MovieResponse> getSeriesPopular(@Path("code") String code);
@@ -457,7 +458,7 @@ public interface ApiInterface {
     Observable<MovieCreditsResponse> getMovieCredits(@Path("id") int movieId, @Query("api_key") String apiKey);
 
     // Related Movies API Call
-    @GET("movies/relateds/{id}/{code}")
+    @GET("media/relateds/{id}/{code}")
     Observable<MovieResponse> getRelatedsMovies(@Path("id") int movieId,@Path("code") String code);
 
     // Suggested Movies API Call

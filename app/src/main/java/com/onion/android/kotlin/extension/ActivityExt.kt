@@ -4,7 +4,10 @@ import android.app.Activity
 import android.graphics.Color
 import android.view.View
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.google.android.exoplayer2.util.Util
+import com.google.android.material.appbar.AppBarLayout
 
 ///////////////////////////////////////////////////////////////////////////
 // 状态栏透明
@@ -38,4 +41,12 @@ fun Activity.hideSystemBar() {
     }
     decorView.systemUiVisibility = uiState
 
+}
+
+fun AppCompatActivity.loadToolbar(toolbar: Toolbar, appBarLayout: AppBarLayout) {
+    setSupportActionBar(toolbar)
+    toolbar.setTitleTextColor(Color.WHITE)
+    toolbar.title = null
+    appBarLayout.bringToFront()
+    supportActionBar?.setDisplayShowTitleEnabled(false)
 }

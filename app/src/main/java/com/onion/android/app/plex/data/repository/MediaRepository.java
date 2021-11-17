@@ -191,7 +191,7 @@ public class MediaRepository {
 
     // Return Serie By Id
     public Observable<Media> getSerie(String serieTmdb) {
-        return requestImdbApi.getSerieById(serieTmdb, settingsManager.getSettings().getTmdbApiKey());
+        return requestMainApi.getSerieById(serieTmdb, settingsManager.getSettings().getcode());
     }
 
 

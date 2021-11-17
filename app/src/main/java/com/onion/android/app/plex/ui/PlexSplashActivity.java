@@ -1,5 +1,7 @@
 package com.onion.android.app.plex.ui;
 
+import static com.onion.android.app.constants.PlexConstants.SERVER_BASE_URL;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -26,8 +28,6 @@ import javax.inject.Inject;
 import info.guardianproject.netcipher.client.StrongBuilder;
 import info.guardianproject.netcipher.client.StrongOkHttpClientBuilder;
 import okhttp3.OkHttpClient;
-
-import static com.onion.android.app.constants.PlexConstants.SERVER_BASE_URL;
 
 public class PlexSplashActivity extends PlexBaseActivity<PlexActivitySplashBinding> implements StrongBuilder.Callback<OkHttpClient> {
 
@@ -63,11 +63,11 @@ public class PlexSplashActivity extends PlexBaseActivity<PlexActivitySplashBindi
         // 监听配置信息获取
         settingsViewModel.settingsMutableLiveData.observe(this, settings -> {
             settingsManager.saveSettings(settings);
-            Tools.postDelayed(() -> {
-                startActivity(new Intent(this, PlexMainActivity.class));
-                finish();
-            }, 1900);
         });
+        Tools.postDelayed(() -> {
+            startActivity(new Intent(this, PlexMainActivity.class));
+            finish();
+        }, 1900);
     }
 
 
