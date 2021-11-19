@@ -2,10 +2,14 @@ package com.onion.android.app.plex.ui
 
 import android.graphics.Color
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.onion.android.R
 import com.onion.android.app.base.BaseActivity
 import com.onion.android.app.plex.data.local.entity.Media
+import com.onion.android.app.plex.ui.adapter.RelatesAdapter
+import com.onion.android.app.plex.ui.adapter.decoration.SpacingItemDecoration
 import com.onion.android.app.plex.vm.DetailVideModel
+import com.onion.android.app.view.dp
 import com.onion.android.databinding.ActivityMovieDetailsActivityBinding
 import com.onion.android.kotlin.extension.fadeOut
 import com.onion.android.kotlin.extension.loadToolbar
@@ -80,33 +84,25 @@ class MediaDetailsActivity :
                 }
                 binding.toolbar.setBackgroundColor(color)
             }
+            detailVideModel.getRelatedMovies(Integer.parseInt(it.id))
             checkLoad()
         }
 
         detailVideModel.movieRelatesMutableLiveData.observe(this) { relateds ->
-//            mRelatedsAdapter = RelatedsAdapter()
-//            mRelatedsAdapter.addToContent(relateds.getRelateds())
-//            // Relateds Movies RecycleView
-//            binding.rvMylike.adapter = mRelatedsAdapter
-//            binding.rvMylike.setHasFixedSize(true)
-//            binding.rvMylike.isNestedScrollingEnabled = false
-//            binding.rvMylike.layoutManager = LinearLayoutManager(
-//                this@MovieDetailsActivity,
-//                LinearLayoutManager.HORIZONTAL,
-//                false
-//            )
-//            binding.rvMylike.addItemDecoration(
-//                SpacingItemDecoration(
-//                    1,
-//                    Tools.dpToPx(this, 0),
-//                    true
-//                )
-//            )
-//            if (mRelatedsAdapter.getItemCount() === 0) {
-//                binding.relatedNotFound.setVisibility(View.VISIBLE)
-//            } else {
-//                binding.relatedNotFound.setVisibility(View.GONE)
-//            }
+            if (relateds.relateds.isNullOrEmpty()) {
+                binding.tvLike.visibility = View.VISIBLE
+                return@observe
+            }
+            val adapter = RelatesAdapter()
+            adapter.submitList(relateds.relateds)
+            binding.rvMylike.adapter = adapter
+            binding.rvMylike.setHasFixedSize(true)
+            binding.rvMylike.isNestedScrollingEnabled = false
+            binding.rvMylike.layoutManager =
+                LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            binding.rvMylike.addItemDecoration(
+                SpacingItemDecoration(1, 2.dp.toInt(), true)
+            )
         }
     }
 

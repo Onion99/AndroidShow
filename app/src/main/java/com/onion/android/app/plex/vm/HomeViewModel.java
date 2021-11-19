@@ -17,17 +17,21 @@ public class HomeViewModel extends ViewModel {
     private final MediaRepository mediaRepository;
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     public final MutableLiveData<MovieResponse> featuredMoviesMutableLiveData = new MutableLiveData<>();
+    public final MutableLiveData<MovieResponse> latestStreamingMutableLiveData = new MutableLiveData<>();
+    public final MutableLiveData<MovieResponse> movieRecommendedMutableLiveData = new MutableLiveData<>();
+    public final MutableLiveData<MovieResponse> movieTrendingMutableLiveData = new MutableLiveData<>();
+    public final MutableLiveData<MovieResponse> movieLatestMutableLiveData = new MutableLiveData<>();
     // State
     public boolean mFeaturedLoaded;
     public boolean mScrollLoaded;
 
     @Inject
-    HomeViewModel(MediaRepository mediaRepository){
+    HomeViewModel(MediaRepository mediaRepository) {
         this.mediaRepository = mediaRepository;
     }
 
-    public void initData(){
-        // get feature data
+    public void initData() {
+        // 获取热门影视
         compositeDisposable.add(mediaRepository.getFeatured()
                 // mediaRepository.getFeature 所在的线程
                 .subscribeOn(Schedulers.io())
@@ -36,8 +40,30 @@ public class HomeViewModel extends ViewModel {
                 // 是否缓存
                 .cache()
                 // 执行完毕后，通知谁
-                .subscribe(featuredMoviesMutableLiveData::postValue,this::handleError)
+                .subscribe(featuredMoviesMutableLiveData::postValue, this::handleError)
         );
+        // 获取最新直播频道
+        compositeDisposable.add(mediaRepository.getLatestStreaming()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .cache()
+                .subscribe(latestStreamingMutableLiveData::postValue, this::handleError)
+        );
+        compositeDisposable.add(mediaRepository.getRecommended()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .cache()
+                .subscribe(movieRecommendedMutableLiveData::postValue, this::handleError)
+        );
+
+
+        compositeDisposable.add(mediaRepository.getTrending()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .cache()
+                .subscribe(movieTrendingMutableLiveData::postValue, this::handleError)
+        );
+
     }
     // HandleError
     private void handleError(Throwable e) {

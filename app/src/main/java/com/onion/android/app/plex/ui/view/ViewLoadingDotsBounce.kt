@@ -12,7 +12,7 @@ import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
-import dp
+import com.onion.android.app.view.dp
 
 class ViewLoadingDotsBounce : LinearLayout {
 
@@ -55,7 +55,7 @@ class ViewLoadingDotsBounce : LinearLayout {
 
         circle.shape = GradientDrawable.OVAL
         circle.setColor(color)
-        circle.setSize(10.dp, 10.dp)
+        circle.setSize(10.dp.toInt(), 10.dp.toInt())
 
         val layoutParams2 =
             LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)

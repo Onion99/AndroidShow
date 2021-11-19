@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    <!-- 右侧 -->
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
@@ -11,6 +11,7 @@
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/grey_1000"
             android:orientation="vertical">
             <!-- AppBarLayout -->
             <com.google.android.material.appbar.AppBarLayout
@@ -81,6 +82,53 @@
                                 app:ci_height="2dp"
                                 app:ci_margin="3dp"
                                 app:ci_width="8dp" />
+                            <!-- 最新影片 -->
+                            <LinearLayout
+                                android:id="@+id/linear_latest_channels"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:id="@+id/linear_latest_channels_image"
+                                    android:layout_width="5dp"
+                                    android:layout_height="@dimen/pixel_20dp"
+                                    android:background="@drawable/row"
+                                    android:backgroundTint="@color/golden_gate"
+                                    android:contentDescription="@string/image" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_weight="1"
+                                    android:text="@string/latest_channels"
+                                    android:textAllCaps="true"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                                    android:textColor="@color/grey_11"
+                                    android:textSize="12sp"
+                                    app:fontFamily="sans-serif-black" />
+
+                                <ImageView
+                                    android:id="@+id/sreaming_all"
+                                    android:layout_width="16dp"
+                                    android:layout_height="16dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:background="@drawable/ic_apps"
+                                    android:backgroundTint="@color/main_color"
+                                    android:gravity="center"
+                                    android:minWidth="0dp"
+                                    android:padding="5dp" />
+                            </LinearLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rv_latest_streaming"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/pixel_15dp"
+                                android:layout_marginBottom="@dimen/spacing_large"
+                                android:nestedScrollingEnabled="false" />
                         </LinearLayout>
                     </androidx.core.widget.NestedScrollView>
                 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

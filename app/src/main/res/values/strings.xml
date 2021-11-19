@@ -45,7 +45,8 @@
     <string name="movie_overview_label">概述</string>
     <string name="movie_overview_text">具体描述</string>
     <string name="movie_cast_label">演员表</string>
-    <string name="relateds">相关电影</string>
+    <string name="relateds">相关推荐</string>
+    <string name="latest_channels">最新影片</string>
     <string name="movie_time">41 min</string>
     <string name="no_relateds_movies_found">未找到相关电影</string>
     <string name="genres_list_is_empty">Genres List is empty</string>

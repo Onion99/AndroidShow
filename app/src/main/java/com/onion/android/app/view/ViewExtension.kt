@@ -3,8 +3,8 @@
 
 package com.onion.android.app.view
 
-import android.content.res.Resources
 import android.animation.ValueAnimator
+import android.content.res.Resources
 import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.util.TypedValue

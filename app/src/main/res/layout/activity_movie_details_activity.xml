@@ -57,6 +57,17 @@
             android:fitsSystemWindows="true"
             android:visibility="visible">
 
+            <!-- 低景 -->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="600dp"
+                android:alpha="0.3"
+                android:background="@drawable/fragment_content_detail_top"
+                android:contentDescription="@string/image"
+                android:fitsSystemWindows="true"
+                android:scaleType="centerCrop" />
+
+            <!-- 海报 -->
             <ImageView
                 android:id="@+id/image_movie_poster"
                 android:layout_width="match_parent"
@@ -65,6 +76,18 @@
                 android:contentDescription="@string/image"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop" />
+
+            <!-- 前景 -->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:background="@drawable/fragment_content_detail_overlay"
+                android:contentDescription="@string/image"
+                android:fitsSystemWindows="true"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.5" />
+
 
             <androidx.core.widget.NestedScrollView
                 android:id="@+id/item_detail_container"
@@ -386,7 +409,7 @@
                     </LinearLayout>
 
                     <!-- 演员列表 -->
-                    <TextView
+                    <!--<TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
@@ -402,13 +425,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/pixel_10dp"
-                        android:nestedScrollingEnabled="false" />
+                        android:nestedScrollingEnabled="false" />-->
 
                     <!-- 电影推荐列表 -->
                     <TextView
+                        android:id="@+id/tv_like"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_marginTop="@dimen/pixel_10dp"
+                        android:layout_marginTop="30dp"
                         android:layout_weight="1"
                         android:text="@string/relateds"
                         android:textAllCaps="true"

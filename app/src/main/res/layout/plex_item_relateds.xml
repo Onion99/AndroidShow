@@ -4,7 +4,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="150dp"
         android:layout_height="223dp"
-        android:innerRadius="0dp"
+        android:innerRadius="10dp"
         android:shape="ring"
         android:thicknessRatio="1.9">
 
