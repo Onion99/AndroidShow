@@ -234,7 +234,7 @@ public interface ApiInterface {
     Call<GenresData> getAllAnimesCall(@Path("code") String code,@Query("page") Integer page);
 
     // Latest Movies API Call
-    @GET("movies/latest/{code}")
+    @GET("media/latestcontent/{code}")
     Observable<MovieResponse> getMovieLatest(@Path("code") String code);
 
     // Featured Movies API Call
@@ -242,31 +242,31 @@ public interface ApiInterface {
     Observable<MovieResponse> getMovieFeatured(@Path("code") String code);
 
     // Recommended Movies API Call
-    @GET("movies/recommended/{code}")
+    @GET("media/recommendedcontent/{code}")
     Observable<MovieResponse> getRecommended(@Path("code") String code);
 
 
     // Recommended Movies API Call
-    @GET("movies/choosed/{code}")
+    @GET("media/choosedcontent/{code}")
     Observable<MovieResponse> getChoosed(@Path("code") String code);
 
     // Trending Movies  API Call
-    @GET("movies/trending/{code}")
+    @GET("media/trendingcontent/{code}")
     Observable<MovieResponse> getTrending(@Path("code") String code);
 
 
     // This week Movies API Call
-    @GET("movies/thisweek/{code}")
+    @GET("media/thisweekcontent/{code}")
     Observable<MovieResponse> getThisWeekMovies(@Path("code") String code);
 
 
     // Popular Movies API Call
-    @GET("movies/popular/{code}")
+    @GET("media/popularcontent/{code}")
     Observable<MovieResponse> getPopularMovies(@Path("code") String code);
 
 
     // This week Movies API Call
-    @GET("movies/all/{code}")
+    @GET("media/allcontent/{code}")
     Observable<GenresData> getAllMovies(@Path("code") String code);
 
     // Return All Genres  API Call
@@ -468,7 +468,7 @@ public interface ApiInterface {
 
 
     // Suggested Movies API Call
-    @GET("movies/random/{code}")
+    @GET("media/random/{code}")
     Observable <MovieResponse> getMoviRandom(@Path("code") String code);
 
     // Search API Call

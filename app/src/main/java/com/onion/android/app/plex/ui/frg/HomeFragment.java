@@ -6,12 +6,14 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.onion.android.R;
 import com.onion.android.app.base.PlexBaseFragment;
 import com.onion.android.app.plex.data.repository.MediaRepository;
 import com.onion.android.app.plex.ui.adapter.FeaturedAdapter;
 import com.onion.android.app.plex.ui.adapter.LatestStreamAdapter;
+import com.onion.android.app.plex.ui.adapter.MovieAdapter;
 import com.onion.android.app.plex.ui.adapter.decoration.SpacingItemDecoration;
 import com.onion.android.app.plex.vm.HomeViewModel;
 import com.onion.android.app.utils.Tools;
@@ -38,8 +40,13 @@ public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding> {
     public void initView() {
         if (Tools.checkIfHasNetwork(requireContext())) {
             viewModel.initData();
-            onLoadFeaturedMovies();
-            onLoadLatestChannel();
+            loadFeaturedMovies();
+            loadLatestChannel();
+            loadRecommendMovies();
+            loadTrendingMovies();
+            loadReleaseMovies();
+            loadPopularSeries();
+            loadPopularMovies();
         }
     }
 
@@ -49,16 +56,9 @@ public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding> {
     }
 
     // 获取热门影视
-    private void onLoadFeaturedMovies() {
-        // 当Item的高度如是固定的，设置这个属性为true可以提高性能，尤其是当RecyclerView有条目插入、删除时性能提升更明显。RecyclerView在条目数量改变，会重新测量、布局各个item，如果设置了setHasFixedSize(true)，由于item的宽高都是固定的，adapter的内容改变时，RecyclerView不会整个布局都重绘
-        mBinding.rvFeatured.setHasFixedSize(true);
-        // 启用或禁用此视图的嵌套滚动。
-        mBinding.rvFeatured.setNestedScrollingEnabled(false);
-        mBinding.rvFeatured.setLayoutManager(new LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false));
-        mBinding.rvFeatured.addItemDecoration(new SpacingItemDecoration(1, Tools.dpToPx(requireActivity(), 0), true));
+    private void loadFeaturedMovies() {
         mBinding.rvFeatured.setAdapter(mFeaturedAdapter);
-        // 设置缓存大小
-        mBinding.rvFeatured.setItemViewCacheSize(8);
+        initCommonRv(mBinding.rvFeatured);
         // 使RecyclerView像ViewPager一样的效果，一次只能滑一页，而且居中显示
         PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
         pagerSnapHelper.attachToRecyclerView(mBinding.rvFeatured);
@@ -75,34 +75,90 @@ public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding> {
         });
     }
 
-    private void onLoadLatestChannel() {
-        viewModel.latestStreamingMutableLiveData.observe(getViewLifecycleOwner(), latestStream -> {
-            if (latestStream.getStreaming().isEmpty()) {
-                mBinding.linearLatestChannels.setVisibility(View.GONE);
+    private void loadLatestChannel() {
+        // 获取代表Fragment's View生命周期的LifecycleOwner 。 在大多数情况下，这反映了 Fragment 本身的生命周期，但在detached Fragment 的情况下，Fragment 的生命周期可能比 View 本身的生命周期长得多
+        viewModel.latestStreamingMutableLiveData.observe(getViewLifecycleOwner(), movies -> {
+            if (movies.getStreaming().isEmpty()) {
+                mBinding.llLatestChannels.setVisibility(View.GONE);
             }
             LatestStreamAdapter adapter = new LatestStreamAdapter();
             mBinding.rvLatestStreaming.setAdapter(adapter);
-            mBinding.rvLatestStreaming.setLayoutManager(new LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false));
-            mBinding.rvLatestStreaming.addItemDecoration(new SpacingItemDecoration(1, Tools.dpToPx(requireActivity(), 0), true));
-            mBinding.rvLatestStreaming.setHasFixedSize(true);
-            mBinding.rvLatestStreaming.setItemViewCacheSize(4);
-            adapter.submitList(latestStream.getStreaming());
+            initCommonRv(mBinding.rvLatestStreaming);
+            adapter.submitList(movies.getStreaming());
         });
     }
 
-    private void onLoadRecommend() {
-        viewModel.latestStreamingMutableLiveData.observe(getViewLifecycleOwner(), latestStream -> {
-            if (latestStream.getStreaming().isEmpty()) {
-                mBinding.linearLatestChannels.setVisibility(View.GONE);
+    private void loadRecommendMovies() {
+        viewModel.recommendedMovieMutableLiveData.observe(getViewLifecycleOwner(), movies -> {
+            if (movies.getRecommended().isEmpty()) {
+                mBinding.llRecommendMovies.setVisibility(View.GONE);
             }
-            LatestStreamAdapter adapter = new LatestStreamAdapter();
-            mBinding.rvLatestStreaming.setAdapter(adapter);
-            mBinding.rvLatestStreaming.setLayoutManager(new LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false));
-            mBinding.rvLatestStreaming.addItemDecoration(new SpacingItemDecoration(1, Tools.dpToPx(requireActivity(), 0), true));
-            mBinding.rvLatestStreaming.setHasFixedSize(true);
-            mBinding.rvLatestStreaming.setItemViewCacheSize(4);
-            adapter.submitList(latestStream.getStreaming());
+            MovieAdapter adapter = new MovieAdapter();
+            mBinding.rvRecommendMovies.setAdapter(adapter);
+            initCommonRv(mBinding.rvRecommendMovies);
+            adapter.submitList(movies.getRecommended());
         });
+    }
+
+    private void loadTrendingMovies() {
+        viewModel.trendingMovieMutableLiveData.observe(getViewLifecycleOwner(), movies -> {
+            if (movies.getTrending().isEmpty()) {
+                mBinding.llTrendingMovies.setVisibility(View.GONE);
+            }
+            MovieAdapter adapter = new MovieAdapter();
+            mBinding.rvTrendingMovies.setAdapter(adapter);
+            initCommonRv(mBinding.rvTrendingMovies);
+            adapter.submitList(movies.getTrending());
+        });
+    }
+
+    private void loadReleaseMovies() {
+        viewModel.movieReleaseMutableLiveData.observe(getViewLifecycleOwner(), movies -> {
+            if (movies.getLatest().isEmpty()) {
+                mBinding.llReleaseMovies.setVisibility(View.GONE);
+            }
+            MovieAdapter adapter = new MovieAdapter();
+            mBinding.rvReleaseMovies.setAdapter(adapter);
+            initCommonRv(mBinding.rvReleaseMovies);
+            adapter.submitList(movies.getLatest());
+        });
+    }
+
+    private void loadPopularSeries() {
+        viewModel.popularSeriesMutableLiveData.observe(getViewLifecycleOwner(), movies -> {
+            if (movies.getPopularSeries() == null || movies.getPopularSeries().isEmpty()) {
+                mBinding.llPopularSeries.setVisibility(View.GONE);
+            }
+            MovieAdapter adapter = new MovieAdapter();
+            mBinding.rvPopularSeries.setAdapter(adapter);
+            initCommonRv(mBinding.rvPopularSeries);
+            adapter.submitList(movies.getPopularSeries());
+        });
+    }
+
+
+    private void loadPopularMovies() {
+        viewModel.popularMoviesMutableLiveData.observe(getViewLifecycleOwner(), movies -> {
+            if (movies.getPopularMovies().isEmpty()) {
+                mBinding.llPopularMovies.setVisibility(View.GONE);
+            }
+            MovieAdapter adapter = new MovieAdapter();
+            mBinding.rvPopularMovies.setAdapter(adapter);
+            initCommonRv(mBinding.rvPopularMovies);
+            adapter.submitList(movies.getPopularMovies());
+        });
+    }
+
+
+    private void initCommonRv(RecyclerView recyclerView) {
+        // 当Item的高度如是固定的，设置这个属性为true可以提高性能，尤其是当RecyclerView有条目插入、删除时性能提升更明显。RecyclerView在条目数量改变，会重新测量、布局各个item，如果设置了setHasFixedSize(true)，由于item的宽高都是固定的，adapter的内容改变时，RecyclerView不会整个布局都重绘
+        recyclerView.setHasFixedSize(true);
+        // 如果此属性设置为 true，则视图将被允许使用当前层次结构中的兼容父视图启动嵌套滚动操作。 如果此视图未实现嵌套滚动，则不会产生任何效果。 在嵌套滚动正在进行时禁用嵌套滚动具有stopping嵌套滚动的效果
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.addItemDecoration(new SpacingItemDecoration(1, Tools.dpToPx(requireActivity(), 0), true));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setItemViewCacheSize(4);
     }
 
     // 检查数据请求状态

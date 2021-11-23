@@ -18,9 +18,13 @@ public class HomeViewModel extends ViewModel {
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     public final MutableLiveData<MovieResponse> featuredMoviesMutableLiveData = new MutableLiveData<>();
     public final MutableLiveData<MovieResponse> latestStreamingMutableLiveData = new MutableLiveData<>();
-    public final MutableLiveData<MovieResponse> movieRecommendedMutableLiveData = new MutableLiveData<>();
-    public final MutableLiveData<MovieResponse> movieTrendingMutableLiveData = new MutableLiveData<>();
-    public final MutableLiveData<MovieResponse> movieLatestMutableLiveData = new MutableLiveData<>();
+    public final MutableLiveData<MovieResponse> recommendedMovieMutableLiveData = new MutableLiveData<>();
+    public final MutableLiveData<MovieResponse> trendingMovieMutableLiveData = new MutableLiveData<>();
+    public final MutableLiveData<MovieResponse> movieReleaseMutableLiveData = new MutableLiveData<>();
+    public final MutableLiveData<MovieResponse> popularSeriesMutableLiveData = new MutableLiveData<>();
+    public final MutableLiveData<MovieResponse> popularMoviesMutableLiveData = new MutableLiveData<>();
+
+
     // State
     public boolean mFeaturedLoaded;
     public boolean mScrollLoaded;
@@ -49,19 +53,40 @@ public class HomeViewModel extends ViewModel {
                 .cache()
                 .subscribe(latestStreamingMutableLiveData::postValue, this::handleError)
         );
+        // 推荐影片
         compositeDisposable.add(mediaRepository.getRecommended()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .cache()
-                .subscribe(movieRecommendedMutableLiveData::postValue, this::handleError)
+                .subscribe(recommendedMovieMutableLiveData::postValue, this::handleError)
         );
-
-
+        // 流行
         compositeDisposable.add(mediaRepository.getTrending()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .cache()
-                .subscribe(movieTrendingMutableLiveData::postValue, this::handleError)
+                .subscribe(trendingMovieMutableLiveData::postValue, this::handleError)
+        );
+        // 发行
+        compositeDisposable.add(mediaRepository.getLatestMovies()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .cache()
+                .subscribe(movieReleaseMutableLiveData::postValue, this::handleError)
+        );
+        // 流行电视剧
+        compositeDisposable.add(mediaRepository.getPopularSeries()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .cache()
+                .subscribe(popularSeriesMutableLiveData::postValue, this::handleError)
+        );
+        // 最受欢迎
+        compositeDisposable.add(mediaRepository.getPopularMovies()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .cache()
+                .subscribe(popularMoviesMutableLiveData::postValue, this::handleError)
         );
 
     }

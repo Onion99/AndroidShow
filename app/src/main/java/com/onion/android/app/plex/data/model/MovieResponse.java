@@ -234,11 +234,11 @@ public class MovieResponse {
     }
 
 
-    public List<Media> getPopular() {
+    public List<Media> getPopularSeries() {
         return popular;
     }
 
-    public void setPopular(List<Media> popular) {
+    public void setPopularSeries(List<Media> popular) {
         this.popular = popular;
     }
 
@@ -298,8 +298,7 @@ public class MovieResponse {
     }
 
 
-
-    public List<Media> getPopularMedia() {
+    public List<Media> getPopularMovies() {
         return popularMedia;
     }
 
