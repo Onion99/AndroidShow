@@ -1,5 +1,8 @@
 package com.onion.android.app.plex.data.remote;
 
+import static com.onion.android.app.constants.PlexConstants.ACCEPT;
+import static com.onion.android.app.constants.PlexConstants.APPLICATION_JSON;
+
 import android.util.Base64;
 
 import com.onion.android.app.utils.Tools;
@@ -16,9 +19,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import static com.onion.android.app.constants.PlexConstants.ACCEPT;
-import static com.onion.android.app.constants.PlexConstants.APPLICATION_JSON;
 @Singleton
 public class FsmPlayerApi {
 
@@ -32,13 +32,33 @@ public class FsmPlayerApi {
     public static final String AT = "QXV0aG9yaXphdGlvbg==";
 
     // 解析域名
-    public static String decodeServiceMainApi(){
+    public static String decodeServiceMainApi() {
         byte[] valueDecoded;
         valueDecoded = Base64.decode(PA.getBytes(StandardCharsets.UTF_8), Base64.DEFAULT);
         return new String(valueDecoded);
     }
 
-    private static String decodeServerMainApi6(){
+    public static String decodeServerMainApi2() {
+        byte[] valueDecoded;
+        valueDecoded = Base64.decode(PL.getBytes(StandardCharsets.UTF_8), Base64.DEFAULT);
+        return new String(valueDecoded);
+    }
+
+
+    public static String decodeServerMainApi3() {
+        byte[] valueDecoded;
+        valueDecoded = Base64.decode(PN.getBytes(StandardCharsets.UTF_8), Base64.DEFAULT);
+        return new String(valueDecoded);
+    }
+
+
+    public static String decodeServerMainApi4() {
+        byte[] valueDecoded;
+        valueDecoded = Base64.decode(P0.getBytes(StandardCharsets.UTF_8), Base64.DEFAULT);
+        return new String(valueDecoded);
+    }
+
+    private static String decodeServerMainApi6() {
         byte[] valueDecoded;
         valueDecoded = Base64.decode(AT.getBytes(StandardCharsets.UTF_8), Base64.DEFAULT);
         return new String(valueDecoded);

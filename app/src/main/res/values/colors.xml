@@ -82,10 +82,20 @@
     <color name="plex_bottom_navgation_bg">#232325</color>
     <color name="plex_item_bg">#121212</color>
     <color name="plex_search_background_input">#333333</color>
+    <color name="player_controls_overlay">#b226262d</color>
+    <color name="player_controls_progress_background">#33ffffff</color>
+    <color name="tv_player_white">#ffffffff</color>
+    <color name="player_controls_secondary_progress_background">#4cffffff</color>
     <color name="fragment_featured_end">#1a1a1a</color>
     <color name="fragment_featured_overlay_center">#6626262d</color>
     <color name="fragment_featured_overlay_start">#0026262d</color>
     <color name="fragment_content_detail_overlay_end">#1a1a1a</color>
     <color name="fragment_content_detail_overlay_center">#6626262d</color>
     <color name="fragment_content_detail_overlay_start">#0026262d</color>
+    <!-- Plex__Expanded Controls -->
+    <color name="black_subtitles_background">#64000000</color>
+    <color name="green_subtitles_background">#641E9618</color>
+    <color name="red_subtitles_background">#64D50000</color>
+    <color name="yellow_subtitles_background">#64f9930d</color>
+
 </resources>

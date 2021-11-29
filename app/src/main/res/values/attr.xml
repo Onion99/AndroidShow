@@ -3,4 +3,12 @@
 <resources>
     <attr format="color" name="button_color" />
     <attr format="color" name="button_text_color" />
+
+
+    <!--  SubTitleImageButton  -->
+    <declare-styleable name="SubTitleImageButton">
+        <attr name="state_checked" format="reference" />
+        <attr name="state_not_checked" format="reference" />
+    </declare-styleable>
+
 </resources>

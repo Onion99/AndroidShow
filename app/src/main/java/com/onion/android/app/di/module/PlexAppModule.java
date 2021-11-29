@@ -1,5 +1,8 @@
 package com.onion.android.app.di.module;
 
+import static android.content.Context.MODE_PRIVATE;
+import static com.onion.android.app.constants.PlexConstants.PREF_FILE;
+
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -18,6 +21,8 @@ import com.onion.android.app.plex.manager.AuthManager;
 import com.onion.android.app.plex.manager.SettingsManager;
 import com.onion.android.app.plex.manager.StatusManager;
 import com.onion.android.app.plex.manager.TokenManager;
+import com.onion.android.app.plex.player.controller.PlayerController;
+import com.onion.android.app.plex.player.controller.PlayerUIController;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -25,9 +30,6 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
-
-import static android.content.Context.MODE_PRIVATE;
-import static com.onion.android.app.constants.PlexConstants.PREF_FILE;
 
 /**
  * Application域的注入
@@ -171,4 +173,16 @@ public class PlexAppModule {
         return dataBase.historyDao();
     }
 
+    @Provides
+    @Singleton
+    PlayerUIController provideController() {
+        return new PlayerUIController();
+    }
+
+
+    @Provides
+    @Singleton
+    PlayerController providePlayerController() {
+        return new PlayerController();
+    }
 }

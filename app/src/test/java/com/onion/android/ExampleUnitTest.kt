@@ -1,6 +1,8 @@
 package com.onion.android
 
+import io.reactivex.rxjava3.core.Observable
 import org.junit.Test
+import java.util.concurrent.TimeUnit
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -21,6 +23,23 @@ class ExampleUnitTest {
                     list[childIndex] = temp
                 }
             }
+        }
+        println("emit = $list")
+    }
+
+    @Test
+    fun observer() {
+        Observable.create<String> {
+            it.onNext("purple")
+            // 等待0.51秒,让第一个发送成功
+            Thread.sleep(510)
+            it.onNext("blue")
+            it.onNext("gray green")
+            it.onNext("green")
+            // 等待0.51秒,让最后一个发送成功
+            Thread.sleep(510)
+        }.debounce(500, TimeUnit.MILLISECONDS).subscribe {
+            println("emit = $it")
         }
     }
 }

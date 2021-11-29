@@ -133,6 +133,13 @@ android {
         // 忽略指定问题的规则(同关闭检查)
         ignore 'TypographyQuotes'
     }
+
+    // 添加当期Module目录下的libs路径的库
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
 }
 
 /*
@@ -144,6 +151,8 @@ sourceSets {
 */
 
 dependencies {
+    // 添加本地依赖库
+    implementation fileTree(dir: 'libs', include: ['*.jar','*.aar'])
     /**
      * Kotlin标准库支持
      * Kotlin代码需要使用的标准函数库，这里在对应的项目下引入标准库即可
@@ -219,6 +228,8 @@ dependencies {
     implementation "com.github.skydoves:rainbow:$versions.rainbowVersion"
     implementation "com.github.skydoves:baserecyclerviewadapter:$versions.baseAdapter"
     implementation 'me.relex:circleindicator:2.1.6'
+    implementation 'com.github.gmazzo:fontawesome:0.4'
+
     // timber,日志打印库
     implementation "com.jakewharton.timber:timber:$versions.timberVersion"
     /**

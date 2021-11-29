@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/avd_search_on.xml" value="0.114" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/bg_episodes.xml" value="0.1" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/bg_episodes_resume.xml" value="0.1525" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/btn_gradient.xml" value="0.1398148148148148" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/btn_gradient_watch_video.xml" value="0.1398148148148148" />
@@ -13,14 +14,34 @@
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/fragment_content_detail_top.xml" value="0.1525" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/fragment_shadows.xml" value="0.8648648648648649" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/ic_apps.xml" value="0.16296296296296298" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/ic_audio.xml" value="0.1" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/ic_download.xml" value="0.158" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/ic_featured.xml" value="0.114" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/ic_home.xml" value="0.1398148148148148" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/ic_my_courses.xml" value="0.114" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/ic_play.xml" value="0.1525" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/ic_refresh.xml" value="0.1" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/ic_report.xml" value="0.1525" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/ic_screen_rotation.xml" value="0.1" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/ic_settings.xml" value="0.1" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/ic_shuffle.xml" value="0.1" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/ic_subject.xml" value="0.1" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/ic_text_fields.xml" value="0.1" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/ic_tune.xml" value="0.1" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/item_recommended_shadow.xml" value="0.246" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/left_shadow.xml" value="0.1" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/progressbar_ads.xml" value="0.1" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/ranking_tag_background.xml" value="0.1525" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/red_live.xml" value="0.1" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/tubi_tv_drawable_pause_selector.xml" value="0.1" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/tubi_tv_drawable_scrubber_selector.xml" value="0.1775" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/tubi_tv_drawable_subtitles_on_selector.xml" value="0.1" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/tubi_tv_rew_15_selector.xml" value="0.1" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/tubi_tv_seek_bar.xml" value="0.1" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/tubi_tv_seek_bar_bg.xml" value="0.1775" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/tubi_tv_seek_bar_secondary_progress.xml" value="0.1" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/tubi_tv_seek_bar_thumb_normal_shape.xml" value="0.1775" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/tubi_tv_seek_bar_thumb_pressed_shape.xml" value="0.1775" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/unselected_black_radius_square.xml" value="0.1398148148148148" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/view_bg.xml" value="0.1525" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/vip.xml" value="0.158" />
@@ -35,12 +56,15 @@
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/layout/item_featured.xml" value="0.8648648648648649" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/layout/item_pokemon.xml" value="0.8648648648648649" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/layout/plex_activity_main.xml" value="0.8648648648648649" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/layout/plex_activity_player.xml" value="0.192481884057971" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/layout/plex_activity_spalsh.xml" value="0.14994934143870314" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/layout/plex_controller_view.xml" value="0.192481884057971" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/layout/plex_fragment_home.xml" value="0.1" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/layout/plex_item_featured.xml" value="0.3104166666666667" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/layout/plex_item_movie.xml" value="0.3338541666666667" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/layout/plex_item_relateds.xml" value="0.35989583333333336" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/layout/plex_item_show_streaming.xml" value="0.3338541666666667" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/layout/plex_player_view.xml" value="0.19293478260869565" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/menu/menu_main.xml" value="0.2953125" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/menu/menu_owl.xml" value="0.2953125" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/menu/plex_bottom.xml" value="0.1" />

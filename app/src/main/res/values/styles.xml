@@ -91,6 +91,18 @@
         <item name="android:textColorPrimary">@color/grey_60</item>
     </style>
 
+    <style name="PlayerSeekBar">
+        <item name="android:paddingLeft">7dp</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingRight">7dp</item>
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:maxHeight">@dimen/pixel_4dp</item>
+        <item name="android:progressDrawable">@drawable/tubi_tv_seek_bar</item>
+        <item name="android:minHeight">@dimen/pixel_4dp</item>
+        <item name="android:thumb">@drawable/tubi_tv_drawable_scrubber_selector</item>
+    </style>
+
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

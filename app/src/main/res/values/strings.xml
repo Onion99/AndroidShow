@@ -16,7 +16,6 @@
 
     <!-- Plex -->
     <string name="home">Home</string>
-    <string name="mylist">My List</string>
     <string name="discover">Discover</string>
     <string name="library">Library</string>
     <string name="upcoming">Upcoming</string>
@@ -50,9 +49,24 @@
     <string name="recommend_movie">推荐影片</string>
     <string name="trending_movie">流行影片</string>
     <string name="release_movie">最新发行</string>
+    <string name="commercial">商业</string>
     <string name="popular_movie">最受欢迎</string>
     <string name="popular_series">流行剧场</string>
+    <string name="substitles">字幕</string>
+    <string name="qualities">质量</string>
+    <string name="controller_time_position_text_default">00:00:00</string>
+    <string name="lists_series">美剧</string>
+    <string name="lists_animes">动漫</string>
+    <string name="up_next">Up Next in : </string>
+    <string name="about_wifi_warning">你选了只在wifi环境下播放,请去设置页更换</string>
+    <string name="back">返回</string>
+    <string name="play_media_as_embed">媒体源已经加载</string>
+    <string name="report_broken_link">媒体源已经失效</string>
+    <string name="lists_streaming">直播</string>
     <string name="movie_time">41 min</string>
+    <string name="episodes">Episodes</string>
+    <string name="next_episode">Next Episode</string>
+    <string name="audio">Audio</string>
     <string name="no_relateds_movies_found">未找到相关电影</string>
     <string name="genres_list_is_empty">Genres List is empty</string>
     <string name="please_try_another_genre">Please try another genre.</string>
@@ -61,6 +75,22 @@
     <string name="movies_amp_series"><![CDATA[MOVIES & Series]]></string>
     <string name="suggested_programmes">Suggested Programmes</string>
     <string name="try_searching_for_another_movie_show">Try Searching for another movie,show</string>
+    <!-- Plex-Queue -->
+    <string name="mylist">My List</string>
+    <string name="plan_name">NAME</string>
+    <string name="player_default">default</string>
+    <string name="player_43">4:3</string>
+    <string name="player_169">16:9</string>
+    <string name="player_fullscreen">full screen</string>
+    <string name="player_room">Zoom</string>
+    <string name="restart">Restart</string>
+    <string name="source_quality">Select Source Quality</string>
+    <string name="lists_movies">Lists of Movies</string>
+    <string name="from_history">from your watching history ?</string>
+    <string name="added_stream_wichlist">Added To Watchlist</string>
+    <string name="removed_stream_watch_list">Removed From Watchlist</string>
+    <string name="unable_to_get_genres">Unable to Get Genres Lists</string>
+    <string name="added_watchlist">Added To Watchlist</string>
 
 
     <!-- Owl -->

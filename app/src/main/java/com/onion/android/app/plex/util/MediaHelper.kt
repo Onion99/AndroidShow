@@ -1,6 +1,8 @@
 package com.onion.android.app.plex.util
 
 import android.content.Context
+import com.google.android.exoplayer2.DefaultRenderersFactory
+import com.google.android.exoplayer2.RenderersFactory
 import com.google.android.exoplayer2.upstream.*
 import com.google.android.exoplayer2.util.Util
 
@@ -30,5 +32,13 @@ object MediaHelper {
             DefaultHttpDataSource.DEFAULT_READ_TIMEOUT_MILLIS,
             true
         )
+    }
+
+    fun buildRenderersFactory(
+        context: Context,
+        preferExtensionRenderer: Boolean
+    ): RenderersFactory {
+        return DefaultRenderersFactory(context.applicationContext)
+            .setExtensionRendererMode(DefaultRenderersFactory.EXTENSION_RENDERER_MODE_ON)
     }
 }

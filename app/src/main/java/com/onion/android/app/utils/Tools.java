@@ -1,7 +1,13 @@
 package com.onion.android.app.utils;
 
+import static android.os.Build.VERSION;
+import static android.os.Build.VERSION_CODES;
+import static android.view.WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS;
+import static com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions.withCrossFade;
+
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
@@ -17,6 +23,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,16 +31,15 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.util.Util;
 import com.google.android.material.appbar.AppBarLayout;
 import com.onion.android.R;
 
 import java.nio.charset.StandardCharsets;
-
-import static android.os.Build.VERSION;
-import static android.os.Build.VERSION_CODES;
-import static android.view.WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS;
-import static com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions.withCrossFade;
+import java.util.Formatter;
+import java.util.Locale;
+import java.util.UUID;
 
 
 
@@ -172,12 +178,51 @@ public class Tools {
 
     // 解析编码 (BASE64)
     public static final String BYTE_TO_MB = "aHR0cHM6Ly9hcGkueW9iZGV2LmxpdmUvaW5mby9hcGkv";
-    public static  final  String PLAYER = "aHR0cHM6Ly9hcGkuZW52YXRvLmNvbS92My8=";
-    public static String getPlayer(){
+    public static final String PLAYER = "aHR0cHM6Ly9hcGkuZW52YXRvLmNvbS92My8=";
+
+    public static String getPlayer() {
         byte[] valueDecoded;
         valueDecoded = Base64.decode(PLAYER.getBytes(StandardCharsets.UTF_8), Base64.DEFAULT);
         return new String(valueDecoded);
     }
 
 
+    private static final StringBuilder formatBuilder = new StringBuilder();
+    private static final Formatter formatter = new Formatter(formatBuilder, Locale.getDefault());
+    private static final String PREF_UNIQUE_ID = "PREF_UNIQUE_ID";
+    private static String uniqueID = null;
+
+    // 将时间转为毫秒
+    public static long progressToMilli(long playerDurationMs, SeekBar seekBar) {
+        long duration = playerDurationMs < 1 ? C.TIME_UNSET : playerDurationMs;
+        return duration == C.TIME_UNSET ? 0 : ((duration * seekBar.getProgress()) / seekBar.getMax());
+    }
+
+    // 获取时间进展
+    public static String getProgressTime(long timeMs, boolean remaining) {
+        if (timeMs == C.TIME_UNSET) timeMs = 0;
+        long totalSeconds = (timeMs + 500) / 1000;
+        long seconds = totalSeconds % 60;
+        long minutes = (totalSeconds / 60) % 60;
+        long hours = totalSeconds / 3600;
+        formatBuilder.setLength(0);
+        String formatHours = "%d:%02d:%02d";
+        String formatMinutes = "%02d:%02d";
+        String time = hours > 0 ? formatter.format(formatHours, hours, minutes, seconds).toString() : formatter.format(formatMinutes, minutes, seconds).toString();
+        return remaining && timeMs != 0 ? "-" + time : time;
+    }
+
+    public static synchronized String id(Context context) {
+        if (uniqueID == null) {
+            SharedPreferences sharedPrefs = context.getSharedPreferences(PREF_UNIQUE_ID, Context.MODE_PRIVATE);
+            uniqueID = sharedPrefs.getString(PREF_UNIQUE_ID, null);
+            if (uniqueID == null) {
+                uniqueID = UUID.randomUUID().toString();
+                SharedPreferences.Editor editor = sharedPrefs.edit();
+                editor.putString(PREF_UNIQUE_ID, uniqueID);
+                editor.apply();
+            }
+        }
+        return uniqueID;
+    }
 }
