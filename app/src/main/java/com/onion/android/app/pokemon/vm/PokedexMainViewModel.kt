@@ -21,9 +21,7 @@ import javax.inject.Inject
 // 现在主用Dagger,不用hilt
 // @HiltViewModel
 class PokedexMainViewModel
-@Inject constructor(
-    private val mainRepository: MainRepository,
-) : LiveCoroutinesViewModel() {
+@Inject constructor(private val mainRepository: MainRepository) : LiveCoroutinesViewModel() {
 
     /**
      * MutableStateFlow https://juejin.cn/post/6844904168910487560

@@ -1,18 +1,16 @@
-package com.onion.android.kotlin.sandwich
+package com.onion.android.kotlin.retrofit_coroutine_call_adapter_factory.common
 
-import com.onion.android.app.pokemon.network.handler.ApiResponse
-import com.onion.android.kotlin.sandwich.coroutines.SuspensionFunction
-import com.onion.android.kotlin.sandwich.mapper.ApiErrorModelMapper
+import com.onion.android.kotlin.retrofit_coroutine_call_adapter_factory.coroutines.SuspensionFunction
+import com.onion.android.kotlin.retrofit_coroutine_call_adapter_factory.mapper.ApiErrorModelMapper
 
 
-/**
- * crossinline : disable non-local return 不允许本地return
- * inline : 编译器会把函数体替换在函数被调用的地方,主要是解决了函数调用时的开销, 调用栈的保存, 匿名对象的建立等
- * Java在语言层面暂时不支持inline, JVM会做一些相关的优化.
- * noinline : 如果函数有多个函数参数, 有些我不希望被inline, 那就可以用noinline来修饰
- * reified :  有时候我们需要类型作为参数, 但是又觉得函数声明个clazz: Class<T>参数, 传入实参MyClass::class.java这样比较难看
- * 想直接用类名传入，就用reified
- */
+// ------------------------------------------------------------------------
+// crossinline : disable non-local return 不允许本地return
+// inline : 编译器会把函数体替换在函数被调用的地方,主要是解决了函数调用时的开销, 调用栈的保存, 匿名对象的建立等
+// Java在语言层面暂时不支持inline, JVM会做一些相关的优化.
+// noinline : 如果函数有多个函数参数, 有些我不希望被inline, 那就可以用noinline来修饰
+// reified :  有时候我们需要类型作为参数, 但是又觉得函数声明个clazz: Class<T>参数, 传入实参MyClass::class.java这样比较难看 ,想直接用类名传入，就用 reified
+// ------------------------------------------------------------------------
 
 // 定义ApiResponse 网络请求成功fun
 @JvmSynthetic

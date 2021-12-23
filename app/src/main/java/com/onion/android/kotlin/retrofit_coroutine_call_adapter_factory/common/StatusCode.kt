@@ -1,4 +1,4 @@
-package com.onion.android.app.pokemon.network.handler
+package com.onion.android.kotlin.retrofit_coroutine_call_adapter_factory.common
 
 /*
 * 枚举类 （enum class） - 实现一个类型安全的枚举

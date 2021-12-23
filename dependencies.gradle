@@ -6,7 +6,9 @@ ext.versions = [
         versionPlugin          : '0.28.0',
 
         // kotlin
-        kotlin_version         : '1.4.20',
+        kotlin_version         : '1.4.32',
+        // coroutines
+        coroutinesVersion      : '1.5.2',
 
         lifecycleVersion       : '2.2.0',
         roomVersion            : '2.3.0',
@@ -49,8 +51,6 @@ ext.versions = [
         // react programing
         'rxandroidVersion'       : '3.0.0',
         'rxjavaVersion'          : '3.0.0',
-        // Anko
-        'anko_version'          : '0.10.8',
         // 加密
         'stringcare_version'        : '4.0.1',
 

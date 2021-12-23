@@ -2,6 +2,7 @@ package com.onion.android
 
 import io.reactivex.rxjava3.core.Observable
 import org.junit.Test
+import java.lang.reflect.ParameterizedType
 import java.util.concurrent.TimeUnit
 
 /**
@@ -42,4 +43,20 @@ class ExampleUnitTest {
             println("emit = $it")
         }
     }
+
+    @Test
+    fun checkParameterized() {
+        val bean = ParameterizedTypeTest()
+        val filed = bean::class.java.declaredFields
+        filed.forEach {
+            println("${it.name}具不具有参数化类型:${it.genericType is ParameterizedType}")
+        }
+    }
+
+
+    class ParameterizedTypeTest() {
+        val stringList = mutableListOf<String>()
+        val singleChar = "A"
+    }
+
 }

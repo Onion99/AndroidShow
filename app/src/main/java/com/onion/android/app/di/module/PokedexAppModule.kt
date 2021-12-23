@@ -8,7 +8,7 @@ import com.onion.android.app.pokemon.network.PokemonService
 import com.onion.android.app.pokemon.network.interceptor.HttpRequestInterceptor
 import com.onion.android.app.pokemon.persistence.AppDataBase
 import com.onion.android.app.pokemon.persistence.PokemonDao
-import com.onion.android.kotlin.sandwich.coroutines.CoroutinesResponseCallAdapterFactory
+import com.onion.android.kotlin.retrofit_coroutine_call_adapter_factory.CoroutinesResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
