@@ -220,4 +220,6 @@ public abstract class PlexConstants{
 
     // Shared Preferences Constants
     public static final String PREF_FILE = "Preferences";
+    public static final String AUTHORIZATION = "Authorization";
+    public static final String BEARER = "Bearer ";
 }

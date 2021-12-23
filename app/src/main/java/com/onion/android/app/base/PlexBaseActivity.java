@@ -1,11 +1,19 @@
 package com.onion.android.app.base;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.view.View;
+import android.view.WindowManager;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+
+import com.google.android.exoplayer2.util.Util;
 
 import java.util.Optional;
 
@@ -54,5 +62,53 @@ public abstract class PlexBaseActivity<T extends ViewDataBinding> extends AppCom
     @Override
     public AndroidInjector<Object> androidInjector() {
         return dispatchingAndroidInjector;
+    }
+
+
+    /**
+     * 隐藏系统状态栏
+     *
+     * @param activity  当前上下文
+     * @param immediate 是否沉浸式
+     */
+    public void hideSystemBar(@NonNull final Activity activity, final boolean immediate) {
+        hideSystemBar(activity, immediate, 2000);
+    }
+
+    public void hideSystemBar(@NonNull final Activity activity, final boolean immediate,
+                              final int delayMs) {
+        activity.getWindow().setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+        );
+        View decorView = activity.getWindow().getDecorView();
+        // 设置沉浸式FLAG
+        // 设置状态栏覆盖到视图
+        // 当状态栏显示或隐藏的时候不要调整
+        int uiState = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // 隐藏导航栏
+                | View.SYSTEM_UI_FLAG_FULLSCREEN; // 隐藏状态
+        if (Util.SDK_INT > 18) {
+            // |= 意指 uiState = uiState | View.SYSTEM_UI_FLAG_LAY
+            uiState |= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE;
+        } else {
+            final Handler handler = new Handler(Looper.getMainLooper());
+            decorView.setOnSystemUiVisibilityChangeListener(
+                    visibility -> {
+                        if (visibility == View.VISIBLE) {
+                            Runnable runnable = () -> hideSystemBar(activity, false);
+                            if (immediate) {
+                                handler.post(runnable);
+                            } else {
+                                handler.postDelayed(runnable, delayMs);
+                            }
+                        }
+                    }
+            );
+        }
+        decorView.setSystemUiVisibility(uiState);
     }
 }

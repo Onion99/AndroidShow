@@ -32,7 +32,7 @@ class ExampleUnitTest {
         Observable.create<String> {
             it.onNext("purple")
             // 等待0.51秒,让第一个发送成功
-            Thread.sleep(510)
+            Thread.sleep(520)
             it.onNext("blue")
             it.onNext("gray green")
             it.onNext("green")

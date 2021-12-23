@@ -1,7 +1,5 @@
 package com.onion.android.app.anim
 
-import android.os.Parcelable
-import android.widget.FrameLayout
 import androidx.transition.PathMotion
 import com.google.android.material.transition.MaterialArcMotion
 
@@ -15,8 +13,4 @@ class TransformationLayout{
             return null
         }
     }
-    //
-    enum class Params(
-
-    ):Parcelable
 }

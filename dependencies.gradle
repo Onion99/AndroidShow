@@ -51,5 +51,7 @@ ext.versions = [
         'rxjavaVersion'          : '3.0.0',
         // Anko
         'anko_version'          : '0.10.8',
+        // 加密
+        'stringcare_version'        : '4.0.1',
 
 ]

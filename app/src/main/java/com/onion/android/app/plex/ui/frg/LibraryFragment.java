@@ -1,9 +1,10 @@
 package com.onion.android.app.plex.ui.frg;
 
+import static com.onion.android.app.constants.PlexConstants.SERVER_BASE_URL;
+
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -12,8 +13,6 @@ import com.onion.android.app.base.PlexBaseFragment;
 import com.onion.android.app.plex.ui.adapter.VpFragmentAdapter;
 import com.onion.android.app.utils.Tools;
 import com.onion.android.databinding.PlexFragmentLibraryBinding;
-
-import static com.onion.android.app.constants.PlexConstants.SERVER_BASE_URL;
 
 public class LibraryFragment extends PlexBaseFragment<PlexFragmentLibraryBinding> {
 
@@ -24,8 +23,8 @@ public class LibraryFragment extends PlexBaseFragment<PlexFragmentLibraryBinding
 
     @Override
     public void initView() {
-        Tools.loadToolbar(((AppCompatActivity) requireActivity()), mBinding.toolbar, null);
-        Tools.loadHttpImg((requireActivity()), mBinding.logoImageTop, SERVER_BASE_URL + "image/minilogo");
+        loadToolbar(mBinding.toolbar, null);
+        Tools.loadHttpImg(mBinding.logoImageTop, SERVER_BASE_URL + "image/minilogo");
         setUpTabs();
     }
 

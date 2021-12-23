@@ -3,7 +3,6 @@ package com.onion.android.app.plex.ui.frg;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.onion.android.R;
 import com.onion.android.app.base.PlexBaseFragment;
@@ -29,8 +28,8 @@ public class DiscoverFragment extends PlexBaseFragment<PlexFragmentDiscoverBindi
 
     @Override
     public void initView() {
-        Tools.loadToolbar(((AppCompatActivity) requireActivity()), mBinding.toolbar, null);
-        Tools.setSystemBarTransparent(getActivity());
+        loadToolbar(mBinding.toolbar, null);
+        setSystemBarTransparent(getActivity());
         mBinding.rvSuggested.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(requireActivity(), 0), true));
         searchViewModel.getSuggestedMovies();
         searchViewModel.movieDetailMutableLiveData.observe(getViewLifecycleOwner(), suggested -> {

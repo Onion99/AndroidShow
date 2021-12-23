@@ -75,14 +75,15 @@ public class PlexSplashActivity extends PlexBaseActivity<PlexActivitySplashBindi
     @Override
     public void initView() {
         initNetcipher();
-        Tools.hideSystemBar(this,true);
-        Tools.loadHttpImg(getApplication(), mBinding.logoImageTop,SERVER_BASE_URL +"image/logo");
+        hideSystemBar(this, true);
+        Tools.loadHttpImg(mBinding.logoImageTop, SERVER_BASE_URL + "image/logo");
         GlideApp.with(this).asBitmap()
                 .listener(new RequestListener<Bitmap>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
                         return false;
                     }
+
                     @Override
                     public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
                         mBinding.loader.setVisibility(View.GONE);

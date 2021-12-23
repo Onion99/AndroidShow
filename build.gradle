@@ -3,6 +3,10 @@ apply from: "$rootDir/versionsPlugin.gradle"
 buildscript {
     apply from: "$rootDir/dependencies.gradle"
     repositories {
+//
+//        maven { url 'https://maven.google.com' }
+//        maven { url 'https://android-sdk.is.com/' }
+//        maven { url 'https://artifacts.applovin.com/android'}
         // 配置阿里云Maven，速度更快哟
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/google' }
@@ -24,6 +28,7 @@ buildscript {
         // Spotless 是一个代码格式化工具。它支持的开发语言有java, kotlin, scala, sql, javascript, css, json, yaml, etc
         // 它不仅能按照指定的规则去检测我们的代码指示出不合规的地方, 同时可以按照规则修复代码
         classpath "com.diffplug.spotless:spotless-plugin-gradle:$versions.spotlessGradle"
+//        classpath "com.stringcare:plugin:${versions.stringcare_version}"
     }
 }
 

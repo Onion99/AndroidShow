@@ -6,17 +6,17 @@ import static com.onion.android.app.constants.PlexConstants.AUTHORISATION_BEARER
 import static com.onion.android.app.constants.PlexConstants.CACHE_CONTROL;
 import static com.onion.android.app.constants.PlexConstants.IMDB_BASE_URL;
 import static com.onion.android.app.constants.PlexConstants.PREFS2;
-import static com.onion.android.app.constants.PlexConstants.PURCHASE_KEY;
 import static com.onion.android.app.constants.PlexConstants.SERVER_BASE_URL;
 import static com.onion.android.app.constants.PlexConstants.SERVER_OPENSUBS_URL;
+import static com.onion.android.app.utils.Tools.USER_AGENT;
 
 import android.util.Base64;
 
 import androidx.annotation.NonNull;
 
 import com.onion.android.App;
-import com.onion.android.app.plex.manager.SettingsManager;
 import com.onion.android.app.plex.manager.TokenManager;
+import com.onion.android.app.plex.util.MediaHelper;
 import com.onion.android.app.utils.Tools;
 
 import org.jetbrains.annotations.NotNull;
@@ -76,7 +76,6 @@ public class ServiceGenerator {
             return chain.proceed(request);
         });
         return builder.build();
-
     }
 
     private static final Retrofit.Builder builder = new Retrofit.Builder()
@@ -85,13 +84,10 @@ public class ServiceGenerator {
             .addConverterFactory(GsonConverterFactory.create());
 
 
-
-
     private static final Retrofit.Builder builderApp = new Retrofit.Builder()
             .baseUrl(PREFS2)
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create());
-
 
 
     private static final Retrofit.Builder builderImdb = new Retrofit.Builder()
@@ -106,18 +102,13 @@ public class ServiceGenerator {
             .addConverterFactory(GsonConverterFactory.create());
 
 
-
     private static final Retrofit.Builder builderStatus = new Retrofit.Builder()
             .baseUrl(SERVER_BASE_URL)
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create());
 
 
-
     private static Retrofit retrofit = builder.build();
-
-
-
     private static final Retrofit retrofitStatus = builderStatus.build();
     private static final Retrofit retrofitApp = builderApp.build();
     private static final Retrofit retrofit2 = builderImdb.build();
@@ -136,7 +127,9 @@ public class ServiceGenerator {
                         Request request = chain.request();
                         Request.Builder newBuilder = request.newBuilder();
                         newBuilder.addHeader(ACCEPT, APPLICATION_JSON);
-                        newBuilder.addHeader("Authorization", "Bearer "+AUTHORISATION_BEARER_STRING);
+                        newBuilder.addHeader("packagename", "com.easyplexdemoapp");
+                        newBuilder.addHeader("Authorization", "Bearer " + AUTHORISATION_BEARER_STRING);
+                        newBuilder.addHeader(USER_AGENT, MediaHelper.userAgent());
                         request = newBuilder.build();
                         return chain.proceed(request);
                     });
@@ -147,11 +140,8 @@ public class ServiceGenerator {
     }
 
 
-
-
-
     @Named("app")
-    public static <T> T createServiceApp(Class<T> service){
+    public static <T> T createServiceApp(Class<T> service) {
         OkHttpClient newClient = client.newBuilder().addInterceptor(chain -> {
             Request request = chain.request();
 
@@ -168,19 +158,16 @@ public class ServiceGenerator {
 
 
     @Named("status")
-    public static <T> T createServiceWithStatus(Class<T> service, final SettingsManager tokenManager){
+    public static <T> T createServiceWithStatus(Class<T> service) {
         OkHttpClient newClient = client.newBuilder().addInterceptor(chain -> {
-
             Request request = chain.request();
             Request.Builder newBuilder = request.newBuilder();
-
-            if(PURCHASE_KEY != null){
-                newBuilder.addHeader("Authorization", Arrays.toString(Base64.decode("QmVhcmVyIEd4b05kUGhPcnNrV1laZlN3MmQ5aGdlWFRvU2xVQmFs", Base64.DEFAULT)));
-                newBuilder.addHeader(ACCEPT, APPLICATION_JSON);
-            }
+            newBuilder.addHeader("Authorization", Arrays.toString(Base64.decode("QmVhcmVyIEd4b05kUGhPcnNrV1laZlN3MmQ5aGdlWFRvU2xVQmFs", Base64.DEFAULT)));
+            newBuilder.addHeader(ACCEPT, APPLICATION_JSON);
             request = newBuilder.build();
             return chain.proceed(request);
-        })  .connectTimeout(60, TimeUnit.SECONDS)
+        })
+                .connectTimeout(60, TimeUnit.SECONDS)
                 .readTimeout(60, TimeUnit.SECONDS)
                 .writeTimeout(60, TimeUnit.SECONDS).build();
 
@@ -215,14 +202,13 @@ public class ServiceGenerator {
     }
 
 
-
     @Named("Auth")
-    public static <T> T createServiceWithAuth(Class<T> service, final TokenManager tokenManager){
+    public static <T> T createServiceWithAuth(Class<T> service, final TokenManager tokenManager) {
         OkHttpClient newClient = client.newBuilder().addInterceptor(chain -> {
 
             Request request = chain.request();
             Request.Builder newBuilder = request.newBuilder();
-            if(tokenManager.getToken().getAccessToken() != null){
+            if (tokenManager.getToken().getAccessToken() != null) {
                 newBuilder.addHeader("Authorization", "Bearer " + tokenManager.getToken().getAccessToken());
             }
             request = newBuilder.build();
@@ -236,10 +222,10 @@ public class ServiceGenerator {
 
 
     /**
-         * Interceptor to cache data and maintain it for a minute.
-         * If the same network request is sent within a minute,
-         * the response is retrieved from cache.
-         */
+     * Interceptor to cache data and maintain it for a minute.
+     * If the same network request is sent within a minute,
+     * the response is retrieved from cache.
+     */
     private static class ResponseCacheInterceptor implements Interceptor {
         @NotNull
         @Override
@@ -286,6 +272,7 @@ public class ServiceGenerator {
             return chain.proceed(request);
         }
     }
+
     /**
      * Interceptor to display response message
      */

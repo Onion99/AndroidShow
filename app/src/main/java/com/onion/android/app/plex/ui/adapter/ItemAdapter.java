@@ -74,7 +74,7 @@ public class ItemAdapter extends PagedListAdapter<Media, ItemAdapter.ItemViewHol
         }
 
         public void onBind(Media media) {
-            Tools.loadHttpImg(itemView.getContext(), binding.itemMovieImage, media.getPosterPath());
+            Tools.loadHttpImg(binding.itemMovieImage, media.getPosterPath());
         }
     }
 }

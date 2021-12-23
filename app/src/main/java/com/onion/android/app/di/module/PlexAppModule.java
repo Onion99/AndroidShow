@@ -98,8 +98,8 @@ public class PlexAppModule {
     @Provides
     @Singleton
     @Named("status")
-    ApiInterface provideServiceStatus(SettingsManager tokenManager) {
-        return ServiceGenerator.createServiceWithStatus(ApiInterface.class, tokenManager);
+    ApiInterface provideServiceStatus() {
+        return ServiceGenerator.createServiceWithStatus(ApiInterface.class);
 
     }
 
