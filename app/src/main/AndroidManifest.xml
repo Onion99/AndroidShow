@@ -23,14 +23,20 @@
             android:launchMode="singleTop"
             android:parentActivityName=".app.plex.ui.PlexMainActivity" />-->
 
-        <activity android:name=".app.pokemon.ui.PokedexMainActivity">
+        <activity
+            android:name=".app.pokemon.ui.PokedexMainActivity"
+            android:label="Poke"
+            android:theme="@style/SplashTheme_Poke">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".app.plex.ui.PlexSplashActivity"
+            android:exported="false"
+            android:label="Plex"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -37,9 +37,9 @@ object ViewBinding {
 
     @JvmStatic
     @BindingAdapter("toast")
-    fun bindToast(view: View, text:String?){
+    fun bindToast(view: View, text: String) {
         text.whatIfNotNullOrEmpty {
-            Toast.makeText(view.context,it,Toast.LENGTH_SHORT).show()
+            Toast.makeText(view.context, it, Toast.LENGTH_SHORT).show()
         }
     }
 

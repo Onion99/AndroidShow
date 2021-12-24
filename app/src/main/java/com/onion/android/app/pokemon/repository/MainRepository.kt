@@ -12,6 +12,8 @@ import com.onion.android.kotlin.simple.whatif.whatIfNotNull
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 
 class MainRepository @Inject constructor(
@@ -22,25 +24,25 @@ class MainRepository @Inject constructor(
 
     @WorkerThread
     fun fetchPokemonList(
-        page:Int,
-        onSuccess: () -> Unit,
-        onError:(String ?) -> Unit
-    ) = flow{
-        var pokemons = pokemonDao.getPokemonList(page)
-        if(pokemons.isEmpty()){
+        page: Int,
+        onStart: () -> Unit,
+        onComplete: () -> Unit,
+        onError: (String?) -> Unit
+    ) = flow {
+        var pokemonList = pokemonDao.getPokemonList(page)
+        if (pokemonList.isEmpty()) {
             val response = pokemonClient.fetchPokemonList(page = page)
             response.suspendOnSuccess {
                 data.whatIfNotNull { response ->
-                    pokemons = response.results
-                    pokemons.forEach { pokemon ->
+                    pokemonList = response.results
+                    pokemonList.forEach { pokemon ->
                         pokemon.page = page
                     }
-                    pokemonDao.insertPokemonList(pokemons)
+                    pokemonDao.insertPokemonList(pokemonList)
                     emit(pokemonDao.getAllPokemonList(page))
-                    onSuccess()
                 }
             }.onError {
-                map(ErrorResponseMapper){
+                map(ErrorResponseMapper) {
                     onError("[Code: $code]: $message")
                 }
             }.onException {
@@ -48,9 +50,8 @@ class MainRepository @Inject constructor(
             }
         } else {
             emit(pokemonDao.getAllPokemonList(page))
-            onSuccess()
         }
-    }.flowOn(Dispatchers.IO)
+    }.onStart { onStart() }.onCompletion { onComplete() }.flowOn(Dispatchers.IO)
 }
 
 // ------------------------------------------------------------------------

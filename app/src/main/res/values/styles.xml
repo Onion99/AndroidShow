@@ -112,6 +112,11 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="SplashTheme_Poke" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
     <style name="H100">
         <item name="android:textSize">11dp</item>
         <item name="android:textColor">#fff0f1f5</item>

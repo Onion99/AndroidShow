@@ -46,9 +46,9 @@
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
             app:adapter="@{adapter}"
-            app:adapterPokemonList="@{vm.pokemonListLiveData}"
+            app:adapterPokemonList="@{vm.pokemonList}"
             app:paginationPokemonList="@{vm}"
-            app:toast="@{vm.toastLiveData}"
+            app:toast="@{vm.toastMessage}"
             tools:listitem="@layout/pokedex_item_pokemon"
             />
 
@@ -56,7 +56,9 @@
             android:id="@+id/progressbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:gone="@{!vm.loading}"
+            android:outlineAmbientShadowColor="@color/colorPrimary"
+            android:outlineSpotShadowColor="@color/colorPrimary"
+            app:gone="@{!vm.loading &amp;&amp; adapter.submitted}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

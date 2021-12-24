@@ -10,10 +10,10 @@ import dagger.multibindings.IntoMap
 @Module
 abstract class PokedexViewModelModule {
 
-    ///////////////////////////////////////////////////////////////////////////
-    // @Binds 和 @Provider的作用相差不大，区别在于@Provider需要写明具体的实现，而@Binds只是告诉Dagger2谁是谁实现的
-    // @IntoMap则可以让Dagger2将多个元素依赖注入到Map之中。
-    ///////////////////////////////////////////////////////////////////////////
+    // ------------------------------------------------------------------------
+    //  @Binds 和 @Provider的作用相差不大，区别在于@Provider需要写明具体的实现，而@Binds只是告诉Dagger2谁是谁实现的
+    //  @IntoMap则可以让Dagger2将多个元素依赖注入到Map之中。
+    // ------------------------------------------------------------------------
     @Binds
     @IntoMap
     @ViewModelKey(PokedexMainViewModel::class)

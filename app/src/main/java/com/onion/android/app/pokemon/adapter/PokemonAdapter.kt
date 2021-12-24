@@ -2,44 +2,44 @@ package com.onion.android.app.pokemon.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.onion.android.app.pokemon.model.Pokemon
 import com.onion.android.databinding.PokedexItemPokemonBinding
+import com.onion.android.kotlin.jetpack.BindingListAdapter
 
-class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>(){
+class PokemonAdapter : BindingListAdapter<Pokemon, PokemonAdapter.PokemonViewHolder>(diffUtil) {
 
-    private val items:MutableList<Pokemon> = mutableListOf()
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): PokemonViewHolder {
-        val binding = PokedexItemPokemonBinding.inflate(LayoutInflater.from(parent.context))
-        return PokemonViewHolder(binding).apply {
-            binding.root.setOnClickListener{
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder =
+        PokemonViewHolder(PokedexItemPokemonBinding.inflate(LayoutInflater.from(parent.context)))
+
+    override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) =
+        holder.bindPokemon(getItem(position))
+
+
+    class PokemonViewHolder constructor(val binding: PokedexItemPokemonBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.root.setOnClickListener {
 
             }
         }
-    }
 
-    override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
-        holder.binding.apply {
-            pokemon = items[position]
-            // 执行绑定配置
-            executePendingBindings()
+        fun bindPokemon(pokemon: Pokemon) {
+            binding.pokemon = pokemon
+            binding.executePendingBindings()
         }
     }
 
-    override fun getItemCount(): Int = items.size
+    companion object {
+        private val diffUtil = object : DiffUtil.ItemCallback<Pokemon>() {
 
-    fun setPokemonList(pokemonList: List<Pokemon>){
-        val previousItemSize = items.size
-        items.clear()
-        items.addAll(pokemonList)
-        notifyItemRangeChanged(previousItemSize,pokemonList.size)
+            override fun areItemsTheSame(oldItem: Pokemon, newItem: Pokemon): Boolean =
+                oldItem.name == newItem.name
+
+            override fun areContentsTheSame(oldItem: Pokemon, newItem: Pokemon): Boolean =
+                oldItem == newItem
+        }
     }
-
-    class PokemonViewHolder(val binding: PokedexItemPokemonBinding) :
-        RecyclerView.ViewHolder(binding.root)
-
 }
