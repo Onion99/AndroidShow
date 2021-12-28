@@ -32,18 +32,14 @@ public class AnimesFragment extends PlexBaseFragment<PlexFragmentLibraryGenresBi
     }
 
     private void initData() {
-        mBinding.recyclerView.setLayoutManager(new GridLayoutManager(requireActivity(), 3));
-        mBinding.recyclerView.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(requireContext(), 0), true));
-        mBinding.recyclerView.setItemViewCacheSize(12);
+        genresViewModel = viewModelProvider.get(GenresViewModel.class);
+        binding.recyclerView.setLayoutManager(new GridLayoutManager(requireActivity(), 3));
+        binding.recyclerView.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(requireContext(), 0), true));
+        binding.recyclerView.setItemViewCacheSize(12);
         genresViewModel.animePagedList.observe(getViewLifecycleOwner(), series -> {
-            mBinding.noMoviesFound.setVisibility(View.GONE);
+            binding.noMoviesFound.setVisibility(View.GONE);
             itemAdapter.submitList(series);
         });
-        mBinding.recyclerView.setAdapter(itemAdapter);
-    }
-
-    @Override
-    public void initViewModel() {
-        genresViewModel = mViewModelProvider.get(GenresViewModel.class);
+        binding.recyclerView.setAdapter(itemAdapter);
     }
 }

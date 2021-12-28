@@ -49,9 +49,9 @@ ext.versions = [
         mediarouter            : '1.2.2',
 
         // react programing
-        'rxandroidVersion'       : '3.0.0',
-        'rxjavaVersion'          : '3.0.0',
+        'rxandroidVersion'     : '3.0.0',
+        'rxjavaVersion'        : '3.0.0',
         // 加密
-        'stringcare_version'        : '4.0.1',
+        'stringcare_version'   : '4.2.1',
 
 ]

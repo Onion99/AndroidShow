@@ -1,13 +1,91 @@
 package com.onion.android.app.plex.manager;
 
+import static android.provider.ContactsContract.CommonDataKinds.Website.URL;
+import static com.onion.android.app.constants.PlexConstants.ADMOB_REWARD;
+import static com.onion.android.app.constants.PlexConstants.ADS_SETTINGS;
+import static com.onion.android.app.constants.PlexConstants.AD_BANNER;
+import static com.onion.android.app.constants.PlexConstants.AD_BANNER_APPODEAL_UNIT_ID;
+import static com.onion.android.app.constants.PlexConstants.AD_BANNER_FACEEBOK_ENABLE;
+import static com.onion.android.app.constants.PlexConstants.AD_BANNER_FACEEBOK_UNIT_ID;
+import static com.onion.android.app.constants.PlexConstants.AD_BANNER_UNIT;
+import static com.onion.android.app.constants.PlexConstants.AD_FACEBOOK_INTERSTITIAL_SHOW;
+import static com.onion.android.app.constants.PlexConstants.AD_FACEBOOK_NATIVE_ENABLE;
+import static com.onion.android.app.constants.PlexConstants.AD_FACEBOOK_NATIVE_UNIT_ID;
+import static com.onion.android.app.constants.PlexConstants.AD_INTERSTITIAL;
+import static com.onion.android.app.constants.PlexConstants.AD_INTERSTITIAL_APPOBEAL_ENABLE;
+import static com.onion.android.app.constants.PlexConstants.AD_INTERSTITIAL_APPOBEAL_SHOW;
+import static com.onion.android.app.constants.PlexConstants.AD_INTERSTITIAL_APPODEAL_UNIT_ID;
+import static com.onion.android.app.constants.PlexConstants.AD_INTERSTITIAL_FACEEBOK_ENABLE;
+import static com.onion.android.app.constants.PlexConstants.AD_INTERSTITIAL_FACEEBOK_UNIT_ID;
+import static com.onion.android.app.constants.PlexConstants.AD_INTERSTITIAL_SHOW;
+import static com.onion.android.app.constants.PlexConstants.AD_INTERSTITIAL_UNIT;
+import static com.onion.android.app.constants.PlexConstants.AD_NATIVEADS_ADMOB_ENABLE;
+import static com.onion.android.app.constants.PlexConstants.AD_NATIVEADS_ADMOB_UNIT_ID;
+import static com.onion.android.app.constants.PlexConstants.ALLOW_ADM_DOWNLOADS;
+import static com.onion.android.app.constants.PlexConstants.ANIME;
+import static com.onion.android.app.constants.PlexConstants.API_KEY;
+import static com.onion.android.app.constants.PlexConstants.APPODEAL_BANNER;
+import static com.onion.android.app.constants.PlexConstants.APPODEAL_REWARD;
+import static com.onion.android.app.constants.PlexConstants.APP_NAME;
+import static com.onion.android.app.constants.PlexConstants.APP_URL_ANDROID;
+import static com.onion.android.app.constants.PlexConstants.AUTOSUBSTITLES;
+import static com.onion.android.app.constants.PlexConstants.CUSTOM_BANNER_IMAGE;
+import static com.onion.android.app.constants.PlexConstants.CUSTOM_BANNER_IMAGE_LINK;
+import static com.onion.android.app.constants.PlexConstants.CUSTOM_MESSAGE;
+import static com.onion.android.app.constants.PlexConstants.DEFAULT_DOWNLOADS_OPTION;
+import static com.onion.android.app.constants.PlexConstants.DEFAULT_MEDIA_COVER;
+import static com.onion.android.app.constants.PlexConstants.DEFAULT_NETWORK;
+import static com.onion.android.app.constants.PlexConstants.DEFAULT_NETWORK_PLAYER;
+import static com.onion.android.app.constants.PlexConstants.DEFAULT_PAYMENT;
+import static com.onion.android.app.constants.PlexConstants.DEFAULT_YOUTUBE_QUALITY;
+import static com.onion.android.app.constants.PlexConstants.DOWNLOADS_PREMUIM_ONLY;
+import static com.onion.android.app.constants.PlexConstants.ENABLE_BOTTOM_ADS_HOME;
+import static com.onion.android.app.constants.PlexConstants.ENABLE_CUSTOM_BANNER;
+import static com.onion.android.app.constants.PlexConstants.ENABLE_CUSTOM_MESSAGE;
+import static com.onion.android.app.constants.PlexConstants.ENABLE_SERVER_DIALOG_SELECTION;
+import static com.onion.android.app.constants.PlexConstants.ENABLE_STREAMING;
+import static com.onion.android.app.constants.PlexConstants.FACEBOOK;
+import static com.onion.android.app.constants.PlexConstants.FACEBOOK_REWARD;
+import static com.onion.android.app.constants.PlexConstants.FEATURED_HOME_NUMBERS;
+import static com.onion.android.app.constants.PlexConstants.IMDB_COVER_PATH;
+import static com.onion.android.app.constants.PlexConstants.INSTAGRAM;
+import static com.onion.android.app.constants.PlexConstants.LATEST_VERSION;
+import static com.onion.android.app.constants.PlexConstants.MANTENANCE_MESSAGE;
+import static com.onion.android.app.constants.PlexConstants.MANTENANCE_MODE;
+import static com.onion.android.app.constants.PlexConstants.NEXT_EPISODE_TIMER;
+import static com.onion.android.app.constants.PlexConstants.OFFLINE_RESUME;
+import static com.onion.android.app.constants.PlexConstants.PAYPAL_AMOUNT;
+import static com.onion.android.app.constants.PlexConstants.PAYPAL_CLIENT_ID;
+import static com.onion.android.app.constants.PlexConstants.PAYPAL_CURRENCY;
+import static com.onion.android.app.constants.PlexConstants.PINNED;
+import static com.onion.android.app.constants.PlexConstants.PREVIEWS;
+import static com.onion.android.app.constants.PlexConstants.PRIVACY_POLICY;
+import static com.onion.android.app.constants.PlexConstants.PURCHASE_KEY;
+import static com.onion.android.app.constants.PlexConstants.RELEASE_NOTES;
+import static com.onion.android.app.constants.PlexConstants.SPLASH_IMAGE;
+import static com.onion.android.app.constants.PlexConstants.STARTAPP_BANNER;
+import static com.onion.android.app.constants.PlexConstants.STARTAPP_ID;
+import static com.onion.android.app.constants.PlexConstants.STARTAPP_INTER;
+import static com.onion.android.app.constants.PlexConstants.STRIPE_PUBLISHABLE_KEY;
+import static com.onion.android.app.constants.PlexConstants.STRIPE_SECRET_KEY;
+import static com.onion.android.app.constants.PlexConstants.TMDB;
+import static com.onion.android.app.constants.PlexConstants.TWITTER;
+import static com.onion.android.app.constants.PlexConstants.UNITYADS_BANNER;
+import static com.onion.android.app.constants.PlexConstants.UNITYADS_INTER;
+import static com.onion.android.app.constants.PlexConstants.UNITY_GAME_ID;
+import static com.onion.android.app.constants.PlexConstants.UPCOMING;
+import static com.onion.android.app.constants.PlexConstants.UPDATE_TITLE;
+import static com.onion.android.app.constants.PlexConstants.USER_AGENT;
+import static com.onion.android.app.constants.PlexConstants.VLC;
+import static com.onion.android.app.constants.PlexConstants.WATCH_ADS_TO_UNLOCK;
+import static com.onion.android.app.constants.PlexConstants.WATCH_ADS_TO_UNLOCK_PLAYER;
+import static com.onion.android.app.constants.PlexConstants.YOUTUBE;
+
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 
-
 import com.onion.android.app.plex.data.model.settings.Settings;
-
-import static android.provider.ContactsContract.CommonDataKinds.Website.URL;
-import static com.onion.android.app.constants.PlexConstants.*;
+import com.stringcare.library.SC;
 
 
 
@@ -154,7 +232,7 @@ public class SettingsManager {
         settings.setAdUnitIdInterstitial(prefs.getString(AD_INTERSTITIAL_UNIT, "ca-app-pub-3940256099942544/1033173712"));
         settings.setAdBanner(prefs.getInt(AD_BANNER, 0));
         settings.setAdUnitIdBanner(prefs.getString(AD_BANNER_UNIT, "ca-app-pub-3940256099942544/6300978111"));
-        settings.setPurchaseKey(prefs.getString(PURCHASE_KEY, API_KEY));
+        settings.setPurchaseKey(prefs.getString(SC.reveal(PURCHASE_KEY), SC.reveal(API_KEY)));
         settings.setTmdbApiKey(prefs.getString(TMDB, null));
         settings.setPrivacyPolicy(prefs.getString(PRIVACY_POLICY, null));
         settings.setAutosubstitles(prefs.getInt(AUTOSUBSTITLES, 1));

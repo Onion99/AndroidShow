@@ -26,14 +26,25 @@ plugins {
     // kotlin-kapt, kotlin注解处理器插件,以AAC系列库的注解使用都依赖这东西
     // kotlin-parcelize,自动化处理序列化生成
 }
-// java和kotlin混合开发 使用Dagger 需要在目标build.gradle(module)的最后添加下面代码，现在为主Module，暂时用不到
-// kapt {
-//    generateStubs = true
-// }
+apply plugin: StringCare // 字符串加密
+/*
+ * java和kotlin混合开发 使用Dagger 需要在目标build.gradle(module)的最后添加下面代码，现在为主Module，暂时用不到
+ kapt {
+    generateStubs = true
+ }
+ */
 
 // 上面的调用等同域 apply plugin: 'com.android.application'
 apply from: "$rootDir/dependencies.gradle"
 apply from: "$rootDir/config.gradle"
+
+// default config
+stringcare {
+    debug false
+    assetsFiles = ["*.json"]
+    stringFiles = ['strings.xml']
+    srcFolders = ['src/main']
+}
 
 android {
     compileSdkVersion 30
@@ -253,6 +264,8 @@ dependencies {
     implementation "com.google.android.exoplayer:extension-mediasession:$versions.exoplayerversion"
     // 投屏 ，使用公共用户界面在远程接收器设备上启用媒体显示和播放
     implementation "androidx.mediarouter:mediarouter:$versions.mediarouter"
+    // 字符串加密 : https://github.com/StringCare/AndroidLibrary/wiki/Implementation
+    implementation "io.github.stringcare:library:$versions.stringcare_version"
 
     // 测试相关
     testImplementation 'junit:junit:4.13'

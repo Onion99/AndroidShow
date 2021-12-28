@@ -57,9 +57,9 @@ abstract class BasePlayerActivity : LifeCycleActivity(), LifecycleOwner, Playbac
     @Inject
     lateinit var sharedPreferences: SharedPreferences
 
-    ///////////////////////////////////////////////////////////////////////////
+    // ------------------------------------------------------------------------
     // 首先获取媒体数据
-    ///////////////////////////////////////////////////////////////////////////
+    // ------------------------------------------------------------------------
     private fun parseIntent() {
         val error = "MediaModel is empty"
         Assertions.checkState(intent != null && intent.extras != null, error)

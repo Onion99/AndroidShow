@@ -27,7 +27,9 @@ public abstract class PlexBaseActivity<T extends ViewDataBinding> extends AppCom
 
     public T mBinding;
 
+    // ------------------------------------------------------------------------
     // DispatchingAndroidInjector 通过 AndroidInjector.Factory 创建AndroidInjector，并将您的activity传递至XXXXActivitySubcomponentImpl中。
+    // ------------------------------------------------------------------------
     @Inject
     DispatchingAndroidInjector<Object> dispatchingAndroidInjector;
 
@@ -39,10 +41,7 @@ public abstract class PlexBaseActivity<T extends ViewDataBinding> extends AppCom
         // 2 - AndroidInjection.inject(this);
         // 最后都在Activity Module 实现实例返回
         // AndroidInjection.inject(this);
-
-        // DataBinding 绑定
         mBinding = DataBindingUtil.setContentView(this, getBindingContent(savedInstanceState));
-        initViewModel();
         initView();
     }
 
@@ -51,8 +50,6 @@ public abstract class PlexBaseActivity<T extends ViewDataBinding> extends AppCom
         super.onDestroy();
         Optional.ofNullable(mBinding).ifPresent(ViewDataBinding::unbind);
     }
-
-    public abstract void initViewModel();
 
     public abstract void initView();
 
@@ -65,12 +62,9 @@ public abstract class PlexBaseActivity<T extends ViewDataBinding> extends AppCom
     }
 
 
-    /**
-     * 隐藏系统状态栏
-     *
-     * @param activity  当前上下文
-     * @param immediate 是否沉浸式
-     */
+    // ------------------------------------------------------------------------
+    // 隐藏系统状态栏
+    // ------------------------------------------------------------------------
     public void hideSystemBar(@NonNull final Activity activity, final boolean immediate) {
         hideSystemBar(activity, immediate, 2000);
     }

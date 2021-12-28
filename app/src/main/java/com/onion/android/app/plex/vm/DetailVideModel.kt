@@ -12,7 +12,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
 
-class DetailVideModel : ViewModel {
+class DetailVideModel @Inject constructor() : ViewModel() {
     lateinit var media: Media
     var mediaLoad = false
     private val compositeDisposable = CompositeDisposable()
@@ -24,9 +24,6 @@ class DetailVideModel : ViewModel {
     lateinit var settingsManager: SettingsManager
     val movieDetailMutableLiveData = MutableLiveData<Media>()
     val movieRelatesMutableLiveData = MutableLiveData<MovieResponse>()
-
-    @Inject
-    constructor() : super()
 
     ///////////////////////////////////////////////////////////////////////////
     // 获取电影详情

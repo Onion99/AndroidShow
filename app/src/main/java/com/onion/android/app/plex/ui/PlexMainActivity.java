@@ -18,11 +18,6 @@ public class PlexMainActivity extends PlexBaseActivity<PlexActivityMainBinding> 
 
 
     @Override
-    public void initViewModel() {
-
-    }
-
-    @Override
     public void initView() {
         hideSystemBar(this, true);
         changeFragment(new HomeFragment(), HomeFragment.class.getSimpleName());
@@ -34,15 +29,13 @@ public class PlexMainActivity extends PlexBaseActivity<PlexActivityMainBinding> 
                 (item -> {
                     switch (item.getItemId()) {
                         case R.id.navigation_home:
-                            changeFragment(new HomeFragment(), HomeFragment.class
-                                    .getSimpleName());
+                            changeFragment(new HomeFragment(), HomeFragment.class.getSimpleName());
                             break;
                         case R.id.navigation_search:
                             changeFragment(new DiscoverFragment(), DiscoverFragment.class.getSimpleName());
                             break;
                         case R.id.navigation_browse:
-                            changeFragment(new LibraryFragment(), LibraryFragment.class
-                                    .getSimpleName());
+                            changeFragment(new LibraryFragment(), LibraryFragment.class.getSimpleName());
                             break;
                         default:
                             break;

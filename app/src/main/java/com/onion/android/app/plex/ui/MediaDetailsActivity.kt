@@ -11,29 +11,29 @@ import com.onion.android.app.plex.ui.adapter.decoration.SpacingItemDecoration
 import com.onion.android.app.plex.vm.DetailVideModel
 import com.onion.android.app.view.dp
 import com.onion.android.databinding.ActivityMovieDetailsActivityBinding
-import com.onion.android.kotlin.extension.fadeOut
-import com.onion.android.kotlin.extension.loadToolbar
-import com.onion.android.kotlin.extension.loadUrl
+import com.onion.android.kotlin.extension.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
 const val ARG_MOVIE = "movie"
 
 class MediaDetailsActivity :
     BaseActivity<ActivityMovieDetailsActivityBinding>(R.layout.activity_movie_details_activity) {
 
-    private val detailVideModel by lazy { getActivityScopeViewModel(DetailVideModel::class.java) }
+    @Inject
+    lateinit var detailVideModel: DetailVideModel
 
     override fun init() {
         intent.getParcelableExtra<Media>(ARG_MOVIE) ?: return
         detailVideModel.media = intent.getParcelableExtra(ARG_MOVIE)!!
         initView()
         initLiveData()
-        if (detailVideModel.media.tmdbId.isNotEmpty()) {
+        if (detailVideModel.media.tmdbId.isNotNull()) {
             detailVideModel.getMediaDetail(detailVideModel.media.tmdbId)
         } else {
             detailVideModel.getMediaDetail(detailVideModel.media.id)
@@ -41,6 +41,8 @@ class MediaDetailsActivity :
     }
 
     private fun initView() {
+        setSystemBarTransparent()
+        hideSystemBar()
         loadToolbar(binding.toolbar, binding.appbar)
         binding.backbutton.setOnClickListener { onBackPressed() }
     }
@@ -72,7 +74,7 @@ class MediaDetailsActivity :
             // 滑动监听
             binding.itemDetailContainer.viewTreeObserver.addOnScrollChangedListener {
                 val scrollY = binding.itemDetailContainer.scrollY
-                var color = Color.parseColor("#E6070707") // ideally a global variable
+                var color = Color.parseColor("#9A434141") // ideally a global variable
                 if (scrollY < 256) {
                     val alpha = scrollY shl 24 or (-1 ushr 8)
                     color = color and alpha

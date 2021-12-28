@@ -16,12 +16,23 @@
         android:theme="@style/AppPlexTheme"
         android:usesCleartextTraffic="true">
         <!-- parentActivityName:为了左上角给子Activity加一个返回按钮-->
-        <!--<activity
+        <activity
             android:name=".app.plex.ui.MediaDetailsActivity"
+            android:parentActivityName=".app.plex.ui.PlexMainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:exported="true"
             android:launchMode="singleTop"
-            android:parentActivityName=".app.plex.ui.PlexMainActivity" />-->
+            android:theme="@style/SplashTheme" />
+
+        <activity
+            android:name=".app.plex.ui.PlexSplashActivity"
+            android:label="Plex"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".app.pokemon.ui.PokedexMainActivity"
@@ -33,17 +44,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".app.plex.ui.PlexSplashActivity"
-            android:exported="false"
-            android:label="Plex"
-            android:theme="@style/SplashTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".app.plex.ui.PlexMainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"

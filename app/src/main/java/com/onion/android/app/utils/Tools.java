@@ -95,7 +95,9 @@ public class Tools {
     }
 
 
+    // ------------------------------------------------------------------------
     // 解析编码 (BASE64)
+    // ------------------------------------------------------------------------
     public static final String PLAYER = "aHR0cHM6Ly9hcGkuZW52YXRvLmNvbS92My8=";
 
     public static String getPlayer() {
@@ -110,13 +112,17 @@ public class Tools {
     private static final String PREF_UNIQUE_ID = "PREF_UNIQUE_ID";
     private static String uniqueID = null;
 
+    // ------------------------------------------------------------------------
     // 将时间转为毫秒
+    // ------------------------------------------------------------------------
     public static long progressToMilli(long playerDurationMs, SeekBar seekBar) {
         long duration = playerDurationMs < 1 ? C.TIME_UNSET : playerDurationMs;
         return duration == C.TIME_UNSET ? 0 : ((duration * seekBar.getProgress()) / seekBar.getMax());
     }
 
+    // ------------------------------------------------------------------------
     // 获取时间进展
+    // ------------------------------------------------------------------------
     public static String getProgressTime(long timeMs, boolean remaining) {
         if (timeMs == C.TIME_UNSET) timeMs = 0;
         long totalSeconds = (timeMs + 500) / 1000;

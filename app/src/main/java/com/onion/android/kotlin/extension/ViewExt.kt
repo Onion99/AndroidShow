@@ -11,7 +11,7 @@ import com.onion.android.R
 fun ImageView.loadUrl(path: String) {
     Glide.with(context).asBitmap().load(path)
         .fitCenter()
-        .placeholder(R.color.app_background)
+        .placeholder(R.color.plex_background)
         .diskCacheStrategy(DiskCacheStrategy.ALL)
         .transition(BitmapTransitionOptions.withCrossFade())
         .skipMemoryCache(true)

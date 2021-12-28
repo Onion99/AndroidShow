@@ -23,14 +23,14 @@ public class LibraryFragment extends PlexBaseFragment<PlexFragmentLibraryBinding
 
     @Override
     public void initView() {
-        loadToolbar(mBinding.toolbar, null);
-        Tools.loadHttpImg(mBinding.logoImageTop, SERVER_BASE_URL + "image/minilogo");
+        loadToolbar(binding.toolbar, null);
+        Tools.loadHttpImg(binding.logoImageTop, SERVER_BASE_URL + "image/minilogo");
         setUpTabs();
     }
 
     private void setUpTabs() {
-        setupViewPager(mBinding.viewPager);
-        new TabLayoutMediator(mBinding.tabLayout, mBinding.viewPager,
+        setupViewPager(binding.viewPager);
+        new TabLayoutMediator(binding.tabLayout, binding.viewPager,
                 (tab, position) -> {
                     if (position == 0)
                         tab.setText(getResources().getString(R.string.movies));
@@ -49,9 +49,5 @@ public class LibraryFragment extends PlexBaseFragment<PlexFragmentLibraryBinding
         vpFragmentAdapter.addFragment(new SeriesFragment());
         vpFragmentAdapter.addFragment(new AnimesFragment());
         viewPager.setAdapter(vpFragmentAdapter);
-    }
-
-    @Override
-    public void initViewModel() {
     }
 }
