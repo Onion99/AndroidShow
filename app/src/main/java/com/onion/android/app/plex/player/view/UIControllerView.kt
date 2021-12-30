@@ -20,7 +20,6 @@ class UIControllerView : FrameLayout {
 
     @Inject
     lateinit var playerController: PlayerController
-    private val TAG = UIControllerView::class.java.simpleName
     private val TIME_TO_HIDE_CONTROL = 5000
     private lateinit var binding: PlexControllerViewBinding
     private lateinit var countdownHandler: Handler

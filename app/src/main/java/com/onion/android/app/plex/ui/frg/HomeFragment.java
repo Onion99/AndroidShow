@@ -35,7 +35,9 @@ public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding> {
 
     @Override
     public void initView() {
-        binding.swipeContainer.setOnRefreshListener(this::initData);
+        binding.swipeContainer.setOnRefreshListener(() -> {
+            viewModel.initData();
+        });
         if (Tools.checkIfHasNetwork(requireContext())) {
             initData();
         } else {
@@ -75,6 +77,7 @@ public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding> {
             mFeaturedAdapter.addFeatured(featured.getFeatured(), requireActivity(), mediaRepository);
             viewModel.mFeaturedLoaded = true;
             viewModel.mScrollLoaded = true;
+            binding.swipeContainer.setRefreshing(false);
             checkDataLoaded();
         });
     }

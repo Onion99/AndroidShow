@@ -3,11 +3,21 @@ package com.onion.android.app.plex.data.model.media;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.jetbrains.annotations.NotNull;
+
+@Entity(primaryKeys = "tmdb", tableName = "resume")
 public class Resume implements Parcelable {
 
+    @NonNull
+    @SerializedName("tmdb")
+    @Expose
+    private String tmdb;
 
     protected Resume(Parcel in) {
         userResumeId = in.readInt();
@@ -102,10 +112,9 @@ public class Resume implements Parcelable {
     @SerializedName("user_resume_id")
     @Expose
     private int userResumeId;
-
-    @SerializedName("tmdb")
+    @SerializedName("type")
     @Expose
-    private String tmdb;
+    private String type;
 
     public String getDeviceId() {
         return deviceId;
@@ -143,9 +152,20 @@ public class Resume implements Parcelable {
     @Expose
     private Integer resumePosition;
 
+    public Resume(@NotNull String tmdb) {
+        this.tmdb = tmdb;
+    }
+
+    public String getType() {
+        return type;
+    }
 
     @SerializedName("movieDuration")
     @Expose
     private Integer movieDuration;
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
 }

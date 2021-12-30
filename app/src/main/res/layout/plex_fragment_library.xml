@@ -4,8 +4,8 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:background="@color/plex_item_bg"
         android:layout_height="match_parent"
+        android:background="@color/plex_item_bg"
         android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -22,14 +22,14 @@
                 app:contentInsetStartWithNavigation="0dp"
                 android:elevation="4dp"
                 app:layout_scrollFlags="scroll|enterAlways"
-                app:popupTheme="@style/AppTheme.PopupOverlay">
+                android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
+                app:popupTheme="?attr/popupTheme">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    android:gravity="center">
 
                     <ImageView
                         android:id="@+id/logo_image_top"
@@ -37,21 +37,21 @@
                         android:layout_height="100dp"
                         android:contentDescription="@string/image" />
                 </RelativeLayout>
-
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tab_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:tabGravity="fill"
-                    app:tabIndicatorColor="@color/main_color"
-                    app:tabIndicatorHeight="3dp"
-                    app:tabMode="fixed"
-                    app:tabSelectedTextColor="@color/golden_gate"
-                    app:tabTextAppearance="@style/TextAppearance.Design.Tab"
-                    app:tabTextColor="@color/grey_20" />
             </androidx.appcompat.widget.Toolbar>
 
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabGravity="fill"
+                app:tabIndicatorColor="@color/main_color"
+                app:tabIndicatorHeight="3dp"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/golden_gate"
+                app:tabTextAppearance="@style/TextAppearance.Design.Tab"
+                app:tabTextColor="@color/grey_20" />
         </com.google.android.material.appbar.AppBarLayout>
+
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"

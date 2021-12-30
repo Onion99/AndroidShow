@@ -9,6 +9,7 @@ import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
@@ -19,6 +20,7 @@ import android.widget.SeekBar;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.exoplayer2.C;
+import com.google.android.exoplayer2.util.MimeTypes;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Formatter;
@@ -148,5 +150,21 @@ public class Tools {
             }
         }
         return uniqueID;
+    }
+
+    // ------------------------------------------------------------------------
+    // 获取字幕类型
+    // ------------------------------------------------------------------------
+    public static String getSubtitleMime(Uri uri) {
+        final String path = uri.getPath();
+        if (path.endsWith(".ssa") || path.endsWith(".ass")) {
+            return MimeTypes.TEXT_SSA;
+        } else if (path.endsWith(".vtt")) {
+            return MimeTypes.TEXT_VTT;
+        } else if (path.endsWith(".ttml") || path.endsWith(".xml") || path.endsWith(".dfxp")) {
+            return MimeTypes.APPLICATION_TTML;
+        } else {
+            return MimeTypes.APPLICATION_SUBRIP;
+        }
     }
 }

@@ -2,25 +2,30 @@ package com.onion.android.app.plex.ui.view
 
 import android.content.Context
 import android.util.AttributeSet
-import android.widget.ImageButton
+import android.widget.Checkable
+import androidx.appcompat.widget.AppCompatImageButton
 import com.onion.android.R
 
-class SeasonsImageButton : ImageButton {
-    constructor(context: Context?) : super(context)
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
+// ------------------------------------------------------------------------
+// 类似于Switch Button 的Image Button
+// ------------------------------------------------------------------------
+class StatusImageButton : AppCompatImageButton, Checkable {
+
+    constructor(context: Context) : super(context) {
+        init(null)
+    }
+
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
+        init(attrs)
+    }
+
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
         context,
         attrs,
         defStyleAttr
-    )
-
-    constructor(
-        context: Context?,
-        attrs: AttributeSet?,
-        defStyleAttr: Int,
-        defStyleRes: Int
-    ) : super(context, attrs, defStyleAttr, defStyleRes)
-
+    ) {
+        init(attrs)
+    }
 
     private var isChecked = false
     private var mStateCheckedDrawableId = 0
@@ -34,10 +39,8 @@ class SeasonsImageButton : ImageButton {
      */
     private fun init(attrs: AttributeSet?) {
         if (attrs != null) {
-            val a = context.theme.obtainStyledAttributes(
-                attrs,
-                R.styleable.SubTitleImageButton, 0, 0
-            )
+            val a =
+                context.theme.obtainStyledAttributes(attrs, R.styleable.SubTitleImageButton, 0, 0)
             try {
                 mStateCheckedDrawableId = a.getResourceId(
                     R.styleable.SubTitleImageButton_state_checked,
@@ -65,8 +68,12 @@ class SeasonsImageButton : ImageButton {
     }
 
 
-    fun setChecked(checked: Boolean) {
+    override fun setChecked(checked: Boolean) {
         isChecked = checked
         setDrawableSelector()
     }
+
+    override fun isChecked(): Boolean = isChecked
+
+    override fun toggle() = setChecked(!isChecked())
 }

@@ -92,6 +92,9 @@
     <color name="fragment_content_detail_overlay_end">#1a1a1a</color>
     <color name="fragment_content_detail_overlay_center">#6626262d</color>
     <color name="fragment_content_detail_overlay_start">#0026262d</color>
+    <color name="tv_auto_play_overlay_center">#99191919</color>
+    <color name="tv_auto_play_overlay_end">#cc191919</color>
+    <color name="tv_auto_play_overlay_start">#4c191919</color>
     <!-- Plex__Expanded Controls -->
     <color name="black_subtitles_background">#64000000</color>
     <color name="green_subtitles_background">#641E9618</color>

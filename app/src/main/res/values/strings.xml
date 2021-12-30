@@ -67,6 +67,7 @@
     <string name="episodes">Episodes</string>
     <string name="next_episode">Next Episode</string>
     <string name="audio">Audio</string>
+    <string name="skip_recap">跳过 介绍</string>
     <string name="no_relateds_movies_found">未找到相关电影</string>
     <string name="genres_list_is_empty">Genres List is empty</string>
     <string name="please_try_another_genre">Please try another genre.</string>

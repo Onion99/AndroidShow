@@ -10,7 +10,6 @@
 
         <import type="android.view.View" />
 
-
         <variable
             name="controller"
             type="com.onion.android.app.plex.player.controller.PlayerController" />
@@ -27,12 +26,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
-            <com.onion.android.app.plex.player.view.TubiExoPlayerView
+            <com.onion.android.app.plex.player.view.ExoPlayerView
                 android:id="@+id/tubitv_player"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-
 
             <FrameLayout
                 android:id="@+id/main_nav_host_fragment"
@@ -611,7 +608,7 @@
                     android:visibility="visible">
 
 
-                    <com.onion.android.app.plex.ui.view.SeasonsImageButton
+                    <com.onion.android.app.plex.ui.view.StatusImageButton
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginTop="5dp"
@@ -689,7 +686,7 @@
                     android:visibility="visible">
 
 
-                    <com.onion.android.app.plex.ui.view.SeasonsImageButton
+                    <com.onion.android.app.plex.ui.view.StatusImageButton
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginTop="5dp"
@@ -738,7 +735,7 @@
                     android:visibility="visible">
 
 
-                    <com.onion.android.app.plex.ui.view.SeasonsImageButton
+                    <com.onion.android.app.plex.ui.view.StatusImageButton
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginTop="5dp"
@@ -896,7 +893,7 @@
                     android:visibility="visible">
 
 
-                    <com.onion.android.app.plex.ui.view.SeasonsImageButton
+                    <com.onion.android.app.plex.ui.view.StatusImageButton
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginTop="5dp"
@@ -1138,8 +1135,6 @@
                                     android:textStyle="bold"
                                     app:fontFamily="sans-serif-black"
                                     tools:text="Up Next in : 15 sec" />
-
-
                             </LinearLayout>
 
 
@@ -1151,15 +1146,9 @@
                                 android:layout_marginEnd="5dp"
                                 android:contentDescription="@string/image"
                                 android:scaleType="fitCenter" />
-
                         </LinearLayout>
-
-
                     </LinearLayout>
-
-
                 </FrameLayout>
-
             </FrameLayout>
 
             <WebView

@@ -55,10 +55,10 @@ import timber.log.Timber;
  * Created by stoyan tubi_tv_quality_on 3/22/17.
  */
 @TargetApi(16)
-public class TubiExoPlayerView extends PlayerView {
+public class ExoPlayerView extends PlayerView {
 
 
-    private static final String TAG = TubiExoPlayerView.class.getSimpleName();
+    private static final String TAG = ExoPlayerView.class.getSimpleName();
     private static final int SURFACE_TYPE_NONE = 0;
     private static final int SURFACE_TYPE_SURFACE_VIEW = 1;
     private static final int SURFACE_TYPE_TEXTURE_VIEW = 2;
@@ -72,16 +72,16 @@ public class TubiExoPlayerView extends PlayerView {
     private SimpleExoPlayer player;
     private PlayerController userController;
 
-    public TubiExoPlayerView(Context context) {
+    public ExoPlayerView(Context context) {
         this(context, null);
     }
 
-    public TubiExoPlayerView(Context context, AttributeSet attrs) {
+    public ExoPlayerView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    @SuppressWarnings("deprecation")
-    public TubiExoPlayerView(Context context, AttributeSet attrs, int defStyleAttr) {
+
+    public ExoPlayerView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         if (isInEditMode()) {
@@ -107,8 +107,7 @@ public class TubiExoPlayerView extends PlayerView {
         if (attrs != null) {
             TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.PlayerView, 0, 0);
             try {
-                playerLayoutId = a.getResourceId(R.styleable.PlayerView_player_layout_id,
-                        playerLayoutId);
+                playerLayoutId = a.getResourceId(R.styleable.PlayerView_player_layout_id, playerLayoutId);
                 surfaceType = a.getInt(R.styleable.PlayerView_surface_type, surfaceType);
                 resizeMode = a.getInt(R.styleable.PlayerView_resize_mode, resizeMode);
             } finally {
@@ -131,10 +130,8 @@ public class TubiExoPlayerView extends PlayerView {
 
         // Create a surface view and insert it into the content frame, if there is one.
         if (contentFrame != null && surfaceType != SURFACE_TYPE_NONE) {
-            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            surfaceView = surfaceType == SURFACE_TYPE_TEXTURE_VIEW ? new TextureView(context)
-                    : new SurfaceView(context);
+            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            surfaceView = surfaceType == SURFACE_TYPE_TEXTURE_VIEW ? new TextureView(context) : new SurfaceView(context);
             surfaceView.setLayoutParams(params);
             contentFrame.addView(surfaceView, 0);
         } else {
@@ -336,12 +333,6 @@ public class TubiExoPlayerView extends PlayerView {
     public void setMediaModel(@NonNull MediaModel mediaModel) {
         if (userController != null) {
             userController.setMediaModel(mediaModel, getContext());
-        }
-    }
-
-    public void setAvailableAdLeft(int count) {
-        if (userController != null) {
-            userController.setAvailableAdLeft(count);
         }
     }
 

@@ -3,7 +3,9 @@ package com.onion.android.app.plex.ui.frg;
 import static com.onion.android.app.constants.PlexConstants.SERVER_BASE_URL;
 
 import android.os.Bundle;
+import android.view.Menu;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -21,9 +23,16 @@ public class LibraryFragment extends PlexBaseFragment<PlexFragmentLibraryBinding
         return R.layout.plex_fragment_library;
     }
 
+
+    @Override
+    public void onPrepareOptionsMenu(@NonNull Menu menu) {
+        menu.clear();
+    }
+
     @Override
     public void initView() {
         loadToolbar(binding.toolbar, null);
+        setHasOptionsMenu(true);
         Tools.loadHttpImg(binding.logoImageTop, SERVER_BASE_URL + "image/minilogo");
         setUpTabs();
     }

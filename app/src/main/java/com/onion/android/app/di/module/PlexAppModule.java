@@ -13,6 +13,7 @@ import com.onion.android.app.plex.data.local.EasyPlexDataBase;
 import com.onion.android.app.plex.data.local.dao.DownloadDao;
 import com.onion.android.app.plex.data.local.dao.FavoriteDao;
 import com.onion.android.app.plex.data.local.dao.HistoryDao;
+import com.onion.android.app.plex.data.local.dao.ResumeDao;
 import com.onion.android.app.plex.data.local.dao.StreamListDao;
 import com.onion.android.app.plex.data.remote.ApiInterface;
 import com.onion.android.app.plex.data.remote.FsmPlayerApi;
@@ -166,6 +167,12 @@ public class PlexAppModule {
         return dataBase.streamListDao();
     }
 
+
+    @Singleton
+    @Provides
+    ResumeDao provideResumeDao(EasyPlexDataBase dataBase) {
+        return dataBase.resumeDao();
+    }
 
     @Singleton
     @Provides

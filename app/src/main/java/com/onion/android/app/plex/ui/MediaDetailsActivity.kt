@@ -2,6 +2,7 @@ package com.onion.android.app.plex.ui
 
 import android.graphics.Color
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onion.android.R
 import com.onion.android.app.base.BaseActivity
@@ -45,10 +46,14 @@ class MediaDetailsActivity :
         hideSystemBar()
         loadToolbar(binding.toolbar, binding.appbar)
         binding.backbutton.setOnClickListener { onBackPressed() }
+        binding.PlayButtonIcon.setOnClickListener {
+            showVideoSelect()
+        }
     }
 
     private fun initLiveData() {
         detailVideModel.movieDetailMutableLiveData.observe(this) {
+            detailVideModel.media = it
             // 背景
             binding.imageMoviePoster.loadUrl(it.posterPath)
             // 标题
@@ -114,5 +119,18 @@ class MediaDetailsActivity :
             binding.progressBar.fadeOut()
             binding.progressBar.visibility = View.GONE
         }
+    }
+
+    private fun showVideoSelect() {
+        val charSequence = arrayOfNulls<String>(detailVideModel.media.videos.size)
+        for (index in detailVideModel.media.videos.indices) {
+            charSequence[index] =
+                detailVideModel.media.videos[index].server + " - " + detailVideModel.media.videos[index].lang
+        }
+        val builder = AlertDialog.Builder(this, R.style.MyAlertDialogTheme)
+        builder.setTitle("清晰度")
+        builder.setItems(charSequence) { dialog, which -> }
+        builder.setCancelable(true)
+        builder.show()
     }
 }

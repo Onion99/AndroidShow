@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.exoplayer2.source.MediaSource;
-import com.onion.android.app.constants.PlexConstants;
 
 import java.io.Serializable;
 
@@ -26,6 +25,7 @@ public class MediaModel implements Serializable {
     private final Integer epId;
 
 
+
     @Nullable
     private final String seasonId;
 
@@ -34,14 +34,11 @@ public class MediaModel implements Serializable {
     private final String epImdb;
 
 
-
     @Nullable
     private final String tvSeasonId;
 
-
     @Nullable
     private final String currentEpName;
-
 
 
     @Nullable
@@ -55,15 +52,13 @@ public class MediaModel implements Serializable {
     private final String currentEpTmdbNumber;
 
 
-    @Nullable
-    private final String currentTvShowName;
-
+    private final int hlscustomformat;
 
 
     @Nullable
     private final String currentExternalId;
-
-
+    @Nullable
+    private final float voteAverage;
 
     /**
      * The url of the media
@@ -92,8 +87,6 @@ public class MediaModel implements Serializable {
 
 
 
-
-
     /**
      * Return if media Premuim
      */
@@ -107,6 +100,13 @@ public class MediaModel implements Serializable {
      */
     @NonNull
     private final String mediaUrl;
+    @Nullable
+    private final String serieName;
+    /**
+     * The nullable subtitles that we sideload for the main media source
+     */
+    @Nullable
+    private final String mediaSubstitleUrl;
 
     /**
      * The title of the media to display
@@ -123,13 +123,6 @@ public class MediaModel implements Serializable {
      */
     @Nullable
     private String mediaCover;
-
-    /**
-     * The nullable subtitles that we sideload for the main media source
-     */
-    @Nullable
-    private String mediaSubstitleUrl;
-
     /**
      * The nullable click through url for this media if its an ad
      *
@@ -137,10 +130,19 @@ public class MediaModel implements Serializable {
      */
 
 
-
-
     @Nullable
-    private String mediaSubstitleType;
+    private final String mediaSubstitleType;
+    @Nullable
+    private final String mediaCoverHistory;
+    private final int hasRecap;
+    private final int getSkiprecapStartIn;
+    @Nullable
+    private final String mediaGenres;
+    /**
+     * Whether this media is an ad or not
+     */
+    private final boolean isAd;
+    private final String type;
 
 
     @Nullable
@@ -150,27 +152,13 @@ public class MediaModel implements Serializable {
      * The media source representation of this model
      */
     private transient MediaSource mediaSource;
-
     /**
      * Whether this media is an ad or not
      */
-    private boolean isAd;
+    private final boolean isVpaid;
 
 
-    private String type;
-
-    /**
-     * Whether this media is an ad or not
-     */
-    private boolean isVpaid;
-
-
-    @Nullable
-    public String getCurrentExternalId() {
-        return currentExternalId;
-    }
-
-    public MediaModel(@Nullable String currentTvShowName, @Nullable String videoid, @Nullable String mediaGenre,
+    public MediaModel(@Nullable int hlscustomformat, @Nullable String videoid, @Nullable String mediaGenre,
                       @Nullable String currentQuality, String type, @Nullable
                               String mediaName, @NonNull String mediaUrl,
                       @Nullable String mediaCover,
@@ -180,10 +168,15 @@ public class MediaModel implements Serializable {
                       @Nullable String tvSeasonId, @Nullable String currentEpName,
                       @Nullable String currentSeasonsNumber, @Nullable Integer episodePostionNumber,
                       @Nullable String currentEpTmdbNumber
-            , Integer isPremuim, String mediaSubstitleType , String currentExternalId) {
+            , @org.jetbrains.annotations.Nullable Integer isPremuim, @org.jetbrains.annotations.Nullable String mediaSubstitleType,
+                      @org.jetbrains.annotations.Nullable String currentExternalId,
+                      @Nullable String mediaCoverHistory, int hasRecap,
+                      int getSkiprecapStartIn, @Nullable String mediaGenres, @Nullable String serieName, float voteAverage) {
 
 
-        this.currentTvShowName = currentTvShowName;
+        this.voteAverage = voteAverage;
+        this.serieName = serieName;
+        this.hlscustomformat = hlscustomformat;
         this.videoid = videoid;
         this.mediaGenre = mediaGenre;
         this.currentQuality = currentQuality;
@@ -206,23 +199,45 @@ public class MediaModel implements Serializable {
         this.isPremuim = isPremuim;
         this.mediaSubstitleType = mediaSubstitleType;
         this.currentExternalId = currentExternalId;
+        this.mediaCoverHistory = mediaCoverHistory;
+        this.hasRecap = hasRecap;
+        this.getSkiprecapStartIn = getSkiprecapStartIn;
+        this.mediaGenres = mediaGenres;
     }
-
-
 
     public static MediaModel media(@Nullable String videoid, @Nullable String substitleLang, @Nullable String currentQuality, String type, @Nullable String mediaName, @NonNull String videoUrl, @Nullable String artworkUrl,
                                    @Nullable String subtitlesUrl, @Nullable Integer epId, @Nullable String seasonId, @Nullable String epImdb,
                                    @Nullable String tvSeasonId, @Nullable String currentEpName, @Nullable
                                            String currentSeasonsNumber, Integer episodePostionNumber,
-                                   String currentEpTmdbNumber , Integer isPremuim, String currentTvShowName,String mediaSubstitleType , String currentExternalId) {
-        return new MediaModel(currentTvShowName, videoid, substitleLang, currentQuality ,type, mediaName, videoUrl, artworkUrl, subtitlesUrl, null,
-                false, false,epId,seasonId,epImdb, tvSeasonId, currentEpName, currentSeasonsNumber, episodePostionNumber, currentEpTmdbNumber,isPremuim, mediaSubstitleType , currentExternalId);
+                                   String currentEpTmdbNumber, Integer isPremuim,
+                                   int hlscustomformat,
+                                   String mediaSubstitleType,
+                                   String currentExternalId,
+                                   String serieCover,
+                                   int hasRecap, int getSkiprecapStartIn, String mediaGenres, String serieName, float voteAverage) {
+        return new MediaModel(hlscustomformat, videoid, substitleLang, currentQuality, type, mediaName, videoUrl, artworkUrl, subtitlesUrl, null,
+                false, false, epId, seasonId, epImdb, tvSeasonId,
+                currentEpName, currentSeasonsNumber, episodePostionNumber,
+                currentEpTmdbNumber, isPremuim, mediaSubstitleType,
+                currentExternalId, serieCover, hasRecap, getSkiprecapStartIn,
+                mediaGenres, serieName, voteAverage);
     }
 
     public static MediaModel ad(@NonNull String videoUrl, @Nullable String clickThroughUrl, boolean isVpaid) {
-        return new MediaModel(null, null, null, null, null,null , videoUrl, null, null, clickThroughUrl,true,isVpaid,null,null
+        return new MediaModel(0, null, null, null, null, null, videoUrl, null, null, clickThroughUrl, true, isVpaid, null, null
 
-                ,null, null, null, null, null, null,null,null,null);
+                , null, null, null,
+                null, null,
+                null, null, null, null, null, 0, 0, null, null, 0);
+    }
+
+    public float getVoteAverage() {
+        return voteAverage;
+    }
+
+    @Nullable
+    public String getSerieName() {
+        return serieName;
     }
 
     @Nullable
@@ -236,14 +251,9 @@ public class MediaModel implements Serializable {
     }
 
     @Nullable
-    public Uri getMediaCover() {
+    public String getMediaCover() {
 
-        if (mediaCover == null) {
-
-          mediaCover = (PlexConstants.SERVER_BASE_URL +"image/logo");
-        }
-
-        return Uri.parse(mediaCover);
+        return mediaCover;
     }
 
     @Nullable
@@ -314,6 +324,12 @@ public class MediaModel implements Serializable {
     }
 
 
+    @Nullable
+    public String getMediaGenres() {
+        return mediaGenres;
+    }
+
+
     public boolean isVpaid() {
         return isVpaid;
     }
@@ -340,18 +356,14 @@ public class MediaModel implements Serializable {
     }
 
 
-    @Nullable
-    public String getCurrentTvShowName() {
-        return currentTvShowName;
+    public int getHlscustomformat() {
+        return hlscustomformat;
     }
-
 
     @Nullable
     public String getCurrentQuality() {
         return currentQuality;
     }
-
-
 
     public Integer getIsPremuim() {
         return isPremuim;
@@ -359,5 +371,25 @@ public class MediaModel implements Serializable {
 
     public void setIsPremuim(Integer isPremuim) {
         this.isPremuim = isPremuim;
+    }
+
+    @Nullable
+    public String getMediaCoverHistory() {
+        return mediaCoverHistory;
+    }
+
+    @Nullable
+    public Integer getHasRecap() {
+        return hasRecap;
+    }
+
+    @Nullable
+    public Integer getGetSkiprecapStartIn() {
+        return getSkiprecapStartIn;
+    }
+
+    @Nullable
+    public String getCurrentExternalId() {
+        return currentExternalId;
     }
 }

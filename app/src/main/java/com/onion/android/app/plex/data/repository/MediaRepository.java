@@ -19,6 +19,7 @@ import com.onion.android.app.plex.data.datasource.stream.StreamingDataSourceFact
 import com.onion.android.app.plex.data.local.dao.DownloadDao;
 import com.onion.android.app.plex.data.local.dao.FavoriteDao;
 import com.onion.android.app.plex.data.local.dao.HistoryDao;
+import com.onion.android.app.plex.data.local.dao.ResumeDao;
 import com.onion.android.app.plex.data.local.dao.StreamListDao;
 import com.onion.android.app.plex.data.local.entity.Download;
 import com.onion.android.app.plex.data.local.entity.History;
@@ -30,12 +31,10 @@ import com.onion.android.app.plex.data.model.episode.EpisodeStream;
 import com.onion.android.app.plex.data.model.genres.GenresByID;
 import com.onion.android.app.plex.data.model.genres.GenresData;
 import com.onion.android.app.plex.data.model.media.Resume;
-import com.onion.android.app.plex.data.model.report.Report;
 import com.onion.android.app.plex.data.model.search.SearchResponse;
 import com.onion.android.app.plex.data.model.status.Status;
 import com.onion.android.app.plex.data.model.stream.MediaStream;
 import com.onion.android.app.plex.data.model.substitles.ExternalID;
-import com.onion.android.app.plex.data.model.suggestions.Suggest;
 import com.onion.android.app.plex.data.model.upcoming.Upcoming;
 import com.onion.android.app.plex.data.remote.ApiInterface;
 import com.onion.android.app.plex.manager.SettingsManager;
@@ -56,6 +55,7 @@ public class MediaRepository {
     private final FavoriteDao favoriteDao;
     private final DownloadDao downloadDao;
     private final HistoryDao historyDao;
+    private final ResumeDao resumeDao;
     private final StreamListDao streamListDao;
     ApiInterface requestMainApi;
 
@@ -83,14 +83,18 @@ public class MediaRepository {
     ApiInterface requestStatusApi;
 
     @Inject
-    MediaRepository(FavoriteDao favoriteDao, DownloadDao downloadDao, ApiInterface requestMainApi,
-                    ApiInterface requestImdbApi, HistoryDao historyDao,StreamListDao streamListDao) {
+    MediaRepository(FavoriteDao favoriteDao, DownloadDao downloadDao,
+                    ApiInterface requestMainApi, ApiInterface requestImdbApi,
+                    HistoryDao historyDao, StreamListDao streamListDao,
+                    ResumeDao resumeDao
+    ) {
         this.favoriteDao = favoriteDao;
         this.downloadDao = downloadDao;
         this.historyDao = historyDao;
         this.streamListDao = streamListDao;
         this.requestMainApi = requestMainApi;
         this.requestImdbApi = requestImdbApi;
+        this.resumeDao = resumeDao;
     }
 
 
@@ -306,25 +310,6 @@ public class MediaRepository {
 
 
 
-
-    // Return Report
-    public Observable<Report> getReport(String code,String title,String message) {
-        return requestMainApi.report(code,title,message);
-    }
-
-
-
-
-    // Return Suggest
-    public Observable<Suggest> getSuggest(String code, String title, String message) {
-        return requestMainApi.suggest(code,title,message);
-    }
-
-
-
-    public Observable<Report> getReport2(String code , String title, String message) {
-        return requestAppApi.report2(code,title,message);
-    }
 
 
 
@@ -633,9 +618,13 @@ public class MediaRepository {
     }
 
 
-
     public boolean isStreamFavorite(int movieid) {
         return streamListDao.isStreamFavoriteMovie(movieid);
+    }
+
+    // Add Movie or Serie in favorite
+    public void addResume(Resume resume) {
+        resumeDao.saveMediaToResume(resume);
     }
 
 }
