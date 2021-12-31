@@ -11,7 +11,6 @@ import com.onion.android.app.plex.data.local.converters.MediaSubstitlesConverter
 import com.onion.android.app.plex.data.local.converters.SaisonConverter;
 import com.onion.android.app.plex.data.local.converters.VideosConverter;
 import com.onion.android.app.plex.data.local.dao.DownloadDao;
-import com.onion.android.app.plex.data.local.dao.FavoriteDao;
 import com.onion.android.app.plex.data.local.dao.HistoryDao;
 import com.onion.android.app.plex.data.local.dao.ResumeDao;
 import com.onion.android.app.plex.data.local.dao.StreamListDao;
@@ -37,7 +36,7 @@ import com.onion.android.app.plex.data.model.media.Resume;
  * 如果您将它放在Dao方法上，那么该方法的所有参数都将能够使用它。
  * 如果将其放在Dao方法参数上，则只有该字段能够使用它
  * */
-@Database(entities = {Media.class, Download.class, History.class, Stream.class, Resume.class}, version = 3, exportSchema = false)
+@Database(entities = {Media.class, Download.class, History.class, Stream.class, Resume.class}, version = 5, exportSchema = false)
 @TypeConverters({GenreConverter.class,
         CastConverter.class,
         VideosConverter.class,
@@ -45,11 +44,8 @@ import com.onion.android.app.plex.data.model.media.Resume;
         MediaSubstitlesConverter.class,
         MediaStreamConverter.class})
 public abstract class EasyPlexDataBase extends RoomDatabase {
-    public abstract FavoriteDao favoriteDao();
     public abstract DownloadDao progressDao();
     public abstract HistoryDao historyDao();
-
     public abstract StreamListDao streamListDao();
-
     public abstract ResumeDao resumeDao();
 }

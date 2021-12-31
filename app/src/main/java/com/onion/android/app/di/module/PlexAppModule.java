@@ -11,7 +11,6 @@ import androidx.room.Room;
 
 import com.onion.android.app.plex.data.local.EasyPlexDataBase;
 import com.onion.android.app.plex.data.local.dao.DownloadDao;
-import com.onion.android.app.plex.data.local.dao.FavoriteDao;
 import com.onion.android.app.plex.data.local.dao.HistoryDao;
 import com.onion.android.app.plex.data.local.dao.ResumeDao;
 import com.onion.android.app.plex.data.local.dao.StreamListDao;
@@ -146,13 +145,6 @@ public class PlexAppModule {
         return Room.databaseBuilder(application, EasyPlexDataBase.class, "plex.db")
                 .allowMainThreadQueries()
                 .fallbackToDestructiveMigration().build();
-    }
-
-    // Room 表 - 注入
-    @Singleton
-    @Provides
-    FavoriteDao provideFavMoviesDao(EasyPlexDataBase dataBase) {
-        return dataBase.favoriteDao();
     }
 
     @Singleton

@@ -142,7 +142,7 @@
                             android:layout_width="5dp"
                             android:layout_height="@dimen/pixel_20dp"
                             android:layout_marginTop="2dp"
-                            android:background="@mipmap/row"
+                            android:background="@drawable/row"
                             android:backgroundTint="@color/golden_gate"
                             android:contentDescription="@string/image" />
 
@@ -188,7 +188,7 @@
                             android:layout_width="5dp"
                             android:layout_height="@dimen/pixel_20dp"
                             android:layout_marginTop="2dp"
-                            android:background="@mipmap/row"
+                            android:background="@drawable/row"
                             android:backgroundTint="@color/golden_gate"
                             android:contentDescription="@string/image" />
 

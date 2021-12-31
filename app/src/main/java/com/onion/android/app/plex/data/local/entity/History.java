@@ -3,7 +3,7 @@ package com.onion.android.app.plex.data.local.entity;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Index;
+import androidx.room.PrimaryKey;
 import androidx.room.RoomWarnings;
 
 import com.google.gson.annotations.Expose;
@@ -11,10 +11,7 @@ import com.google.gson.annotations.SerializedName;
 
 
 @SuppressWarnings(RoomWarnings.DEFAULT_CONSTRUCTOR)
-@Entity(
-        tableName = "history",
-        indices = {@Index(value = {"id"}, unique = true)}, inheritSuperIndices = true)
-
+@Entity(tableName = "history", inheritSuperIndices = true)
 public class History extends Media {
 
     public History(@NonNull String id, @NonNull String tmdbId, String posterPath , String title,String backdropPath,String link) {
@@ -53,22 +50,27 @@ public class History extends Media {
     @NonNull
     @SerializedName("id")
     @Expose
-    @ColumnInfo(name = "history_id")
-    public String id;
+    @PrimaryKey
+    private String id;
 
 
     @NonNull
     @SerializedName("tmdb_id")
     @Expose
     @ColumnInfo(name = "tmdbId_history")
-    public String tmdbId;
+    private String tmdbId;
 
     @Override
     public String getTitle() {
         return title;
     }
 
-
+    @ColumnInfo(name = "serieName_history")
+    @Expose
+    private String serieName;
+    @ColumnInfo(name = "seasondbId_history")
+    @Expose
+    private int seasondbId;
 
     @Override
     public void setTitle(String title) {
@@ -80,7 +82,9 @@ public class History extends Media {
     @SerializedName("poster_path")
     @Expose
     private String posterPath;
-
+    @ColumnInfo(name = "mediaGenre_history")
+    @Expose
+    private String mediaGenre;
 
 
     @ColumnInfo(name = "title_history")
@@ -131,13 +135,14 @@ public class History extends Media {
     @Expose
     private String tv;
 
-    public String getType() {
-        return type;
+    public String getSerieName() {
+        return serieName;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setSerieName(String serieName) {
+        this.serieName = serieName;
     }
+
 
     @ColumnInfo(name = "type_history")
     @Expose
@@ -187,6 +192,32 @@ public class History extends Media {
     @ColumnInfo(name = "seasonsNumber_history")
     @Expose
     private String seasonsNumber;
+
+    @Override
+    public String getType() {
+        return type;
+    }
+
+    @Override
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public int getSeasondbId() {
+        return seasondbId;
+    }
+
+    public void setSeasondbId(int seasondbId) {
+        this.seasondbId = seasondbId;
+    }
+
+    public String getMediaGenre() {
+        return mediaGenre;
+    }
+
+    public void setMediaGenre(String mediaGenre) {
+        this.mediaGenre = mediaGenre;
+    }
 
     @ColumnInfo(name = "seasonId_history")
     @Expose
@@ -286,9 +317,4 @@ public class History extends Media {
     public void setPosterPath(String posterPath) {
         this.posterPath = posterPath;
     }
-
-
-
-
-
 }

@@ -81,6 +81,7 @@
     <string name="plan_name">NAME</string>
     <string name="player_default">default</string>
     <string name="player_43">4:3</string>
+    <string name="choose_your_launch_player">选择要启用的播放器</string>
     <string name="player_169">16:9</string>
     <string name="player_fullscreen">full screen</string>
     <string name="player_room">Zoom</string>

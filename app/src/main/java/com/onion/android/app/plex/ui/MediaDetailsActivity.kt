@@ -3,15 +3,19 @@ package com.onion.android.app.plex.ui
 import android.graphics.Color
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onion.android.R
 import com.onion.android.app.base.BaseActivity
 import com.onion.android.app.plex.data.local.entity.Media
+import com.onion.android.app.plex.data.model.stream.MediaStream
 import com.onion.android.app.plex.ui.adapter.RelatesAdapter
 import com.onion.android.app.plex.ui.adapter.decoration.SpacingItemDecoration
 import com.onion.android.app.plex.vm.DetailVideModel
+import com.onion.android.app.utils.Tools
 import com.onion.android.app.view.dp
 import com.onion.android.databinding.ActivityMovieDetailsActivityBinding
+import com.onion.android.databinding.PlexDialogBottomStreamBinding
 import com.onion.android.kotlin.extension.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -28,6 +32,9 @@ class MediaDetailsActivity :
 
     @Inject
     lateinit var detailVideModel: DetailVideModel
+    private lateinit var currentUrl: String
+    private var mediaGenre = ""
+    private lateinit var currentMediaStream: MediaStream
 
     override fun init() {
         intent.getParcelableExtra<Media>(ARG_MOVIE) ?: return
@@ -129,8 +136,31 @@ class MediaDetailsActivity :
         }
         val builder = AlertDialog.Builder(this, R.style.MyAlertDialogTheme)
         builder.setTitle("清晰度")
-        builder.setItems(charSequence) { dialog, which -> }
+        builder.setItems(charSequence) { _, which ->
+            detailVideModel.media.videos[which]?.apply {
+                showPlayDialog(which)
+                currentUrl = link
+                currentMediaStream = this
+            }
+        }
         builder.setCancelable(true)
         builder.show()
+    }
+
+    //                                 startStreamFromDialog(movieDetail, wich, externalId, movieDetail.getVideos().get(wich).getLink(), movieDetail.getVideos().get(wich));
+    private fun showPlayDialog(which: Int) {
+        val dialog = AppCompatDialog(this)
+        dialog.setBindingView<PlexDialogBottomStreamBinding>(R.layout.plex_dialog_bottom_stream)
+            .apply {
+                btClose.setOnClickListener { dialog.dismiss() }
+                plexPlayer.setOnClickListener {
+                    Tools.useMainPlay(
+                        this@MediaDetailsActivity,
+                        detailVideModel.media, currentUrl, currentMediaStream.server,
+                        mediaGenre, currentMediaStream
+                    )
+                }
+            }
+        dialog.setNormalStyleShow()
     }
 }

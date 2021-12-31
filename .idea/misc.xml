@@ -6,9 +6,12 @@
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/avd_search_on.xml" value="0.114" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/bg_episodes.xml" value="0.1" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/bg_episodes_resume.xml" value="0.1525" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/bg_vlc.xml" value="0.1" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/btn_gradient.xml" value="0.1398148148148148" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/btn_gradient_watch_video.xml" value="0.1398148148148148" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/btn_mx.xml" value="0.1" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/btn_premuim.xml" value="0.1398148148148148" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/btn_webcast.xml" value="0.1" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/content_detail_progress.xml" value="0.158" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/fragment_content_detail_overlay.xml" value="0.1525" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/drawable/fragment_content_detail_top.xml" value="0.1525" />
@@ -63,6 +66,8 @@
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/layout/plex_activity_player.xml" value="0.192481884057971" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/layout/plex_activity_spalsh.xml" value="0.14994934143870314" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/layout/plex_controller_view.xml" value="0.1" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/layout/plex_dialog_bottom_stream.xml" value="0.192481884057971" />
+        <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/layout/plex_fragment_discover.xml" value="0.16145833333333334" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/layout/plex_fragment_home.xml" value="0.1" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/layout/plex_fragment_library.xml" value="0.32135416666666666" />
         <entry key="..\:/Project/Mine/AndroidShow/app/src/main/res/layout/plex_item_featured.xml" value="0.3104166666666667" />

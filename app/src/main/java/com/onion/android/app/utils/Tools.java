@@ -1,8 +1,11 @@
 package com.onion.android.app.utils;
 
 import static com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions.withCrossFade;
+import static com.onion.android.app.plex.ui.MediaDetailsActivityKt.ARG_MOVIE;
+import static com.onion.android.app.plex.ui.player.MainPlayerActivityKt.MEDIA_KEY;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
@@ -21,6 +24,10 @@ import android.widget.SeekBar;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.util.MimeTypes;
+import com.onion.android.app.plex.data.local.entity.Media;
+import com.onion.android.app.plex.data.model.media.MediaModel;
+import com.onion.android.app.plex.data.model.stream.MediaStream;
+import com.onion.android.app.plex.ui.player.MainPlayerActivity;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Formatter;
@@ -138,6 +145,9 @@ public class Tools {
         return remaining && timeMs != 0 ? "-" + time : time;
     }
 
+    // ------------------------------------------------------------------------
+    // 设备id
+    // ------------------------------------------------------------------------
     public static synchronized String id(Context context) {
         if (uniqueID == null) {
             SharedPreferences sharedPrefs = context.getSharedPreferences(PREF_UNIQUE_ID, Context.MODE_PRIVATE);
@@ -165,6 +175,35 @@ public class Tools {
             return MimeTypes.APPLICATION_TTML;
         } else {
             return MimeTypes.APPLICATION_SUBRIP;
+        }
+    }
+
+    public static void useMainPlay(Context context, Media movieDetail, String url, String server, String mediaGenre, MediaStream mediaStream) {
+        if (!movieDetail.getSubstitles().isEmpty() && movieDetail.getSubstitles() != null && movieDetail.getSubstitles().get(0).getZip() != 1) {
+            String currentSubsTitle = movieDetail.getSubstitles().get(0).getLink();
+            String currentSubsTitleType = movieDetail.getSubstitles().get(0).getType();
+            String currentSubsTitleLang = movieDetail.getSubstitles().get(0).getLang();
+            Intent intent = new Intent(context, MainPlayerActivity.class);
+            intent.putExtra(MEDIA_KEY, MediaModel.media(movieDetail.getId(),
+                    currentSubsTitleLang, mediaStream.getServer(), "0", movieDetail.getTitle(),
+                    url, movieDetail.getBackdropPath(), currentSubsTitle, null
+                    , null, null, null, null,
+                    null, null, null,
+                    null, mediaStream.getHls(), currentSubsTitleType, movieDetail.getImdbExternalId()
+                    , movieDetail.getPosterPath(), movieDetail.getHasrecap(), movieDetail.getSkiprecapStartIn(), mediaGenre, null, movieDetail.getVoteAverage()));
+            intent.putExtra(ARG_MOVIE, movieDetail);
+            context.startActivity(intent);
+        } else {
+            Intent intent = new Intent(context, MainPlayerActivity.class);
+            intent.putExtra(MEDIA_KEY, MediaModel.media(movieDetail.getId(),
+                    null, server, "0", movieDetail.getTitle(),
+                    url, movieDetail.getBackdropPath(), null, null
+                    , null, null, null, null,
+                    null, null, null,
+                    null, mediaStream.getHls(), movieDetail.getSubstype(), movieDetail.getImdbExternalId()
+                    , movieDetail.getPosterPath(), movieDetail.getHasrecap(), movieDetail.getSkiprecapStartIn(), mediaGenre, null, movieDetail.getVoteAverage()));
+            intent.putExtra(ARG_MOVIE, movieDetail);
+            context.startActivity(intent);
         }
     }
 }

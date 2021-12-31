@@ -9,33 +9,45 @@ import androidx.annotation.NonNull;
 import androidx.databinding.BindingAdapter;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Index;
+import androidx.room.PrimaryKey;
 import androidx.room.RoomWarnings;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.onion.android.app.plex.data.model.credits.Cast;
 import com.onion.android.app.plex.data.model.genres.Genre;
 import com.onion.android.app.plex.data.model.serie.Season;
 import com.onion.android.app.plex.data.model.stream.MediaStream;
-import com.onion.android.app.plex.data.model.substitles.MediaSubstitle;
+import com.onion.android.app.plex.data.model.substitles.MediaSubsTitle;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 
-
-
-@Entity(primaryKeys = "tmdbId",
-        tableName = "favorite",
-        indices = {@Index(value = {"tmdbId"}, unique = true)}, inheritSuperIndices = true)
-
+@Entity(tableName = "movies")
 @SuppressWarnings(RoomWarnings.PRIMARY_KEY_FROM_EMBEDDED_IS_DROPPED)
 public class Media implements Parcelable {
+    public static final Creator<Media> CREATOR = new Creator<Media>() {
+        @Override
+        public Media createFromParcel(Parcel in) {
+            return new Media(in);
+        }
 
+        @Override
+        public Media[] newArray(int size) {
+            return new Media[size];
+        }
+    };
     @NonNull
     @SerializedName("id")
     @Expose
-    public String id;
+    @PrimaryKey
+    private String id;
+    @SerializedName("tmdb_id")
+    @Expose
+    private String tmdbId;
 
     public String getDeviceId() {
         return deviceId;
@@ -48,14 +60,28 @@ public class Media implements Parcelable {
     @SerializedName("deviceId")
     @Expose
     private String deviceId;
-    @NonNull
-    @SerializedName("tmdb_id")
+    @SerializedName("skiprecap_start_in")
     @Expose
-    public String tmdbId;
-
-
-    public Media() {
-    }
+    private Integer skiprecapStartIn;
+    @SerializedName("hasrecap")
+    @Expose
+    private Integer hasrecap;
+    @SerializedName("type")
+    @Expose
+    private String type;
+    private long contentLength;
+    @SerializedName("linkpreview")
+    @Expose
+    private String linkpreview;
+    @SerializedName("minicover")
+    @Expose
+    private String minicover;
+    @SerializedName("trailer_url")
+    @Expose
+    private String trailerUrl;
+    @SerializedName("newEpisodes")
+    @Expose
+    private int newEpisodes;
 
 
     public String getImdbExternalId() {
@@ -74,6 +100,13 @@ public class Media implements Parcelable {
     @SerializedName("title")
     @Expose
     private String title;
+    @SerializedName("hls")
+    @Expose
+    private int hls;
+    private int streamhls;
+    @SerializedName("youtubelink")
+    @Expose
+    private int youtubelink;
 
     @SerializedName("name")
     @Expose
@@ -90,6 +123,15 @@ public class Media implements Parcelable {
     @SerializedName("substype")
     @Expose
     private String substype;
+    @SerializedName("substitles")
+    @Expose
+    private List<MediaSubsTitle> substitles = null;
+    @SerializedName("downloads")
+    @Expose
+    private List<MediaStream> downloads;
+    @SerializedName("casterslist")
+    @Expose
+    private List<Cast> cast;
 
 
     @SerializedName("overview")
@@ -101,12 +143,107 @@ public class Media implements Parcelable {
     @Expose
     private String posterPath;
 
+    public Media() {
+
+        //
+    }
+
+    protected Media(Parcel in) {
+        deviceId = in.readString();
+        id = in.readString();
+        tmdbId = in.readString();
+        if (in.readByte() == 0) {
+            skiprecapStartIn = null;
+        } else {
+            skiprecapStartIn = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            hasrecap = null;
+        } else {
+            hasrecap = in.readInt();
+        }
+        imdbExternalId = in.readString();
+        title = in.readString();
+        type = in.readString();
+        name = in.readString();
+        substype = in.readString();
+        contentLength = in.readLong();
+        overview = in.readString();
+        posterPath = in.readString();
+        linkpreview = in.readString();
+        minicover = in.readString();
+        backdropPath = in.readString();
+        previewPath = in.readString();
+        trailerUrl = in.readString();
+        voteAverage = in.readFloat();
+        voteCount = in.readString();
+        live = in.readInt();
+        premuim = in.readInt();
+        newEpisodes = in.readInt();
+        userHistoryId = in.readInt();
+        vip = in.readInt();
+        hls = in.readInt();
+        streamhls = in.readInt();
+        link = in.readString();
+        embed = in.readInt();
+        youtubelink = in.readInt();
+        resumeWindow = in.readInt();
+        resumePosition = in.readLong();
+        isAnime = in.readInt();
+        popularity = in.readString();
+        views = in.readString();
+        status = in.readString();
+        runtime = in.readString();
+        releaseDate = in.readString();
+        genre = in.readString();
+        firstAirDate = in.readString();
+        trailerId = in.readString();
+        createdAt = in.readString();
+        updatedAt = in.readString();
+        if (in.readByte() == 0) {
+            hd = null;
+        } else {
+            hd = in.readInt();
+        }
+        genres = in.createTypedArrayList(Genre.CREATOR);
+    }
+
+    public Integer getSkiprecapStartIn() {
+        return skiprecapStartIn;
+    }
+
+    public void setSkiprecapStartIn(Integer skiprecapStartIn) {
+        this.skiprecapStartIn = skiprecapStartIn;
+    }
+
+    public Integer getHasrecap() {
+        return hasrecap;
+    }
+
+    public void setHasrecap(Integer hasrecap) {
+        this.hasrecap = hasrecap;
+    }
+
     @SerializedName("backdrop_path")
     @Expose
     private String backdropPath;
     @SerializedName("preview_path")
     @Expose
     private String previewPath;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public long getContentLength() {
+        return contentLength;
+    }
+
+
     @SerializedName("vote_average")
     @Expose
     private float voteAverage;
@@ -124,6 +261,18 @@ public class Media implements Parcelable {
     @SerializedName("premuim")
     @Expose
     private int premuim;
+
+    public void setContentLength(long contentLength) {
+        this.contentLength = contentLength;
+    }
+
+    public String getMinicover() {
+        return minicover;
+    }
+
+    public void setMinicover(String minicover) {
+        this.minicover = minicover;
+    }
 
     public int getUserHistoryId() {
         return userHistoryId;
@@ -149,6 +298,29 @@ public class Media implements Parcelable {
     @Expose
     private int vip;
 
+    public String getLinkpreview() {
+        return linkpreview;
+    }
+
+    public void setLinkpreview(String linkpreview) {
+        this.linkpreview = linkpreview;
+    }
+
+    public String getTrailerUrl() {
+        return trailerUrl;
+    }
+
+    public void setTrailerUrl(String trailerUrl) {
+        this.trailerUrl = trailerUrl;
+    }
+
+    public int getNewEpisodes() {
+        return newEpisodes;
+    }
+
+    public void setNewEpisodes(int newEpisodes) {
+        this.newEpisodes = newEpisodes;
+    }
 
     @SerializedName("link")
     @Expose
@@ -166,11 +338,22 @@ public class Media implements Parcelable {
     @Expose
     private int embed;
 
+    public int getHls() {
+        return hls;
+    }
+
+    public void setHls(int hls) {
+        this.hls = hls;
+    }
+
+    public int getStreamhls() {
+        return streamhls;
+    }
+
 
     private int resumeWindow;
 
     private long resumePosition;
-
 
     @SerializedName("is_anime")
     @Expose
@@ -188,9 +371,9 @@ public class Media implements Parcelable {
     @Expose
     private String status;
 
-    @SerializedName("substitles")
-    @Expose
-    private List<MediaSubstitle> substitles = null;
+    public void setStreamhls(int streamhls) {
+        this.streamhls = streamhls;
+    }
 
 
     @SerializedName("seasons")
@@ -226,6 +409,7 @@ public class Media implements Parcelable {
     private String updatedAt;
 
 
+
     public String getLink() {
         return link;
     }
@@ -247,6 +431,18 @@ public class Media implements Parcelable {
     @Expose
     private Integer hd;
 
+    public int getYoutubelink() {
+        return youtubelink;
+    }
+
+    public void setYoutubelink(int youtubelink) {
+        this.youtubelink = youtubelink;
+    }
+
+    public List<MediaStream> getDownloads() {
+        return downloads;
+    }
+
 
     @SerializedName("videos")
     @Expose
@@ -256,102 +452,23 @@ public class Media implements Parcelable {
     @Expose
     private List<Genre> genres;
 
-
-    protected Media(Parcel in) {
-        id = in.readString();
-        tmdbId = in.readString();
-        title = in.readString();
-        name = in.readString();
-        overview = in.readString();
-        posterPath = in.readString();
-        backdropPath = in.readString();
-        previewPath = in.readString();
-        voteAverage = in.readFloat();
-        voteCount = in.readString();
-        premuim = in.readInt();
-        isAnime = in.readInt();
-        popularity = in.readString();
-        if (in.readByte() == 0) {
-            views = null;
-        } else {
-            views = in.readString();
-        }
-        status = in.readString();
-        runtime = in.readString();
-        releaseDate = in.readString();
-        genre = in.readString();
-        firstAirDate = in.readString();
-        trailerId = in.readString();
-        createdAt = in.readString();
-        updatedAt = in.readString();
-        if (in.readByte() == 0) {
-            hd = null;
-        } else {
-            hd = in.readInt();
-        }
-        genres = in.createTypedArrayList(Genre.CREATOR);
+    public void setDownloads(List<MediaStream> downloads) {
+        this.downloads = downloads;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(id);
-        dest.writeString(tmdbId);
-        dest.writeString(title);
-        dest.writeString(name);
-        dest.writeString(overview);
-        dest.writeString(posterPath);
-        dest.writeString(backdropPath);
-        dest.writeString(previewPath);
-        dest.writeFloat(voteAverage);
-        dest.writeString(voteCount);
-        dest.writeInt(premuim);
-        dest.writeInt(isAnime);
-        dest.writeString(popularity);
-        if (views == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeString(views);
-        }
-        dest.writeString(status);
-        dest.writeString(runtime);
-        dest.writeString(releaseDate);
-        dest.writeString(genre);
-        dest.writeString(firstAirDate);
-        dest.writeString(trailerId);
-        dest.writeString(createdAt);
-        dest.writeString(updatedAt);
-        if (hd == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(hd);
-        }
-        dest.writeTypedList(genres);
+    public List<Cast> getCast() {
+        return cast;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public void setCast(List<Cast> cast) {
+        this.cast = cast;
     }
-
-    public static final Creator<Media> CREATOR = new Creator<Media>() {
-        @Override
-        public Media createFromParcel(Parcel in) {
-            return new Media(in);
-        }
-
-        @Override
-        public Media[] newArray(int size) {
-            return new Media[size];
-        }
-    };
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(@NotNull String id) {
         this.id = id;
     }
 
@@ -478,11 +595,11 @@ public class Media implements Parcelable {
     }
 
 
-    public List<MediaSubstitle> getSubstitles() {
+    public List<MediaSubsTitle> getSubstitles() {
         return substitles;
     }
 
-    public void setSubstitles(List<MediaSubstitle> substitles) {
+    public void setSubstitles(List<MediaSubsTitle> substitles) {
         this.substitles = substitles;
     }
 
@@ -603,8 +720,76 @@ public class Media implements Parcelable {
 
 
     @BindingAdapter("android:imageUrl")
-    public static void loadImage (ImageView view, String url) {
+    public static void loadImage(ImageView view, String url) {
         Glide.with(view.getContext()).load(url).into(view);
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(deviceId);
+        dest.writeString(id);
+        dest.writeString(tmdbId);
+        if (skiprecapStartIn == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(skiprecapStartIn);
+        }
+        if (hasrecap == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(hasrecap);
+        }
+        dest.writeString(imdbExternalId);
+        dest.writeString(title);
+        dest.writeString(type);
+        dest.writeString(name);
+        dest.writeString(substype);
+        dest.writeLong(contentLength);
+        dest.writeString(overview);
+        dest.writeString(posterPath);
+        dest.writeString(linkpreview);
+        dest.writeString(minicover);
+        dest.writeString(backdropPath);
+        dest.writeString(previewPath);
+        dest.writeString(trailerUrl);
+        dest.writeFloat(voteAverage);
+        dest.writeString(voteCount);
+        dest.writeInt(live);
+        dest.writeInt(premuim);
+        dest.writeInt(newEpisodes);
+        dest.writeInt(userHistoryId);
+        dest.writeInt(vip);
+        dest.writeInt(hls);
+        dest.writeInt(streamhls);
+        dest.writeString(link);
+        dest.writeInt(embed);
+        dest.writeInt(youtubelink);
+        dest.writeInt(resumeWindow);
+        dest.writeLong(resumePosition);
+        dest.writeInt(isAnime);
+        dest.writeString(popularity);
+        dest.writeString(views);
+        dest.writeString(status);
+        dest.writeString(runtime);
+        dest.writeString(releaseDate);
+        dest.writeString(genre);
+        dest.writeString(firstAirDate);
+        dest.writeString(trailerId);
+        dest.writeString(createdAt);
+        dest.writeString(updatedAt);
+        if (hd == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(hd);
+        }
+        dest.writeTypedList(genres);
+    }
 }

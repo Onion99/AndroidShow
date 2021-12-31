@@ -3,7 +3,7 @@ package com.onion.android.app.plex.data.model.substitles;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class MediaSubstitle {
+public class MediaSubsTitle {
 
     @SerializedName("name")
     @Expose
@@ -15,6 +15,18 @@ public class MediaSubstitle {
     @SerializedName("link")
     @Expose
     private String link;
+
+    @SerializedName("zip")
+    @Expose
+    private int zip;
+
+    public int getZip() {
+        return zip;
+    }
+
+    public void setZip(int zip) {
+        this.zip = zip;
+    }
 
     public String getType() {
         return type;
@@ -68,5 +80,4 @@ public class MediaSubstitle {
     public String toString() {
         return lang;
     }
-
 }

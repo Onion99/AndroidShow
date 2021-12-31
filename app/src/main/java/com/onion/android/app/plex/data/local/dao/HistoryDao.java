@@ -22,47 +22,26 @@ public interface HistoryDao {
     Flowable<List<History>> getHistory();
 
 
-    @Query("SELECT * FROM history WHERE tmdbId=:tmdbId")
-    Flowable<List<History>> getHistoryByTmdb(Integer tmdbId);
-
     // Save the the movie or serie in the  Favorite Table
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void saveMediaToFavorite(History history);
-
-
-
-
-    @Query("SELECT * FROM history WHERE tmdbId_history=:tmdbId")
-    LiveData<History> isHistory(int tmdbId);
-
-
-
-    @Query("SELECT * FROM history WHERE tmdbId=:tmdbId")
-    boolean isHistorytv(int tmdbId);
 
 
     @Query("DELETE FROM history")
     void deleteHistory();
 
 
-
     // Return true if the element in the featured is in the  Favorite Table
-    @Query("SELECT * FROM history WHERE tmdbId=:tmdbId")
-    boolean hasHistory(int tmdbId);
-
-
     @Query("SELECT * FROM history WHERE id=:id")
-    boolean hasHistory3(int id);
+    boolean hasHistory(int id);
 
 
-    @Query("SELECT * FROM history WHERE id=:id")
-    LiveData<History> hasHistory2(int id);
+    @Query("SELECT * FROM history WHERE id=:id AND type_history=:type")
+    LiveData<History> hasHistory2(int id, String type);
 
 
     @Delete
     void deleteMediaFromHistory(History mediaDetail);
-
-
 
 
 }
