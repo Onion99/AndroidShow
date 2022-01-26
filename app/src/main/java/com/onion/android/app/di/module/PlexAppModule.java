@@ -184,4 +184,11 @@ public class PlexAppModule {
     PlayerController providePlayerController() {
         return new PlayerController();
     }
+
+
+    @Provides
+    @Singleton
+    public SharedPreferences provideSharedPreferences(Application application) {
+        return application.getSharedPreferences(PREF_FILE, MODE_PRIVATE);
+    }
 }

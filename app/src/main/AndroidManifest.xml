@@ -23,6 +23,13 @@
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/SplashTheme" />
+        <activity
+            android:name=".app.plex.ui.player.MainPlayerActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:parentActivityName=".app.plex.ui.PlexMainActivity"
+            android:theme="@style/SplashTheme" />
 
         <activity
             android:name=".app.plex.ui.PlexSplashActivity"

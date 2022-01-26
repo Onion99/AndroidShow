@@ -2,7 +2,7 @@ package com.onion.android.app.utils;
 
 import static com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions.withCrossFade;
 import static com.onion.android.app.plex.ui.MediaDetailsActivityKt.ARG_MOVIE;
-import static com.onion.android.app.plex.ui.player.MainPlayerActivityKt.MEDIA_KEY;
+import static com.onion.android.app.plex.ui.player.BasePlayerActivityKt.KEY_MEDIA;
 
 import android.content.Context;
 import android.content.Intent;
@@ -178,13 +178,16 @@ public class Tools {
         }
     }
 
+    // ------------------------------------------------------------------------
+    // 使用自带的播放器进行播放
+    // ------------------------------------------------------------------------
     public static void useMainPlay(Context context, Media movieDetail, String url, String server, String mediaGenre, MediaStream mediaStream) {
         if (!movieDetail.getSubstitles().isEmpty() && movieDetail.getSubstitles() != null && movieDetail.getSubstitles().get(0).getZip() != 1) {
             String currentSubsTitle = movieDetail.getSubstitles().get(0).getLink();
             String currentSubsTitleType = movieDetail.getSubstitles().get(0).getType();
             String currentSubsTitleLang = movieDetail.getSubstitles().get(0).getLang();
             Intent intent = new Intent(context, MainPlayerActivity.class);
-            intent.putExtra(MEDIA_KEY, MediaModel.media(movieDetail.getId(),
+            intent.putExtra(KEY_MEDIA, MediaModel.media(movieDetail.getId(),
                     currentSubsTitleLang, mediaStream.getServer(), "0", movieDetail.getTitle(),
                     url, movieDetail.getBackdropPath(), currentSubsTitle, null
                     , null, null, null, null,
@@ -195,7 +198,7 @@ public class Tools {
             context.startActivity(intent);
         } else {
             Intent intent = new Intent(context, MainPlayerActivity.class);
-            intent.putExtra(MEDIA_KEY, MediaModel.media(movieDetail.getId(),
+            intent.putExtra(KEY_MEDIA, MediaModel.media(movieDetail.getId(),
                     null, server, "0", movieDetail.getTitle(),
                     url, movieDetail.getBackdropPath(), null, null
                     , null, null, null, null,

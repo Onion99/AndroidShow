@@ -32,8 +32,14 @@ class MediaDetailsActivity :
 
     @Inject
     lateinit var detailVideModel: DetailVideModel
+
+    // 当前视频连接
     private lateinit var currentUrl: String
+
+    // 媒体类型
     private var mediaGenre = ""
+
+    // 媒体流对象
     private lateinit var currentMediaStream: MediaStream
 
     override fun init() {
@@ -63,6 +69,10 @@ class MediaDetailsActivity :
             detailVideModel.media = it
             // 背景
             binding.imageMoviePoster.loadUrl(it.posterPath)
+            // 媒体类型
+            for (genre in it.genres) {
+                mediaGenre = genre.getName()
+            }
             // 标题
             binding.textMovieTitle.text = it.title
             // 发行日期
@@ -117,6 +127,7 @@ class MediaDetailsActivity :
             binding.rvMylike.addItemDecoration(
                 SpacingItemDecoration(1, 2.dp.toInt(), true)
             )
+            binding.rvMylike.changeVisibility()
         }
     }
 
@@ -147,7 +158,7 @@ class MediaDetailsActivity :
         builder.show()
     }
 
-    //                                 startStreamFromDialog(movieDetail, wich, externalId, movieDetail.getVideos().get(wich).getLink(), movieDetail.getVideos().get(wich));
+
     private fun showPlayDialog(which: Int) {
         val dialog = AppCompatDialog(this)
         dialog.setBindingView<PlexDialogBottomStreamBinding>(R.layout.plex_dialog_bottom_stream)

@@ -24,3 +24,14 @@ fun View.fadeOut(animatorListenerAdapter: AnimatorListenerAdapter? = null) {
         .setListener(animatorListenerAdapter)
         .alpha(0.0f)
 }
+
+fun View.changeVisibility() {
+    visibility = when {
+        visibility != View.GONE -> {
+            View.GONE
+        }
+        else -> {
+            View.VISIBLE
+        }
+    }
+}
