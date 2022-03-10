@@ -3,6 +3,7 @@ package com.onion.android.app.constants;
 import android.util.Base64;
 
 import com.onion.android.BuildConfig;
+import com.stringcare.library.SC;
 
 import java.nio.charset.StandardCharsets;
 
@@ -31,14 +32,14 @@ public abstract class PlexConstants{
 
     private static String decodeServerMainApi(){
         byte[] valueDecoded;
-        valueDecoded = Base64.decode(SERVER_ENCODED.getBytes(StandardCharsets.UTF_8), Base64.DEFAULT);
+        valueDecoded = Base64.decode(SC.reveal(SERVER_ENCODED).getBytes(StandardCharsets.UTF_8), Base64.DEFAULT);
         return new String(valueDecoded);
     }
 
     // Don't Change
     private static String decodeAuthorisationBearer(){
         byte[] valueDecoded;
-        valueDecoded = Base64.decode(AUTHORISATION_BEARER.getBytes(StandardCharsets.UTF_8), Base64.DEFAULT);
+        valueDecoded = Base64.decode(SC.reveal(AUTHORISATION_BEARER).getBytes(StandardCharsets.UTF_8), Base64.DEFAULT);
         return new String(valueDecoded);
     }
 

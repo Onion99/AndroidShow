@@ -3,24 +3,22 @@ package com.onion.android.app.plex.data.local.entity;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 import androidx.room.RoomWarnings;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 
-@Entity(tableName = "download",inheritSuperIndices = true)
+@Entity(tableName = "download", inheritSuperIndices = true)
 @SuppressWarnings(RoomWarnings.PRIMARY_KEY_FROM_EMBEDDED_IS_DROPPED)
 public class Download extends Media {
 
-
-    public Download(@NonNull String id,@NonNull String tmdbId,String backdropPath , String title , String link) {
-        this.id = id;
-        this.tmdbId = tmdbId;
-        this.backdropPath = backdropPath;
-        this.title =title;
-        this.link = link;
-    }
+    @NonNull
+    @SerializedName("id")
+    @Expose
+    @PrimaryKey
+    private String id;
 
     @Override
     @NonNull
@@ -35,7 +33,6 @@ public class Download extends Media {
 
 
     @Override
-    @NonNull
     public String getTmdbId() {
         return tmdbId;
     }
@@ -55,18 +52,29 @@ public class Download extends Media {
         this.link = link;
     }
 
-    @NonNull
-    @SerializedName("id")
-    @Expose
-    @ColumnInfo(name = "download_id")
-    public String id;
-
-
-    @NonNull
     @SerializedName("tmdb_id")
     @Expose
     @ColumnInfo(name = "tmdbId_download", index = true)
-    public String tmdbId;
+    private String tmdbId;
+    @ColumnInfo(name = "episodeId_download")
+    @Expose
+    private String episodeId;
+    @ColumnInfo(name = "mediaGenre_download")
+    @Expose
+    private String mediaGenre;
+    @ColumnInfo(name = "serieName_history")
+    @Expose
+    private String serieName;
+
+
+    public Download(@NonNull String id, String tmdbId, String backdropPath, String title, String link) {
+        this.id = id;
+        this.tmdbId = tmdbId;
+        this.backdropPath = backdropPath;
+        this.title = title;
+        this.link = link;
+    }
+
 
     @Override
     public String getTitle() {
@@ -88,19 +96,32 @@ public class Download extends Media {
         this.backdropPath = backdropPath;
     }
 
-
-    public String getType() {
-        return type;
+    public String getEpisodeId() {
+        return episodeId;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setEpisodeId(String episodeId) {
+        this.episodeId = episodeId;
     }
 
     @ColumnInfo(name = "title_download")
     @SerializedName("title")
     @Expose
     private String title;
+
+    @Override
+    public String getType() {
+        return type;
+    }
+
+    @Override
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getMediaGenre() {
+        return mediaGenre;
+    }
 
 
     @ColumnInfo(name = "backdropPath_download")
@@ -242,6 +263,18 @@ public class Download extends Media {
     @Expose
     private String currentSeasons;
 
+    public void setMediaGenre(String mediaGenre) {
+        this.mediaGenre = mediaGenre;
+    }
+
+    public String getSerieName() {
+        return serieName;
+    }
+
+    public void setSerieName(String serieName) {
+        this.serieName = serieName;
+    }
+
     @ColumnInfo(name = "serieId_history")
     @Expose
     private String serieId;
@@ -265,5 +298,6 @@ public class Download extends Media {
     public void setSerieId(String serieId) {
         this.serieId = serieId;
     }
+
 
 }

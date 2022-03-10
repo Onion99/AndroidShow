@@ -11,7 +11,7 @@ import com.onion.android.R
 fun ImageView.loadUrl(path: String) {
     Glide.with(context).asBitmap().load(path)
         .fitCenter()
-        .placeholder(R.color.app_background)
+        .placeholder(R.color.plex_background)
         .diskCacheStrategy(DiskCacheStrategy.ALL)
         .transition(BitmapTransitionOptions.withCrossFade())
         .skipMemoryCache(true)
@@ -23,4 +23,15 @@ fun View.fadeOut(animatorListenerAdapter: AnimatorListenerAdapter? = null) {
     animate().setDuration(500)
         .setListener(animatorListenerAdapter)
         .alpha(0.0f)
+}
+
+fun View.changeVisibility() {
+    visibility = when {
+        visibility != View.GONE -> {
+            View.GONE
+        }
+        else -> {
+            View.VISIBLE
+        }
+    }
 }

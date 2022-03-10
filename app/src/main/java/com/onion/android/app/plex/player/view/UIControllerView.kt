@@ -20,34 +20,37 @@ class UIControllerView : FrameLayout {
 
     @Inject
     lateinit var playerController: PlayerController
-    private val TAG = UIControllerView::class.java.simpleName
     private val TIME_TO_HIDE_CONTROL = 5000
     private lateinit var binding: PlexControllerViewBinding
     private lateinit var countdownHandler: Handler
 
 
-    constructor(context: Context) : super(context)
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
+    constructor(context: Context) : super(context) {
+        init()
+    }
+
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
+        init()
+    }
+
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
         context,
         attrs,
         defStyleAttr
     ) {
-        setBinding(
-            DataBindingUtil.inflate(
-                LayoutInflater.from(context),
-                R.layout.plex_controller_view,
-                this,
-                true
-            )
+        init()
+    }
+
+
+    private fun init() {
+        binding = DataBindingUtil.inflate(
+            LayoutInflater.from(context),
+            R.layout.plex_controller_view,
+            null,
+            false
         )
         Thread(hideUIAction).start()
         countdownHandler = Handler(Looper.getMainLooper())
-
-    }
-
-    private fun setBinding(binding: PlexControllerViewBinding) {
-        this.binding = binding
     }
 
     fun setPlayerController(playerController: PlayerController): UIControllerView {

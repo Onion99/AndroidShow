@@ -11,8 +11,8 @@ import androidx.room.Room;
 
 import com.onion.android.app.plex.data.local.EasyPlexDataBase;
 import com.onion.android.app.plex.data.local.dao.DownloadDao;
-import com.onion.android.app.plex.data.local.dao.FavoriteDao;
 import com.onion.android.app.plex.data.local.dao.HistoryDao;
+import com.onion.android.app.plex.data.local.dao.ResumeDao;
 import com.onion.android.app.plex.data.local.dao.StreamListDao;
 import com.onion.android.app.plex.data.remote.ApiInterface;
 import com.onion.android.app.plex.data.remote.FsmPlayerApi;
@@ -147,13 +147,6 @@ public class PlexAppModule {
                 .fallbackToDestructiveMigration().build();
     }
 
-    // Room 表 - 注入
-    @Singleton
-    @Provides
-    FavoriteDao provideFavMoviesDao(EasyPlexDataBase dataBase) {
-        return dataBase.favoriteDao();
-    }
-
     @Singleton
     @Provides
     DownloadDao provideProgressDao(EasyPlexDataBase dataBase) {
@@ -166,6 +159,12 @@ public class PlexAppModule {
         return dataBase.streamListDao();
     }
 
+
+    @Singleton
+    @Provides
+    ResumeDao provideResumeDao(EasyPlexDataBase dataBase) {
+        return dataBase.resumeDao();
+    }
 
     @Singleton
     @Provides
@@ -184,5 +183,12 @@ public class PlexAppModule {
     @Singleton
     PlayerController providePlayerController() {
         return new PlayerController();
+    }
+
+
+    @Provides
+    @Singleton
+    public SharedPreferences provideSharedPreferences(Application application) {
+        return application.getSharedPreferences(PREF_FILE, MODE_PRIVATE);
     }
 }

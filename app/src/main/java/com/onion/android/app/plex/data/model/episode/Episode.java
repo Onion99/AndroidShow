@@ -3,7 +3,7 @@ package com.onion.android.app.plex.data.model.episode;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.onion.android.app.plex.data.model.substitles.MediaSubstitle;
+import com.onion.android.app.plex.data.model.substitles.MediaSubsTitle;
 
 import java.util.List;
 
@@ -100,7 +100,7 @@ public class Episode {
 
     @SerializedName("substitles")
     @Expose
-    private List<MediaSubstitle> substitles = null;
+    private List<MediaSubsTitle> substitles = null;
 
 
     public Integer getId() {
@@ -225,11 +225,11 @@ public class Episode {
     }
 
 
-    public List<MediaSubstitle> getSubstitles() {
+    public List<MediaSubsTitle> getSubstitles() {
         return substitles;
     }
 
-    public void setSubstitles(List<MediaSubstitle> substitles) {
+    public void setSubstitles(List<MediaSubsTitle> substitles) {
         this.substitles = substitles;
     }
 

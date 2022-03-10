@@ -3,6 +3,8 @@ package com.onion.android.app.plex.data.remote;
 import static com.onion.android.app.constants.PlexConstants.ACCEPT;
 import static com.onion.android.app.constants.PlexConstants.APPLICATION_JSON;
 import static com.onion.android.app.constants.PlexConstants.AUTHORISATION_BEARER_STRING;
+import static com.onion.android.app.constants.PlexConstants.AUTHORIZATION;
+import static com.onion.android.app.constants.PlexConstants.BEARER;
 import static com.onion.android.app.constants.PlexConstants.CACHE_CONTROL;
 import static com.onion.android.app.constants.PlexConstants.IMDB_BASE_URL;
 import static com.onion.android.app.constants.PlexConstants.PREFS2;
@@ -128,7 +130,7 @@ public class ServiceGenerator {
                         Request.Builder newBuilder = request.newBuilder();
                         newBuilder.addHeader(ACCEPT, APPLICATION_JSON);
                         newBuilder.addHeader("packagename", "com.easyplexdemoapp");
-                        newBuilder.addHeader("Authorization", "Bearer " + AUTHORISATION_BEARER_STRING);
+                        newBuilder.addHeader(AUTHORIZATION, BEARER + AUTHORISATION_BEARER_STRING);
                         newBuilder.addHeader(USER_AGENT, MediaHelper.userAgent());
                         request = newBuilder.build();
                         return chain.proceed(request);
@@ -210,6 +212,8 @@ public class ServiceGenerator {
             Request.Builder newBuilder = request.newBuilder();
             if (tokenManager.getToken().getAccessToken() != null) {
                 newBuilder.addHeader("Authorization", "Bearer " + tokenManager.getToken().getAccessToken());
+                newBuilder.addHeader("token", AUTHORISATION_BEARER_STRING);
+                newBuilder.addHeader("User-Agent", MediaHelper.userAgent());
             }
             request = newBuilder.build();
             return chain.proceed(request);

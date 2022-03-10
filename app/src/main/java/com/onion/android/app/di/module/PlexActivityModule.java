@@ -3,6 +3,7 @@ package com.onion.android.app.di.module;
 import com.onion.android.app.plex.ui.MediaDetailsActivity;
 import com.onion.android.app.plex.ui.PlexMainActivity;
 import com.onion.android.app.plex.ui.PlexSplashActivity;
+import com.onion.android.app.plex.ui.player.MainPlayerActivity;
 import com.onion.android.customview.first_location.TestViewActivity;
 
 import dagger.Module;
@@ -31,6 +32,9 @@ public abstract class PlexActivityModule {
 
     @ContributesAndroidInjector
     abstract MediaDetailsActivity contributeMediaDetailsActivity();
+
+    @ContributesAndroidInjector
+    abstract MainPlayerActivity contributeMainPlayerActivity();
 
     // 如果存在Fragment，则将Activity对应的FragmentModule依赖进来
     @ContributesAndroidInjector(modules = PlexFragmentBuilderModule.class)

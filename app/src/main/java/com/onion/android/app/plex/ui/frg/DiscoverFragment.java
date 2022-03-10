@@ -22,19 +22,15 @@ public class DiscoverFragment extends PlexBaseFragment<PlexFragmentDiscoverBindi
     }
 
     @Override
-    public void initViewModel() {
-        searchViewModel = mViewModelProvider.get(SearchViewModel.class);
-    }
-
-    @Override
     public void initView() {
-        loadToolbar(mBinding.toolbar, null);
+        searchViewModel = viewModelProvider.get(SearchViewModel.class);
+        loadToolbar(binding.toolbar, null);
         setSystemBarTransparent(getActivity());
-        mBinding.rvSuggested.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(requireActivity(), 0), true));
+        binding.rvSuggested.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(requireActivity(), 0), true));
         searchViewModel.getSuggestedMovies();
         searchViewModel.movieDetailMutableLiveData.observe(getViewLifecycleOwner(), suggested -> {
-            mBinding.setAdapter(new SearchAdapter(suggested.getSuggested()));
-            mBinding.setVm(searchViewModel);
+            binding.setAdapter(new SearchAdapter(suggested.getSuggested()));
+            binding.setVm(searchViewModel);
         });
     }
 }

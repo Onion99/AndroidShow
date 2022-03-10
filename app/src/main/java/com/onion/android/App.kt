@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import com.onion.android.app.di.injector.AppInjector
+import com.stringcare.library.SC
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -35,6 +36,8 @@ class App : Application(), HasAndroidInjector, StrongBuilder.Callback<OkHttpClie
     override fun onCreate() {
         super.onCreate()
         context = applicationContext
+        // 字符串加密库初始化
+        SC.Companion.init(this)
         // Dagger-3 Injector器初始化
         AppInjector.init(this)
         // Netcipher-step-1-Creating the OrbotHelper

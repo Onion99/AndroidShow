@@ -39,7 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/seasons"
+                    android:visibility="gone"
                     android:textAllCaps="true"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textColor="@color/grey_11"
@@ -445,6 +445,7 @@
                         android:id="@+id/rv_mylike"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:visibility="gone"
                         android:layout_marginTop="@dimen/pixel_10dp"
                         android:layout_marginBottom="100dp"
                         android:nestedScrollingEnabled="false" />

@@ -29,8 +29,8 @@ import javax.inject.Inject;
 
 public abstract class PlexBaseFragment<T extends ViewDataBinding> extends Fragment implements Injectable {
 
-    public T mBinding;
-    public ViewModelProvider mViewModelProvider;
+    public T binding;
+    public ViewModelProvider viewModelProvider;
 
     @Inject
     ViewModelProvider.Factory viewModelFactory;
@@ -38,9 +38,9 @@ public abstract class PlexBaseFragment<T extends ViewDataBinding> extends Fragme
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater, getBindingContent(savedInstanceState), container, false);
-        mBinding.setLifecycleOwner(this);
-        return mBinding.getRoot();
+        binding = DataBindingUtil.inflate(inflater, getBindingContent(savedInstanceState), container, false);
+        binding.setLifecycleOwner(this);
+        return binding.getRoot();
     }
 
     public abstract int getBindingContent(@Nullable Bundle savedInstanceState);
@@ -49,25 +49,21 @@ public abstract class PlexBaseFragment<T extends ViewDataBinding> extends Fragme
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // initViewModel 必须放在Fragment/Activity UI 初始化后面，否则将拿不到对应ViewModelProvider(this,viewModelFactory),从而报错
-        mViewModelProvider = new ViewModelProvider(this, viewModelFactory);
-        initViewModel();
+        viewModelProvider = new ViewModelProvider(this, viewModelFactory);
         initView();
     }
-
-    public abstract void initViewModel();
-    // 创建ViewModelProvider ，这将通过给定的Factory创造ViewModels，并将其保持在给定的ViewModelStoreOwner
-    // 创建的ViewModel与给定的范围相关联，只要该范围处于活动状态（例如，如果它是一项活动，直到完成或终止进程），它将一直保留
-    // viewModel = new ViewModelProvider(this,viewModelFactory).get(HomeViewModel .class);
 
     public abstract void initView();
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Optional.ofNullable(mBinding).ifPresent(ViewDataBinding::unbind);
+        Optional.ofNullable(binding).ifPresent(ViewDataBinding::unbind);
     }
 
+    // ------------------------------------------------------------------------
     // 状态栏 - 透明
+    // ------------------------------------------------------------------------
     public void setSystemBarTransparent(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = activity.getWindow();

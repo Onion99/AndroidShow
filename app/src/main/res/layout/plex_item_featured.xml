@@ -123,7 +123,7 @@
                             android:layout_margin="@dimen/spacing_middle"
                             android:background="?attr/selectableItemBackgroundBorderless"
                             android:contentDescription="@string/image"
-                            app:srcCompat="@mipmap/add_from_queue" />
+                            app:srcCompat="@drawable/add_from_queue" />
                     </LinearLayout>
 
                     <LinearLayout

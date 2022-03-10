@@ -107,15 +107,17 @@ public class FeaturedAdapter extends RecyclerView.Adapter<FeaturedAdapter.Featur
 
 
         private void onLoadMovies(Media media) {
-            if (mediaRepository.hasHistory(Integer.parseInt(media.getTmdbId()))) {
-                binding.PlayButtonIcon.setBackground(context.getResources().getDrawable(R.drawable.btn_gradient_watch_video,null));
+            if (media == null) return;
+            if (media.getTmdbId() != null && mediaRepository.hasHistory(Integer.parseInt(media.getTmdbId()))) {
+                binding.PlayButtonIcon.setBackground(context.getResources().getDrawable(R.drawable.btn_gradient_watch_video, null));
                 binding.PlayButtonIcon.setText("Resume");
-            }else {
-                binding.PlayButtonIcon.setBackground(context.getResources().getDrawable(R.drawable.btn_gradient,null));
+            } else {
+                binding.PlayButtonIcon.setBackground(context.getResources().getDrawable(R.drawable.btn_gradient, null));
                 binding.PlayButtonIcon.setText("Lecture");
             }
-            binding.moviePremuim.setVisibility(media.getPremuim() == 1? View.VISIBLE:View.GONE);
+            binding.moviePremuim.setVisibility(media.getPremuim() == 1 ? View.VISIBLE : View.GONE);
             binding.movietitle.setText(media.getTitle());
+            if (media.getGenres() == null) return;
             for (Genre genre : media.getGenres()) {
                 binding.mgenres.setText(genre.getName());
             }

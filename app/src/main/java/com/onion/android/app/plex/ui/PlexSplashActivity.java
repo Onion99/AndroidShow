@@ -39,10 +39,10 @@ public class PlexSplashActivity extends PlexBaseActivity<PlexActivitySplashBindi
     @Inject
     ViewModelProvider.Factory viewModelFactory;
 
-    /**
-     * 初始化洋葱代理，使用的洋葱路由概念(提供匿名性和对交通监控的抵抗)
-     */
-    private void initNetcipher(){
+    // ------------------------------------------------------------------------
+    // 初始化洋葱代理，使用的洋葱路由概念(提供匿名性和对交通监控的抵抗)
+    // ------------------------------------------------------------------------
+    private void initNetcipher() {
         // Netcipher-step-2-Creating a Activity Builder
         try {
             StrongOkHttpClientBuilder
@@ -56,8 +56,8 @@ public class PlexSplashActivity extends PlexBaseActivity<PlexActivitySplashBindi
         }
     }
 
-    @Override
-    public void initViewModel() {
+
+    private void initViewModel() {
         settingsViewModel = new ViewModelProvider(this, viewModelFactory).get(SettingsViewModel.class);
         settingsViewModel.getSettingsDetails();
         // 监听配置信息获取
@@ -70,10 +70,9 @@ public class PlexSplashActivity extends PlexBaseActivity<PlexActivitySplashBindi
         }, 1900);
     }
 
-
-
     @Override
     public void initView() {
+        initViewModel();
         initNetcipher();
         hideSystemBar(this, true);
         Tools.loadHttpImg(mBinding.logoImageTop, SERVER_BASE_URL + "image/logo");

@@ -9,7 +9,7 @@ import androidx.databinding.BindingAdapter;
 import com.bumptech.glide.Glide;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.onion.android.app.plex.data.model.substitles.MediaSubstitle;
+import com.onion.android.app.plex.data.model.substitles.MediaSubsTitle;
 
 import java.util.List;
 
@@ -19,13 +19,13 @@ public class EpisodeStream extends BaseObservable {
 
     @SerializedName("episode_stream")
     @Expose
-    private List<MediaSubstitle> streamepisode;
+    private List<MediaSubsTitle> streamepisode;
 
-    public List<MediaSubstitle> getStreamepisode() {
+    public List<MediaSubsTitle> getStreamepisode() {
         return streamepisode;
     }
 
-    public void setStreamepisode(List<MediaSubstitle> streamepisode) {
+    public void setStreamepisode(List<MediaSubsTitle> streamepisode) {
         this.streamepisode = streamepisode;
     }
 

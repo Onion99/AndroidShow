@@ -1,14 +1,18 @@
 package com.onion.android.app.utils;
 
 import static com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions.withCrossFade;
+import static com.onion.android.app.plex.ui.MediaDetailsActivityKt.ARG_MOVIE;
+import static com.onion.android.app.plex.ui.player.BasePlayerActivityKt.KEY_MEDIA;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
@@ -19,6 +23,11 @@ import android.widget.SeekBar;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.exoplayer2.C;
+import com.google.android.exoplayer2.util.MimeTypes;
+import com.onion.android.app.plex.data.local.entity.Media;
+import com.onion.android.app.plex.data.model.media.MediaModel;
+import com.onion.android.app.plex.data.model.stream.MediaStream;
+import com.onion.android.app.plex.ui.player.MainPlayerActivity;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Formatter;
@@ -95,7 +104,9 @@ public class Tools {
     }
 
 
+    // ------------------------------------------------------------------------
     // 解析编码 (BASE64)
+    // ------------------------------------------------------------------------
     public static final String PLAYER = "aHR0cHM6Ly9hcGkuZW52YXRvLmNvbS92My8=";
 
     public static String getPlayer() {
@@ -110,13 +121,17 @@ public class Tools {
     private static final String PREF_UNIQUE_ID = "PREF_UNIQUE_ID";
     private static String uniqueID = null;
 
+    // ------------------------------------------------------------------------
     // 将时间转为毫秒
+    // ------------------------------------------------------------------------
     public static long progressToMilli(long playerDurationMs, SeekBar seekBar) {
         long duration = playerDurationMs < 1 ? C.TIME_UNSET : playerDurationMs;
         return duration == C.TIME_UNSET ? 0 : ((duration * seekBar.getProgress()) / seekBar.getMax());
     }
 
+    // ------------------------------------------------------------------------
     // 获取时间进展
+    // ------------------------------------------------------------------------
     public static String getProgressTime(long timeMs, boolean remaining) {
         if (timeMs == C.TIME_UNSET) timeMs = 0;
         long totalSeconds = (timeMs + 500) / 1000;
@@ -130,6 +145,9 @@ public class Tools {
         return remaining && timeMs != 0 ? "-" + time : time;
     }
 
+    // ------------------------------------------------------------------------
+    // 设备id
+    // ------------------------------------------------------------------------
     public static synchronized String id(Context context) {
         if (uniqueID == null) {
             SharedPreferences sharedPrefs = context.getSharedPreferences(PREF_UNIQUE_ID, Context.MODE_PRIVATE);
@@ -142,5 +160,53 @@ public class Tools {
             }
         }
         return uniqueID;
+    }
+
+    // ------------------------------------------------------------------------
+    // 获取字幕类型
+    // ------------------------------------------------------------------------
+    public static String getSubtitleMime(Uri uri) {
+        final String path = uri.getPath();
+        if (path.endsWith(".ssa") || path.endsWith(".ass")) {
+            return MimeTypes.TEXT_SSA;
+        } else if (path.endsWith(".vtt")) {
+            return MimeTypes.TEXT_VTT;
+        } else if (path.endsWith(".ttml") || path.endsWith(".xml") || path.endsWith(".dfxp")) {
+            return MimeTypes.APPLICATION_TTML;
+        } else {
+            return MimeTypes.APPLICATION_SUBRIP;
+        }
+    }
+
+    // ------------------------------------------------------------------------
+    // 使用自带的播放器进行播放
+    // ------------------------------------------------------------------------
+    public static void useMainPlay(Context context, Media movieDetail, String url, String server, String mediaGenre, MediaStream mediaStream) {
+        if (!movieDetail.getSubstitles().isEmpty() && movieDetail.getSubstitles() != null && movieDetail.getSubstitles().get(0).getZip() != 1) {
+            String currentSubsTitle = movieDetail.getSubstitles().get(0).getLink();
+            String currentSubsTitleType = movieDetail.getSubstitles().get(0).getType();
+            String currentSubsTitleLang = movieDetail.getSubstitles().get(0).getLang();
+            Intent intent = new Intent(context, MainPlayerActivity.class);
+            intent.putExtra(KEY_MEDIA, MediaModel.media(movieDetail.getId(),
+                    currentSubsTitleLang, mediaStream.getServer(), "0", movieDetail.getTitle(),
+                    url, movieDetail.getBackdropPath(), currentSubsTitle, null
+                    , null, null, null, null,
+                    null, null, null,
+                    null, mediaStream.getHls(), currentSubsTitleType, movieDetail.getImdbExternalId()
+                    , movieDetail.getPosterPath(), movieDetail.getHasrecap(), movieDetail.getSkiprecapStartIn(), mediaGenre, null, movieDetail.getVoteAverage()));
+            intent.putExtra(ARG_MOVIE, movieDetail);
+            context.startActivity(intent);
+        } else {
+            Intent intent = new Intent(context, MainPlayerActivity.class);
+            intent.putExtra(KEY_MEDIA, MediaModel.media(movieDetail.getId(),
+                    null, server, "0", movieDetail.getTitle(),
+                    url, movieDetail.getBackdropPath(), null, null
+                    , null, null, null, null,
+                    null, null, null,
+                    null, mediaStream.getHls(), movieDetail.getSubstype(), movieDetail.getImdbExternalId()
+                    , movieDetail.getPosterPath(), movieDetail.getHasrecap(), movieDetail.getSkiprecapStartIn(), mediaGenre, null, movieDetail.getVoteAverage()));
+            intent.putExtra(ARG_MOVIE, movieDetail);
+            context.startActivity(intent);
+        }
     }
 }

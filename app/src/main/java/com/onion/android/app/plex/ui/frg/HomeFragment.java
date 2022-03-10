@@ -2,6 +2,7 @@ package com.onion.android.app.plex.ui.frg;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,24 +30,18 @@ public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding> {
     @Inject
     MediaRepository mediaRepository;
 
+    @Inject
     HomeViewModel viewModel;
 
     @Override
-    public void initViewModel() {
-        viewModel = mViewModelProvider.get(HomeViewModel.class);
-    }
-
-    @Override
     public void initView() {
-        if (Tools.checkIfHasNetwork(requireContext())) {
+        binding.swipeContainer.setOnRefreshListener(() -> {
             viewModel.initData();
-            loadFeaturedMovies();
-            loadLatestChannel();
-            loadRecommendMovies();
-            loadTrendingMovies();
-            loadReleaseMovies();
-            loadPopularSeries();
-            loadPopularMovies();
+        });
+        if (Tools.checkIfHasNetwork(requireContext())) {
+            initData();
+        } else {
+            Toast.makeText(requireContext(), "网路错误,刷新一下吧", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -55,22 +50,34 @@ public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding> {
         return R.layout.plex_fragment_home;
     }
 
+    private void initData() {
+        viewModel.initData();
+        loadFeaturedMovies();
+        loadLatestChannel();
+        loadRecommendMovies();
+        loadTrendingMovies();
+        loadReleaseMovies();
+        loadPopularSeries();
+        loadPopularMovies();
+    }
+
     // 获取热门影视
     private void loadFeaturedMovies() {
-        mBinding.rvFeatured.setAdapter(mFeaturedAdapter);
-        initCommonRv(mBinding.rvFeatured);
+        binding.rvFeatured.setAdapter(mFeaturedAdapter);
+        initCommonRv(binding.rvFeatured);
         // 使RecyclerView像ViewPager一样的效果，一次只能滑一页，而且居中显示
         PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
-        pagerSnapHelper.attachToRecyclerView(mBinding.rvFeatured);
+        pagerSnapHelper.attachToRecyclerView(binding.rvFeatured);
         // banner 条监听 RecyclerView
-        mBinding.indicator.attachToRecyclerView(mBinding.rvFeatured, pagerSnapHelper);
-        mBinding.indicator.createIndicators(mFeaturedAdapter.getItemCount(), 0);
+        binding.indicator.attachToRecyclerView(binding.rvFeatured, pagerSnapHelper);
+        binding.indicator.createIndicators(mFeaturedAdapter.getItemCount(), 0);
         // 注册一个新的观察者以侦听数据更改
-        mFeaturedAdapter.registerAdapterDataObserver(mBinding.indicator.getAdapterDataObserver());
+        mFeaturedAdapter.registerAdapterDataObserver(binding.indicator.getAdapterDataObserver());
         viewModel.featuredMoviesMutableLiveData.observe(getViewLifecycleOwner(), featured -> {
             mFeaturedAdapter.addFeatured(featured.getFeatured(), requireActivity(), mediaRepository);
             viewModel.mFeaturedLoaded = true;
             viewModel.mScrollLoaded = true;
+            binding.swipeContainer.setRefreshing(false);
             checkDataLoaded();
         });
     }
@@ -79,11 +86,11 @@ public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding> {
         // 获取代表Fragment's View生命周期的LifecycleOwner 。 在大多数情况下，这反映了 Fragment 本身的生命周期，但在detached Fragment 的情况下，Fragment 的生命周期可能比 View 本身的生命周期长得多
         viewModel.latestStreamingMutableLiveData.observe(getViewLifecycleOwner(), movies -> {
             if (movies.getStreaming().isEmpty()) {
-                mBinding.llLatestChannels.setVisibility(View.GONE);
+                binding.llLatestChannels.setVisibility(View.GONE);
             }
             LatestStreamAdapter adapter = new LatestStreamAdapter();
-            mBinding.rvLatestStreaming.setAdapter(adapter);
-            initCommonRv(mBinding.rvLatestStreaming);
+            binding.rvLatestStreaming.setAdapter(adapter);
+            initCommonRv(binding.rvLatestStreaming);
             adapter.submitList(movies.getStreaming());
         });
     }
@@ -91,11 +98,11 @@ public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding> {
     private void loadRecommendMovies() {
         viewModel.recommendedMovieMutableLiveData.observe(getViewLifecycleOwner(), movies -> {
             if (movies.getRecommended().isEmpty()) {
-                mBinding.llRecommendMovies.setVisibility(View.GONE);
+                binding.llRecommendMovies.setVisibility(View.GONE);
             }
             MovieAdapter adapter = new MovieAdapter();
-            mBinding.rvRecommendMovies.setAdapter(adapter);
-            initCommonRv(mBinding.rvRecommendMovies);
+            binding.rvRecommendMovies.setAdapter(adapter);
+            initCommonRv(binding.rvRecommendMovies);
             adapter.submitList(movies.getRecommended());
         });
     }
@@ -103,11 +110,11 @@ public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding> {
     private void loadTrendingMovies() {
         viewModel.trendingMovieMutableLiveData.observe(getViewLifecycleOwner(), movies -> {
             if (movies.getTrending().isEmpty()) {
-                mBinding.llTrendingMovies.setVisibility(View.GONE);
+                binding.llTrendingMovies.setVisibility(View.GONE);
             }
             MovieAdapter adapter = new MovieAdapter();
-            mBinding.rvTrendingMovies.setAdapter(adapter);
-            initCommonRv(mBinding.rvTrendingMovies);
+            binding.rvTrendingMovies.setAdapter(adapter);
+            initCommonRv(binding.rvTrendingMovies);
             adapter.submitList(movies.getTrending());
         });
     }
@@ -115,11 +122,11 @@ public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding> {
     private void loadReleaseMovies() {
         viewModel.movieReleaseMutableLiveData.observe(getViewLifecycleOwner(), movies -> {
             if (movies.getLatest().isEmpty()) {
-                mBinding.llReleaseMovies.setVisibility(View.GONE);
+                binding.llReleaseMovies.setVisibility(View.GONE);
             }
             MovieAdapter adapter = new MovieAdapter();
-            mBinding.rvReleaseMovies.setAdapter(adapter);
-            initCommonRv(mBinding.rvReleaseMovies);
+            binding.rvReleaseMovies.setAdapter(adapter);
+            initCommonRv(binding.rvReleaseMovies);
             adapter.submitList(movies.getLatest());
         });
     }
@@ -127,11 +134,11 @@ public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding> {
     private void loadPopularSeries() {
         viewModel.popularSeriesMutableLiveData.observe(getViewLifecycleOwner(), movies -> {
             if (movies.getPopularSeries() == null || movies.getPopularSeries().isEmpty()) {
-                mBinding.llPopularSeries.setVisibility(View.GONE);
+                binding.llPopularSeries.setVisibility(View.GONE);
             }
             MovieAdapter adapter = new MovieAdapter();
-            mBinding.rvPopularSeries.setAdapter(adapter);
-            initCommonRv(mBinding.rvPopularSeries);
+            binding.rvPopularSeries.setAdapter(adapter);
+            initCommonRv(binding.rvPopularSeries);
             adapter.submitList(movies.getPopularSeries());
         });
     }
@@ -140,11 +147,11 @@ public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding> {
     private void loadPopularMovies() {
         viewModel.popularMoviesMutableLiveData.observe(getViewLifecycleOwner(), movies -> {
             if (movies.getPopularMovies().isEmpty()) {
-                mBinding.llPopularMovies.setVisibility(View.GONE);
+                binding.llPopularMovies.setVisibility(View.GONE);
             }
             MovieAdapter adapter = new MovieAdapter();
-            mBinding.rvPopularMovies.setAdapter(adapter);
-            initCommonRv(mBinding.rvPopularMovies);
+            binding.rvPopularMovies.setAdapter(adapter);
+            initCommonRv(binding.rvPopularMovies);
             adapter.submitList(movies.getPopularMovies());
         });
     }
@@ -164,8 +171,8 @@ public class HomeFragment extends PlexBaseFragment<PlexFragmentHomeBinding> {
     // 检查数据请求状态
     private void checkDataLoaded() {
         if (viewModel.checkDataLoaded()) {
-            mBinding.scrollView.setVisibility(View.VISIBLE);
-            mBinding.progressBar.setVisibility(View.GONE);
+            binding.scrollView.setVisibility(View.VISIBLE);
+            binding.progressBar.setVisibility(View.GONE);
         }
     }
 }

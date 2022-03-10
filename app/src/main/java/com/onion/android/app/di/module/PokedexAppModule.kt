@@ -44,7 +44,6 @@ class PokedexAppModule {
             .addConverterFactory(MoshiConverterFactory.create())
             .addCallAdapterFactory(CoroutinesResponseCallAdapterFactory())
             .build()
-
     }
 
     @Provides

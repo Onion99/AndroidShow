@@ -2,38 +2,52 @@ package com.onion.android.app.plex.ui
 
 import android.graphics.Color
 import android.view.View
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onion.android.R
 import com.onion.android.app.base.BaseActivity
 import com.onion.android.app.plex.data.local.entity.Media
+import com.onion.android.app.plex.data.model.stream.MediaStream
 import com.onion.android.app.plex.ui.adapter.RelatesAdapter
 import com.onion.android.app.plex.ui.adapter.decoration.SpacingItemDecoration
 import com.onion.android.app.plex.vm.DetailVideModel
+import com.onion.android.app.utils.Tools
 import com.onion.android.app.view.dp
 import com.onion.android.databinding.ActivityMovieDetailsActivityBinding
-import com.onion.android.kotlin.extension.fadeOut
-import com.onion.android.kotlin.extension.loadToolbar
-import com.onion.android.kotlin.extension.loadUrl
+import com.onion.android.databinding.PlexDialogBottomStreamBinding
+import com.onion.android.kotlin.extension.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
 const val ARG_MOVIE = "movie"
 
 class MediaDetailsActivity :
     BaseActivity<ActivityMovieDetailsActivityBinding>(R.layout.activity_movie_details_activity) {
 
-    private val detailVideModel by lazy { getActivityScopeViewModel(DetailVideModel::class.java) }
+    @Inject
+    lateinit var detailVideModel: DetailVideModel
+
+    // 当前视频连接
+    private lateinit var currentUrl: String
+
+    // 媒体类型
+    private var mediaGenre = ""
+
+    // 媒体流对象
+    private lateinit var currentMediaStream: MediaStream
 
     override fun init() {
         intent.getParcelableExtra<Media>(ARG_MOVIE) ?: return
         detailVideModel.media = intent.getParcelableExtra(ARG_MOVIE)!!
         initView()
         initLiveData()
-        if (detailVideModel.media.tmdbId.isNotEmpty()) {
+        if (detailVideModel.media.tmdbId.isNotNull()) {
             detailVideModel.getMediaDetail(detailVideModel.media.tmdbId)
         } else {
             detailVideModel.getMediaDetail(detailVideModel.media.id)
@@ -41,14 +55,24 @@ class MediaDetailsActivity :
     }
 
     private fun initView() {
+        setSystemBarTransparent()
+        hideSystemBar()
         loadToolbar(binding.toolbar, binding.appbar)
         binding.backbutton.setOnClickListener { onBackPressed() }
+        binding.PlayButtonIcon.setOnClickListener {
+            showVideoSelect()
+        }
     }
 
     private fun initLiveData() {
         detailVideModel.movieDetailMutableLiveData.observe(this) {
+            detailVideModel.media = it
             // 背景
             binding.imageMoviePoster.loadUrl(it.posterPath)
+            // 媒体类型
+            for (genre in it.genres) {
+                mediaGenre = genre.getName()
+            }
             // 标题
             binding.textMovieTitle.text = it.title
             // 发行日期
@@ -72,7 +96,7 @@ class MediaDetailsActivity :
             // 滑动监听
             binding.itemDetailContainer.viewTreeObserver.addOnScrollChangedListener {
                 val scrollY = binding.itemDetailContainer.scrollY
-                var color = Color.parseColor("#E6070707") // ideally a global variable
+                var color = Color.parseColor("#9A434141") // ideally a global variable
                 if (scrollY < 256) {
                     val alpha = scrollY shl 24 or (-1 ushr 8)
                     color = color and alpha
@@ -103,6 +127,7 @@ class MediaDetailsActivity :
             binding.rvMylike.addItemDecoration(
                 SpacingItemDecoration(1, 2.dp.toInt(), true)
             )
+            binding.rvMylike.changeVisibility()
         }
     }
 
@@ -112,5 +137,41 @@ class MediaDetailsActivity :
             binding.progressBar.fadeOut()
             binding.progressBar.visibility = View.GONE
         }
+    }
+
+    private fun showVideoSelect() {
+        val charSequence = arrayOfNulls<String>(detailVideModel.media.videos.size)
+        for (index in detailVideModel.media.videos.indices) {
+            charSequence[index] =
+                detailVideModel.media.videos[index].server + " - " + detailVideModel.media.videos[index].lang
+        }
+        val builder = AlertDialog.Builder(this, R.style.MyAlertDialogTheme)
+        builder.setTitle("清晰度")
+        builder.setItems(charSequence) { _, which ->
+            detailVideModel.media.videos[which]?.apply {
+                showPlayDialog(which)
+                currentUrl = link
+                currentMediaStream = this
+            }
+        }
+        builder.setCancelable(true)
+        builder.show()
+    }
+
+
+    private fun showPlayDialog(which: Int) {
+        val dialog = AppCompatDialog(this)
+        dialog.setBindingView<PlexDialogBottomStreamBinding>(R.layout.plex_dialog_bottom_stream)
+            .apply {
+                btClose.setOnClickListener { dialog.dismiss() }
+                plexPlayer.setOnClickListener {
+                    Tools.useMainPlay(
+                        this@MediaDetailsActivity,
+                        detailVideModel.media, currentUrl, currentMediaStream.server,
+                        mediaGenre, currentMediaStream
+                    )
+                }
+            }
+        dialog.setNormalStyleShow()
     }
 }

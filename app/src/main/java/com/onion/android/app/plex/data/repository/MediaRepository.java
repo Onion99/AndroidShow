@@ -4,8 +4,6 @@ import static com.onion.android.app.constants.PlexConstants.PURCHASE_KEY;
 
 import android.annotation.SuppressLint;
 
-import androidx.lifecycle.LiveData;
-
 import com.onion.android.app.plex.data.datasource.genreslist.AnimesGenreListDataSource;
 import com.onion.android.app.plex.data.datasource.genreslist.AnimesGenresListDataSourceFactory;
 import com.onion.android.app.plex.data.datasource.genreslist.ByGenreListDataSource;
@@ -17,8 +15,8 @@ import com.onion.android.app.plex.data.datasource.genreslist.SeriesGenresListDat
 import com.onion.android.app.plex.data.datasource.stream.StreamDataSource;
 import com.onion.android.app.plex.data.datasource.stream.StreamingDataSourceFactory;
 import com.onion.android.app.plex.data.local.dao.DownloadDao;
-import com.onion.android.app.plex.data.local.dao.FavoriteDao;
 import com.onion.android.app.plex.data.local.dao.HistoryDao;
+import com.onion.android.app.plex.data.local.dao.ResumeDao;
 import com.onion.android.app.plex.data.local.dao.StreamListDao;
 import com.onion.android.app.plex.data.local.entity.Download;
 import com.onion.android.app.plex.data.local.entity.History;
@@ -30,12 +28,10 @@ import com.onion.android.app.plex.data.model.episode.EpisodeStream;
 import com.onion.android.app.plex.data.model.genres.GenresByID;
 import com.onion.android.app.plex.data.model.genres.GenresData;
 import com.onion.android.app.plex.data.model.media.Resume;
-import com.onion.android.app.plex.data.model.report.Report;
 import com.onion.android.app.plex.data.model.search.SearchResponse;
 import com.onion.android.app.plex.data.model.status.Status;
 import com.onion.android.app.plex.data.model.stream.MediaStream;
 import com.onion.android.app.plex.data.model.substitles.ExternalID;
-import com.onion.android.app.plex.data.model.suggestions.Suggest;
 import com.onion.android.app.plex.data.model.upcoming.Upcoming;
 import com.onion.android.app.plex.data.remote.ApiInterface;
 import com.onion.android.app.plex.manager.SettingsManager;
@@ -53,9 +49,9 @@ import timber.log.Timber;
 
 @Singleton
 public class MediaRepository {
-    private final FavoriteDao favoriteDao;
     private final DownloadDao downloadDao;
     private final HistoryDao historyDao;
+    private final ResumeDao resumeDao;
     private final StreamListDao streamListDao;
     ApiInterface requestMainApi;
 
@@ -83,14 +79,17 @@ public class MediaRepository {
     ApiInterface requestStatusApi;
 
     @Inject
-    MediaRepository(FavoriteDao favoriteDao, DownloadDao downloadDao, ApiInterface requestMainApi,
-                    ApiInterface requestImdbApi, HistoryDao historyDao,StreamListDao streamListDao) {
-        this.favoriteDao = favoriteDao;
+    MediaRepository(DownloadDao downloadDao,
+                    ApiInterface requestMainApi, ApiInterface requestImdbApi,
+                    HistoryDao historyDao, StreamListDao streamListDao,
+                    ResumeDao resumeDao
+    ) {
         this.downloadDao = downloadDao;
         this.historyDao = historyDao;
         this.streamListDao = streamListDao;
         this.requestMainApi = requestMainApi;
         this.requestImdbApi = requestImdbApi;
+        this.resumeDao = resumeDao;
     }
 
 
@@ -307,25 +306,6 @@ public class MediaRepository {
 
 
 
-    // Return Report
-    public Observable<Report> getReport(String code,String title,String message) {
-        return requestMainApi.report(code,title,message);
-    }
-
-
-
-
-    // Return Suggest
-    public Observable<Suggest> getSuggest(String code, String title, String message) {
-        return requestMainApi.suggest(code,title,message);
-    }
-
-
-
-    public Observable<Report> getReport2(String code , String title, String message) {
-        return requestAppApi.report2(code,title,message);
-    }
-
 
 
 
@@ -496,20 +476,12 @@ public class MediaRepository {
     }
 
 
-    // Add Movie or Serie in favorite
-    public void addFavorite(Media mediaDetail) {
-        favoriteDao.saveMediaToFavorite(mediaDetail);
-    }
 
     // Add Movie or Serie in favorite
     public void addStreamFavorite(Stream stream) {
         streamListDao.saveMediaToFavorite(stream);
     }
 
-
-    public void addFavorite1(Download mediaDetail) {
-        favoriteDao.saveMediaToFavorite1(mediaDetail);
-    }
 
 
     public void addhistory(History history) {
@@ -518,11 +490,6 @@ public class MediaRepository {
 
 
 
-    // Remove Movie or Serie from favorite
-    public void removeFavorite(Media mediaDetail) {
-        Timber.i("Removing %s to database", mediaDetail.getTitle());
-        favoriteDao.deleteMediaFromFavorite(mediaDetail);
-    }
 
 
 
@@ -551,12 +518,6 @@ public class MediaRepository {
 
 
 
-    // Return Favorite Lists of Movies or Series
-    public Flowable<List<Media>> getFavorites() {
-        return favoriteDao.getFavoriteMovies();
-    }
-
-
     public Flowable<List<Stream>> getStreamFavorites() {
         return streamListDao.getFavorite();
     }
@@ -569,11 +530,6 @@ public class MediaRepository {
     }
 
 
-    // Return Download Lists of Movies or Series
-    public Flowable<List<History>> getHistoryByTmdb(int imdb) {
-        return historyDao.getHistoryByTmdb(imdb);
-    }
-
 
 
     // Return Download Lists of Movies or Series
@@ -581,11 +537,6 @@ public class MediaRepository {
         return downloadDao.getDownloadMovies();
     }
 
-
-    // Delete All Movies & Series from Favorite Table
-    public void deleteAllFromFavorites() {
-        favoriteDao.deleteMediaFromFavorite();
-    }
 
 
 
@@ -597,45 +548,20 @@ public class MediaRepository {
 
 
 
-    // Return if the movie or serie is in favorite table
-    public LiveData<Media> isFavorite(int movieid) {
-        return favoriteDao.isFavoriteMovie(movieid);
-    }
-
-
-    public LiveData<History> isHistory(int movieid) {
-        return historyDao.isHistory(movieid);
-    }
-
-
-    public boolean isHistorytv(int movieid) {
-        return historyDao.isHistorytv(movieid);
-    }
-
-
-
-    public boolean isFeaturedFavorite(int movieid) {
-        return favoriteDao.isFeaturedFavoriteMovie(movieid);
-    }
 
 
     public boolean hasHistory(int movieid) {
         return historyDao.hasHistory(movieid);
     }
 
-    public boolean hasHistory3(int movieid) {
-        return historyDao.hasHistory3(movieid);
-    }
-
-
-    public LiveData<History> hasHistory2(int movieid) {
-        return historyDao.hasHistory2(movieid);
-    }
-
-
 
     public boolean isStreamFavorite(int movieid) {
         return streamListDao.isStreamFavoriteMovie(movieid);
+    }
+
+    // Add Movie or Serie in favorite
+    public void addResume(Resume resume) {
+        resumeDao.saveMediaToResume(resume);
     }
 
 }

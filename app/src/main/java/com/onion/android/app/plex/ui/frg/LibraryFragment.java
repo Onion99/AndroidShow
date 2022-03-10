@@ -3,7 +3,9 @@ package com.onion.android.app.plex.ui.frg;
 import static com.onion.android.app.constants.PlexConstants.SERVER_BASE_URL;
 
 import android.os.Bundle;
+import android.view.Menu;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -21,16 +23,23 @@ public class LibraryFragment extends PlexBaseFragment<PlexFragmentLibraryBinding
         return R.layout.plex_fragment_library;
     }
 
+
+    @Override
+    public void onPrepareOptionsMenu(@NonNull Menu menu) {
+        menu.clear();
+    }
+
     @Override
     public void initView() {
-        loadToolbar(mBinding.toolbar, null);
-        Tools.loadHttpImg(mBinding.logoImageTop, SERVER_BASE_URL + "image/minilogo");
+        loadToolbar(binding.toolbar, null);
+        setHasOptionsMenu(true);
+        Tools.loadHttpImg(binding.logoImageTop, SERVER_BASE_URL + "image/minilogo");
         setUpTabs();
     }
 
     private void setUpTabs() {
-        setupViewPager(mBinding.viewPager);
-        new TabLayoutMediator(mBinding.tabLayout, mBinding.viewPager,
+        setupViewPager(binding.viewPager);
+        new TabLayoutMediator(binding.tabLayout, binding.viewPager,
                 (tab, position) -> {
                     if (position == 0)
                         tab.setText(getResources().getString(R.string.movies));
@@ -49,9 +58,5 @@ public class LibraryFragment extends PlexBaseFragment<PlexFragmentLibraryBinding
         vpFragmentAdapter.addFragment(new SeriesFragment());
         vpFragmentAdapter.addFragment(new AnimesFragment());
         viewPager.setAdapter(vpFragmentAdapter);
-    }
-
-    @Override
-    public void initViewModel() {
     }
 }

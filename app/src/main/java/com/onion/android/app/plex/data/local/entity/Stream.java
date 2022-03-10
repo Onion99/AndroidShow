@@ -3,6 +3,7 @@ package com.onion.android.app.plex.data.local.entity;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 import androidx.room.RoomWarnings;
 
 import com.google.gson.annotations.Expose;
@@ -40,8 +41,8 @@ public class Stream extends Media {
     @NonNull
     @SerializedName("id")
     @Expose
-    @ColumnInfo(name = "stream_id")
-    public String id;
+    @PrimaryKey
+    private String id;
 
     @Override
     @NonNull
@@ -58,7 +59,7 @@ public class Stream extends Media {
     @SerializedName("tmdb_id")
     @ColumnInfo(name = "stream_tmdb")
     @Expose
-    public String tmdbId;
+    private String tmdbId;
 
 
     @Override
@@ -126,8 +127,6 @@ public class Stream extends Media {
     public void setPosterPath(String posterPath) {
         this.posterPath = posterPath;
     }
-
-
 
 
 

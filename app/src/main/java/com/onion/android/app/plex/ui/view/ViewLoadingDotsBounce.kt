@@ -16,7 +16,6 @@ import com.onion.android.app.view.dp
 
 class ViewLoadingDotsBounce : LinearLayout {
 
-    private lateinit var currentContext: Context
     private var imgs = mutableListOf<ImageView>()
     private var layouts = mutableListOf<LinearLayout>()
     private var anims = mutableListOf<ObjectAnimator>()
@@ -40,7 +39,7 @@ class ViewLoadingDotsBounce : LinearLayout {
     )
 
     private fun preInit() {
-        orientation = LinearLayout.HORIZONTAL
+        orientation = HORIZONTAL
         gravity = Gravity.CENTER
 
         var color = Color.GRAY

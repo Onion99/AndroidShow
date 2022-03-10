@@ -40,7 +40,6 @@ fun Activity.hideSystemBar() {
         uiState = uiState or (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or View.SYSTEM_UI_FLAG_IMMERSIVE)
     }
     decorView.systemUiVisibility = uiState
-
 }
 
 fun AppCompatActivity.loadToolbar(toolbar: Toolbar, appBarLayout: AppBarLayout) {
