@@ -1,40 +1,39 @@
-/*
-* Android Studio中的Module主要有两种属性, 主Module - 即AppModule ，次Module - 即依赖库
-* 1. application属性 -> apply plugin: ‘com.android.application’ , 可以独立运行的Android程序，也就是我们的APP
-* 2. library属性 -> apply plugin: ‘com.android.library’ , 不可以独立运行，一般是Android程序依赖的库文件
-* */
+// ------------------------------------------------------------------------
+// Android Studio中的Module主要有两种属性, 主Module - 即AppModule ，次Module - 即依赖库
+// 1. application属性 -> apply plugin: ‘com.android.application’ , 可以独立运行的Android程序，也就是我们的APP
+// 2. library属性 -> apply plugin: ‘com.android.library’ , 不可以独立运行，一般是Android程序依赖的库文件
+// ------------------------------------------------------------------------
 plugins {
     id 'com.android.application'
+    // ------------------------------------------------------------------------
     // 应用Gradle Kotlin插件
-    /**
-     * 在需要引入项目（可能你是多项目构建，模块）构建脚本下引入插件 -> apply plugin: "kotlin"
-     * 如果Gradle版为2.1或以上，则可以在对应需要引入的构建脚本下方便的使用plugins {}脚本块进行快速引入（不需要再buildscript中声名引入了）,就如同这里
-     * */
+    // 在需要引入项目（可能你是多项目构建，模块）构建脚本下引入插件 -> apply plugin: "kotlin"
+    // 如果Gradle版为2.1或以上，则可以在对应需要引入的构建脚本下方便的使用plugins {}脚本块进行快速引入（不需要再buildscript中声名引入了）,就如同这里
+    // ------------------------------------------------------------------------
     id 'kotlin-android'
-    /**
-     * APT 支持
-     * 在 Android 插件中，官方已经支持APT了。但是加入 Kotlin 后，由于Kotlin构建环节和Java 有些微妙的变化，因此需要重建这个流程的构建，因此Kotlin为我们提供了另外的插件支持
-     * 在本来使用 annotationProcessor依赖方式的依赖上，改为 kapt
-     * kapt 不仅仅是会处理 kotlin 的内容，同时也可以处理 java 代码中的内容。
-     * kotlint apt 支持生成Kotlin源文件，生成的源文件默认在 processingEnv.options["kapt.kotlin.generated"]路径下，在最终编译时，将会把这个目录下的源文件进行编译。
-     */
+    // ------------------------------------------------------------------------
+    // APT 支持
+    // 在 Android 插件中，官方已经支持APT了。但是加入 Kotlin 后，由于Kotlin构建环节和Java 有些微妙的变化，因此需要重建这个流程的构建，因此Kotlin为我们提供了另外的插件支持
+    // 在本来使用 annotationProcessor依赖方式的依赖上，改为 kapt
+    // kapt 不仅仅是会处理 kotlin 的内容，同时也可以处理 java 代码中的内容。
+    // kotlin apt 支持生成Kotlin源文件，生成的源文件默认在 processingEnv.options["kapt.kotlin.generated"]路径下，在最终编译时，将会把这个目录下的源文件进行编译。
+    // ------------------------------------------------------------------------
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
     id 'dagger.hilt.android.plugin'
-    // kotlin-android,使用Kotlin插件
-    // kotlin-android-extensions, 使用Kotlin Android扩展插件 ,像这个就可以直接实现Databinding,废弃了，id混用，非常不好
-    // kotlin-kapt, kotlin注解处理器插件,以AAC系列库的注解使用都依赖这东西
-    // kotlin-parcelize,自动化处理序列化生成
+    // kotlin-android -> 使用Kotlin插件
+    // kotlin-android-extensions-> 使用Kotlin Android扩展插件 ,像这个就可以直接实现DataBinding,废弃了，id混用，非常不好
+    // kotlin-kapt -> kotlin注解处理器插件,以AAC系列库的注解使用都依赖这东西
+    // kotlin-parcelize -> 自动化处理序列化生成
 }
-apply plugin: StringCare // 字符串加密
-/*
- * java和kotlin混合开发 使用Dagger 需要在目标build.gradle(module)的最后添加下面代码，现在为主Module，暂时用不到
- kapt {
-    generateStubs = true
- }
- */
+apply plugin: StringCare // 字符串加密, 等同于 apply plugin: 'com.android.application'
+// ------------------------------------------------------------------------
+// java和kotlin混合开发 使用Dagger 需要在目标build.gradle(module)的最后添加下面代码，现在为主Module，暂时用不到
+// kapt {
+//    generateStubs = true
+// }
+// ------------------------------------------------------------------------
 
-// 上面的调用等同域 apply plugin: 'com.android.application'
 apply from: "$rootDir/dependencies.gradle"
 apply from: "$rootDir/config.gradle"
 
@@ -153,13 +152,13 @@ android {
     }
 }
 
-/*
-Kotlin 插件默认将 src / main / kotlin /和 src / main / java / 作为 srcDirs路径
-如果项目对默认路径做了调整，需要重新设置该信息
-sourceSets {
-    main.kotlin.srcDirs += 'src/main/自己的目录' // 让 kotlin 知道哪些目录是存在kotlin代码源文件
-}
-*/
+// ------------------------------------------------------------------------
+// Kotlin 插件默认将 src / main / kotlin /和 src / main / java / 作为 srcDirs路径
+// 如果项目对默认路径做了调整，需要重新设置该信息
+// sourceSets {
+//    main.kotlin.srcDirs += 'src/main/自己的目录' // 让 kotlin 知道哪些目录是存在kotlin代码源文件
+// }
+// ------------------------------------------------------------------------
 
 dependencies {
     // 添加本地依赖库
