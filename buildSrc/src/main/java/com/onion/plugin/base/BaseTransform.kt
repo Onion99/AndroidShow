@@ -10,19 +10,30 @@ import org.apache.commons.io.IOUtils
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
+import java.util.concurrent.Callable
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.ForkJoinPool
 import java.util.jar.JarEntry
 import java.util.jar.JarFile
 import java.util.jar.JarOutputStream
 
 abstract class BaseTransform : Transform() {
 
+    private val executorService: ExecutorService = ForkJoinPool.commonPool()
+
+    private val taskList = mutableListOf<Callable<Unit>>()
+
+
     // ------------------------------------------------------------------------
     // 实现转换逻辑
     // ------------------------------------------------------------------------
     override fun transform(transformInvocation: TransformInvocation?) {
+        Log.log("transform start--------------->")
+        onTransformStart()
         //去掉默认处理，super.transform(transformInvocation)
         super.transform(transformInvocation)
         if (transformInvocation == null) return
+        val startTime = System.currentTimeMillis()
         // transform 的 输入源
         val inputs = transformInvocation.inputs
         // transform 的 输出源, output 的内容不是任意指定，而是根据input的内容和设置的scopes等有TransformOutputProvider生成。
@@ -40,13 +51,32 @@ abstract class BaseTransform : Transform() {
         inputs.forEach { transformInput ->
             // 处理jar中的文件输入
             transformInput.jarInputs.forEach { jarInput ->
-                handleJarInput(jarInput, outputProvider, context, isIncremental)
+                submitTask {
+                    handleJarInput(jarInput, outputProvider, context, isIncremental)
+                }
             }
             // 处理目录中的文件输入
-            transformInput.directoryInputs.forEach {
-
+            transformInput.directoryInputs.forEach { dirInput ->
+                submitTask {
+                    handleDirectoryInput(dirInput, outputProvider, context, isIncremental)
+                }
             }
         }
+        val taskListFeature = executorService.invokeAll(taskList)
+//        taskListFeature.forEach {
+//            it.get()
+//        }
+        onTransformEnd()
+        Log.log("transform end--------------->" + "duration : " + (System.currentTimeMillis() - startTime) + " ms")
+    }
+
+    // ------------------------------------------------------------------------
+    // 执行线程任务
+    // ------------------------------------------------------------------------
+    private fun submitTask(task: () -> Unit) {
+        taskList.add(Callable<Unit> {
+            task()
+        })
     }
 
     // ------------------------------------------------------------------------
@@ -286,11 +316,22 @@ abstract class BaseTransform : Transform() {
     // ------------------------------------------------------------------------
     override fun isIncremental(): Boolean {
         // 简单点，先不支持
-        return false
+        return true
     }
 
     // ------------------------------------------------------------------------
     // 返回当前转换器的名称
     // ------------------------------------------------------------------------
     override fun getName(): String = javaClass.simpleName
+
+
+    // ------------------------------------------------------------------------
+    // 执行转换之前
+    // ------------------------------------------------------------------------
+    protected open fun onTransformStart() {}
+
+    // ------------------------------------------------------------------------
+    // 执行转换之后
+    // ------------------------------------------------------------------------
+    protected open fun onTransformEnd() {}
 }

@@ -21,3 +21,4 @@ local.properties
 .idea/misc.xml
 .idea/sonarlint/issuestore/b/d/bd66bea1d016acb14165140913981ab8f0cfb199
 /.idea/
+/buildSrc/build/
