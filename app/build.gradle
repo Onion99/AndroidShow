@@ -27,6 +27,8 @@ plugins {
     // kotlin-parcelize -> 自动化处理序列化生成
 }
 apply plugin: StringCare // 字符串加密, 等同于 apply plugin: 'com.android.application'
+//import com.onion.plugin.plugin.TestPlugin
+//apply plugin: TestPlugin // 插桩测试
 // ------------------------------------------------------------------------
 // java和kotlin混合开发 使用Dagger 需要在目标build.gradle(module)的最后添加下面代码，现在为主Module，暂时用不到
 // kapt {
