@@ -16,7 +16,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$versions.gradleBuildTool"
         // 配置kotlin环境-1-添加Gradle kotlin 插件依赖引用
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.30"
         // 这个插件提供了一个任务来确定哪些依赖项有更新。此外，插件还检查Gradle本身的更新。 https://github.com/ben-manes/gradle-versions-plugin
         // 检查更新 - ./gradlew dependencyUpdates , 会在当前目录下生成 build/dependencyUpdates/report.txt 文件 列出可以更新的gradle 插件
         classpath "com.github.ben-manes:gradle-versions-plugin:$versions.versionPlugin"

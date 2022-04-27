@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">OnionUI</string>
+    <string name="button">Button</string>
+    <string name="lake_tahoe_image">Image of Lake Tahoe</string>
+    <string name="textview">TextView</string>
+    <string name="learn_constraintLayout">learn_constraintLayout</string>
+</resources>

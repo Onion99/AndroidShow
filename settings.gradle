@@ -6,3 +6,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "AndroidShow"
 include ':app'
+include ':onionui'

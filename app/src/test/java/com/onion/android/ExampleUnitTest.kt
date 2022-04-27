@@ -29,6 +29,53 @@ class ExampleUnitTest {
     }
 
     @Test
+    fun test() {
+        var array = arrayOf<Int>()
+        for (i in 0..50) {
+            when (i) {
+                0 -> {
+                    print(0)
+                    array[0] = 0
+                }
+
+                1 -> {
+                    print(1)
+                    array[1] = 1
+                }
+                else -> {
+                    array[i] = array[i - 2] + array[i - 1]
+                    print(array[i])
+                }
+            }
+        }
+    }
+
+    @Test
+    fun test2() {
+        val array1 = arrayOf(1, 2, 3, 4)
+        val array2 = arrayOf(10, 6, 7, 8)
+        val array3 = arrayOf(11, 12, 13, 14)
+        val array4 = arrayOf(0, 0, 0, 0)
+        println(array1)
+        println(array2)
+        println(array3)
+        println(array4)
+        for (i in array4.indices) {
+            var testArray = arrayOf<Int>(1, 2, 3, 4)
+            testArray[i] = array4[i]
+            for (index in 0..2) {
+                when (index) {
+                    0 -> testArray[index] = array3[i]
+                    1 -> testArray[index] = array2[i]
+                    2 -> testArray[index] = array1[i]
+                }
+            }
+            println(testArray)
+        }
+
+    }
+
+    @Test
     fun observer() {
         Observable.create<String> {
             it.onNext("purple")
