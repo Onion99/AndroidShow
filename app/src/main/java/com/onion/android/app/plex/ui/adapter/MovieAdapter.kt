@@ -37,6 +37,6 @@ class MovieAdapter : BindingAdapter<Media, MovieAdapter.RelatesViewHolder>(diffU
         for (genre in media.genres) {
             holder.binding.mgenres.text = genre.getName()
         }
-        holder.binding.itemMovieImage.loadUrl(media.posterPath)
+//        holder.binding.itemMovieImage.loadUrl(media.posterPath)
     }
 }

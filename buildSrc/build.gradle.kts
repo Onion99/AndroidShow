@@ -1,10 +1,13 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-//apply from: "$rootDir/dependencies.gradle"
+//apply {
+//    from("${rootDir.parent}/dependencies.gradle")
+//}
 
 plugins {
     `kotlin-dsl`
-    kotlin("jvm") version "1.4.32"
+//    kotlin("jvm") version "1.5.30"
+//    kotlin("kapt")
 }
 
 val compileKotlin: KotlinCompile by tasks
