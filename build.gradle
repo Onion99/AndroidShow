@@ -1,7 +1,8 @@
 // ---- 应用 ben-manes gradle-versions-plugin的更新配置 ------
 apply from: "$rootDir/versionsPlugin.gradle"
 buildscript {
-    apply from: "$rootDir/dependencies.gradle"
+    apply from: "$rootDir/exclude_other_version.gradle"
+    apply from: "$rootDir/dependencies_manager.gradle"
     repositories {
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/google' }
@@ -13,23 +14,23 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:$versions.gradleBuildTool"
+        classpath  classpath.android
         // ---- 配置kotlin环境-1-添加Gradle kotlin 插件依赖引用 ------
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlinVersion"
+        classpath  classpath.kotlin
         // ------------------------------------------------------------------------
         // gradle-versions-plugin
         // 这个插件提供了一个任务来确定哪些依赖项有更新。此外，插件还检查Gradle本身的更新。 https://github.com/ben-manes/gradle-versions-plugin
         // 检查更新 - ./gradlew dependencyUpdates , 会在当前目录下生成 build/dependencyUpdates/report.txt 文件 列出可以更新的gradle 插件
         // ------------------------------------------------------------------------
-        classpath "com.github.ben-manes:gradle-versions-plugin:$versions.versionPlugin"
+        classpath  classpath.versions
         // ---- Hilt 插件,依赖 hilt 注入库 ,必须应用此插件，否则报错 ------
-        classpath "com.google.dagger:hilt-android-gradle-plugin:$versions.hiltCoreVersion"
+        classpath  classpath.hilt
         // ------------------------------------------------------------------------
         // Spotless 是一个代码格式化工具。它支持的开发语言有java, kotlin, scala, sql, javascript, css, json, yaml, etc
         // 它不仅能按照指定的规则去检测我们的代码指示出不合规的地方, 同时可以按照规则修复代码
         // ------------------------------------------------------------------------
-        classpath "com.diffplug.spotless:spotless-plugin-gradle:$versions.spotlessGradle"
-        classpath "io.github.stringcare:plugin:$versions.stringcareVersion"
+        classpath  classpath.spotless
+        classpath  classpath.string_care
     }
 }
 

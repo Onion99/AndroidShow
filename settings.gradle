@@ -1,9 +1,20 @@
+// ---- 配置所有项目使用的存储库 ------
 dependencyResolutionManagement {
     repositories {
-        google()
-        jcenter()
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
     }
 }
+// ---- 项目名 ------
 rootProject.name = "AndroidShow"
+// ---- 组合Module ------
 include ':app'
 include ':onionui'
+// ------------------------------------------------------------------------
+// 复合构建 https://docs.gradle.org/current/userguide/composite_builds.html
+// 1. 合并通常独立开发的构建，例如在应用程序使用的库中尝试错误修复时
+// 2. 将大型多项目构建分解为更小、更隔离的块，这些块可以根据需要独立或一起工作
+// 包含的生成不与复合生成或其他包含的生成共享任何配置。每个包含的生成都是单独配置和执行的
+// ------------------------------------------------------------------------
+//includeBuild 'versionPlugin'

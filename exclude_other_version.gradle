@@ -1,0 +1,54 @@
+//val path = rootDir.path.toString().substring(0,rootDir.toPath().toString().indexOf(indexChar)+indexChar.length-1)
+def indexChar = "AndroidShow"
+apply from: "${rootProject.rootDir.toString().subSequence(0,rootProject.rootDir.toString().indexOf(indexChar)+indexChar.length())}/dependencies_manager.gradle"
+
+// ---- 保持依赖库版本唯一,以及去除没有必要的依赖 ------
+configurations.all {
+    resolutionStrategy{
+        force deps.androidx.appcompat
+        force deps.androidx.fragment
+        force deps.androidx.activity
+        force deps.androidx.constraint
+        force deps.androidx.annotation
+        force deps.androidx.core
+        force deps.androidx.core_ktx
+        force deps.androidx.core_common
+        force deps.androidx.core_runtime
+        force deps.androidx.coordinator
+        force deps.androidx.recyclerview
+        force deps.androidx.material
+        force deps.androidx.room
+        force deps.androidx.room_ktx
+        force deps.androidx.databinding_common
+        force deps.androidx.databinding_runtime
+        force deps.androidx.databinding_adapters
+        force deps.kotlin.stdlib
+        force deps.kotlin.stdlibJdk7
+        force deps.kotlin.stdlibJdk8
+        force deps.kotlin.runtime
+        force deps.kotlin.common
+        force deps.kotlin.reflect
+        force deps.kotlin.coroutines
+        force deps.kotlin.coroutines_android
+        force deps.lifecycle.viewmodel
+        force deps.lifecycle.viewmodel_ktx
+        force deps.lifecycle.livedata
+        force deps.lifecycle.runtime
+        force deps.square.javawriter
+        force deps.google.gson
+        force deps.google.findbugs
+        force deps.other.jetbrain_annotation
+        force deps.other.commons_io
+        force deps.other.commons_codec
+    }
+}
+configurations {
+    all*.exclude module: 'lifecycle-extensions'
+    all*.exclude module: 'annotation-experimental'
+}
+/*
+configurations {
+    all*.exclude group: 'io.reactivex.rxjava3'
+    all*.exclude group: 'io.reactivex.rxjava3', module: 'rxjava3'
+}
+*/

@@ -1,0 +1,210 @@
+// ------------------------------------------------------------------------
+// 使用groovy ext的方式进行依赖版本统一管理
+// ------------------------------------------------------------------------
+ext.deps = [:]
+def versions = [
+
+        // ---- Gradle plugins ------
+        gradle_android           : '4.1.1',
+        gradle_kotlin            : '1.4.20',
+        gradle_spotless          : '5.8.2',
+        gradle_hilt              : '2.31-alpha',
+        gradle_version_update    : '0.28.0',
+        gradle_string_care       : '4.2.1',
+
+        // ---- Kotlin ------
+        coroutine_version        : '1.5.2',
+
+        // ---- AAC ------
+        lifecycle                : '2.3.1',
+        room                     : '2.3.0',
+        dagger                   : '2.30.1',
+        binding                  : '7.0.2',
+
+        // ---- Hilt ------
+        hilt_core                : '2.31-alpha',
+        hilt                     : '1.0.0-alpha02',
+
+        // ---- Network ------
+        retrofit         : '2.9.0',
+        okhttp           : '4.9.0',
+        gson                     : '2.8.6',
+
+        // ---- UI ------
+        transformation_layout    : '1.0.4',
+        glide                    : '4.11.0',
+        glide_palette            : '2.1.2',
+        rainbow                  : '1.0.3',
+        base_recyclerview_adapter: '0.1.3',
+        circle_indicator         : '2.1.6',
+        font_awesome             : '0.4',
+
+        // ---- Debugging ------
+        timber                   : '4.7.1',
+
+        // ---- Moshi ------
+        moshi            : '1.11.0',
+        moshi_converter   : '2.7.2',
+
+        // ---- NetCipher ------
+        netcipher                : '2.1.0',
+        netcipher_okhttp         : '2.0.0-alpha1',
+        netcipher_webkit         : '2.0.0-alpha1',
+
+        // ---- ExoPlayer ------
+        exoplayer                : '2.11.7',
+        mediarouter              : '1.2.2',
+
+        // ---- React Programing ------
+        rxandroid             : '3.0.0',
+        rxjava                : '3.0.0',
+
+        // ---- 加密 ------
+        stringcare            : '4.2.1',
+
+        // ---- 测试相关 ------
+        junit                 : '4.13',
+        junit_android         : '1.1.2',
+        espresso               : '3.3.0',
+
+]
+
+ext.classpath = [
+        android    : "com.android.tools.build:gradle:$versions.gradle_android",
+        kotlin     : "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.gradle_kotlin",
+        spotless   : "com.diffplug.spotless:spotless-plugin-gradle:$versions.gradle_spotless",
+        versions   : "com.github.ben-manes:gradle-versions-plugin:$versions.gradle_version_update",
+        hilt       : "com.google.dagger:hilt-android-gradle-plugin:$versions.gradle_hilt",
+        string_care: "io.github.stringcare:plugin:$versions.gradle_string_care"
+]
+
+// ------------------------------------------------------------------------
+// AndroidX
+// ------------------------------------------------------------------------
+def androidx = [:]
+androidx.appcompat = "androidx.appcompat:appcompat:1.3.1"
+androidx.fragment = "androidx.fragment:fragment:1.3.6"
+androidx.activity = "androidx.activity:activity:1.2.4"
+androidx.palette = "androidx.palette:palette:1.0.0"
+def core_version = "1.6.0"
+androidx.core = "androidx.core:core:$core_version"
+androidx.core_ktx = "androidx.core:core-ktx:$core_version"
+def core_extra_version = "2.1.0"
+androidx.core_common = "androidx.arch.core:core-common:$core_extra_version"
+androidx.core_runtime = "androidx.arch.core:core-runtime:$core_extra_version"
+androidx.annotation = "androidx.annotation:annotation:1.2.0"
+androidx.constraint = "androidx.constraintlayout:constraintlayout:2.0.4"
+androidx.legacy = "androidx.legacy:legacy-support-core-utils:1.0.0"
+androidx.collection = "androidx.collection:collection:1.1.0"
+androidx.percentlayout = "androidx.percentlayout:percentlayout:1.0.0"
+androidx.coordinator = "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
+androidx.recyclerview = "androidx.recyclerview:recyclerview:1.1.0"
+androidx.material = "com.google.android.material:material:1.3.0"
+androidx.paging = "androidx.paging:paging-runtime:2.1.2"
+androidx.mediarouter = "androidx.mediarouter:mediarouter:$versions.mediarouter"
+androidx.room = "androidx.room:room-runtime:$versions.room"
+androidx.room_ktx = "androidx.room:room-ktx:$versions.room"
+androidx.room_compiler = "androidx.room:room-compiler:$versions.room"
+androidx.room_rxjava3 =  "androidx.room:room-rxjava3:$versions.room"
+androidx.databinding_common = "androidx.databinding:databinding-common:$versions.binding"
+androidx.databinding_runtime = "androidx.databinding:databinding-runtime:$versions.binding"
+androidx.databinding_adapters = "androidx.databinding:databinding-adapters:$versions.binding"
+androidx.viewbinding = "androidx.databinding:viewbinding:$versions.binding"
+deps.androidx = androidx
+
+
+def lifecycle = [:]
+lifecycle.common   = "androidx.lifecycle:lifecycle-common-java8:$versions.lifecycle"
+lifecycle.runtime  = "androidx.lifecycle:lifecycle-runtime:$versions.lifecycle"
+lifecycle.viewmodel = "androidx.lifecycle:lifecycle-viewmodel:$versions.lifecycle"
+lifecycle.viewmodel_ktx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
+lifecycle.livedata = "androidx.lifecycle:lifecycle-livedata:$versions.lifecycle"
+deps.lifecycle = lifecycle
+
+// ------------------------------------------------------------------------
+// Kotlin
+// ------------------------------------------------------------------------
+def kotlin = [:]
+kotlin.gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.gradle_kotlin"
+// ---- Java 6 ------
+kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$versions.gradle_kotlin"
+kotlin.reflect = "org.jetbrains.kotlin:kotlin-reflect:$versions.gradle_kotlin"
+kotlin.common = "org.jetbrains.kotlin:kotlin-stdlib-common:$versions.gradle_kotlin"
+kotlin.runtime = "org.jetbrains.kotlin:kotlin-android-extensions-runtime:$versions.gradle_kotlin"
+// ---- Java 7 ------
+kotlin.stdlibJdk7 = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.gradle_kotlin"
+kotlin.stdlibJdk8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.gradle_kotlin"
+kotlin.coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutine_version"
+kotlin.coroutines_android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutine_version"
+deps.kotlin = kotlin
+
+// ------------------------------------------------------------------------
+// Google
+// ------------------------------------------------------------------------
+def google = [:]
+google.dagger = "com.google.dagger:dagger:${versions.dagger}"
+google.dagger_compiler = "com.google.dagger:dagger-compiler:${versions.dagger}"
+google.dagger_android = "com.google.dagger:dagger-android:${versions.dagger}"
+google.dagger_android_support = "com.google.dagger:dagger-android-support:${versions.dagger}"
+google.dagger_android_processor = "com.google.dagger:dagger-android-processor:${versions.dagger}"
+google.hilt_android = "com.google.dagger:hilt-android:${versions.hilt_core}"
+google.hilt_common = "androidx.hilt:hilt-common:${versions.hilt}"
+google.hilt_lifecycle = "androidx.hilt:hilt-lifecycle-viewmodel:${versions.hilt}"
+google.hilt_compiler_dagger = "com.google.dagger:hilt-compiler:${versions.hilt_core}"
+google.hilt_compiler = "androidx.hilt:hilt-compiler:${versions.hilt}"
+google.gson = "com.google.code.gson:gson:${versions.gson}"
+google.findbugs = "com.google.code.findbugs:jsr305:3.0.2"
+google.exoplayer           = "com.google.android.exoplayer:exoplayer:$versions.exoplayer"
+google.exoplayer_extension = "com.google.android.exoplayer:extension-mediasession:$versions.exoplayer"
+deps.google = google
+// ------------------------------------------------------------------------
+// Square Up
+// ------------------------------------------------------------------------
+def square = [:]
+square.retrofit = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+square.retrofit_converter_moshi = "com.squareup.retrofit2:converter-moshi:$versions.retrofit"
+square.retrofit_converter_gson  = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+square.okhttp3_logging  = "com.squareup.okhttp3:logging-interceptor:$versions.okhttp"
+square.wireRunntime = 'com.squareup.wire:wire-runtime:3.7.0'
+square.javawriter = 'com.squareup:javawriter:2.5.0'
+square.okhttp = 'com.squareup.okhttp3:okhttp:4.9.1'
+square.moshi  = "com.squareup.moshi:moshi-kotlin:$versions.moshi"
+square.moshi_kotlin  = "com.squareup.moshi:moshi-kotlin-codegen:$versions.moshi"
+deps.square = square
+// ------------------------------------------------------------------------
+// Github
+// ------------------------------------------------------------------------
+def github = [:]
+github.stringcare = "io.github.stringcare:library:$versions.stringcare"
+github.netcipher = "info.guardianproject.netcipher:netcipher:$versions.netcipher"
+github.netcipher_okhttp = "info.guardianproject.netcipher:netcipher-okhttp3:$versions.netcipher_okhttp"
+github.netcipher_webkit = "info.guardianproject.netcipher:netcipher-webkit:$versions.netcipher_webkit"
+github.rxjava3_retrofit_adapter = "com.github.akarnokd:rxjava3-retrofit-adapter:$versions.rxjava-RC8"
+github.rxjava3_bridge = "com.github.akarnokd:rxjava3-bridge:$versions.rxjava"
+github.rxjava3_android = "io.reactivex.rxjava3:rxandroid:${versions.rxandroid}"
+github.rxjava3 = "io.reactivex.rxjava3:rxjava:${versions.rxjava}"
+github.glide = "com.github.bumptech.glide:glide:$versions.glide"
+github.glide_compiler = "com.github.bumptech.glide:compiler:$versions.glide"
+github.glide_palette = "com.github.florent37:glidepalette:$versions.glide_palette"
+github.timber = "com.jakewharton.timber:timber:$versions.timber"
+github.transformation_layout = "com.github.skydoves:transformationlayout:$versions.transformation_layout"
+github.rainbow = "com.github.skydoves:rainbow:$versions.rainbow"
+github.circle_indicator = "me.relex:circleindicator:$versions.circle_indicator"
+github.font_awesome = "com.github.gmazzo:fontawesome:$versions.font_awesome"
+github.base_recyclerview_adapter = "com.github.skydoves:baserecyclerviewadapter:$versions.base_recyclerview_adapter"
+deps.github = github
+// ------------------------------------------------------------------------
+// Test
+// ------------------------------------------------------------------------
+def test = [:]
+test.junit = "junit:junit:$versions.junit"
+test.junit_android = "androidx.test.ext:junit:$versions.junit_android"
+test.espresso = "androidx.test.espresso:espresso-core:$versions.espresso"
+deps.test = test
+
+
+def other = [:]
+other.jetbrain_annotation = "org.jetbrains:annotations:16.0.1"
+other.commons_io = "commons-io:commons-io:2.4"
+other.commons_codec = "commons-codec:commons-codec:1.10"
+deps.other = other

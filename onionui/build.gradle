@@ -2,9 +2,10 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
 }
-
+apply from: "$rootDir/exclude_other_version.gradle"
+apply from: "$rootDir/dependencies_manager.gradle"
 android {
-    compileSdkVersion 32
+    compileSdkVersion 30
 
     defaultConfig {
         applicationId "com.dong.onionui"
@@ -32,7 +33,5 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation deps.androidx.material
 }
