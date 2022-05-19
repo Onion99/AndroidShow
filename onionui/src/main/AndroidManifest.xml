@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidShow">
         <activity
+            android:name=".LaunchActivity"
+            android:exported="false" />
+        <activity
             android:name=".ShowActivity"
             android:exported="true">
             <intent-filter>

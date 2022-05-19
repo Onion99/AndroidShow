@@ -36,4 +36,6 @@ class ShowActivity : AppCompatActivity() {
             super.onBackPressed()
         } else setContentView("activity_show")
     }
+
+    fun showTelegram(view: View) {}
 }

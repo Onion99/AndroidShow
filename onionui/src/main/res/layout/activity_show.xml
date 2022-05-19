@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:ignore="HardcodedText,OnClick,UsingOnClickInXml"
     tools:context=".ShowActivity">
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -18,8 +19,17 @@
             android:onClick="show"
             android:tag="constraint_example_1"
             android:text="@string/learn_constraintLayout"
-            app:cornerRadius="@dimen/cardview_default_radius"
-            tools:ignore="UsingOnClickInXml" />
+            app:cornerRadius="@dimen/cardview_default_radius" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="showTelegram"
+            android:tag="constraint_example_1"
+            android:text="Telegrarm"
+            android:textAllCaps="false"
+            app:cornerRadius="@dimen/cardview_default_radius" />
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.core.widget.NestedScrollView>
