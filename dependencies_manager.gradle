@@ -189,6 +189,7 @@ github.glide_palette = "com.github.florent37:glidepalette:$versions.glide_palett
 github.timber = "com.jakewharton.timber:timber:$versions.timber"
 github.transformation_layout = "com.github.skydoves:transformationlayout:$versions.transformation_layout"
 github.rainbow = "com.github.skydoves:rainbow:$versions.rainbow"
+github.lottie  = "com.airbnb.android:lottie:5.0.3"
 github.circle_indicator = "me.relex:circleindicator:$versions.circle_indicator"
 github.font_awesome = "com.github.gmazzo:fontawesome:$versions.font_awesome"
 github.base_recyclerview_adapter = "com.github.skydoves:baserecyclerviewadapter:$versions.base_recyclerview_adapter"

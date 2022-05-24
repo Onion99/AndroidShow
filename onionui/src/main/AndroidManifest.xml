@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidShow">
         <activity
-            android:name=".LaunchActivity"
+            android:name=".telegram.LaunchActivity"
             android:exported="false" />
         <activity
             android:name=".ShowActivity"

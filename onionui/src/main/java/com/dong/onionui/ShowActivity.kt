@@ -1,8 +1,10 @@
 package com.dong.onionui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.dong.onionui.telegram.LaunchActivity
 
 class ShowActivity : AppCompatActivity() {
     // ----默认布局----
@@ -37,5 +39,7 @@ class ShowActivity : AppCompatActivity() {
         } else setContentView("activity_show")
     }
 
-    fun showTelegram(view: View) {}
+    fun showTelegram(view: View) {
+        startActivity(Intent(this,LaunchActivity::class.java))
+    }
 }

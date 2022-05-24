@@ -6,5 +6,16 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+    <!-- 白天/黑夜 样式色 -->
     <color name="white">#FFFFFFFF</color>
+    <color name="divider">#dcdcdc</color>
+    <color name="widget_name">#212121</color>
+    <color name="widget_badge">#ffffff</color>
+    <color name="widget_time">#96999C</color>
+    <color name="widget_text">#8B8D8F</color>
+    <color name="widget_divider">#d9d9d9</color>
+    <color name="widget_action_text">#8B8D8F</color>
+    <color name="widget_edit_text">#999999</color>
+    <color name="ic_background">#F54142</color>
+    <color name="ic_background_beta">#747F9F</color>
 </resources>
