@@ -4,11 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.dong.onionui.material.MaterialShowActivity
 import com.dong.onionui.telegram.LaunchActivity
 
-class ShowActivity : AppCompatActivity() {
+class MainShowActivity : AppCompatActivity() {
     // ----默认布局----
-    private var mTag = "activity_show"
+    private var mTag = "activity_main_show"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,12 +35,17 @@ class ShowActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        if (mTag == "activity_show") {
+        if (mTag == "activity_main_show") {
             super.onBackPressed()
-        } else setContentView("activity_show")
+        } else setContentView("activity_main_show")
     }
 
     fun showTelegram(view: View) {
         startActivity(Intent(this,LaunchActivity::class.java))
     }
+
+    fun showMaterialBuildShow(view: View) {
+        startActivity(Intent(this,MaterialShowActivity::class.java))
+    }
+
 }

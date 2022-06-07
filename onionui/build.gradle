@@ -2,7 +2,6 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
 }
-apply from: "$rootDir/exclude_other_version.gradle"
 apply from: "$rootDir/dependencies_manager.gradle"
 android {
     compileSdkVersion 30
@@ -81,5 +80,10 @@ android {
 dependencies {
     implementation deps.androidx.material
     implementation deps.androidx.recyclerview
+    implementation deps.androidx.appcompat
+    implementation deps.androidx.constraint
     implementation deps.github.lottie
+    implementation project(path: ':common-ui')
 }
+apply from: "$rootDir/exclude_other_version.gradle"
+

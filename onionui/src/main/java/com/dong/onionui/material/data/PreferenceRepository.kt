@@ -26,11 +26,18 @@ import androidx.lifecycle.MutableLiveData
  */
 class PreferenceRepository(private val sharedPreferences: SharedPreferences) {
 
+  // ------------------------------------------------------------------------
+  // 存储夜间模式设置参数
+  // ------------------------------------------------------------------------
   private val nightMode: Int
     get() = sharedPreferences.getInt(PREFERENCE_NIGHT_MODE, PREFERENCE_NIGHT_MODE_DEF_VAL)
+  val nightModeLive = MutableLiveData<Int>()
 
 
-  private var isDarkTheme: Boolean = false
+  // ------------------------------------------------------------------------
+  // 监听夜间模式开关
+  // ------------------------------------------------------------------------
+  var isDarkTheme: Boolean = false
     get() = nightMode == AppCompatDelegate.MODE_NIGHT_YES
     set(value) {
       sharedPreferences.edit().putInt(PREFERENCE_NIGHT_MODE, if (value) {
@@ -40,9 +47,12 @@ class PreferenceRepository(private val sharedPreferences: SharedPreferences) {
       }).apply()
       field = value
     }
+  val isDarkThemeLive = MutableLiveData<Boolean>()
 
-  private val nightModeLive = MutableLiveData<Int>()
-  private val isDarkThemeLive = MutableLiveData<Boolean>()
+
+  // ------------------------------------------------------------------------
+  // 监听数据变化
+  // ------------------------------------------------------------------------
   private val preferenceChangedListener =
     SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
       when (key) {

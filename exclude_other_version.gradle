@@ -22,6 +22,7 @@ configurations.all {
         force deps.androidx.databinding_common
         force deps.androidx.databinding_runtime
         force deps.androidx.databinding_adapters
+        force deps.androidx.viewbinding
         force deps.kotlin.stdlib
         force deps.kotlin.stdlibJdk7
         force deps.kotlin.stdlibJdk8

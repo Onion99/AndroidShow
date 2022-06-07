@@ -10,10 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidShow">
         <activity
+            android:name=".material.MaterialShowActivity"
+            android:exported="false" />
+        <activity
             android:name=".telegram.LaunchActivity"
             android:exported="false" />
         <activity
-            android:name=".ShowActivity"
+            android:name=".MainShowActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
