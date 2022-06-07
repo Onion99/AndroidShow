@@ -20,3 +20,4 @@ android {
         jvmTarget = '1.8'
     }
 }
+apply from: "$rootDir/exclude_other_version.gradle"
