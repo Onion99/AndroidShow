@@ -4,6 +4,9 @@ package com.onion.versionplugin
 // 统一依赖管理:Kotlin + BuildSrc，支持双向跟踪，依赖更新时会重新构建整个项目
 // ------------------------------------------------------------------------
 object Version {
+    const val compileSdkVersion = 30
+    const val minSdkVersion     = 26
+    const val targetSdkVersion  = 29
     const val kotlin = "1.3.72"
     const val coroutines = "1.6.1"
 

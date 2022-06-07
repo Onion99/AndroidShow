@@ -20,3 +20,4 @@ include ':onionui'
 //includeBuild 'versionPlugin'
 include ':common-ui'
 includeBuild("versionPlugin")
+include ':tutorial-java'

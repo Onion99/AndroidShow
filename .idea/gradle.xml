@@ -26,6 +26,7 @@
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/common-ui" />
             <option value="$PROJECT_DIR$/onionui" />
+            <option value="$PROJECT_DIR$/tutorial-java" />
             <option value="$PROJECT_DIR$/versionPlugin" />
           </set>
         </option>
