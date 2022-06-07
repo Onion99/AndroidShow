@@ -19,3 +19,4 @@ include ':onionui'
 // ------------------------------------------------------------------------
 //includeBuild 'versionPlugin'
 include ':common-ui'
+includeBuild("versionPlugin")
