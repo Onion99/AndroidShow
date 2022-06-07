@@ -25,7 +25,7 @@ plugins {
     // kotlin-android-extensions-> 使用Kotlin Android扩展插件 ,像这个就可以直接实现DataBinding,废弃了，id混用，非常不好
     // kotlin-kapt -> kotlin注解处理器插件,以AAC系列库的注解使用都依赖这东西
     // kotlin-parcelize -> 自动化处理序列化生成
-    // id 'com.onion.versionplugin'
+     id 'com.onion.versionplugin'
 }
 // ------------------------------------------------------------------------
 // 字符串加密插件, 等同于 apply plugin: 'com.android.application'
@@ -60,16 +60,16 @@ apply from: "$rootDir/plex_config.gradle"
 // ---- 2. Groovy Ext,主要用这个 ------
 //apply from: "$rootDir/dependencies_manager.gradle"
 // ---- 3. Composing builds，支持单向跟踪，依赖更新时不会构建整个项目 ------
-//import com.onion.versionplugin.DependencyManager
+import com.onion.versionplugin.Version
 // ---- 4. Version Catalog ------
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion Version.compileSdkVersion
     buildToolsVersion "30.0.3"
     defaultConfig {
         applicationId "com.onion.android"
-        minSdkVersion 26
-        targetSdkVersion 29
+        minSdkVersion Version.minSdkVersion
+        targetSdkVersion Version.targetSdkVersion
         versionCode 2
         versionName "2.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

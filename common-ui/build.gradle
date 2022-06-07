@@ -1,15 +1,16 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'com.onion.versionplugin'
 }
 apply from: "$rootDir/dependencies_manager.gradle"
-
+import com.onion.versionplugin.Version
 android {
-    compileSdkVersion 30
+    compileSdkVersion Version.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 32
+        minSdkVersion Version.minSdkVersion
+        targetSdkVersion Version.targetSdkVersion
         consumerProguardFiles "consumer-rules.pro"
     }
 

@@ -5,6 +5,11 @@
       <module name="AndroidShow.versionPlugin" target="1.7" />
       <module name="AndroidShow.versionPlugin.main" target="1.7" />
       <module name="AndroidShow.versionPlugin.test" target="1.7" />
+      <module name="version-plugin.VersionPlugin.main" target="1.7" />
+      <module name="version-plugin.VersionPlugin.test" target="1.7" />
+      <module name="VersionPlugin" target="1.7" />
+      <module name="VersionPlugin.main" target="1.7" />
+      <module name="VersionPlugin.test" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

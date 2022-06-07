@@ -7,9 +7,9 @@
         <compositeConfiguration>
           <compositeBuild compositeDefinitionSource="SCRIPT">
             <builds>
-              <build path="$PROJECT_DIR$/versionPlugin" name="versionPlugin">
+              <build path="$PROJECT_DIR$/version-plugin" name="version-plugin">
                 <projects>
-                  <project path="$PROJECT_DIR$/versionPlugin" />
+                  <project path="$PROJECT_DIR$/version-plugin" />
                 </projects>
               </build>
             </builds>
@@ -23,11 +23,11 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/app-ui" />
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/common-ui" />
-            <option value="$PROJECT_DIR$/onionui" />
             <option value="$PROJECT_DIR$/tutorial-java" />
-            <option value="$PROJECT_DIR$/versionPlugin" />
+            <option value="$PROJECT_DIR$/version-plugin" />
           </set>
         </option>
       </GradleProjectSettings>

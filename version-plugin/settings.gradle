@@ -8,4 +8,4 @@ dependencyResolutionManagement {
 }
 
 // ---- 项目名 ------
-rootProject.name = "versionPlugin"
+rootProject.name = "version-plugin"

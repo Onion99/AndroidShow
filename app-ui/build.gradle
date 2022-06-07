@@ -1,15 +1,17 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.onion.versionplugin'
 }
 apply from: "$rootDir/dependencies_manager.gradle"
+import com.onion.versionplugin.Version
 android {
-    compileSdkVersion 30
+    compileSdkVersion Version.compileSdkVersion
 
     defaultConfig {
         applicationId "com.dong.onionui"
-        minSdkVersion 21
-        targetSdkVersion 32
+        minSdkVersion Version.minSdkVersion
+        targetSdkVersion Version.targetSdkVersion
         versionCode 1
         versionName "1.0"
 

@@ -1,5 +1,5 @@
 // ---- 应用 ben-manes gradle-versions-plugin的更新配置 ------
-apply from: "$rootDir/versionsPlugin.gradle"
+apply from: "$rootDir/plugin_update.gradle"
 buildscript {
     apply from: "$rootDir/exclude_other_version.gradle"
     apply from: "$rootDir/dependencies_manager.gradle"
