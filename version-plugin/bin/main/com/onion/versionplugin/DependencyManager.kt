@@ -5,7 +5,7 @@ package com.onion.versionplugin
 // ------------------------------------------------------------------------
 object Version {
     const val compileSdkVersion = 30
-    const val minSdkVersion     = 26
+    const val minSdkVersion     = 21
     const val targetSdkVersion  = 29
     const val kotlin = "1.3.72"
     const val coroutines = "1.6.1"
