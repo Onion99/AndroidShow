@@ -14,30 +14,26 @@
         android:paddingHorizontal="20dp">
 
         <com.google.android.material.button.MaterialButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/ShowButtonStyle"
             android:onClick="show"
             android:tag="constraint_example_1"
-            android:text="@string/learn_constraintLayout"
-            app:cornerRadius="@dimen/cardview_default_radius" />
+            android:text="@string/learn_constraintLayout" />
 
         <com.google.android.material.button.MaterialButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/ShowButtonStyle"
             android:onClick="showTelegram"
-            android:tag="constraint_example_1"
-            android:text="Telegrarm"
-            android:textAllCaps="false"
-            app:cornerRadius="@dimen/cardview_default_radius" />
+            android:text="@string/learn_code_view"/>
 
         <com.google.android.material.button.MaterialButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/ShowButtonStyle"
             android:onClick="showMaterialBuildShow"
-            android:tag="constraint_example_1"
-            android:text="Material Theme Show"
-            android:textAllCaps="false"
-            app:cornerRadius="@dimen/cardview_default_radius" />
+            android:text="@string/learn_material"/>
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/ShowButtonStyle"
+            android:onClick="showCustomViewPage"
+            android:text="@string/learn_custom_view"/>
+
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

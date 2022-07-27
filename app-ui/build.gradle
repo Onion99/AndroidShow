@@ -2,9 +2,24 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.onion.versionplugin'
+    id 'com.diffplug.spotless'
 }
 apply from: "$rootDir/dependencies_manager.gradle"
 import com.onion.versionplugin.Version
+
+
+spotless {
+    kotlin {
+        ktlint("0.37.2")
+        target 'src/**/*.kt'
+    }
+    java {
+        removeUnusedImports()
+        googleJavaFormat("1.5")
+        target '**/*.java'
+    }
+}
+
 android {
     compileSdkVersion Version.compileSdkVersion
 

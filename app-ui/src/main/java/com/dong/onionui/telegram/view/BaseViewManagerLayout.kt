@@ -1,4 +1,4 @@
-package com.dong.onionui.ui.view
+package com.dong.onionui.telegram.view
 
 import android.app.Activity
 import android.content.Context

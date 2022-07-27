@@ -27,12 +27,9 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.AppCompatImageView
 import com.dong.onionui.R
 
-/**
- * Composite view to show an (optional) leading icon, followed by a text label, followed by
- * a trailing icon.
- *
- * Clicking on this view's trailing icon will launch [linkUrl].
- */
+// ------------------------------------------------------------------------
+// Material 标签View
+// ------------------------------------------------------------------------
 class LabelLinkView @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
@@ -79,12 +76,7 @@ class LabelLinkView @JvmOverloads constructor(
     trailingImageView = view.findViewById(R.id.label_trailing_image_view)
     trailingImageView.setOnClickListener(onLinkClickedListener)
 
-    val a = context.theme.obtainStyledAttributes(
-      attrs,
-      R.styleable.LabelLinkView,
-      defStyleAttr,
-      defStyleRes
-    )
+    val a = context.theme.obtainStyledAttributes(attrs, R.styleable.LabelLinkView, defStyleAttr, defStyleRes)
     leadingIcon = a.getDrawable(R.styleable.LabelLinkView_leadingIcon)
     label = a.getString(R.styleable.LabelLinkView_android_text) ?: label
     linkUrl = a.getString(R.styleable.LabelLinkView_linkUrl) ?: linkUrl

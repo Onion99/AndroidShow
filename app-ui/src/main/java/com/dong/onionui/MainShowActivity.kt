@@ -4,8 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.dong.onionui.helper.AndroidUtilities
 import com.dong.onionui.material.MaterialShowActivity
 import com.dong.onionui.telegram.LaunchActivity
+import com.dong.onionui.ui.act.FragmentContainerActivity
 
 class MainShowActivity : AppCompatActivity() {
     // ----默认布局----
@@ -13,6 +15,7 @@ class MainShowActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AndroidUtilities.checkDisplaySize(this,resources.configuration)
         setContentView(mTag)
     }
 
@@ -46,6 +49,10 @@ class MainShowActivity : AppCompatActivity() {
 
     fun showMaterialBuildShow(view: View) {
         startActivity(Intent(this,MaterialShowActivity::class.java))
+    }
+
+    fun showCustomViewPage(view: View) {
+        startActivity(Intent(this,FragmentContainerActivity::class.java))
     }
 
 }

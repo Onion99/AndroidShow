@@ -13,8 +13,8 @@ import kotlin.math.ceil
 object AndroidUtilities {
 
     private var density = 1f
-    private var displaySize = Point()
-    private var displayMetrics = DisplayMetrics()
+    var displaySize = Point()
+    var displayMetrics = DisplayMetrics()
     private var screenRefreshRate = 60f
     private var usingHardwareInput = false
 

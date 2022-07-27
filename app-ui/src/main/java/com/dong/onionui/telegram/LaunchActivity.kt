@@ -1,6 +1,7 @@
 package com.dong.onionui.telegram
 
 import android.app.ActivityManager.TaskDescription
+import android.graphics.Color
 import android.os.Bundle
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
@@ -10,14 +11,14 @@ import androidx.appcompat.app.AppCompatActivity
 import com.dong.onionui.R
 import com.dong.onionui.helper.AndroidUtilities
 import com.dong.onionui.telegram.page.splash.IntroView
-import com.dong.onionui.ui.view.BaseViewManagerLayout
+import com.dong.onionui.telegram.view.BaseViewManagerLayout
 
 class LaunchActivity : AppCompatActivity() {
 
     lateinit var viewManagerLayout: BaseViewManagerLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         setTheme(R.style.Theme_TMessages)
         // ---- 定制最近任务显示相关信息 https://segmentfault.com/a/1190000004374916 ------
         setTaskDescription(
@@ -30,6 +31,7 @@ class LaunchActivity : AppCompatActivity() {
 
         // init ui
         val frameLayout = FrameLayout(this)
+        frameLayout.setBackgroundColor(Color.WHITE)
         setContentView(frameLayout, ViewGroup.LayoutParams(MATCH_PARENT,MATCH_PARENT))
         viewManagerLayout = BaseViewManagerLayout(this)
         frameLayout.addView(

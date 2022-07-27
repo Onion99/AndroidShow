@@ -13,6 +13,9 @@
             android:name=".material.MaterialShowActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.act.FragmentContainerActivity"
+            android:exported="false" />
+        <activity
             android:name=".telegram.LaunchActivity"
             android:exported="false" />
         <activity
