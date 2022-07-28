@@ -25,6 +25,7 @@ open class CelebrateView : View{
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+        // 获取增量时间
         val deltaTime = timer.getDeltaTime()
         for (i in systems.size - 1 downTo 0) {
             val partySystem = systems[i]
@@ -86,6 +87,7 @@ open class CelebrateView : View{
     }
 }
 
+// ---- 粒子渲染系统 ------
 class PartySystem(val party: Party, val createdAt: Long = System.currentTimeMillis(), pixelDensity: Float = Resources.getSystem().displayMetrics.density) {
 
     var enabled = true
@@ -94,8 +96,9 @@ class PartySystem(val party: Party, val createdAt: Long = System.currentTimeMill
 
     private val activeParticles = mutableListOf<Confetti>()
 
-    // Called every frame to create and update the particles state
-    // returns a list of particles that are ready to be rendered
+    // ------------------------------------------------------------------------
+    // 调用每个帧来创建和更新粒子状态，返回准备渲染的粒子列表
+    // ------------------------------------------------------------------------
     fun render(deltaTime: Float, drawArea: Rect): List<Particle> {
         if (enabled) {
             activeParticles.addAll(emitter.createConfetti(deltaTime, party, drawArea))
@@ -108,34 +111,43 @@ class PartySystem(val party: Party, val createdAt: Long = System.currentTimeMill
         return activeParticles.filter { it.drawParticle }.map { it.toParticle() }
     }
 
-    /**
-     * When the emitter is done emitting.
-     * @return true if the emitter is done emitting or false when it's still busy or needs to start
-     * based on the delay
-     */
+    // ------------------------------------------------------------------------
+    // 如果发射器发射完毕，则为true；
+    // 如果发射器仍然繁忙或需要根据延迟启动，则为false
+    // ------------------------------------------------------------------------
     fun isDoneEmitting(): Boolean = (emitter.isFinished() && activeParticles.size == 0) || (!enabled && activeParticles.size == 0)
 }
 
 
 // ------------------------------------------------------------------------
-// TimerIntegration 检索自上一帧渲染以来的增量时间。如果发生任何丢帧，则使用 Delta 时间正确绘制五彩纸屑
+// TimerIntegration 检索自渲染前一帧以来的增量时间。如果发生任何帧丢失，则使用增量时间正确绘制彩色纸屑
 // ------------------------------------------------------------------------
 class TimerIntegration {
+
+    // ---- 上一次绘制的时间 ------
     private var previousTime: Long = -1L
 
     fun reset() {
         previousTime = -1L
     }
 
+    // ------------------------------------------------------------------------
+    // 获取增量时间
+    // ------------------------------------------------------------------------
     fun getDeltaTime(): Float {
+        // 比较当前时间和上一次绘制的时间 (纳秒时间: https://www.cnblogs.com/somefuture/p/13690961.html) 毫秒是纳秒的10的6次方
         if (previousTime == -1L) previousTime = System.nanoTime()
 
         val currentTime = System.nanoTime()
-        val dt = (currentTime - previousTime) / 1000000f
+        // 取得增量时间
+        val deltaTime = (currentTime - previousTime) / 1000000f
         previousTime = currentTime
-        return dt / 1000
+        return deltaTime / 1000
     }
 
+    // ------------------------------------------------------------------------
+    // 获取运行时间
+    // ------------------------------------------------------------------------
     fun getTotalTimeRunning(startTime: Long): Long {
         val currentTime = System.currentTimeMillis()
         return (currentTime - startTime)
