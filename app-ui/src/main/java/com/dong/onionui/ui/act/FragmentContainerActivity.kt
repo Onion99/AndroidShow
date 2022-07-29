@@ -2,6 +2,7 @@ package com.dong.onionui.ui.act
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.dong.onionui.R
 import com.dong.onionui.databinding.ActivityFragmentContainerBinding
 import com.dong.onionui.helper.AndroidUtilities
 import com.dong.onionui.helper.LayoutHelper
+import com.dong.onionui.ui.view.SwitchButton
 import com.dong.onionui.ui.view.celebrate.CelebrateView
 import com.dong.onionui.ui.view.celebrate.Party
 import com.dong.onionui.ui.view.celebrate.Position
@@ -40,6 +42,7 @@ class CustomViewFragment:Fragment(){
 
     private val celebrateTimer = Timer()
     private lateinit var celebrateView:CelebrateView
+    private lateinit var switchButton:SwitchButton
 
 
     override fun onCreateView(
@@ -50,9 +53,17 @@ class CustomViewFragment:Fragment(){
         val rootLayout = LinearLayout(requireContext())
         rootLayout.orientation = LinearLayout.VERTICAL
         rootLayout.layoutParams = LayoutHelper.createCommonViewGroup()
+        rootLayout.gravity = Gravity.CENTER_HORIZONTAL
         // CelebrateView
         celebrateView = CelebrateView(context)
-        rootLayout.addView(celebrateView,LayoutHelper.MATCH_PARENT,AndroidUtilities.dp(300f))
+//        rootLayout.addView(celebrateView,LayoutHelper.MATCH_PARENT,AndroidUtilities.dp(300f))
+        // switchButton
+        switchButton = SwitchButton(requireContext())
+        rootLayout.addView(switchButton,LayoutHelper.WRAP_CONTENT,LayoutHelper.WRAP_CONTENT)
+        switchButton.layoutParams = (switchButton.layoutParams as LinearLayout.LayoutParams).apply {
+            topMargin = AndroidUtilities.dp(10f)
+            bottomMargin = AndroidUtilities.dp(6f)
+        }
         return rootLayout
     }
 
