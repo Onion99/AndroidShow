@@ -100,6 +100,9 @@ dependencies {
     implementation deps.androidx.appcompat
     implementation deps.androidx.constraint
     implementation deps.github.lottie
+    // 适配屏幕-最小宽度限定符
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+    implementation 'com.intuit.ssp:ssp-android:1.0.6'
     implementation project(path: ':common-ui')
 }
 apply from: "$rootDir/exclude_other_version.gradle"
